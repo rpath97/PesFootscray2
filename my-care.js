@@ -165,3 +165,28 @@ function handleMyCareKeys(keyCode) {
     }
     return 1;
 }
+
+// Additional Code for MyCare Section
+
+// Function to handle MyCare button click
+function handleMyCareButtonClick() {
+    document.querySelector('.default-view').style.display = 'none';
+    document.querySelector('.my-care-view').style.display = 'block';
+    const myCareFirstElement = document.getElementById('myCareFirstButton');
+    if (myCareFirstElement) {
+        myCareFirstElement.focus();
+    }
+
+    var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
+    JAPITObjForWIXPSvc.Cookie = 2025;
+    JAPITObjForWIXPSvc.CmdType = "Change";
+    JAPITObjForWIXPSvc.Fun = "ApplicationControl";
+    JAPITObjForWIXPSvc.CommandDetails = {
+        "ApplicationDetails": {
+            "ApplicationName": "MyCare"
+        },
+        "ApplicationState": "Active"
+    };
+    sendWIxPCommand(JAPITObjForWIXPSvc);
+    delete JAPITObjForWIXPSvc;
+}

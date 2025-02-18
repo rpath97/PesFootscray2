@@ -106,8 +106,25 @@ function openMovies() {
 	sendWIxPCommand(JAPITObjForWIXPSvc);
 	delete JAPITObjForWIXPSvc;
 }
+// Open Netflix application
+function openNetflix() {
+	var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();	
 
-// Open YouTube application
+	JAPITObjForWIXPSvc.Cookie  = 119;
+	JAPITObjForWIXPSvc.CmdType = "Change";
+	JAPITObjForWIXPSvc.Fun     = "ApplicationControl";
+	JAPITObjForWIXPSvc.CommandDetails = {
+		"ApplicationDetails": {
+			"ApplicationAndroidPackageName": "com.netflix.ninja"
+			},
+		"ApplicationState": 'Activate'
+ 	};
+    
+	sendWIxPCommand(JAPITObjForWIXPSvc);
+	delete JAPITObjForWIXPSvc;
+}
+
+// Open Kayo application
 function openKayo() {
 	var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();	
 
@@ -116,12 +133,32 @@ function openKayo() {
 	JAPITObjForWIXPSvc.Fun     = "ApplicationControl";
 	JAPITObjForWIXPSvc.CommandDetails = {
 		"ApplicationDetails": {
-			"ApplicationAndroidPackageName": "au.com.kayosports"
+			"ApplicationAndroidPackageName": "au.com.kayosports.tv"
 			},
 		"ApplicationState": 'Activate'
  	};
 	sendWIxPCommand(JAPITObjForWIXPSvc);
 	delete JAPITObjForWIXPSvc;
+    //applicationControl("KayoSports", "Activate");
+}
+function openKayo2() {
+	var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();	
+
+	JAPITObjForWIXPSvc.Cookie  = 119;
+	JAPITObjForWIXPSvc.CmdType = "Change";
+	JAPITObjForWIXPSvc.Fun     = "ApplicationControl";
+	JAPITObjForWIXPSvc.CommandDetails = {
+		"ApplicationDetails": {
+			"ApplicationName": "Internet"
+			},
+		"ApplicationAttributes": {
+            "WebsiteURL": "https://youtube.com"
+        },
+        "ApplicationState": 'Activate'
+ 	};
+	sendWIxPCommand(JAPITObjForWIXPSvc);
+	delete JAPITObjForWIXPSvc;
+    //applicationControl("KayoSports", "Activate");
 }
 
 
@@ -232,50 +269,50 @@ function channelList() {
 }
 
 // Handle Back Button
-function handleBackButton() {
-    if (document.querySelector('.hospital-info-view').style.display === 'block') {
-        document.querySelector('.hospital-info-view').style.display = 'none';
-        document.querySelector('.default-view').style.display = 'block';
-        const menuButton = document.getElementById('hospitalInfoButton');
-        if (menuButton) {
-            menuButton.focus();
-        }
+// function handleBackButton() {
+//     if (document.querySelector('.hospital-info-view').style.display === 'block') {
+//         document.querySelector('.hospital-info-view').style.display = 'none';
+//         document.querySelector('.default-view').style.display = 'block';
+//         const menuButton = document.getElementById('hospitalInfoButton');
+//         if (menuButton) {
+//             menuButton.focus();
+//         }
 
-        var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
-        JAPITObjForWIXPSvc.Cookie = 1020;
-        JAPITObjForWIXPSvc.CmdType = "Change";
-        JAPITObjForWIXPSvc.Fun = "ApplicationControl";
-        JAPITObjForWIXPSvc.CommandDetails = {
-            "ApplicationDetails": {
-                "ApplicationName": "Dashboard"
-            },
-            "ApplicationState": "Active"
-        };
-        sendWIxPCommand(JAPITObjForWIXPSvc);
-        return 0;
-    } else if (document.querySelector('.entertainment-view').style.display === 'block') {
-        document.querySelector('.entertainment-view').style.display = 'none';
-        document.querySelector('.default-view').style.display = 'block';
-        const menuButton = document.getElementById('entertainmentButton');
-        if (menuButton) {
-            menuButton.focus();
-        }
+//         var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
+//         JAPITObjForWIXPSvc.Cookie = 1020;
+//         JAPITObjForWIXPSvc.CmdType = "Change";
+//         JAPITObjForWIXPSvc.Fun = "ApplicationControl";
+//         JAPITObjForWIXPSvc.CommandDetails = {
+//             "ApplicationDetails": {
+//                 "ApplicationName": "Dashboard"
+//             },
+//             "ApplicationState": "Active"
+//         };
+//         sendWIxPCommand(JAPITObjForWIXPSvc);
+//         return 0;
+//     } else if (document.querySelector('.entertainment-view').style.display === 'block') {
+//         document.querySelector('.entertainment-view').style.display = 'none';
+//         document.querySelector('.default-view').style.display = 'block';
+//         const menuButton = document.getElementById('entertainmentButton');
+//         if (menuButton) {
+//             menuButton.focus();
+//         }
 
-        var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
-        JAPITObjForWIXPSvc.Cookie = 1020;
-        JAPITObjForWIXPSvc.CmdType = "Change";
-        JAPITObjForWIXPSvc.Fun = "ApplicationControl";
-        JAPITObjForWIXPSvc.CommandDetails = {
-            "ApplicationDetails": {
-                "ApplicationName": "Dashboard"
-            },
-            "ApplicationState": "Active"
-        };
-        sendWIxPCommand(JAPITObjForWIXPSvc);
-        return 0;
-    }
-    return 1;
-}
+//         var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
+//         JAPITObjForWIXPSvc.Cookie = 1020;
+//         JAPITObjForWIXPSvc.CmdType = "Change";
+//         JAPITObjForWIXPSvc.Fun = "ApplicationControl";
+//         JAPITObjForWIXPSvc.CommandDetails = {
+//             "ApplicationDetails": {
+//                 "ApplicationName": "Dashboard"
+//             },
+//             "ApplicationState": "Active"
+//         };
+//         sendWIxPCommand(JAPITObjForWIXPSvc);
+//         return 0;
+//     }
+//     return 1;
+// }
 
 // Handle Entertainment Navigation
 function handleEntertainmentKeys(keyCode) {

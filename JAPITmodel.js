@@ -396,30 +396,30 @@ function handleEntertainmentKeys(keyCode) {
 	return 1;
 }
 
-function handleBackButton() {
-	if (document.querySelector('.entertainment-view').style.display === 'block') {
-		document.querySelector('.entertainment-view').style.display = 'none';
-		document.querySelector('.default-view').style.display = 'block';
-		const menuButton = document.getElementById('entertainmentButton');
-		if (menuButton) {
-			menuButton.focus();
-		}
+// function handleBackButton() {
+// 	if (document.querySelector('.entertainment-view').style.display === 'block') {
+// 		document.querySelector('.entertainment-view').style.display = 'none';
+// 		document.querySelector('.default-view').style.display = 'block';
+// 		const menuButton = document.getElementById('entertainmentButton');
+// 		if (menuButton) {
+// 			menuButton.focus();
+// 		}
 
-		var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
-		JAPITObjForWIXPSvc.Cookie = 1020;
-		JAPITObjForWIXPSvc.CmdType = "Change";
-		JAPITObjForWIXPSvc.Fun = "ApplicationControl";
-		JAPITObjForWIXPSvc.CommandDetails = {
-			"ApplicationDetails": {
-				"ApplicationName": "Dashboard"
-			},
-			"ApplicationState": "Active"
-		};
-		sendWIxPCommand(JAPITObjForWIXPSvc);
-		return 0;
-	}
-	return 1;
-}
+// 		var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
+// 		JAPITObjForWIXPSvc.Cookie = 1020;
+// 		JAPITObjForWIXPSvc.CmdType = "Change";
+// 		JAPITObjForWIXPSvc.Fun = "ApplicationControl";
+// 		JAPITObjForWIXPSvc.CommandDetails = {
+// 			"ApplicationDetails": {
+// 				"ApplicationName": "Dashboard"
+// 			},
+// 			"ApplicationState": "Active"
+// 		};
+// 		sendWIxPCommand(JAPITObjForWIXPSvc);
+// 		return 0;
+// 	}
+// 	return 1;
+// }
 
 function handleExitButton() {
 	// Implement exit logic here

@@ -206,7 +206,8 @@ function handleRadioChannelClick(channelNumber) {
 function handleNetflixClick() {
     console.log('Opening Netflix...');
     // Add your Netflix handling code
-    applicationControl("Netflix", "Activate");
+    //applicationControl("Netflix", "Activate");
+    openNetflix();
 }
 
 function handleYouTubeClick() {
@@ -262,6 +263,7 @@ function clearEntertainmentActive() {
         console.log('Opening Kayo Sports...');
         // Add your Kayo Sports handling code
         applicationControl("KayoSports", "Activate");
+        //openKayo2();
     }
     
 
@@ -272,7 +274,7 @@ function clearEntertainmentActive() {
 function handleDisneyPlusClick() {
     console.log('Opening Disney+...');
     // Add your Disney+ handling code
-    applicationControl("DisneyPlus", "Activate");
+    applicationControl("Disney+", "Activate");
 }
 
 // 7plus handler
@@ -280,4 +282,36 @@ function handle7PlusClick() {
     console.log('Opening 7plus...');
     // Add your 7plus handling code
     applicationControl("7plus", "Activate");
+}
+
+// Add these new handler functions
+
+function handleParamountClick() {
+    console.log('Opening Paramount+...');
+    applicationControl("Paramount+", "Activate");
+}
+
+function handleAppleTVClick() {
+    console.log('Opening Apple TV...');
+    applicationControl("Apple TV", "Activate");
+}
+
+function handle9NowClick() {
+    console.log('Opening 9 Now...');
+    applicationControl("9Now", "Activate");
+}
+
+function handle10PlayClick() {
+    console.log('Opening 10 Play...');
+    applicationControl("10 play", "Activate");
+}
+
+function handleBingeClick() {
+    console.log('Opening Binge...');
+    applicationControl("Binge", "Activate");
+}
+
+function handleABCiViewClick() {
+    console.log('Opening ABC iView...');
+    applicationControl("ABC iview", "Activate");
 } 

@@ -40,6 +40,7 @@
 
     <!-- Add this in the head section -->
     <script type="text/javascript" src="my-care.js"></script>
+    <script type="text/javascript" src="hospital-info.js"></script>
 </head>
 
 <body onload="init(); 
@@ -51,54 +52,48 @@
                 <img src="logos/westernhealthlogo.png" alt="Western Health" class="img-fluid">
             </div>
             <nav class="menu d-flex flex-column">
-                <button class="menu-item japit-button" 
-                        data-japit-selectable="true"
-                        data-japit-focusable="true"
-                        data-action="entertainment"
-                        onclick="handleEntertainmentClick()"
-                        data-japit-control="true"
-                        data-japit-next-up="clinicalButton"
-                        data-japit-next-down="hospitalInfoButton"
-                        id="entertainmentButton">
-                    <img src="logos/entertainment.png" alt="Entertainment">
-                    <span>Entertainment</span>
-                </button>
-                <button class="menu-item japit-button"
-                        data-japit-selectable="true"
-                        data-japit-focusable="true"
-                        data-action="hospital-info"
-                        onclick="handleHospitalInfoClick()"
-                        data-japit-control="true"
-                        data-japit-next-up="entertainmentButton"
-                        data-japit-next-down="myCareButton"
-                        id="hospitalInfoButton">
-                    <img src="logos/hospitalinformation.png" alt="Hospital Info">
-                    <span>Hospital Info</span>
-                </button>
-                <button class="menu-item japit-button"
-                        data-japit-selectable="true"
-                        data-japit-focusable="true"
-                        data-action="my-care"
-                        onclick="handleMyCareClick()"
-                        data-japit-control="true"
-                        data-japit-next-up="hospitalInfoButton"
-                        data-japit-next-down="clinicalButton"
-                        id="myCareButton">
-                    <img src="logos/mycare.png" alt="My Care">
-                    <span>My Care</span>
-                </button>
-                <button class="menu-item japit-button"
-                        data-japit-selectable="true"
-                        data-japit-focusable="true"
-                        data-action="clinical-services"
-                        onclick="handleClinicalServicesClick()"
-                        data-japit-control="true"
-                        data-japit-next-up="myCareButton"
-                        data-japit-next-down="entertainmentButton"
-                        id="clinicalButton">
-                    <img src="logos/clinicalservices.png" alt="Clinical Services">
-                    <span>Clinical Services</span>
-                </button>
+                <div class="menu">
+                    <button class="menu-item japit-button" 
+                            data-type="entertainment"
+                            data-japit-control="true"
+                            data-japit-focusable="true"
+                            data-action="entertainment"
+                            onclick="handleEntertainmentClick()">
+                        <img src="logos/entertainment.png" alt="Entertainment">
+                        <span>Entertainment</span>
+                    </button>
+                    
+                    <!-- Add separator div -->
+                    <div class="menu-separator"></div>
+                    
+                    <button class="menu-item japit-button"
+                            data-type="hospitalinfo"
+                            data-japit-control="true"
+                            data-japit-focusable="true"
+                            data-action="hospitalinfo"
+                            onclick="handleHospitalInfoClick()">
+                        <img src="logos/hospitalinformation.png" alt="Hospital Info">
+                        <span>Hospital Info</span>
+                    </button>
+                    <button class="menu-item japit-button"
+                            data-type="my-care"
+                            data-japit-control="true"
+                            data-japit-focusable="true"
+                            data-action="my-care"
+                            onclick="handleMyCareButtonClick()">
+                        <img src="logos/mycare.png" alt="My Care">
+                        <span>My Care</span>
+                    </button>
+                    <button class="menu-item japit-button"
+                            data-type="clinical-services"
+                            data-japit-control="true"
+                            data-japit-focusable="true"
+                            data-action="clinical-services"
+                            onclick="handleClinicalServicesClick()">
+                        <img src="logos/clinicalservices.png" alt="Clinical Services">
+                        <span>Clinical Services</span>
+                    </button>
+                </div>
             </nav>
         </div>
 
@@ -199,6 +194,72 @@
                                     data-action="7plus"
                                     onclick="handle7PlusClick()">
                                 <img src="logos/7plus.png" alt="7plus">
+                            </button>
+                        </div>
+                        <div class="col">
+                            <button class="entertainment-card japit-button"
+                                    data-type="paramount"
+                                    data-japit-control="true"
+                                    data-japit-focusable="true"
+                                    data-action="paramount"
+                                    onclick="handleParamountClick()">
+                                <img src="logos/paramountplus.jpg" alt="Paramount+">
+                                <span>Paramount+</span>
+                            </button>
+                        </div>
+                        <div class="col">
+                            <button class="entertainment-card japit-button"
+                                    data-type="appletv"
+                                    data-japit-control="true"
+                                    data-japit-focusable="true"
+                                    data-action="appletv"
+                                    onclick="handleAppleTVClick()">
+                                <img src="logos/appletv.png" alt="Apple TV">
+                                <span>Apple TV</span>
+                            </button>
+                        </div>
+                        <div class="col">
+                            <button class="entertainment-card japit-button"
+                                    data-type="9now"
+                                    data-japit-control="true"
+                                    data-japit-focusable="true"
+                                    data-action="9now"
+                                    onclick="handle9NowClick()">
+                                <img src="logos/9now.jpg" alt="9 Now">
+                                <span>9 Now</span>
+                            </button>
+                        </div>
+                        <div class="col">
+                            <button class="entertainment-card japit-button"
+                                    data-type="10play"
+                                    data-japit-control="true"
+                                    data-japit-focusable="true"
+                                    data-action="10play"
+                                    onclick="handle10PlayClick()">
+                                <img src="logos/10play.png" alt="10 Play">
+                                <span>10 Play</span>
+                            </button>
+                        </div>
+                        <div class="col">
+                            <button class="entertainment-card japit-button"
+                                    data-type="binge"
+                                    data-japit-control="true"
+                                    data-japit-focusable="true"
+                                    data-action="binge"
+                                    onclick="handleBingeClick()">
+                                <img src="logos/binge.jpg" alt="Binge">
+                                <span>Binge</span>
+                            </button>
+                        </div>
+                        <div class="col">
+                            <button class="entertainment-card japit-button"
+                                    data-type="abciview"
+                                    data-japit-control="true"
+                                    data-japit-focusable="true"
+                                    data-action="abciview"
+                                    onclick="handleABCiViewClick()">
+                                <img src="logos/abciview.png" alt="ABC iView">
+                                <span>ABC iView</span>
                             </button>
                         </div>
                     </div>
@@ -313,99 +374,24 @@
 
             <!-- Radio View -->
             <div class="content radio-view" style="display: none;">
-                <div class="container-fluid">
-                    <div class="radio-grid">
-                        <!-- ABC KIDS Listen -->
-                        <button class="radio-card japit-button"
-                                data-type="radio1"
-                                data-japit-control="true"
-                                data-japit-focusable="true"
-                                data-action="radio1"
-                                onclick="handleRadioChannelClick(568)">
-                            <img src="logos/ABC_KIDS_Listen.png" alt="ABC KIDS Listen">
-                            <span>ABC KIDS Listen</span>
-                        </button>
-                        <!-- triple j -->
-                        <button class="radio-card japit-button"
-                                data-type="radio2"
-                                data-japit-control="true"
-                                data-japit-focusable="true"
-                                data-action="radio2"
-                                onclick="handleRadioChannelClick(569)">
-                            <img src="logos/triple_j.png" alt="triple j">
-                            <span>triple j</span>
-                        </button>
-                        <!-- triple j Unearthed -->
-                        <button class="radio-card japit-button"
-                                data-type="radio3"
-                                data-japit-control="true"
-                                data-japit-focusable="true"
-                                data-action="radio3"
-                                onclick="handleRadioChannelClick(570)">
-                            <img src="logos/triple_j_Unearthed.png" alt="triple j Unearthed">
-                            <span>triple j Unearthed</span>
-                        </button>
-                        <!-- ABC NewsRadio -->
-                        <button class="radio-card japit-button"
-                                data-type="radio4"
-                                data-japit-control="true"
-                                data-japit-focusable="true"
-                                data-action="radio4"
-                                onclick="handleRadioChannelClick(575)">
-                            <img src="logos/ABC_NewsRadio.png" alt="ABC NewsRadio">
-                            <span>ABC NewsRadio</span>
-                        </button>
-                        <!-- ABC Jazz -->
-                        <button class="radio-card japit-button"
-                                data-type="radio5"
-                                data-japit-control="true"
-                                data-japit-focusable="true"
-                                data-action="radio5"
-                                onclick="handleRadioChannelClick(567)">
-                            <img src="logos/ABC_Jazz.png" alt="ABC Jazz">
-                            <span>ABC Jazz</span>
-                        </button>
-                        <!-- ABC Classic -->
-                        <button class="radio-card japit-button"
-                                data-type="radio6"
-                                data-japit-control="true"
-                                data-japit-focusable="true"
-                                data-action="radio6"
-                                onclick="handleRadioChannelClick(571)">
-                            <img src="logos/ABC_Classic.png" alt="ABC Classic">
-                            <span>ABC Classic</span>
-                        </button>
-                        <!-- ABC RN -->
-                        <button class="radio-card japit-button"
-                                data-type="radio7"
-                                data-japit-control="true"
-                                data-japit-focusable="true"
-                                data-action="radio7"
-                                onclick="handleRadioChannelClick(574)">
-                            <img src="logos/ABC_RN.png" alt="ABC RN">
-                            <span>ABC RN</span>
-                        </button>
-                        <!-- ABC Country -->
-                        <button class="radio-card japit-button"
-                                data-type="radio8"
-                                data-japit-control="true"
-                                data-japit-focusable="true"
-                                data-action="radio8"
-                                onclick="handleRadioChannelClick(572)">
-                            <img src="logos/ABC_Country.png" alt="ABC Country">
-                            <span>ABC Country</span>
-                        </button>
-                        <!-- Double J -->
-                        <button class="radio-card japit-button"
-                                data-type="radio9"
-                                data-japit-control="true"
-                                data-japit-focusable="true"
-                                data-action="radio9"
-                                onclick="handleRadioChannelClick(566)">
-                            <img src="logos/Double_J.png" alt="Double J">
-                            <span>Double J</span>
-                        </button>
-                    </div>
+                <div class="radio-info-grid">
+                    <button class="radio-info-card japit-button"
+                            data-type="abc-kids"
+                            data-japit-control="true"
+                            data-japit-focusable="true"
+                            onclick="handleRadioChannelClick(568)">
+                        <img src="logos/ABC_KIDS_Listen.png" alt="ABC KIDS Listen">
+                        <span>ABC KIDS Listen</span>
+                    </button>
+                    
+                    <button class="radio-info-card japit-button"
+                            data-type="triple-j"
+                            data-japit-control="true"
+                            data-japit-focusable="true"
+                            onclick="handleRadioChannelClick(569)">
+                        <img src="logos/triple_j.png" alt="Triple J">
+                        <span>Triple J</span>
+                    </button>
                 </div>
             </div>
 
