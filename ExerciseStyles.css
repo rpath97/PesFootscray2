@@ -584,7 +584,7 @@ div.Input_Output {
 /* Clinical card hover/focus effects */
 .clinical-card:hover, .clinical-card:focus {
     box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-    background: linear-gradient(135deg, #00b0f0, #0098d6);
+    background: linear-gradient(135deg, #d8bb15, #d8bb15);
     transform: scale(1.1);
     z-index: 2;
 }
