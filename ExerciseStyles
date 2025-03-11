@@ -1,0 +1,57 @@
+<div class="content hospital-info-view" style="display: none;">
+    <div class="container-fluid">
+        <div class="row row-cols-1 row-cols-md-2 g-4 justify-content-center">
+            <!-- Welcome -->
+            <div class="col">
+                <button class="hospital-info-card japit-button"
+                        id="welcome-button"
+                        data-type="welcome"
+                        data-japit-control="true"
+                        data-japit-focusable="true"
+                        data-action="welcome"
+                        onclick="handleWelcomeClick()">
+                    <img src="logos/welcome.png" alt="Welcome">
+                    <span>Welcome</span>
+                </button>
+            </div>
+            <!-- Visiting Hours -->
+            <div class="col">
+                <button class="hospital-info-card japit-button"
+                        id="hospital-info-button"
+                        data-type="visiting"
+                        data-japit-control="true"
+                        data-japit-focusable="true"
+                        data-action="visiting"
+                        onclick="handleVisitingClick()">
+                    <img src="logos/visitinghours.png" alt="Visiting Hours">
+                    <span>Visiting Hours</span>
+                </button>
+            </div>
+            <!-- Healthcare Rights -->
+            <div class="col">
+                <button class="hospital-info-card japit-button"
+                        id="healthcare-rights-button"
+                        data-type="rights"
+                        data-japit-control="true"
+                        data-japit-focusable="true"
+                        data-action="rights"
+                        onclick="handleRightsClick()">
+                    <img src="logos/healthcarerights.png" alt="Healthcare Rights">
+                    <span>Healthcare Rights</span>
+                </button>
+            </div>
+            <!-- Reach -->
+            <div class="col">
+                <button class="hospital-info-card japit-button"
+                        data-type="reach"
+                        data-japit-control="true"
+                        data-japit-focusable="true"
+                        data-action="reach"
+                        onclick="handleReachClick()">
+                    <img src="logos/reach.png" alt="Reach">
+                    <span>Reach</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,33 +1,3 @@
-// Hospital Information button click handler
-// function handleHospitalInfoClick() {
-//     console.log('Opening Hospital Info...');
-    
-//     // Hide all views first
-//     document.querySelectorAll('.content').forEach(view => {
-//         if (view) {
-//             view.style.display = 'none';
-//         }
-//     });
-    
-//     // Show hospital info view
-//     const hospitalInfoView = document.querySelector('.hospital-info-view');
-//     if (hospitalInfoView) {
-//         hospitalInfoView.style.display = 'block';
-//         console.log('Hospital Info view displayed');
-//     }
-    
-//     // Update button states
-//     document.querySelectorAll('.menu-item').forEach(item => {
-//         item.classList.remove('active');
-//     });
-    
-//     // Add active class to hospital info button
-//     const hospitalInfoButton = document.querySelector('.menu-item[data-type="hospitalinfo"]');
-//     if (hospitalInfoButton) {
-//         hospitalInfoButton.classList.add('active');
-//     }
-// }
-
 // Hospital Information card click handlers
 function handleWelcomeClick() {
     console.log('Opening Welcome Video in new window...');
@@ -38,7 +8,7 @@ function handleWelcomeClick() {
     const left = (window.screen.width - width) / 2;
     const top = (window.screen.height - height) / 2;
 
-    // Open video in new window with specific dimensions and position
+    // Open video file directly in new window
     const videoWindow = window.open('', 'Welcome to Country', 
         `width=${width},
          height=${height},
@@ -87,9 +57,11 @@ function handleWelcomeClick() {
     videoWindow.document.close();
 
     // Focus back on welcome button when video window closes
-    videoWindow.onbeforeunload = () => {
-        document.querySelector('.hospital-info-card[data-type="welcome"]').focus();
-    };
+    if (videoWindow) {
+        videoWindow.onbeforeunload = () => {
+            document.querySelector('.hospital-info-card[data-type="welcome"]').focus();
+        };
+    }
 }
 
 function handleVisitingClick() {
@@ -144,146 +116,66 @@ function clearHospitalInfoActive() {
 }
 
 // Update the JAPIT focus handling
-function handleHospitalInfoFocus() {
-    var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
-    JAPITObjForWIXPSvc.Cookie = 2040;
-    JAPITObjForWIXPSvc.CmdType = "Change";
-    JAPITObjForWIXPSvc.Fun = "UserInputControl";
-    JAPITObjForWIXPSvc.CommandDetails = {
-        "FocusSettings": {
-            "FocusMode": "Explicit",
-            "ElementsToFocus": [
-                { "ElementId": "welcome", "NextUp": "hospitalInfoButton", "NextDown": "maps", "NextLeft": "safety", "NextRight": "visiting" },
-                { "ElementId": "visiting", "NextUp": "hospitalInfoButton", "NextDown": "rights", "NextLeft": "welcome", "NextRight": "safety" },
-                { "ElementId": "safety", "NextUp": "hospitalInfoButton", "NextDown": "reach", "NextLeft": "visiting", "NextRight": "welcome" },
-                { "ElementId": "maps", "NextUp": "welcome", "NextDown": "hospitalInfoButton", "NextLeft": "reach", "NextRight": "rights" },
-                { "ElementId": "rights", "NextUp": "visiting", "NextDown": "hospitalInfoButton", "NextLeft": "maps", "NextRight": "reach" },
-                { "ElementId": "reach", "NextUp": "safety", "NextDown": "hospitalInfoButton", "NextLeft": "rights", "NextRight": "maps" }
-            ]
-        }
-    };
-    sendWIxPCommand(JAPITObjForWIXPSvc);
-    delete JAPITObjForWIXPSvc;
-}
+// function handleHospitalInfoFocus() {
+//     var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
+//     JAPITObjForWIXPSvc.Cookie = 2040;
+//     JAPITObjForWIXPSvc.CmdType = "Change";
+//     JAPITObjForWIXPSvc.Fun = "UserInputControl";
+//     JAPITObjForWIXPSvc.CommandDetails = {
+//         "FocusSettings": {
+//             "FocusMode": "Explicit",
+//             "ElementsToFocus": [
+//                 { "ElementId": "welcome", "NextUp": "hospitalInfoButton", "NextDown": "maps", "NextLeft": "safety", "NextRight": "visiting" },
+//                 { "ElementId": "visiting", "NextUp": "hospitalInfoButton", "NextDown": "rights", "NextLeft": "welcome", "NextRight": "safety" },
+//                 { "ElementId": "safety", "NextUp": "hospitalInfoButton", "NextDown": "reach", "NextLeft": "visiting", "NextRight": "welcome" },
+//                 { "ElementId": "maps", "NextUp": "welcome", "NextDown": "hospitalInfoButton", "NextLeft": "reach", "NextRight": "rights" },
+//                 { "ElementId": "rights", "NextUp": "visiting", "NextDown": "hospitalInfoButton", "NextLeft": "maps", "NextRight": "reach" },
+//                 { "ElementId": "reach", "NextUp": "safety", "NextDown": "hospitalInfoButton", "NextLeft": "rights", "NextRight": "maps" }
+//             ]
+//         }
+//     };
+//     sendWIxPCommand(JAPITObjForWIXPSvc);
+//     delete JAPITObjForWIXPSvc;
+// }
 
 // Add keyboard navigation handling
 function handleHospitalInfoKeys(keyCode) {
-    if (document.querySelector('.hospital-info-view').style.display === 'block') {
-        const currentFocus = document.activeElement;
-        
-        // Navigation mapping for each card
-        const navigationMap = {
-            'welcome': {
-                'right': 'visiting',
-                'left': 'safety',
-                'down': 'maps'
-            },
-            'visiting': {
-                'right': 'safety',
-                'left': 'welcome',
-                'down': 'rights'
-            },
-            'safety': {
-                'right': 'welcome',
-                'left': 'visiting',
-                'down': 'reach'
-            },
-            'maps': {
-                'right': 'rights',
-                'left': 'reach',
-                'up': 'welcome'
-            },
-            'rights': {
-                'right': 'reach',
-                'left': 'maps',
-                'up': 'visiting'
-            },
-            'reach': {
-                'right': 'maps',
-                'left': 'rights',
-                'up': 'safety'
-            }
-        };
-
-        if (currentFocus.classList.contains('hospital-info-card')) {
-            const currentType = currentFocus.getAttribute('data-type');
-            const directions = navigationMap[currentType];
-            
-            let nextType;
-            switch(keyCode) {
-                case 37: // Left
-                    nextType = directions['left'];
-                    handleHospitalLeftButton();
-                    break;
-                case 38: // Up
-                    nextType = directions['up'];
-                    handleHospitalUpButton();
-                    break;
-                case 39: // Right
-                    nextType = directions['right'];
-                    handleHospitalRightButton();
-                    break;
-                case 40: // Down
-                    nextType = directions['down'];
-                    handleHospitalDownButton();
-                    break;
-            }
-
-            if (nextType) {
-                if (nextType === 'hospitalInfoButton') {
-                    const sidebarButton = document.getElementById('hospitalInfoButton');
-                    if (sidebarButton) {
-                        sidebarButton.focus();
-                    }
-                } else {
-                    const nextCard = document.querySelector(`.hospital-info-card[data-type="${nextType}"]`);
-                    if (nextCard) {
-                        nextCard.focus();
-                    }
-                }
-            }
-        }
-
-        // Send JAPIT command for key press
-        var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
-        JAPITObjForWIXPSvc.Cookie = 2030;
-        JAPITObjForWIXPSvc.CmdType = "Change";
-        JAPITObjForWIXPSvc.Fun = "UserInputControl";
-        
+    const currentFocus = document.activeElement;
+    
+    if (currentFocus.id === 'welcome-button' || 
+        currentFocus.getAttribute('data-type') === 'healthcare-rights') {
         switch(keyCode) {
-            case 37: // Left
-                JAPITObjForWIXPSvc.CommandDetails = {
-                    "VirtualKeyDetails": {
-                        "VirtualKey": "HBBTV_VK_LEFT"
-                    }
-                };
-                break;
-            case 38: // Up
-                JAPITObjForWIXPSvc.CommandDetails = {
-                    "VirtualKeyDetails": {
-                        "VirtualKey": "HBBTV_VK_UP"
-                    }
-                };
-                break;
-            case 39: // Right
-                JAPITObjForWIXPSvc.CommandDetails = {
-                    "VirtualKeyDetails": {
-                        "VirtualKey": "HBBTV_VK_RIGHT"
-                    }
-                };
-                break;
-            case 40: // Down
-                JAPITObjForWIXPSvc.CommandDetails = {
-                    "VirtualKeyDetails": {
-                        "VirtualKey": "HBBTV_VK_DOWN"
-                    }
-                };
+            case 37: // Left arrow
+                const hospitalInfoButton = document.querySelector('.menu-item[data-type="hospitalinfo"]');
+                if (hospitalInfoButton) {
+                    hospitalInfoButton.focus();
+                    return 0; // Key handled
+                }
                 break;
         }
-        
-        sendWIxPCommand(JAPITObjForWIXPSvc);
-        delete JAPITObjForWIXPSvc;
-        return 0;
     }
-    return 1;
+    return 1; // Key not handled
+}
+
+// Add this to your existing event listeners
+document.addEventListener('keydown', function(e) {
+    if (document.querySelector('.hospital-info-view').style.display === 'block') {
+        handleHospitalInfoKeys(e.keyCode);
+    }
+});
+
+function handleHospitalInfoButtonClick() {
+    console.log('Opening Hospital Info section...');
+    
+    // Hide all views first
+    document.querySelectorAll('.content').forEach(view => {
+        view.style.display = 'none';
+    });
+    // document.querySelector('.default-view').style.display = 'none';
+    // // Show My Care view
+    // const hospitalInfoView = document.querySelector('.hospital-info-view');
+    // if (hospitalInfoView) {
+    //     hospitalInfoView.style.display = 'block';
+    // }  
+
 }

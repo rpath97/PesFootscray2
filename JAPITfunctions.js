@@ -1,6 +1,5 @@
 // Functions that contain different JAPIT messages to execute different tasks to the TV
-// Author: Hanson Wilson
-// Date: 03/10/2024
+
 
 // Global variables
 var radioOn = 0;
@@ -106,8 +105,8 @@ function openMovies() {
 	sendWIxPCommand(JAPITObjForWIXPSvc);
 	delete JAPITObjForWIXPSvc;
 }
-// Open Netflix application
-function openNetflix() {
+// Open Spotify application
+function openSpotify() {
 	var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();	
 
 	JAPITObjForWIXPSvc.Cookie  = 119;
@@ -115,7 +114,7 @@ function openNetflix() {
 	JAPITObjForWIXPSvc.Fun     = "ApplicationControl";
 	JAPITObjForWIXPSvc.CommandDetails = {
 		"ApplicationDetails": {
-			"ApplicationAndroidPackageName": "com.netflix.ninja"
+			"ApplicationAndroidPackageName": "com.spotify.tv.android"
 			},
 		"ApplicationState": 'Activate'
  	};
@@ -268,215 +267,7 @@ function channelList() {
     delete JAPITObjForWIXPSvc;
 }
 
-// Handle Back Button
-// function handleBackButton() {
-//     if (document.querySelector('.hospital-info-view').style.display === 'block') {
-//         document.querySelector('.hospital-info-view').style.display = 'none';
-//         document.querySelector('.default-view').style.display = 'block';
-//         const menuButton = document.getElementById('hospitalInfoButton');
-//         if (menuButton) {
-//             menuButton.focus();
-//         }
 
-//         var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
-//         JAPITObjForWIXPSvc.Cookie = 1020;
-//         JAPITObjForWIXPSvc.CmdType = "Change";
-//         JAPITObjForWIXPSvc.Fun = "ApplicationControl";
-//         JAPITObjForWIXPSvc.CommandDetails = {
-//             "ApplicationDetails": {
-//                 "ApplicationName": "Dashboard"
-//             },
-//             "ApplicationState": "Active"
-//         };
-//         sendWIxPCommand(JAPITObjForWIXPSvc);
-//         return 0;
-//     } else if (document.querySelector('.entertainment-view').style.display === 'block') {
-//         document.querySelector('.entertainment-view').style.display = 'none';
-//         document.querySelector('.default-view').style.display = 'block';
-//         const menuButton = document.getElementById('entertainmentButton');
-//         if (menuButton) {
-//             menuButton.focus();
-//         }
-
-//         var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
-//         JAPITObjForWIXPSvc.Cookie = 1020;
-//         JAPITObjForWIXPSvc.CmdType = "Change";
-//         JAPITObjForWIXPSvc.Fun = "ApplicationControl";
-//         JAPITObjForWIXPSvc.CommandDetails = {
-//             "ApplicationDetails": {
-//                 "ApplicationName": "Dashboard"
-//             },
-//             "ApplicationState": "Active"
-//         };
-//         sendWIxPCommand(JAPITObjForWIXPSvc);
-//         return 0;
-//     }
-//     return 1;
-// }
-
-// Handle Entertainment Navigation
-function handleEntertainmentKeys(keyCode) {
-    if (document.querySelector('.entertainment-view').style.display === 'block') {
-        const currentFocus = document.activeElement;
-        
-        // Navigation mapping for each card
-        const navigationMap = {
-            'tv': {
-                'right': 'movies',
-                'left': 'entertainmentButton'  // Goes to sidebar
-            },
-            'movies': {
-                'right': 'radio',
-                'left': 'tv',
-                'down': 'netflix'
-            },
-            'radio': {
-                'right': 'netflix',  // Wraps to next row
-                'left': 'movies',
-                'down': 'youtube'
-            },
-            'netflix': {
-                'right': 'youtube',
-                'left': 'radio',  // Goes to radio instead of sidebar
-                'up': 'movies'
-            },
-            'youtube': {
-                'left': 'netflix',
-                'up': 'radio'
-            }
-        };
-
-        if (currentFocus.classList.contains('entertainment-card')) {
-            const currentType = currentFocus.getAttribute('data-type');
-            const directions = navigationMap[currentType];
-            
-            let nextType;
-            switch(keyCode) {
-                case 37: // Left
-                    nextType = directions['left'];
-                    handleLeftButton();
-                    break;
-                case 38: // Up
-                    nextType = directions['up'];
-                    handleUpButton();
-                    break;
-                case 39: // Right
-                    nextType = directions['right'];
-                    handleRightButton();
-                    break;
-                case 40: // Down
-                    nextType = directions['down'];
-                    handleDownButton();
-                    break;
-            }
-
-            if (nextType) {
-                if (nextType === 'entertainmentButton') {
-                    // Navigate to sidebar
-                    const sidebarButton = document.getElementById('entertainmentButton');
-                    if (sidebarButton) {
-                        sidebarButton.focus();
-                    }
-                } else {
-                    // Navigate to next card
-                    const nextCard = document.querySelector(`.entertainment-card[data-type="${nextType}"]`);
-                    if (nextCard) {
-                        nextCard.focus();
-                    }
-                }
-            }
-        }
-
-        // Send JAPIT command for key press
-        var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
-        JAPITObjForWIXPSvc.Cookie = 1030;
-        JAPITObjForWIXPSvc.CmdType = "Change";
-        JAPITObjForWIXPSvc.Fun = "UserInputControl";
-        
-        switch(keyCode) {
-            case 37: // Left
-                JAPITObjForWIXPSvc.CommandDetails = {
-                    "VirtualKeyDetails": {
-                        "VirtualKey": "HBBTV_VK_LEFT"
-                    }
-                };
-                break;
-            case 38: // Up
-                JAPITObjForWIXPSvc.CommandDetails = {
-                    "VirtualKeyDetails": {
-                        "VirtualKey": "HBBTV_VK_UP"
-                    }
-                };
-                break;
-            case 39: // Right
-                JAPITObjForWIXPSvc.CommandDetails = {
-                    "VirtualKeyDetails": {
-                        "VirtualKey": "HBBTV_VK_RIGHT"
-                    }
-                };
-                break;
-            case 40: // Down
-                JAPITObjForWIXPSvc.CommandDetails = {
-                    "VirtualKeyDetails": {
-                        "VirtualKey": "HBBTV_VK_DOWN"
-                    }
-                };
-                break;
-        }
-        
-        sendWIxPCommand(JAPITObjForWIXPSvc);
-        delete JAPITObjForWIXPSvc;
-        return 0;
-    }
-    return 1;
-}
-
-// Add this new function to handle JAPIT focus for entertainment section
-function handleEntertainmentFocus() {
-    // Register entertainment cards for JAPIT focus
-    var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
-    JAPITObjForWIXPSvc.Cookie = 1040;
-    JAPITObjForWIXPSvc.CmdType = "Change";
-    JAPITObjForWIXPSvc.Fun = "UserInputControl";
-    JAPITObjForWIXPSvc.CommandDetails = {
-        "FocusSettings": {
-            "FocusMode": "Explicit",
-            "ElementsToFocus": [
-                { "ElementId": "tv", "NextUp": "entertainmentButton", "NextDown": "netflix", "NextLeft": "youtube", "NextRight": "movies" },
-                { "ElementId": "movies", "NextUp": "entertainmentButton", "NextDown": "youtube", "NextLeft": "tv", "NextRight": "radio" },
-                { "ElementId": "radio", "NextUp": "entertainmentButton", "NextDown": "youtube", "NextLeft": "movies", "NextRight": "netflix" },
-                { "ElementId": "netflix", "NextUp": "tv", "NextDown": "entertainmentButton", "NextLeft": "radio", "NextRight": "youtube" },
-                { "ElementId": "youtube", "NextUp": "movies", "NextDown": "entertainmentButton", "NextLeft": "netflix", "NextRight": "tv" }
-            ]
-        }
-    };
-    sendWIxPCommand(JAPITObjForWIXPSvc);
-    delete JAPITObjForWIXPSvc;
-}
-
-// Function that handles hospital info focus when hospital info button is clicked
-function handleHospitalInfoFocus() {
-    // Register hospital info cards for JAPIT focus
-    var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
-    JAPITObjForWIXPSvc.Cookie = 2040;
-    JAPITObjForWIXPSvc.CmdType = "Change";
-    JAPITObjForWIXPSvc.Fun = "UserInputControl";
-    JAPITObjForWIXPSvc.CommandDetails = {
-        "FocusSettings": {
-            "FocusMode": "Explicit",
-            "ElementsToFocus": [
-                { "ElementId": "welcome", "NextUp": "hospitalInfoButton", "NextDown": "maps", "NextLeft": "safety", "NextRight": "visiting" },
-                { "ElementId": "visiting", "NextUp": "hospitalInfoButton", "NextDown": "rights", "NextLeft": "welcome", "NextRight": "safety" },
-                { "ElementId": "safety", "NextUp": "hospitalInfoButton", "NextDown": "reach", "NextLeft": "visiting", "NextRight": "welcome" },
-                { "ElementId": "maps", "NextUp": "welcome", "NextDown": "hospitalInfoButton", "NextLeft": "reach", "NextRight": "rights" },
-                { "ElementId": "rights", "NextUp": "visiting", "NextDown": "hospitalInfoButton", "NextLeft": "maps", "NextRight": "reach" },
-                { "ElementId": "reach", "NextUp": "safety", "NextDown": "hospitalInfoButton", "NextLeft": "rights", "NextRight": "maps" }
-            ]
-        }
-	};
-	sendWIxPCommand(JAPITObjForWIXPSvc);
-	delete JAPITObjForWIXPSvc;
-}
 
 // Add hospital info navigation key handling
 function handleHospitalInfoKeys(keyCode) {
@@ -529,159 +320,23 @@ function handleHospitalInfoKeys(keyCode) {
         return 0;
     }
     return 1;
+	
 }
 
-// Add these functions for hospital info navigation
-function handleHospitalLeftButton() {
-    if (document.querySelector('.hospital-info-view').style.display === 'block') {
-        const currentFocus = document.activeElement;
-        
-        // Navigation mapping for left button
-        const leftNavigationMap = {
-            'welcome': 'safety',
-            'visiting': 'welcome',
-            'safety': 'visiting',
-            'maps': 'reach',
-            'rights': 'maps',
-            'reach': 'rights'
-        };
-
-        if (currentFocus.classList.contains('hospital-info-card')) {
-            const currentType = currentFocus.getAttribute('data-type');
-            const nextType = leftNavigationMap[currentType];
-            const nextCard = document.querySelector(`.hospital-info-card[data-type="${nextType}"]`);
-            if (nextCard) {
-                nextCard.focus();
-            }
-        }
-    }
+function channelStopPlaying(channNo) {
+ 
+	var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
+	JAPITObjForWIXPSvc.Cookie  = 8;
+	JAPITObjForWIXPSvc.CmdType = "Change";
+	JAPITObjForWIXPSvc.Fun     = "ChannelSelection";
+	JAPITObjForWIXPSvc.CommandDetails = {
+		"ChannelTuningDetails": {
+			"ChannelNumber": channNo
+		},
+		"TrickMode": 'Stop'
+	};
+	sendWIxPCommand(JAPITObjForWIXPSvc);
+	delete JAPITObjForWIXPSvc;
 }
 
-function handleHospitalRightButton() {
-    if (document.querySelector('.hospital-info-view').style.display === 'block') {
-        const currentFocus = document.activeElement;
-        
-        // Navigation mapping for right button
-        const rightNavigationMap = {
-            'welcome': 'visiting',
-            'visiting': 'safety',
-            'safety': 'welcome',
-            'maps': 'rights',
-            'rights': 'reach',
-            'reach': 'maps'
-        };
-
-        if (currentFocus.classList.contains('hospital-info-card')) {
-            const currentType = currentFocus.getAttribute('data-type');
-            const nextType = rightNavigationMap[currentType];
-            const nextCard = document.querySelector(`.hospital-info-card[data-type="${nextType}"]`);
-            if (nextCard) {
-                nextCard.focus();
-            }
-        }
-    }
-}
-
-function handleHospitalUpButton() {
-    if (document.querySelector('.hospital-info-view').style.display === 'block') {
-        const currentFocus = document.activeElement;
-        
-        // Navigation mapping for up button
-        const upNavigationMap = {
-            'maps': 'welcome',
-            'rights': 'visiting',
-            'reach': 'safety'
-        };
-
-        if (currentFocus.classList.contains('hospital-info-card')) {
-            const currentType = currentFocus.getAttribute('data-type');
-            const nextType = upNavigationMap[currentType];
-            const nextCard = document.querySelector(`.hospital-info-card[data-type="${nextType}"]`);
-            if (nextCard) {
-                nextCard.focus();
-            }
-        }
-    }
-}
-
-function handleHospitalDownButton() {
-    if (document.querySelector('.hospital-info-view').style.display === 'block') {
-        const currentFocus = document.activeElement;
-        
-        // Navigation mapping for down button
-        const downNavigationMap = {
-            'welcome': 'maps',
-            'visiting': 'rights',
-            'safety': 'reach'
-        };
-
-        if (currentFocus.classList.contains('hospital-info-card')) {
-            const currentType = currentFocus.getAttribute('data-type');
-            const nextType = downNavigationMap[currentType];
-            const nextCard = document.querySelector(`.hospital-info-card[data-type="${nextType}"]`);
-            if (nextCard) {
-                nextCard.focus();
-            }
-        }
-    }
-}
-// Add menu navigation mapping
-const menuNavigationMap = {
-    'entertainmentButton': {
-        'up': 'clinicalButton',  // Wrap to bottom
-        'down': 'hospitalInfoButton'
-    },
-    'hospitalInfoButton': {
-        'up': 'entertainmentButton',
-        'down': 'myCareButton'
-    },
-    'myCareButton': {
-        'up': 'hospitalInfoButton',
-        'down': 'clinicalButton'
-    },
-    'clinicalButton': {
-        'up': 'myCareButton',
-        'down': 'entertainmentButton'  // Wrap to top
-    }
-};
-
-// Update handleMenuKeys function
-function handleMenuKeys(keyCode) {
-    const currentFocus = document.activeElement;
-    const currentId = currentFocus.id;
-    
-    if (menuNavigationMap[currentId]) {
-        let nextId;
-        switch(keyCode) {
-            case 38: // Up
-                nextId = menuNavigationMap[currentId]['up'];
-                break;
-            case 40: // Down
-                nextId = menuNavigationMap[currentId]['down'];
-                break;
-        }
-
-        if (nextId) {
-            const nextButton = document.getElementById(nextId);
-            if (nextButton) {
-                nextButton.focus();
-                
-                // Send JAPIT focus command
-                var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
-                JAPITObjForWIXPSvc.Cookie = 1020;
-                JAPITObjForWIXPSvc.CmdType = "Change";
-                JAPITObjForWIXPSvc.Fun = "UserInputControl";
-                JAPITObjForWIXPSvc.CommandDetails = {
-                    "FocusSettings": {
-                        "SetFocusTo": nextId
-                    }
-                };
-                sendWIxPCommand(JAPITObjForWIXPSvc);
-                delete JAPITObjForWIXPSvc;
-            }
-        }
-        return 0;
-    }
-    return 1;
-}
 

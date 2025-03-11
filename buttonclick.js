@@ -21,8 +21,8 @@ function handleJapitButtonClick(elementId) {
         case 'radio':
             handleRadioClick();
             break;
-        case 'netflix':
-            handleNetflixClick();
+        case 'spotify':
+            handleSpotifyClick();
             break;
         case 'youtube':
             handleYouTubeClick();
@@ -61,10 +61,128 @@ function handleJapitButtonClick(elementId) {
         case 'reach':
             handleReachClick();
             break;
+
+            //mycare section
+            case 'mycare':
+            console.log('Mycare button clicked via JAPIT button handler');
+            handleMycareClick();
+            break;
+        case 'management-and-discharge':
+            handleManagementandDischargeClick();
+            break;
+        case 'carers-survey':
+            handleCarersSurveyClick();
+            break;
+        case 'patient-survey':
+            handlePatientSurveyClick();
+            break;
+        case 'blacktown-surveys':
+            handleBlacktownSurveysClick();
+            break;
+
+             //clinical services section
+             case 'clinical services':
+                console.log('Clinical services button clicked via JAPIT button handler');
+                handleClinicalServicesClick();
+                break;
+            case 'clinical-sharing':
+                handleClinicalSharingClick();
+                break;
+    
+        
     }
 }
 
-// Register button click handler with JAPIT
-if (window.JAPITWIXPPlugin) {
-    window.JAPITWIXPPlugin.WebIXPOnButtonClick = handleJapitButtonClick;
+function init() {
+    // Wait for DOM to be fully loaded before trying to focus
+    setTimeout(() => {
+        const entertainmentButton = document.getElementById('entertainmentButton');
+        if (entertainmentButton) {
+            entertainmentButton.focus();
+            
+            // Set JAPIT focus
+            var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
+            JAPITObjForWIXPSvc.Cookie = 3041;
+            JAPITObjForWIXPSvc.CmdType = "Change";
+            JAPITObjForWIXPSvc.Fun = "UserInputControl";
+            JAPITObjForWIXPSvc.CommandDetails = {
+                "FocusSettings": {
+                    "SetFocusTo": "entertainment"
+                }
+            };
+            sendWIxPCommand(JAPITObjForWIXPSvc);
+            delete JAPITObjForWIXPSvc;
+        } else {
+            console.log('Entertainment button not found');
+        }
+    }, 100);
+
+    // Register JAPIT button click handler
+    if (window.JAPITWIXPPlugin) {
+        window.JAPITWIXPPlugin.WebIXPOnButtonClick = handleJapitButtonClick;
+    }
+}
+
+
+//Clinical Serivices button click and focus
+function init() {
+    // Wait for DOM to be fully loaded before trying to focus
+    setTimeout(() => {
+        const clinicalServicesButton = document.getElementById('clinicalServicesButton');
+        if (clinicalServicesButton) {
+            clinicalServicesButton.focus();
+            
+            // Set JAPIT focus
+            var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
+            JAPITObjForWIXPSvc.Cookie = 3041;
+            JAPITObjForWIXPSvc.CmdType = "Change";
+            JAPITObjForWIXPSvc.Fun = "UserInputControl";
+            JAPITObjForWIXPSvc.CommandDetails = {
+                "FocusSettings": {
+                    "SetFocusTo": "clinical-services"
+                }
+            };
+            sendWIxPCommand(JAPITObjForWIXPSvc);
+            delete JAPITObjForWIXPSvc;
+        } else {
+            console.log('mycare button not found');
+        }
+    }, 100);
+
+    // Register JAPIT button click handler
+    if (window.JAPITWIXPPlugin) {
+        window.JAPITWIXPPlugin.WebIXPOnButtonClick = handleJapitButtonClick;
+    }
+}
+
+//CLINICAL SERVICES button click and focusfunction init() {
+    //MYCARE button click and focus
+function init() {
+    // Wait for DOM to be fully loaded before trying to focus
+    setTimeout(() => {
+        const mycareButton = document.getElementById('mycareButton');
+        if (mycareButton) {
+            mycareButton.focus();
+            
+            // Set JAPIT focus
+            var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
+            JAPITObjForWIXPSvc.Cookie = 3041;
+            JAPITObjForWIXPSvc.CmdType = "Change";
+            JAPITObjForWIXPSvc.Fun = "UserInputControl";
+            JAPITObjForWIXPSvc.CommandDetails = {
+                "FocusSettings": {
+                    "SetFocusTo": "mycare"
+                }
+            };
+            sendWIxPCommand(JAPITObjForWIXPSvc);
+            delete JAPITObjForWIXPSvc;
+        } else {
+            console.log('mycare button not found');
+        }
+    }, 100);
+
+    // Register JAPIT button click handler
+    if (window.JAPITWIXPPlugin) {
+        window.JAPITWIXPPlugin.WebIXPOnButtonClick = handleJapitButtonClick;
+    }
 }

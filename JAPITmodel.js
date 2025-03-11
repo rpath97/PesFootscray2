@@ -6,6 +6,7 @@
 */
 /* global variables */
 
+var radio_channel_on = 0;
 
 function Exercise01ModelInit() {
 	setRcControlSelective();
@@ -29,6 +30,15 @@ function WIXPResponseHandler(WIXPResponseJSON){
 			channelListResponseFromTV(parsedWIXPJSON);
 		}
 	} catch(e) {
+		//Error - can print to logs view
+		document.getElementById("logmsgcallback").value += '\n' + e + '\n';
+		document.getElementById("logmsgcallback").scrollTop=document.getElementById("logmsgcallback").scrollHeight;
+		errorCount++;
+		//This is turn the tv screen off and reset the errorCount. Mainly to over the Googlecast error.
+		if (errorCount > 10){
+			errorCount = 0;
+			//powerState('Standby');
+		}
 		return e;
 	}
 }
@@ -62,6 +72,19 @@ function switchToMainTuner(){
 		"TuneToSource": "MainTuner"
 	};
 
+	sendWIxPCommand(JAPITObjForWIXPSvc);
+}
+
+function switchToHDMI1(){  //clinical services to HDMI STR
+	var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
+
+	JAPITObjForWIXPSvc.Cookie = 1055;
+	JAPITObjForWIXPSvc.CmdType = "Change";
+	JAPITObjForWIXPSvc.Fun = "Source";
+	JAPITObjForWIXPSvc.CommandDetails = {
+		"TuneToSource": "HDMI1"
+	};
+	changeCDBstate('Deactivate');  //deactivate the dashboard to open HDMI STR
 	sendWIxPCommand(JAPITObjForWIXPSvc);
 }
 
@@ -212,12 +235,41 @@ function OnKeyReceivedHandler(event) {
 }
 
 
-function keyHandler(keyCode) {
+function keyHandler(keyCode)
+ {
 	try {
-		switch (keyCode) {
+		switch (keyCode) {  //activate the dashboard going back from where i am to dashboard
 			case VK_MENU:
+				channelStopPlaying(radio_channel_playing);
+				if(castState == 1) {
+					castState = 0;
+					//googlCastToggle('Off');
+					state = "Activate";
+					//changeCDBstate(state);
+					switchSource('HDMI1');
+					tvChannelsApp('Activate');
+					document.getElementById('ButtonTVChannel').focus();
+					//SelectCast('Deactivate');
+					//setTimeout(tvChannelsApp('Deactivate'), 1000);
+					setTimeout(changeCDBstate(state), 1000);
+					//applicationControl('TVChannels', 'Deactivate');
+					//activateApplications();
+					//applicationControl('Internet', 'Deactivate');
+					//applicationControl('Directshare', 'Deactivate');
+					//applicationControl('InternetHotspot', 'Deactivate');
+					//window.location.reload(true);
+				} 
+				else {
 				
 				changeCDBstate('Activate');
+				const videoSrcFrame = document.getElementById('video-src-iframe');
+				}
+				if (videoSrcFrame) {
+					videoSrcFrame.src = '';  //d the welcome video and activated the dashbo
+					// ard
+				}
+				changeCDBstate('Activate');
+				
 				break;
 			case VK_1: //Refreshes the dashboard
 				UtilityRefreshPage();
@@ -231,7 +283,7 @@ function keyHandler(keyCode) {
 			case VK_4:
 				var element = document.getElementById("ipaddydiv");
 				var currentDisplay = window.getComputedStyle(element).display;
-
+				
 				if (currentDisplay === 'none') {
 					element.style.display = 'flex';  // Show the element
 				} else {
@@ -241,108 +293,17 @@ function keyHandler(keyCode) {
 			default:
 				alert("Nothing to handle \n");
 				break;
+			}
 		}
-	}
+	
 	catch (e) {
 		//Keyhandler error
 	}
 
 	//Exit Keyhandler
-}
 
-function handleLeftButton() {
-	// Handle entertainment section
-	if (document.querySelector('.entertainment-view').style.display === 'block') {
-		const currentFocus = document.activeElement;
-		
-		// Navigation mapping for entertainment left button
-		const leftNavigationMap = {
-			'tv': 'youtube',
-			'movies': 'tv',
-			'radio': 'movies',
-			'netflix': 'radio',
-			'youtube': 'netflix'
-		};
 
-		if (currentFocus.classList.contains('entertainment-card')) {
-			const currentType = currentFocus.getAttribute('data-type');
-			const nextType = leftNavigationMap[currentType];
-			const nextCard = document.querySelector(`.entertainment-card[data-type="${nextType}"]`);
-			if (nextCard) {
-				nextCard.focus();
-			}
-		}
-	}
-}
 
-function handleRightButton() {
-	// Handle entertainment section
-	if (document.querySelector('.entertainment-view').style.display === 'block') {
-		const currentFocus = document.activeElement;
-		
-		// Navigation mapping for entertainment right button
-		const rightNavigationMap = {
-			'tv': 'movies',
-			'movies': 'radio',
-			'radio': 'netflix',
-			'netflix': 'youtube',
-			'youtube': 'tv'
-		};
-
-		if (currentFocus.classList.contains('entertainment-card')) {
-			const currentType = currentFocus.getAttribute('data-type');
-			const nextType = rightNavigationMap[currentType];
-			const nextCard = document.querySelector(`.entertainment-card[data-type="${nextType}"]`);
-			if (nextCard) {
-				nextCard.focus();
-			}
-		}
-	}
-}
-
-function handleUpButton() {
-	// Handle entertainment section
-	if (document.querySelector('.entertainment-view').style.display === 'block') {
-		const currentFocus = document.activeElement;
-		
-		// Navigation mapping for entertainment up button
-		const upNavigationMap = {
-			'netflix': 'tv',
-			'youtube': 'movies'
-		};
-
-		if (currentFocus.classList.contains('entertainment-card')) {
-			const currentType = currentFocus.getAttribute('data-type');
-			const nextType = upNavigationMap[currentType];
-			const nextCard = document.querySelector(`.entertainment-card[data-type="${nextType}"]`);
-			if (nextCard) {
-				nextCard.focus();
-			}
-		}
-	}
-}
-
-function handleDownButton() {
-	// Handle entertainment section
-	if (document.querySelector('.entertainment-view').style.display === 'block') {
-		const currentFocus = document.activeElement;
-		
-		// Navigation mapping for entertainment down button
-		const downNavigationMap = {
-			'tv': 'netflix',
-			'movies': 'youtube'
-		};
-
-		if (currentFocus.classList.contains('entertainment-card')) {
-			const currentType = currentFocus.getAttribute('data-type');
-			const nextType = downNavigationMap[currentType];
-			const nextCard = document.querySelector(`.entertainment-card[data-type="${nextType}"]`);
-			if (nextCard) {
-				nextCard.focus();
-			}
-		}
-	}
-}
 
 function handleEntertainmentKeys(keyCode) {
 	if (document.querySelector('.entertainment-view').style.display === 'block') {
@@ -394,32 +355,11 @@ function handleEntertainmentKeys(keyCode) {
 		return 0;
 	}
 	return 1;
+	}
 }
 
-// function handleBackButton() {
-// 	if (document.querySelector('.entertainment-view').style.display === 'block') {
-// 		document.querySelector('.entertainment-view').style.display = 'none';
-// 		document.querySelector('.default-view').style.display = 'block';
-// 		const menuButton = document.getElementById('entertainmentButton');
-// 		if (menuButton) {
-// 			menuButton.focus();
-// 		}
+// 
 
-// 		var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
-// 		JAPITObjForWIXPSvc.Cookie = 1020;
-// 		JAPITObjForWIXPSvc.CmdType = "Change";
-// 		JAPITObjForWIXPSvc.Fun = "ApplicationControl";
-// 		JAPITObjForWIXPSvc.CommandDetails = {
-// 			"ApplicationDetails": {
-// 				"ApplicationName": "Dashboard"
-// 			},
-// 			"ApplicationState": "Active"
-// 		};
-// 		sendWIxPCommand(JAPITObjForWIXPSvc);
-// 		return 0;
-// 	}
-// 	return 1;
-// }
 
 function handleExitButton() {
 	// Implement exit logic here

@@ -1,5 +1,6 @@
 // Track active section
 let currentSection = 'default';
+const directoryPath = 'logos/channel_logos/'; 
 
 // Menu click handlers
 function handleMenuClick(section, event) {
@@ -49,6 +50,12 @@ function handleHospitalInfoClick() {
     
     // Hide default view
     document.querySelector('.default-view').style.display = 'none';
+    // Hide entertainment view
+    document.querySelector('.entertainment-view').style.display = 'none';
+      // Hide mycare view
+    //   document.querySelector('.mycare-view').style.display = 'none';
+      // Hide clinicalservices view
+    //   document.querySelector('.clinicalservices-view').style.display = 'none';
     
     // Show hospital info view
     const hospitalInfoView = document.querySelector('.hospital-info-view');
@@ -136,86 +143,86 @@ function handleEntertainmentClick() {
     console.log('Switched to entertainment view');
 }
 
-// function handleMyCareClick() {
-//     console.log('My Care button clicked');
+function back2dashboard() {
+    document.getElementById("radio_list").style.display = "none";
+    document.getElementById("nav").style.display = "flex";
+    document.getElementById("patientMenu").style.display = "block";
+    document.getElementById("gallery").style.display = "flex";
+
+    document.getElementById('ButtonTVChannel').focus();
+}
+
+function radio_ui(event) {
+    const leftColumn = document.querySelector(".radio-view");
+    // const rightColumn = document.getElementById("right-column");
+    // const rightColumnLogo = document.getElementById("radio-logo-right");
+    // const gifTitle = document.getElementById("gif-title");
     
-//     // Hide default view (main image)
-//     const defaultView = document.querySelector('.default-view');
-//     if (defaultView) {
-//         defaultView.style.display = 'none';
-//     }
-
-//     // Hide sidebar
-//     const sidebar = document.querySelector('.sidebar');
-//     if (sidebar) {
-//         sidebar.style.display = 'none';
-//     }
-
-//     // Show my care view
-//     const myCareView = document.querySelector('.my-care-view');
-//     if (myCareView) {
-//         myCareView.style.display = 'block';
-//     }
-
-//     // Adjust main content to full width
-//     const mainContent = document.querySelector('.main-content');
-//     if (mainContent) {
-//         mainContent.style.marginLeft = '0';
-//         mainContent.style.width = '100%';
-//     }
-
-//     // Update current section
-//     currentSection = 'my-care';
-
-//     // Focus first my care card
-//     setTimeout(() => {
-//         const firstCard = document.querySelector('.mycare-card');
-//         if (firstCard) {
-//             firstCard.focus();
-//         }
-//     }, 100);
-
-//     console.log('Switched to my care view');
-// }
-
-// function handleClinicalServicesClick() {
-//     console.log('Clinical Services button clicked');
+    //leftColumn.style.flex = 2; // Change the left column to 2/3 of the container
+    // rightColumn.style.flex = 1; // Make the right column visible (1/3 of the container)
     
-//     // Hide default view (main image)
-//     const defaultView = document.querySelector('.default-view');
-//     if (defaultView) {
-//         defaultView.style.display = 'none';
-//     }
+    const clickedButton = event.currentTarget;  // Get the clicked element
+    const buttonId = clickedButton.id;   // Access the ID property
+    const channel_no = channel_list.find(item => item.BasicChannelDetails.ChannelName === buttonId);
+    channelSelection(channel_no.BasicChannelDetails.ChannelNo);
+    radio_channel_playing = channel_no.BasicChannelDetails.ChannelNo; //it plays as defined in the channel_list
+    // gifTitle.innerHTML = `<div>${buttonId}</div>`;
+    // channelSelection(buttonId);
+    const logoname = buttonId + '.png';
+    const img_src = directoryPath + logoname;
+    // rightColumnLogo.src = img_src.toLocaleLowerCase();
+    // img_url = rightColumnLogo.src;
+    
+    // checkImageExists(img_url, function(exists) {
+    //     if (exists) {
+    //         console.log('Image exists.');
+    //     } else {
+    //         //rightColumnLogo.src = 'UI_images/radioicon2.png';
+    //         console.log('Image does not exist.');
+    //     }
+    // });
 
-//     // Hide sidebar
-//     const sidebar = document.querySelector('.sidebar');
-//     if (sidebar) {
-//         sidebar.style.display = 'none';
-//     }
+    document.getElementById(clickedButton.id).focus(); 
+}
 
-//     // Show clinical services view
-//     const clinicalView = document.querySelector('.clinical-services-view');
-//     if (clinicalView) {
-//         clinicalView.style.display = 'block';
-//     }
+function remove_channel() {
+    document.querySelector('.radio-button-container').remove();
+}
 
-//     // Adjust main content to full width
-//     const mainContent = document.querySelector('.main-content');
-//     if (mainContent) {
-//         mainContent.style.marginLeft = '0';
-//         mainContent.style.width = '100%';
-//     }
+function add_channel() {
+    const leftColumn = document.getElementById("left-column");
+    const rightColumn = document.getElementById("right-column");
+    const gifTitle = document.getElementById("gif-title");
+    const buttonContainer = document.createElement('div');
+    buttonContainer.classList.add('radio-button-container');
+    
+    const btnElement = document.createElement('button');
+    btnElement.id = channel_list[1].BasicChannelDetails.ChannelName;
+    btnElement.class = 'radio_chan_btn';
 
-//     // Update current section
-//     currentSection = 'clinical-services';
+    // Create image element
+    var image = document.createElement("img");
+    image.src = "UI_images/radioicon2.png";
+    image.style.width = "100px";
+    btnElement.appendChild(image);
 
-//     // Focus clinical sharing card
-//     setTimeout(() => {
-//         const firstCard = document.querySelector('.clinical-card');
-//         if (firstCard) {
-//             firstCard.focus();
-//         }
-//     }, 100);
+    // Create text element
+    var textSpan = document.createElement("span");
+    textSpan.className = "buttonText";
+    textSpan.textContent = channel_list[1].BasicChannelDetails.ChannelName;
+    btnElement.appendChild(textSpan);
 
-//     console.log('Switched to clinical services view');
-// } 
+    btnElement.style.fontSize = "30px"; 
+    btnElement.style.margin = "30px";
+    btnElement.style.width = "200px";
+    btnElement.style.height = "180px";
+    btnElement.addEventListener('click', radio_ui);
+
+    const channlName = channel_list[1].BasicChannelDetails.ChannelName;
+
+    const titleElement = document.createElement('div');
+    titleElement.textContent = channel_list[1].BasicChannelDetails.ChannelName;
+
+    buttonContainer.appendChild(btnElement);
+    leftColumn.appendChild(buttonContainer);
+}

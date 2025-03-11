@@ -21,15 +21,15 @@ function UtilityInit(){
 	// document.getElementById('logmsg').style.display = "none";
 
 	//UtilityToggleLogsWindow();
-	setTimeout(function() {
-		try {
-			document.addEventListener("keydown", keyDownHandler, true);
-			document.addEventListener("OnKeyReceived", OnKeyReceivedHandler, false);
-		} catch(e) {
-			document.getElementById("logmsgcallback").value += '\n' + 'Add event listener not initialized: ' + '\n';
-		document.getElementById("logmsgcallback").scrollTop=document.getElementById("logmsgcallback").scrollHeight;
-		}
-	}, 5000);
+	// setTimeout(function() {
+	// 	try {
+	// 		document.addEventListener("keydown", keyDownHandler, true);
+	// 		document.addEventListener("OnKeyReceived", OnKeyReceivedHandler, false);
+	// 	} catch(e) {
+	// 		document.getElementById("logmsgcallback").value += '\n' + 'Add event listener not initialized: ' + '\n';
+	// 	document.getElementById("logmsgcallback").scrollTop=document.getElementById("logmsgcallback").scrollHeight;
+	// 	}
+	// }, 5000);
 }
 
 function UtilityRefreshPage(){

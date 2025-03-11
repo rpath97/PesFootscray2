@@ -43,8 +43,7 @@
     <script type="text/javascript" src="hospital-info.js"></script>
 </head>
 
-<body onload="init(); 
- document.getElementById('clinicalButton').focus()">
+<body onload="init()">
     <div class="d-flex">
         <!-- Sidebar -->
         <div class="sidebar bg-white shadow-sm">
@@ -53,46 +52,47 @@
             </div>
             <nav class="menu d-flex flex-column">
                 <div class="menu">
-                    <button class="menu-item japit-button" 
+                    <button class="menu-item japit-button" id="entertainmentButton"
                             data-type="entertainment"
                             data-japit-control="true"
-                            data-japit-focusable="true"
-                            data-action="entertainment"
+                        data-japit-focusable="true"
+                        data-action="entertainment"
                             onclick="handleEntertainmentClick()">
-                        <img src="logos/entertainment.png" alt="Entertainment">
-                        <span>Entertainment</span>
-                    </button>
+                    <img src="logos/entertainment.png" alt="Entertainment">
+                    <span>Entertainment</span>
+                </button>
                     
                     <!-- Add separator div -->
                     <div class="menu-separator"></div>
                     
-                    <button class="menu-item japit-button"
+                <button class="menu-item japit-button"
                             data-type="hospitalinfo"
                             data-japit-control="true"
-                            data-japit-focusable="true"
+                        data-japit-focusable="true"
                             data-action="hospitalinfo"
                             onclick="handleHospitalInfoClick()">
-                        <img src="logos/hospitalinformation.png" alt="Hospital Info">
-                        <span>Hospital Info</span>
-                    </button>
-                    <button class="menu-item japit-button"
+                    <img src="logos/hospitalinformation.png" alt="Hospital Info">
+                    <span>Hospital Info</span>
+                </button>
+                <button class="menu-item japit-button"
                             data-type="my-care"
                             data-japit-control="true"
-                            data-japit-focusable="true"
-                            data-action="my-care"
+                        data-japit-focusable="true"
+                        data-action="my-care"
                             onclick="handleMyCareButtonClick()">
-                        <img src="logos/mycare.png" alt="My Care">
-                        <span>My Care</span>
-                    </button>
-                    <button class="menu-item japit-button"
+                    <img src="logos/mycare.png" alt="My Care">
+                    <span>My Care</span>
+                </button>
+                <button class="menu-item japit-button"
+                            id="clinical-services-button"
                             data-type="clinical-services"
                             data-japit-control="true"
-                            data-japit-focusable="true"
-                            data-action="clinical-services"
+                        data-japit-focusable="true"
+                        data-action="clinical-services"
                             onclick="handleClinicalServicesClick()">
-                        <img src="logos/clinicalservices.png" alt="Clinical Services">
-                        <span>Clinical Services</span>
-                    </button>
+                    <img src="logos/clinicalservices.png" alt="Clinical Services">
+                    <span>Clinical Services</span>
+                </button>
                 </div>
             </nav>
         </div>
@@ -100,7 +100,7 @@
         <!-- Main Content Area -->
         <div class="main-content flex-grow-1">
             <div class="header bg-white shadow-sm py-2 px-4 d-flex justify-content-end align-items-center">
-                <div class="time text-end">Sunday 11:47 pm 27 October 2024</div>
+                <div class="time text-end"></div>
             </div>
             
             <!-- Default View -->
@@ -112,7 +112,7 @@
             <div class="content entertainment-view py-4" style="display: none;">
                 <div class="container-fluid">
                     <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
-                        <!-- Entertainment Cards -->
+                        <!-- TV Button -->
                         <div class="col">
                             <button class="entertainment-card japit-button"
                                     data-type="tv"
@@ -124,6 +124,7 @@
                                 <span>Television</span>
                             </button>
                         </div>
+                        <!-- Movies Button -->
                         <div class="col">
                             <button class="entertainment-card japit-button"
                                     data-type="movies"
@@ -135,6 +136,7 @@
                                 <span>Movies</span>
                             </button>
                         </div>
+                        <!-- Radio Button -->
                         <div class="col">
                             <button class="entertainment-card japit-button"
                                     data-type="radio"
@@ -146,120 +148,16 @@
                                 <span>Radio</span>
                             </button>
                         </div>
+                        <!-- Casting Button -->
                         <div class="col">
                             <button class="entertainment-card japit-button"
-                                    data-type="netflix"
+                                    data-type="casting"
                                     data-japit-control="true"
                                     data-japit-focusable="true"
-                                    data-action="netflix"
-                                    onclick="handleNetflixClick()">
-                                <img src="logos/netflix.png" alt="Netflix">
-                            </button>
-                        </div>
-                        <div class="col">
-                            <button class="entertainment-card japit-button"
-                                    data-type="youtube"
-                                    data-japit-control="true"
-                                    data-japit-focusable="true"
-                                    data-action="youtube"
-                                    onclick="handleYouTubeClick()">
-                                <img src="logos/youtube.png" alt="YouTube">
-                            </button>
-                        </div>
-                        <div class="col">
-                            <button class="entertainment-card japit-button"
-                                    data-type="kayo"
-                                    data-japit-control="true"
-                                    data-japit-focusable="true"
-                                    data-action="kayosports"
-                                    onclick="openKayo()">
-                                <img src="logos/kayosports.png" alt="Kayo Sports">
-                            </button>
-                        </div>
-                        <div class="col">
-                            <button class="entertainment-card japit-button"
-                                    data-type="disney-plus"
-                                    data-japit-control="true"
-                                    data-japit-focusable="true"
-                                    data-action="disneyplus"
-                                    onclick="handleDisneyPlusClick()">
-                                <img src="logos/disneyplus.png" alt="Disney+">
-                            </button>
-                        </div>
-                        <div class="col">
-                            <button class="entertainment-card japit-button"
-                                    data-type="7plus"
-                                    data-japit-control="true"
-                                    data-japit-focusable="true"
-                                    data-action="7plus"
-                                    onclick="handle7PlusClick()">
-                                <img src="logos/7plus.png" alt="7plus">
-                            </button>
-                        </div>
-                        <div class="col">
-                            <button class="entertainment-card japit-button"
-                                    data-type="paramount"
-                                    data-japit-control="true"
-                                    data-japit-focusable="true"
-                                    data-action="paramount"
-                                    onclick="handleParamountClick()">
-                                <img src="logos/paramountplus.jpg" alt="Paramount+">
-                                <span>Paramount+</span>
-                            </button>
-                        </div>
-                        <div class="col">
-                            <button class="entertainment-card japit-button"
-                                    data-type="appletv"
-                                    data-japit-control="true"
-                                    data-japit-focusable="true"
-                                    data-action="appletv"
-                                    onclick="handleAppleTVClick()">
-                                <img src="logos/appletv.png" alt="Apple TV">
-                                <span>Apple TV</span>
-                            </button>
-                        </div>
-                        <div class="col">
-                            <button class="entertainment-card japit-button"
-                                    data-type="9now"
-                                    data-japit-control="true"
-                                    data-japit-focusable="true"
-                                    data-action="9now"
-                                    onclick="handle9NowClick()">
-                                <img src="logos/9now.jpg" alt="9 Now">
-                                <span>9 Now</span>
-                            </button>
-                        </div>
-                        <div class="col">
-                            <button class="entertainment-card japit-button"
-                                    data-type="10play"
-                                    data-japit-control="true"
-                                    data-japit-focusable="true"
-                                    data-action="10play"
-                                    onclick="handle10PlayClick()">
-                                <img src="logos/10play.png" alt="10 Play">
-                                <span>10 Play</span>
-                            </button>
-                        </div>
-                        <div class="col">
-                            <button class="entertainment-card japit-button"
-                                    data-type="binge"
-                                    data-japit-control="true"
-                                    data-japit-focusable="true"
-                                    data-action="binge"
-                                    onclick="handleBingeClick()">
-                                <img src="logos/binge.jpg" alt="Binge">
-                                <span>Binge</span>
-                            </button>
-                        </div>
-                        <div class="col">
-                            <button class="entertainment-card japit-button"
-                                    data-type="abciview"
-                                    data-japit-control="true"
-                                    data-japit-focusable="true"
-                                    data-action="abciview"
-                                    onclick="handleABCiViewClick()">
-                                <img src="logos/abciview.png" alt="ABC iView">
-                                <span>ABC iView</span>
+                                    data-action="casting"
+                                    onclick="handleCastingClick()">
+                                <img src="logos/casting.png" alt="Casting">
+                                <span>Casting</span>
                             </button>
                         </div>
                     </div>
@@ -271,31 +169,41 @@
                 <div class="container-fluid">
                     <div class="my-care-grid">
                         <button class="mycare-card japit-button"
-                                data-type="sample1"
+                                id="management-and-discharge-button"
+                                data-type="management-and-discharge"
                                 data-japit-control="true"
                                 data-japit-focusable="true"
-                                data-action="sample1"
-                                onclick="handleSample1Click()">
-                            <img src="logos/sample1.png" alt="Sample 1">
-                            <span>Sample 1</span>
+                                data-action="management-and-discharge"
+                                onclick="handleManagementandDischargeClick()">
+                            <img src="logos/Management and Discharge.png" alt="Management and Discharge">
+                            <span>Management and Discharge</span>
                         </button>
                         <button class="mycare-card japit-button"
-                                data-type="sample2"
+                                data-type="carers-survey"
                                 data-japit-control="true"
                                 data-japit-focusable="true"
-                                data-action="sample2"
-                                onclick="handleSample2Click()">
-                            <img src="logos/sample2.png" alt="Sample 2">
-                            <span>Sample 2</span>
+                                data-action="carers-survey"
+                                onclick="handleCarersSurveyClick()">
+                            <img src="logos/Carers Survey.png" alt="Carers Survey">
+                            <span>Carers Survey</span>
                         </button>
                         <button class="mycare-card japit-button"
-                                data-type="sample3"
+                                data-type="patient-survey"
                                 data-japit-control="true"
                                 data-japit-focusable="true"
-                                data-action="sample3"
-                                onclick="handleSample3Click()">
-                            <img src="logos/sample3.png" alt="Sample 3">
-                            <span>Sample 3</span>
+                                data-action="patient-survey"
+                                onclick="handlePatientSurveyClick()">
+                            <img src="logos/patientsurvey.png" alt="Patient Survey">
+                            <span>Patient Survey</span>
+                        </button>
+                        <button class="mycare-card japit-button"
+                                data-type="blacktown-surveys"
+                                data-japit-control="true"
+                                data-japit-focusable="true"
+                                data-action="blacktown-surveys"
+                                onclick="handleBlacktownSurveysClick()">
+                            <img src="logos/blacktownsurvey.png" alt="Blacktown Surveys">
+                            <span>Blacktown Surveys</span>
                         </button>
                     </div>
                 </div>
@@ -305,11 +213,12 @@
             <div class="content clinical-services-view" style="display: none;">
                 <div class="clinical-grid">
                     <button class="clinical-card japit-button" 
+                            id="clinical-sharing-button"
                             data-type="sharing"
                             data-japit-control="true"
                             data-japit-focusable="true"
                             data-action="sharing"
-                            onclick="handleClinicalSharingClick()">
+                            onclick="switchToHDMI1()">
                         <img src="logos/clinicalsharing.png" alt="Clinical Sharing">
                         <span>Clinical Sharing</span>
                     </button>
@@ -323,6 +232,7 @@
                         <!-- Welcome -->
                         <div class="col">
                             <button class="hospital-info-card japit-button"
+                                    id="welcome-button"
                                     data-type="welcome"
                                     data-japit-control="true"
                                     data-japit-focusable="true"
@@ -335,6 +245,7 @@
                         <!-- Visiting Hours -->
                         <div class="col">
                             <button class="hospital-info-card japit-button"
+                                    id="hospital-info-button"
                                     data-type="visiting"
                                     data-japit-control="true"
                                     data-japit-focusable="true"
@@ -347,6 +258,7 @@
                         <!-- Healthcare Rights -->
                         <div class="col">
                             <button class="hospital-info-card japit-button"
+                                    id="healthcare-rights-button"
                                     data-type="rights"
                                     data-japit-control="true"
                                     data-japit-focusable="true"
@@ -374,26 +286,13 @@
 
             <!-- Radio View -->
             <div class="content radio-view" style="display: none;">
-                <div class="radio-info-grid">
-                    <button class="radio-info-card japit-button"
-                            data-type="abc-kids"
-                            data-japit-control="true"
-                            data-japit-focusable="true"
-                            onclick="handleRadioChannelClick(568)">
-                        <img src="logos/ABC_KIDS_Listen.png" alt="ABC KIDS Listen">
-                        <span>ABC KIDS Listen</span>
-                    </button>
-                    
-                    <button class="radio-info-card japit-button"
-                            data-type="triple-j"
-                            data-japit-control="true"
-                            data-japit-focusable="true"
-                            onclick="handleRadioChannelClick(569)">
-                        <img src="logos/triple_j.png" alt="Triple J">
-                        <span>Triple J</span>
-                    </button>
-                </div>
+                <!-- Radio channels will be dynamically added here by handleRadioClick() -->
             </div>
+
+            <!-- Video Frame -->
+            <!-- <div class="video-grid" id="video-frame">
+                <iframe id="video-src-iframe" src="" width="100%" display="none" height="100%" frameborder="0" allowfullscreen/>
+             </div> -->
 
             <!-- Log Windows -->
             <div id="IDJAPITToTV_Misc" class="JAPITToTV_Misc">
@@ -407,6 +306,7 @@
             </div>
         </div>
     </div>
+    
 
     <!-- JAPIT WIXP Plugin -->
     <object id="JAPITWIXPPlugin" 
@@ -416,6 +316,11 @@
             style="visibility: hidden"
             onload="pluginLoaded()">
     </object>
+
+     <!-- Video Frame -->
+     <div class="video-grid" id="video-frame">
+        <iframe id="video-src-iframe" src="" width="100%" height="100%" frameborder="0" allowfullscreen/>
+     </div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

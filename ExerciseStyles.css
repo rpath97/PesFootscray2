@@ -115,12 +115,12 @@ body {
 /* Entertainment Grid Layout */
 .entertainment-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Changed to 3 columns for better layout */
+    grid-template-columns: repeat(3, 1fr);
     gap: 30px;
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
-    margin-top: 50px;
+    margin-top: 150px;
 }
 
 .card-grid {
@@ -194,6 +194,12 @@ body {
 }
 
 /* Main menu items (TV, Movies, Radio) */
+.entertainment-card[data-type="tv"],
+.entertainment-card[data-type="movies"],
+.entertainment-card[data-type="radio"] {
+    margin-top: 100px;  /* Add space above main menu items */
+}
+
 .entertainment-card[data-type="tv"] img,
 .entertainment-card[data-type="movies"] img,
 .entertainment-card[data-type="radio"] img {
@@ -205,62 +211,13 @@ body {
 
 .entertainment-card[data-type="tv"] span,
 .entertainment-card[data-type="movies"] span,
+.entertainment-card[data-type="casting"] span,
 .entertainment-card[data-type="radio"] span {
-    font-size: 28px; /* Slightly reduced font size */
+    font-size: 28px;
     margin-top: 10px;
 }
 
-/* Streaming service cards (Netflix, YouTube, etc.) */
-.entertainment-card[data-type="netflix"] img,
-.entertainment-card[data-type="youtube"] img,
-.entertainment-card[data-type="kayo"] img,
-.entertainment-card[data-type="disney-plus"] img,
-.entertainment-card[data-type="7plus"] img,
-.entertainment-card[data-type="paramount"] img,
-.entertainment-card[data-type="10play"] img,
-.entertainment-card[data-type="appletv"] img,
-.entertainment-card[data-type="binge"] img,
-.entertainment-card[data-type="abciview"] img {
-    width: 160px;  /* Slightly reduced to make room for text */
-    height: 160px;
-    margin-top: 10px;
-    margin-bottom: 15px;  /* Add space for text below */
-    object-fit: contain;
-    transition: transform 0.3s ease;
-    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2));
-}
 
-/* Remove the text hiding rules and style all streaming service text */
-.entertainment-card[data-type="netflix"] span,
-.entertainment-card[data-type="youtube"] span,
-.entertainment-card[data-type="kayo"] span,
-.entertainment-card[data-type="disney-plus"] span,
-.entertainment-card[data-type="7plus"] span,
-.entertainment-card[data-type="paramount"] span,
-.entertainment-card[data-type="10play"] span,
-.entertainment-card[data-type="appletv"] span,
-.entertainment-card[data-type="binge"] span,
-.entertainment-card[data-type="abciview"] span {
-    font-size: 22px;
-    font-weight: 500;
-    color: #333;
-    margin-top: 10px;
-    text-align: center;
-}
-
-/* Adjust all streaming service cards to accommodate text */
-.entertainment-card[data-type="netflix"],
-.entertainment-card[data-type="youtube"],
-.entertainment-card[data-type="kayo"],
-.entertainment-card[data-type="disney-plus"],
-.entertainment-card[data-type="7plus"],
-.entertainment-card[data-type="paramount"],
-.entertainment-card[data-type="10play"],
-.entertainment-card[data-type="appletv"],
-.entertainment-card[data-type="binge"],
-.entertainment-card[data-type="abciview"] {
-    padding: 15px;
-}
 
 /* View transitions */
 .default-view, .entertainment-view {
@@ -275,7 +232,8 @@ body {
     margin-left: 20%;
     width: 80%;
     padding: 50px;
-    padding-top: 50px;
+    padding-top: 100px;
+    display: none;  /* Hidden by default */
 }
 
 /* Back Button */
@@ -361,7 +319,7 @@ div.JAPITToTV_Misc {
     height: 1080px;
     background: none;
     display: none;
-    z-index: 1000;
+    z-index: 1200;
     padding: 0;
     box-shadow: none;
     visibility: visible;
@@ -483,31 +441,38 @@ div.Input_Output {
     line-height: 1.2;
 }
 
-/* My Care View Layout */
+/* My Care view container */
 .my-care-view {
-    padding: 40px;
+    background-color: #f5f5f5;  /* Light gray background */
+    height: calc(100vh - 60px);
+    overflow: hidden;
     margin-left: 20%;
     width: 80%;
-    height: calc(100vh - 60px);
-    background-color: #f5f9ff;
+    padding: 40px;
+    display: none;  /* Hidden by default */
 }
 
+/* My Care Grid Layout */
 .my-care-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-    padding: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 100px;  /* Reduced gap between cards */
+    /* padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
+    margin-top:100px;
+    flex-wrap: wrap;
+    align-content: space-evenly;
+    justify-content: space-evenly; */
+    /* max-height: 1000px; */
 }
 
+/* My Care Card Styles */
 .mycare-card {
-    width: 200%;
-    height: 200px;
-    padding: 30px;
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    width: 300px;  /* Same as television button */
+    height: 300px; /* Same as television button */
+    background: white;
+    border-radius: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -515,38 +480,95 @@ div.Input_Output {
     gap: 20px;
     transition: all 0.3s ease;
     cursor: pointer;
-    border: none;
+    padding: 20px;
+    margin: 0 auto;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
+    
+/* Default image states */
+.mycare-card[data-type="management-and-discharge"] img { content: url("logos/Management and Discharge.png"); }
+.mycare-card[data-type="carers-survey"] img { content: url("logos/Carers Survey.png"); }
+.mycare-card[data-type="patient-survey"] img { content: url("logos/patientsurvey.png"); }
+.mycare-card[data-type="blacktown-surveys"] img { content: url("logos/blacktownsurvey.png"); }
 
+/* Hover image states */
+.mycare-card[data-type="management-and-discharge"]:hover img { content: url("logos/Management and Dischargehover.png"); }
+.mycare-card[data-type="carers-survey"]:hover img { content: url("logos/CarersSurveyhover.png"); }
+.mycare-card[data-type="patient-survey"]:hover img { content: url("logos/patientsurveyhover.png"); }
+.mycare-card[data-type="blacktown-surveys"]:hover img { content: url("logos/BlacktownSurveyhover.png"); }
+
+/* Focus states - same as hover */
+.mycare-card[data-type="management-and-discharge"]:focus img { content: url("logos/Management and Dischargehover.png"); }
+.mycare-card[data-type="carers-survey"]:focus img { content: url("logos/CarersSurveyhover.png"); }
+.mycare-card[data-type="patient-survey"]:focus img { content: url("logos/patientsurveyhover.png"); }
+.mycare-card[data-type="blacktown-surveys"]:focus img { content: url("logos/BlacktownSurveyhover.png"); }
+
+
+
+
+
+/* Default image states */
+.Hospital-info-card[data-type="welcome"] img { content: url("logos/welcome.png"); }
+.Hospital-info-card[data-type="visiting-hours"] img { content: url("logos/visitinghours.png"); }
+.Hospital-info-card[data-type="healthcare-rights"] img { content: url("logos/healthcarerights.png"); }
+.Hospital-info-card[data-type="reach"] img { content: url("logos/reach.png"); }
+
+/* Hover image states */
+.Hospital-info-card[data-type="welcome"]:hover img { content: url("logos/welcomehover.png"); }
+.Hospital-info-card[data-type="visiting-hours"]:hover img { content: url("logos/visitinghourshover.png"); }
+.Hospital-info-card[data-type="healthcare-rights"]:hover img { content: url("logos/healthcarerightshover.png"); }
+.Hospital-info-card[data-type="reach"]:hover img { content: url("logos/reachhover.png"); }
+
+/* Focus states - same as hover */
+.Hospital-info-card:focus img { content: url("logos/welcomehover.png"); } 
+.Hospital-info-card:focus img { content: url("logos/visitinghourshover.png"); }
+.Hospital-info-card:focus img { content: url("logos/healthcarerightshover.png"); }
+.Hospital-info-card:focus img { content: url("logos/reachhover.png"); }
+
+/* Common hover/focus effects */
 .mycare-card:hover,
 .mycare-card:focus {
-    transform: scale(1.05);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-    background: linear-gradient(135deg, #00b0f0, #0098d6);
-}
-
-.mycare-card img {
-    width: 80px;
-    height: 80px;
-    transition: transform 0.3s ease;
-}
-
-.mycare-card span {
-    font-size: 24px;
-    font-weight: 500;
-    color: #2c3e50;
-    text-align: center;
+    background-color: #c41e3a;  /* Red background on hover */
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(196, 30, 58, 0.3);  /* Red shadow */
 }
 
 .mycare-card:hover span,
 .mycare-card:focus span {
-    color: white;
+    color: white;  /* White text on hover */
+    
 }
 
 .mycare-card:hover img,
 .mycare-card:focus img {
-    transform: scale(1.1);
-    filter: brightness(0) invert(1);
+    transform: scale(1.05);
+}
+
+/* Common image styles */
+.mycare-card img {
+    width: 150px;
+    height: 150px;
+    /* margin-top: 10px;
+    margin-bottom: 10px; */
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+/* Text styling */
+.mycare-card span {
+    font-size: 24px;
+    font-weight: 500;
+    color: #333;
+    /* margin-top: 5px;*/
+    text-align: center;
+}
+
+/* Card border colors */
+.mycare-card[data-type="management-and-discharge"],
+.mycare-card[data-type="carers-survey"],
+.mycare-card[data-type="patient-survey"],
+.mycare-card[data-type="blacktown-surveys"] {
+    border-top: 4px solid #c41e3a;
 }
 
 /* Clinical Services Grid Layout */
@@ -566,26 +588,20 @@ div.Input_Output {
 }
 
 .clinical-card {
+    width: 300px;  /* Same as television button */
+    height: 300px; /* Same as television button */
     background: white;
-    border-radius: 12px;
-    padding: 50px;
-    text-align: center;
-    color: #2c3e50;
-    transition: all 0.3s ease;
+    border-radius: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
     justify-content: center;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    border: none;
+    gap: 20px;
+    transition: all 0.3s ease;
     cursor: pointer;
-    height: 400px;
-    width: 400px;
-    position: relative;
-    overflow: hidden;
-    -japit-focusable: true;
-    -japit-selectable: true;
+    padding: 20px;
+    margin: 0 auto;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 .clinical-card:hover, .clinical-card:focus {
@@ -633,7 +649,7 @@ div.Input_Output {
     padding: 40px;
 }
 
-/* Update the full-width state for content views */
+/* Update the full-width state for content views sidemenu bar */
 .entertainment-view,
 .my-care-view,
 .clinical-services-view,
@@ -807,82 +823,71 @@ body.refreshing::after {
     100% { transform: scale(1); }
 }
 
-/* Radio View Layout */
+/* Radio View Container */
 .radio-view {
-    padding: 20px;
-    width: 100%;
+    background-color: #f5f9ff;
     height: calc(100vh - 60px);
-    background-color: white;
+    padding: 40px;
+    overflow-y: auto;
+    margin-top: 60px; /* Add top margin to create space below header */
 }
 
-.radio-grid {
+.radio-channel-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-    padding: 30px;
-    max-width: 1200px;
-    margin: 0 auto;
+    grid-template-columns: repeat(3, 1fr); /* Force exactly 3 columns */
+    gap: 20px;
+    padding: 20px;
+    max-width: 800px; /* Control overall grid width */
+    margin: 0 auto; /* Center the grid */
 }
 
-.radio-card {
-    width: 300px;
-    height: 220px;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+.radio-button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.radio_chan_btn {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 15px;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    border: none;
+    width: 200px; /* Fixed width */
+    height: 200px; /* Fixed height */
     padding: 20px;
+    background: white;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 18px;
+    color: #333;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 0 auto; /* Center button in grid cell */
 }
 
-.radio-card img {
+.radio_chan_btn img {
     width: 80px;
     height: 80px;
     object-fit: contain;
-    transition: transform 0.3s ease;
+    margin-bottom: 10px;
 }
 
-.radio-card span {
-    font-size: 22px;
-    font-weight: 500;
-    color: #2c3e50;
+.radio_chan_btn .buttonText {
+    font-size: 18px;
+    color: #333;
     text-align: center;
 }
 
-.radio-card:hover,
-.radio-card:focus {
-    transform: scale(1.05);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-    background: linear-gradient(135deg, #00b0f0, #0098d6);
+.radio_chan_btn:focus,
+.radio_chan_btn.active {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    background: white;
+    outline: none;
 }
 
-.radio-card:hover span,
-.radio-card:focus span {
-    color: white;
-}
-
-.radio-card:hover img,
-.radio-card:focus img {
-    transform: scale(1.1);
-    filter: brightness(0) invert(1);
-}
-
-.radio-card.active {
-    background: linear-gradient(135deg, #00b0f0, #0098d6);
-}
-
-.radio-card.active span {
-    color: white;
-}
-
-.radio-card.active img {
-    filter: brightness(0) invert(1);
+.radio_chan_btn.active .buttonText {
+    color: #000;
 }
 
 /* Main dashboard image styling */
@@ -1049,19 +1054,6 @@ body.refreshing::after {
     margin-top: 15px;
 }
 
-.radiochannels-card[data-type="Double J"] span,
-.radiochannels-card[data-type="ABC Jazz"] span,
-.radiochannels-card[data-type="ABC KIDS Listen"] span,
-.radiochannels-card[data-type="triple j"] span,
-.radiochannels-card[data-type="triple j Unearthed"] span,
-.radiochannels-card[data-type="ABC Classic"] span,
-.radiochannels-card[data-type="ABC Country"] span,
-.radiochannels-card[data-type="ABC Melbourne"] span,
-.radiochannels-card[data-type="ABC RN"] span,
-.radiochannels-card[data-type="ABC NewsRadio"] span {
-    display: block;
-}
-
 /* View transitions */
 .default-view, .radiochannels-view {
     transition: opacity 0.3s ease-in-out;
@@ -1103,73 +1095,202 @@ body.refreshing::after {
     margin-top: 20px;  /* Additional spacing for visiting hours */
 }
 
-/* Radio Info Grid Layout - matching hospital info style */
+/* Radio Info Grid Layout style */
 .radio-info-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 120px;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 80px;
+    gap: 120px;  /* Increased from 80px to 120px */
     padding: 40px;
-    max-width: 1200px;
-    margin: 0 auto;
-    margin-top: 100px;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Radio card styles - matching hospital info cards */
-.radio-info-card {
-    width: 300px;
-    height: 300px;
+/* Video container styles */
+/* .video-grid {
+    position: fixed;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80vh;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.9);
     padding: 20px;
-    background-color: white;
     border-radius: 15px;
+    display: none;  /* Hidden by default */
+ /* } */
+#video-frame {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+}
+#video-src-iframe {
+    display: none;
+    
+}
+
+/* .video-grid iframe,  // removed for now
+.video-grid video {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.video-grid.active {
+    display: block;  /* Show when active */
+ /* } */
+
+/* Radio Styles */
+#radioicon {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    transition: all 0.3s ease;
+}
+
+/* Remove the fixed positioning styles that were causing overlay issues */
+#radioicon {
+    display: block;
+    background-color: white;
+    border-radius: 10px;
+    transition: background-color 0.5s ease;
+}
+
+.radio_list {
+    width: 1920px;
+    height: 1080px;
+    display: flex;
+    transition: all 0.5s ease;
+}
+
+.radio_chan_btn {
+    margin: 10px;
+    font-size: 16px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.radio_chan_btn:focus {
+    background-color: #f0c87f;
+    transform: scale(1.07);
+    outline: none;
+}
+
+#radio-logo-right {
+    width: 100px;
+    margin-bottom: 50px;
+}
+
+/* Note: Removed duplicate #radioicon definition since it was identical to the first one */
+
+/* Radio Channel Grid */
+.radio-channel-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Force exactly 3 columns */
+    gap: 20px;
+    padding: 20px;
+    max-width: 800px; /* Control overall grid width */
+    margin: 0 auto; /* Center the grid */
+}
+
+.radio-channel-button {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 20px;
-    transition: all 0.3s ease;
+    width: 200px; /* Fixed width */
+    height: 200px; /* Fixed height */
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
     cursor: pointer;
-    margin: 0 auto;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    font-size: 18px;
+    color: #333;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 0 auto; /* Center button in grid cell */
 }
 
-.radio-info-card img {
-    width: 150px;
-    height: 150px;
+.radio-channel-button img {
+    width: 80px;
+    height: 80px;
     object-fit: contain;
-    transition: transform 0.3s ease;
+    margin-bottom: 10px;
 }
 
-.radio-info-card span {
-    font-size: 24px;
-    font-weight: 500;
+.radio-channel-button span {
+    font-size: 16px;
     color: #333;
     text-align: center;
 }
 
-.radio-info-card:hover,
-.radio-info-card:focus {
-    transform: scale(1.05);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+.radio-channel-button:hover,
+.radio-channel-button:focus {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    background: white;
+    outline: none;
+}
+
+/* Keep icon and text color dark on hover/focus */
+.radio-channel-button:hover span,
+.radio-channel-button:focus span {
+    color: #333;
+}
+
+.radio-channel-button:hover img,
+.radio-channel-button:focus img {
+    filter: none;
+}
+
+/* Add casting loading screen styles */
+.casting-loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.casting-loading .loading-content {
+    text-align: center;
+}
+
+.casting-loading .casting-logo {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 20px;
+}
+
+/* Casting button specific styles */
+.entertainment-card[data-type="casting"] {
+    /* Remove the blue gradient background */
+    /* background: linear-gradient(135deg, #2196F3, #1976D2); */
+    background: white; /* Set to white like other buttons */
+}
+
+.entertainment-card[data-type="casting"]:hover,
+.entertainment-card[data-type="casting"]:focus {
+    /* Use the same hover/focus style as other entertainment cards */
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0, 176, 240, 0.3);
     background: linear-gradient(135deg, #00b0f0, #0098d6);
 }
 
-.radio-info-card:hover img,
-.radio-info-card:focus img {
-    transform: scale(1.1);
-    filter: brightness(0) invert(1);
-}
-
-.radio-info-card:hover span,
-.radio-info-card:focus span {
-    color: white;
-}
-
-/* Radio view container */
-.radio-view {
-    background-color: #f5f9ff;
-    height: calc(100vh - 60px);
-    overflow: hidden;
-    margin-left: 20%;
-    width: 80%;
-    padding: 40px;
+.entertainment-card[data-type="casting"] img {
+    width: 150px; /* Match other entertainment card image sizes */
+    height: 150px;
+    margin-bottom: 15px;
 }

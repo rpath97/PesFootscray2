@@ -203,19 +203,6 @@ function handleRadioChannelClick(channelNumber) {
     selectRadioChannel(channelNumber);
 }
 
-function handleNetflixClick() {
-    console.log('Opening Netflix...');
-    // Add your Netflix handling code
-    //applicationControl("Netflix", "Activate");
-    openNetflix();
-}
-
-function handleYouTubeClick() {
-    console.log('Opening YouTube...');
-    // Add your YouTube handling code
-    applicationControl("YouTube", "Activate");
-}
-
 function handleEntertainmentClick() {
     console.log('Opening Entertainment...');
     
@@ -253,22 +240,6 @@ function clearEntertainmentActive() {
         card.classList.remove('active');
     });
 }
-
-// Kayo Sports handler
-// function handleKayoSportsClick() {
-//     console.log('Opening Kayo Sports...');
-//     clearEntertainmentActive();
-
-    function handleKayoSportsClick() {
-        console.log('Opening Kayo Sports...');
-        // Add your Kayo Sports handling code
-        applicationControl("KayoSports", "Activate");
-        //openKayo2();
-    }
-    
-
-    
-    
 
 // Disney+ handler
 function handleDisneyPlusClick() {
@@ -314,4 +285,46 @@ function handleBingeClick() {
 function handleABCiViewClick() {
     console.log('Opening ABC iView...');
     applicationControl("ABC iview", "Activate");
+}
+
+// Add casting handler
+function handleCastingClick() {
+    console.log('Opening Casting...');
+    
+    // Hide entertainment view
+   // document.querySelector('.entertainment-view').style.display = 'none';
+    SelectCast('Activate');
+    changeCDBstate('Deactivate');
+
+    
+    // // Create loading screen
+    // const loadingScreen = document.createElement('div');
+    // loadingScreen.className = 'casting-loading';
+    // loadingScreen.innerHTML = `
+    //     <div class="loading-content">
+    //         <img src="logos/casting.png" alt="Casting" class="casting-logo">
+    //         <div class="spinner-border text-primary" role="status">
+    //             <span class="visually-hidden">Loading casting...</span>
+    //         </div>
+    //         <div class="text-white mt-3">Setting up casting...</div>
+    //     </div>
+    // `;
+    // document.body.appendChild(loadingScreen);
+
+    // // First deactivate any running apps
+    // var deactivateApps = new CreateJAPITObjectForWIXPSvc();
+    // deactivateApps.Cookie = 1049;
+    // deactivateApps.CmdType = "Change";
+    // deactivateApps.Fun = "ApplicationControl";
+    // deactivateApps.CommandDetails = {
+    //     "ApplicationState": "DeactivateAll"
+    // };
+    // sendWIxPCommand(deactivateApps);
+    // delete deactivateApps;
+
+    // // Enable casting
+    // setTimeout(() => {
+    //     applicationControl("Casting", "Activate");
+    //     document.body.removeChild(loadingScreen);
+    // }, 1500);
 } 

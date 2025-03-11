@@ -7,9 +7,48 @@
 /* a function to initialize our module */
 function init() {
 	UtilityInit();
-	console.log("Unitility init done");
+	
+	// Add datetime update function
+	function updateDateTime() {
+		const now = new Date();
+		const options = { 
+			weekday: 'long', 
+			year: 'numeric', 
+			month: 'long', 
+			day: 'numeric', 
+			hour: '2-digit', 
+			minute: '2-digit',
+			hour12: false, // Use 24-hour format
+			timeZone: 'Australia/Victoria'
+		};
+		
+		// Format the date for Victoria timezone
+		const formatter = new Intl.DateTimeFormat('en-AU', options);
+		const headerTime = document.querySelector('.time');
+		if (headerTime) {
+			headerTime.innerText = formatter.format(now);
+		}
+	}
+
+	// Update every second
+	setInterval(updateDateTime, 1000);
+
+	// Run immediately
+	updateDateTime();
+
+	// Rest of init code...
+	setTimeout(function() {
+		try {
+			document.addEventListener("keydown", keyDownHandler, true);
+			document.addEventListener("OnKeyReceived", OnKeyReceivedHandler, false);
+		} catch(e) {
+			console.log(e);
+		}
+	}, 5000);
+
+	console.log("Utility init done");
 	Exercise01ModelInit();
-	Exercise01ViewInit();
+	// Exercise01ViewInit();
 	
 	
 	// Register for JAPIT key events
