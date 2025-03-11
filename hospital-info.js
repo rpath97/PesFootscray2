@@ -116,14 +116,17 @@ function clearHospitalInfoActive() {
 }
 
 
-// Add keyboard navigation handling
+// Handle hospital info button click
+function handleHospitalInfoClick() {
+    console.log('Opening Hospital Info...');
 
+    
+    //setting previous and current page
+    previous_page = current_page;
+    current_page = "hospitalinfo_menu";
 
-// Add this to your existing event listeners
-// document.addEventListener('keydown', function(e) {
-//     if (document.querySelector('.hospital-info-view').style.display === 'block') {
-//         handleHospitalInfoKeys(e.keyCode);
-//     }
-// });
+    document.getElementById(previous_page).style.display = 'none';
+    document.getElementById(current_page).style.display = 'block';
 
-
+    document.getElementById("welcome-button").focus();
+}

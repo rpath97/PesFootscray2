@@ -10,6 +10,8 @@ function handleClinicalServicesClick() {
     document.getElementById(previous_page).style.display = 'none';
     document.getElementById(current_page).style.display = 'block';
 
+    document.getElementById("clinical-sharing-button").focus();
+
     
 }
 

@@ -109,12 +109,13 @@
 
             <!-- Entertainment View -->
             <div class="content entertainment-view py-4" style="display: none;" id="entertainment_menu">
-                <div class="container-fluid">
+                <!-- <div class="container-fluid"> -->
                     <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
                         <!-- TV Button -->
-                        <div class="col">
+                        <!-- <div class="col"> -->
                             <button class="entertainment-card japit-button"
                                     data-type="tv"
+                                    id="tv_button"
                                     data-japit-control="true"
                                     data-japit-focusable="true"
                                     data-action="tv"
@@ -122,9 +123,9 @@
                                 <img src="logos/television.png" alt="TV">
                                 <span>Television</span>
                             </button>
-                        </div>
+                        <!-- </div> -->
                         <!-- Movies Button -->
-                        <div class="col">
+                        <!-- <div class="col"> -->
                             <button class="entertainment-card japit-button"
                                     data-type="movies"
                                     data-japit-control="true"
@@ -134,9 +135,9 @@
                                 <img src="logos/movies.png" alt="Movies">
                                 <span>Movies</span>
                             </button>
-                        </div>
+                        <!-- </div> -->
                         <!-- Radio Button -->
-                        <div class="col">
+                        <!-- <div class="col"> -->
                             <button class="entertainment-card japit-button"
                                     data-type="radio"
                                     data-japit-control="true"
@@ -146,9 +147,9 @@
                                 <img src="logos/radio.png" alt="Radio">
                                 <span>Radio</span>
                             </button>
-                        </div>
+                        <!-- </div> -->
                         <!-- Casting Button -->
-                        <div class="col">
+                        <!-- <div class="col"> -->
                             <button class="entertainment-card japit-button"
                                     data-type="casting"
                                     data-japit-control="true"
@@ -158,15 +159,15 @@
                                 <img src="logos/casting.png" alt="Casting">
                                 <span>Casting</span>
                             </button>
-                        </div>
+                        <!-- </div> -->
                     </div>
-                </div>
+                <!-- </div> -->
             </div>
 
             <!-- My Care View -->
             <div class="content my-care-view" style="display: none;" id="mycare_menu">
-                <div class="container-fluid">
-                    <div class="my-care-grid">
+                <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
+                    <!-- <div class="my-care-grid"> -->
                         <button class="mycare-card japit-button"
                                 id="management-and-discharge-button"
                                 data-type="management-and-discharge"
@@ -204,13 +205,13 @@
                             <img src="logos/blacktownsurvey.png" alt="Blacktown Surveys">
                             <span>Blacktown Surveys</span>
                         </button>
-                    </div>
+                    <!-- </div> -->
                 </div>
             </div>
 
             <!-- Clinical Services View -->
             <div class="content clinical-services-view" style="display: none;" id="clinicalservices_menu">
-                <div class="clinical-grid">
+                <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
                     <button class="clinical-card japit-button" 
                             id="clinical-sharing-button"
                             data-type="sharing"
@@ -226,10 +227,8 @@
 
             <!-- Hospital Info View -->
             <div class="content hospital-info-view" style="display: none;" id="hospitalinfo_menu">
-                <div class="container-fluid">
-                    <div class="row row-cols-1 row-cols-md-2 g-4 justify-content-center">
-                        <!-- Welcome -->
-                        <div class="col">
+                <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">   <!-- Welcome -->
+                        <!-- <div class="col"> -->
                             <button class="hospital-info-card japit-button"
                                     id="welcome-button"
                                     data-type="welcome"
@@ -240,9 +239,9 @@
                                 <img src="logos/welcome.png" alt="Welcome">
                                 <span>Welcome</span>
                             </button>
-                        </div>
+                        <!-- </div> -->
                         <!-- Visiting Hours -->
-                        <div class="col">
+                        <!-- <div class="col"> -->
                             <button class="hospital-info-card japit-button"
                                     id="hospital-info-button"
                                     data-type="visiting"
@@ -253,9 +252,9 @@
                                 <img src="logos/visitinghours.png" alt="Visiting Hours">
                                 <span>Visiting Hours</span>
                             </button>
-                        </div>
+                        <!-- </div> -->
                         <!-- Healthcare Rights -->
-                        <div class="col">
+                        <!-- <div class="col"> -->
                             <button class="hospital-info-card japit-button"
                                     id="healthcare-rights-button"
                                     data-type="rights"
@@ -266,9 +265,9 @@
                                 <img src="logos/healthcarerights.png" alt="Healthcare Rights">
                                 <span>Healthcare Rights</span>
                             </button>
-                        </div>
+                        <!-- </div> -->
                         <!-- Reach -->
-                        <div class="col">
+                        <!-- <div class="col"> -->
                             <button class="hospital-info-card japit-button"
                                     data-type="reach"
                                     data-japit-control="true"
@@ -278,13 +277,12 @@
                                 <img src="logos/reach.png" alt="Reach">
                                 <span>Reach</span>
                             </button>
-                        </div>
+                        <!-- </div> -->
                     </div>
-                </div>
             </div>
 
             <!-- Radio View -->
-            <div class="content radio-view" style="display: none;">
+            <div class="content radio-view" style="display: none;" id="radio_view">
                 <!-- Radio channels will be dynamically added here by handleRadioClick() -->
             </div>
 

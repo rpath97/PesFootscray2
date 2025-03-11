@@ -3,112 +3,62 @@ let currentSection = 'default';
 const directoryPath = 'logos/channel_logos/'; 
 
 // Menu click handlers
-function handleMenuClick(section, event) {
-    console.log('Menu click:', section);
+// function handleMenuClick(section, event) {
+//     console.log('Menu click:', section);
     
-    // Remove active class from all menu items
-    document.querySelectorAll('.menu-item').forEach(item => {
-        item.classList.remove('active');
-    });
+//     // Remove active class from all menu items
+//     document.querySelectorAll('.menu-item').forEach(item => {
+//         item.classList.remove('active');
+//     });
 
-    // Add active class to clicked item
-    if (event && event.currentTarget) {
-        event.currentTarget.classList.add('active');
-    }
+//     // Add active class to clicked item
+//     if (event && event.currentTarget) {
+//         event.currentTarget.classList.add('active');
+//     }
 
-    // Hide all content sections
-    document.querySelectorAll('.content').forEach(content => {
-        content.style.display = 'none';
-    });
+//     // Hide all content sections
+//     document.querySelectorAll('.content').forEach(content => {
+//         content.style.display = 'none';
+//     });
 
-    // Show selected section
-    if (section === 'entertainment') {
-        document.querySelector('.entertainment-view').style.display = 'block';
-        currentSection = 'entertainment';
+//     // Show selected section
+//     if (section === 'entertainment') {
+//         document.querySelector('.entertainment-view').style.display = 'block';
+//         currentSection = 'entertainment';
         
-        // Focus first entertainment card
-        setTimeout(() => {
-            const firstCard = document.querySelector('.entertainment-card');
-            if (firstCard) {
-                firstCard.focus();
-            }
-        }, 100);
-    } else {
-        document.querySelector('.default-view').style.display = 'block';
-        currentSection = 'default';
-    }
-}
+//         // Focus first entertainment card
+//         setTimeout(() => {
+//             const firstCard = document.querySelector('.entertainment-card');
+//             if (firstCard) {
+//                 firstCard.focus();
+//             }
+//         }, 100);
+//     } else {
+//         document.querySelector('.default-view').style.display = 'block';
+//         currentSection = 'default';
+//     }
+// }
 
 // Function to return to home/default view
-function returnToHome() {
-    JAPITReturnToHome();
-}
+// function returnToHome() {
+//     JAPITReturnToHome();
+// }
 
-// Handle hospital info button click
-function handleHospitalInfoClick() {
-    console.log('Opening Hospital Info...');
 
-    
-    //setting previous and current page
-    previous_page = current_page;
-    current_page = "hospitalinfo_menu";
 
-    document.getElementById(previous_page).style.display = 'none';
-    document.getElementById(current_page).style.display = 'block';
 
-    
-    // // Hide default view
-    // document.querySelector('.default-view').style.display = 'none';
-    // // Hide entertainment view
-    // document.querySelector('.entertainment-view').style.display = 'none';
-    //   // Hide mycare view
-    // //   document.querySelector('.mycare-view').style.display = 'none';
-    //   // Hide clinicalservices view
-    // //   document.querySelector('.clinicalservices-view').style.display = 'none';
-    
-    // // Show hospital info view
-    // const hospitalInfoView = document.querySelector('.hospital-info-view');
-    // if (hospitalInfoView) {
-    //     hospitalInfoView.style.display = 'block';
-    // }
-    
-    // // Keep sidebar visible
-    // const sidebar = document.querySelector('.sidebar');
-    // if (sidebar) {
-    //     sidebar.style.display = 'block';
-    // }
-    
-    // // Update button states
-    // const hospitalInfoButton = document.getElementById('hospitalInfoButton');
-    // if (hospitalInfoButton) {
-    //     // Remove active class from all menu items
-    //     document.querySelectorAll('.menu-item').forEach(item => {
-    //         item.classList.remove('active');
-    //     });
-    //     // Add active class to hospital info button
-    //     hospitalInfoButton.classList.add('active');
-    // }
-
-    // // Focus first hospital info card
-    // setTimeout(() => {
-    //     const firstCard = document.querySelector('.hospital-info-card[data-type="welcome"]');
-    //     if (firstCard) {
-    //         firstCard.focus();
-    //     }
-    // }, 100);
-}
 
 // Handle entertainment button click specifically
 
 
-function back2dashboard() {
-    document.getElementById("radio_list").style.display = "none";
-    document.getElementById("nav").style.display = "flex";
-    document.getElementById("patientMenu").style.display = "block";
-    document.getElementById("gallery").style.display = "flex";
+// function back2dashboard() {
+//     document.getElementById("radio_list").style.display = "none";
+//     document.getElementById("nav").style.display = "flex";
+//     document.getElementById("patientMenu").style.display = "block";
+//     document.getElementById("gallery").style.display = "flex";
 
-    document.getElementById('ButtonTVChannel').focus();
-}
+//     document.getElementById('ButtonTVChannel').focus();
+// }
 
 function radio_ui(event) {
     const leftColumn = document.querySelector(".radio-view");

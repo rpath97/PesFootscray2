@@ -19,7 +19,12 @@ function openRadio() {
     //setting current page
     // const currentPage = document.querySelector('.current-page');
     // currentPage.textContent = 'Radio';
-    current_page = "radio";
+    previous_page = current_page;
+    current_page = "radio_view";
+
+
+    document.getElementById(previous_page).style.display = "none";
+    document.getElementById(current_page).style.display = "block";
     
 
     //debugger;
