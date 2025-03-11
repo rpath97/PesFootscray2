@@ -112,6 +112,16 @@ body {
     color: white;
 }
 
+/* Entertainment Grid Layout */
+/* .entertainment-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top: 150px;
+} */
 
 .card-grid {
     display: grid;
@@ -574,7 +584,7 @@ div.Input_Output {
 /* Clinical card hover/focus effects */
 .clinical-card:hover, .clinical-card:focus {
     box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-    background: linear-gradient(135deg, #dda816, #dda816);
+    background: linear-gradient(135deg, #00b0f0, #0098d6);
     transform: scale(1.1);
     z-index: 2;
 }
