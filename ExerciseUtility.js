@@ -14,22 +14,6 @@ function UtilityInit(){
 	document.getElementById('logmsgcallback').style.color = "green";
 	document.getElementById('logmsg').style.color = "blue";
 
-	// Initialize log windows as hidden
-	// document.getElementById('IDJAPITFromTV').style.display = "none";
-	// document.getElementById('IDJAPITToTV_Misc').style.display = "none";
-	// document.getElementById('logmsgcallback').style.display = "none";
-	// document.getElementById('logmsg').style.display = "none";
-
-	//UtilityToggleLogsWindow();
-	// setTimeout(function() {
-	// 	try {
-	// 		document.addEventListener("keydown", keyDownHandler, true);
-	// 		document.addEventListener("OnKeyReceived", OnKeyReceivedHandler, false);
-	// 	} catch(e) {
-	// 		document.getElementById("logmsgcallback").value += '\n' + 'Add event listener not initialized: ' + '\n';
-	// 	document.getElementById("logmsgcallback").scrollTop=document.getElementById("logmsgcallback").scrollHeight;
-	// 	}
-	// }, 5000);
 }
 
 function UtilityRefreshPage(){

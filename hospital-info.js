@@ -115,67 +115,15 @@ function clearHospitalInfoActive() {
     });
 }
 
-// Update the JAPIT focus handling
-// function handleHospitalInfoFocus() {
-//     var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
-//     JAPITObjForWIXPSvc.Cookie = 2040;
-//     JAPITObjForWIXPSvc.CmdType = "Change";
-//     JAPITObjForWIXPSvc.Fun = "UserInputControl";
-//     JAPITObjForWIXPSvc.CommandDetails = {
-//         "FocusSettings": {
-//             "FocusMode": "Explicit",
-//             "ElementsToFocus": [
-//                 { "ElementId": "welcome", "NextUp": "hospitalInfoButton", "NextDown": "maps", "NextLeft": "safety", "NextRight": "visiting" },
-//                 { "ElementId": "visiting", "NextUp": "hospitalInfoButton", "NextDown": "rights", "NextLeft": "welcome", "NextRight": "safety" },
-//                 { "ElementId": "safety", "NextUp": "hospitalInfoButton", "NextDown": "reach", "NextLeft": "visiting", "NextRight": "welcome" },
-//                 { "ElementId": "maps", "NextUp": "welcome", "NextDown": "hospitalInfoButton", "NextLeft": "reach", "NextRight": "rights" },
-//                 { "ElementId": "rights", "NextUp": "visiting", "NextDown": "hospitalInfoButton", "NextLeft": "maps", "NextRight": "reach" },
-//                 { "ElementId": "reach", "NextUp": "safety", "NextDown": "hospitalInfoButton", "NextLeft": "rights", "NextRight": "maps" }
-//             ]
-//         }
-//     };
-//     sendWIxPCommand(JAPITObjForWIXPSvc);
-//     delete JAPITObjForWIXPSvc;
-// }
 
 // Add keyboard navigation handling
-function handleHospitalInfoKeys(keyCode) {
-    const currentFocus = document.activeElement;
-    
-    if (currentFocus.id === 'welcome-button' || 
-        currentFocus.getAttribute('data-type') === 'healthcare-rights') {
-        switch(keyCode) {
-            case 37: // Left arrow
-                const hospitalInfoButton = document.querySelector('.menu-item[data-type="hospitalinfo"]');
-                if (hospitalInfoButton) {
-                    hospitalInfoButton.focus();
-                    return 0; // Key handled
-                }
-                break;
-        }
-    }
-    return 1; // Key not handled
-}
+
 
 // Add this to your existing event listeners
-document.addEventListener('keydown', function(e) {
-    if (document.querySelector('.hospital-info-view').style.display === 'block') {
-        handleHospitalInfoKeys(e.keyCode);
-    }
-});
+// document.addEventListener('keydown', function(e) {
+//     if (document.querySelector('.hospital-info-view').style.display === 'block') {
+//         handleHospitalInfoKeys(e.keyCode);
+//     }
+// });
 
-function handleHospitalInfoButtonClick() {
-    console.log('Opening Hospital Info section...');
-    
-    // Hide all views first
-    document.querySelectorAll('.content').forEach(view => {
-        view.style.display = 'none';
-    });
-    // document.querySelector('.default-view').style.display = 'none';
-    // // Show My Care view
-    // const hospitalInfoView = document.querySelector('.hospital-info-view');
-    // if (hospitalInfoView) {
-    //     hospitalInfoView.style.display = 'block';
-    // }  
 
-}

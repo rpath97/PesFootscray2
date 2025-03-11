@@ -1,141 +1,4 @@
-// Entertainment card click handlers
-function handleTelevisionClick() {
-    console.log('Opening TV...');
-    
-    // Hide all views first
-    document.querySelectorAll('.content').forEach(view => {
-        if (view) {
-            view.style.display = 'none';
-        }
-    });
-    
-    // Hide sidebar
-    const sidebar = document.querySelector('.sidebar');
-    if (sidebar) {
-        sidebar.style.display = 'none';
-    }
-    
-    // Create loading screen
-    const loadingScreen = document.createElement('div');
-    loadingScreen.className = 'tv-loading';
-    loadingScreen.innerHTML = `
-        <div class="loading-content">
-            <img src="logos/television.png" alt="TV" class="tv-logo">
-            <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Loading TV channels...</span>
-            </div>
-            <div class="text-white mt-3">Setting up TV channels...</div>
-        </div>
-    `;
-    document.body.appendChild(loadingScreen);
 
-    // First deactivate any running apps
-    var deactivateApps = new CreateJAPITObjectForWIXPSvc();
-    deactivateApps.Cookie = 1049;
-    deactivateApps.CmdType = "Change";
-    deactivateApps.Fun = "ApplicationControl";
-    deactivateApps.CommandDetails = {
-        "ApplicationState": "DeactivateAll"
-    };
-    sendWIxPCommand(deactivateApps);
-    delete deactivateApps;
-
-    // Switch to TV source first
-    var setSource = new CreateJAPITObjectForWIXPSvc();
-    setSource.Cookie = 1048;
-    setSource.CmdType = "Change";
-    setSource.Fun = "Source";
-    setSource.CommandDetails = {
-        "TuneToSource": "MainTuner"
-    };
-    sendWIxPCommand(setSource);
-    delete setSource;
-
-    // Initialize TV channels
-    //openTV();
-
-    // Register callback for channel setup
-    registerJAPITCallback("ChannelList", function(response) {
-        if (response.CommandDetails && response.CommandDetails.Status === "Success") {
-            console.log("TV channels setup successfully");
-            
-            // Launch TV app in fullscreen
-            var launchTV = new CreateJAPITObjectForWIXPSvc();
-            launchTV.Cookie = 1050;
-            launchTV.CmdType = "Change";
-            launchTV.Fun = "ApplicationControl";
-            launchTV.CommandDetails = {
-                "ApplicationDetails": {
-                    "ApplicationName": "TVChannels",
-                    "ApplicationParameters": {
-                        "StartMode": "FullScreen",
-                        "TvhostMode": "Active",
-                        "LaunchState": "foreground",
-                        "DefaultChannel": default_chan_no.toString()
-                    }
-                },
-                "ApplicationState": "Activate"
-            };
-            sendWIxPCommand(launchTV);
-            delete launchTV;
-
-            // Remove loading screen after successful launch
-            setTimeout(() => {
-                const loadingScreen = document.querySelector('.tv-loading');
-                if (loadingScreen) {
-                    loadingScreen.remove();
-                }
-            }, 2000);
-        } else {
-            console.error("Failed to setup TV channels");
-            handleTVError();
-        }
-    });
-}
-
-function handleTVError() {
-    // Remove loading screen
-    const loadingScreen = document.querySelector('.tv-loading');
-    if (loadingScreen) {
-        loadingScreen.remove();
-    }
-    
-    // Show all views again
-    document.querySelectorAll('.content').forEach(view => {
-        if (view.classList.contains('entertainment-view')) {
-            view.style.display = 'block';
-        }
-    });
-    
-    // Show sidebar
-    const sidebar = document.querySelector('.sidebar');
-    if (sidebar) {
-        sidebar.style.display = 'block';
-    }
-    
-    // Show error toast
-    const errorToast = `
-        <div class="toast-container position-fixed bottom-0 end-0 p-3">
-            <div class="toast" role="alert">
-                <div class="toast-header bg-danger text-white">
-                    <strong class="me-auto">Error</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
-                </div>
-                <div class="toast-body">
-                    Unable to setup TV channels. Please check your connection and try again.
-                </div>
-            </div>
-        </div>
-    `;
-    document.body.insertAdjacentHTML('beforeend', errorToast);
-    const toast = new bootstrap.Toast(document.querySelector('.toast'));
-    toast.show();
-}
-
-function handleTVClick() {
-    console.log('Opening TV...');
-    openTV();
-}
 
 function handleMoviesClick() {
     console.log('Opening Movies...');
@@ -205,89 +68,69 @@ function handleRadioChannelClick(channelNumber) {
 
 function handleEntertainmentClick() {
     console.log('Opening Entertainment...');
-    
-    // Register JAPIT focus handling
-    //handleEntertainmentFocus();
-    
-    // Hide default view
-    document.querySelector('.default-view').style.display = 'none';
-    
-    // Show entertainment view
-    document.querySelector('.entertainment-view').style.display = 'block';
-    
-    // Focus first entertainment card
-    const tvCard = document.querySelector('.entertainment-card[data-type="tv"]');
-    if (tvCard) {
-        // Set JAPIT focus
-        var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
-        JAPITObjForWIXPSvc.Cookie = 1041;
-        JAPITObjForWIXPSvc.CmdType = "Change";
-        JAPITObjForWIXPSvc.Fun = "UserInputControl";
-        JAPITObjForWIXPSvc.CommandDetails = {
-            "FocusSettings": {
-                "SetFocusTo": "tv"
-            }
-        };
-        sendWIxPCommand(JAPITObjForWIXPSvc);
-        delete JAPITObjForWIXPSvc;
-        
-        tvCard.focus();
-    }
+
+    //setting previous and current page
+    previous_page = current_page;
+    current_page = "entertainment_menu";
+
+    document.getElementById(previous_page).style.display = 'none';
+    document.getElementById(current_page).style.display = 'block';
+
 }
 
-function clearEntertainmentActive() {
-    document.querySelectorAll('.entertainment-card').forEach(card => {
-        card.classList.remove('active');
-    });
-}
+// function clearEntertainmentActive() {
+//     document.querySelectorAll('.entertainment-card').forEach(card => {
+//         card.classList.remove('active');
+//     });
+// }
 
-// Disney+ handler
-function handleDisneyPlusClick() {
-    console.log('Opening Disney+...');
-    // Add your Disney+ handling code
-    applicationControl("Disney+", "Activate");
-}
+// // Disney+ handler
+// function handleDisneyPlusClick() {
+//     console.log('Opening Disney+...');
+//     // Add your Disney+ handling code
+//     applicationControl("Disney+", "Activate");
+// }
 
-// 7plus handler
-function handle7PlusClick() {
-    console.log('Opening 7plus...');
-    // Add your 7plus handling code
-    applicationControl("7plus", "Activate");
-}
+// // 7plus handler
+// function handle7PlusClick() {
+//     console.log('Opening 7plus...');
+//     // Add your 7plus handling code
+//     applicationControl("7plus", "Activate");
+// }
 
-// Add these new handler functions
+// // Add these new handler functions
 
-function handleParamountClick() {
-    console.log('Opening Paramount+...');
-    applicationControl("Paramount+", "Activate");
-}
+// function handleParamountClick() {
+//     console.log('Opening Paramount+...');
+//     applicationControl("Paramount+", "Activate");
+// }
 
-function handleAppleTVClick() {
-    console.log('Opening Apple TV...');
-    applicationControl("Apple TV", "Activate");
-}
+// function handleAppleTVClick() {
+//     console.log('Opening Apple TV...');
+//     applicationControl("Apple TV", "Activate");
+// }
 
-function handle9NowClick() {
-    console.log('Opening 9 Now...');
-    applicationControl("9Now", "Activate");
-}
+// function handle9NowClick() {
+//     console.log('Opening 9 Now...');
+//     applicationControl("9Now", "Activate");
+// }
 
-function handle10PlayClick() {
-    console.log('Opening 10 Play...');
-    applicationControl("10 play", "Activate");
-}
+// function handle10PlayClick() {
+//     console.log('Opening 10 Play...');
+//     applicationControl("10 play", "Activate");
+// }
 
-function handleBingeClick() {
-    console.log('Opening Binge...');
-    applicationControl("Binge", "Activate");
-}
+// function handleBingeClick() {
+//     console.log('Opening Binge...');
+//     applicationControl("Binge", "Activate");
+// }
 
-function handleABCiViewClick() {
-    console.log('Opening ABC iView...');
-    applicationControl("ABC iview", "Activate");
-}
+// function handleABCiViewClick() {
+//     console.log('Opening ABC iView...');
+//     applicationControl("ABC iview", "Activate");
+// }
 
-// Add casting handler
+// Add entertainment casting handler
 function handleCastingClick() {
     console.log('Opening Casting...');
     
@@ -298,33 +141,5 @@ function handleCastingClick() {
 
     
     // // Create loading screen
-    // const loadingScreen = document.createElement('div');
-    // loadingScreen.className = 'casting-loading';
-    // loadingScreen.innerHTML = `
-    //     <div class="loading-content">
-    //         <img src="logos/casting.png" alt="Casting" class="casting-logo">
-    //         <div class="spinner-border text-primary" role="status">
-    //             <span class="visually-hidden">Loading casting...</span>
-    //         </div>
-    //         <div class="text-white mt-3">Setting up casting...</div>
-    //     </div>
-    // `;
-    // document.body.appendChild(loadingScreen);
-
-    // // First deactivate any running apps
-    // var deactivateApps = new CreateJAPITObjectForWIXPSvc();
-    // deactivateApps.Cookie = 1049;
-    // deactivateApps.CmdType = "Change";
-    // deactivateApps.Fun = "ApplicationControl";
-    // deactivateApps.CommandDetails = {
-    //     "ApplicationState": "DeactivateAll"
-    // };
-    // sendWIxPCommand(deactivateApps);
-    // delete deactivateApps;
-
-    // // Enable casting
-    // setTimeout(() => {
-    //     applicationControl("Casting", "Activate");
-    //     document.body.removeChild(loadingScreen);
-    // }, 1500);
+  
 } 

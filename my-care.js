@@ -119,16 +119,22 @@ function handleMyCareKeys(keyCode) {
 function handleMyCareButtonClick() {
     console.log('Opening My Care section...');
     
+    //setting previous and current page
+    previous_page = current_page;
+    current_page = "mycare_menu";
 
-    document.querySelector('.default-view').style.display = 'none';
-    document.querySelector('.entertainment-view').style.display = 'none'; //hide entertainment display
+    document.getElementById(previous_page).style.display = 'none';
+    document.getElementById(current_page).style.display = 'block';
+
+    // document.querySelector('.default-view').style.display = 'none';
+    // document.querySelector('.entertainment-view').style.display = 'none'; //hide entertainment display
     
-    // Show entertainment view
-    document.querySelector('.my-care-view').style.display = 'block';
+    // // Show entertainment view
+    // document.querySelector('.my-care-view').style.display = 'block';
     
-    // Focus first entertainment card
-    const myCareCard = document.getElementById("management-and-discharge-button");
-    myCareCard.focus();
+    // // Focus first entertainment card
+    // const myCareCard = document.getElementById("management-and-discharge-button");
+    // myCareCard.focus();
 }
 
 // Add this to your existing event listeners

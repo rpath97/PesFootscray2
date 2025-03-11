@@ -15,6 +15,13 @@ var radio_channel_playing = 0;
 function openRadio() {
     const directoryPath = 'logos/channel_logos/'; // 
     const targetFilename = 'sbs popasia.png'; // Replace with the filename you're looking for
+
+    //setting current page
+    // const currentPage = document.querySelector('.current-page');
+    // currentPage.textContent = 'Radio';
+    current_page = "radio";
+    
+
     //debugger;
     // window.onload = function() {
     //     const radioList = document.getElementsByClassName("radio_list");

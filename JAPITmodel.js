@@ -7,6 +7,8 @@
 /* global variables */
 
 var radio_channel_on = 0;
+var current_page = "default_view";
+var previous_page = "";
 
 function Exercise01ModelInit() {
 	setRcControlSelective();
@@ -182,7 +184,7 @@ function setRcControlSelective(){
 			{ "vkkey" : "HBBTV_VK_ADJUST" }, //SETTINGS BUTTON
 			// { "vkkey" : "HBBTV_VK_DOWN" }, // not existing
 			{ "vkkey" : "HBBTV_VK_MENU" }, // Home Button
-			//{ "vkkey" : "HBBTV_VK_BACK" }, // not existing
+			{ "vkkey" : "HBBTV_VK_BACK" }, // not existing
 			{ "vkkey" : "HBBTV_VK_RED" },
 			{ "vkkey" : "HBBTV_VK_GREEN" },
 			{"vkkey": "HBBTV_VK_YOUTUBE"},
@@ -284,12 +286,15 @@ function keyHandler(keyCode)
 				var element = document.getElementById("ipaddydiv");
 				var currentDisplay = window.getComputedStyle(element).display;
 				
+				
 				if (currentDisplay === 'none') {
 					element.style.display = 'flex';  // Show the element
 				} else {
 					element.style.display = 'none';  // Hide the element
 				}
 				break;
+			case VK_BACK:
+			
 			default:
 				alert("Nothing to handle \n");
 				break;
@@ -301,62 +306,63 @@ function keyHandler(keyCode)
 	}
 
 	//Exit Keyhandler
-
-
-
-
-function handleEntertainmentKeys(keyCode) {
-	if (document.querySelector('.entertainment-view').style.display === 'block') {
-		var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
-		JAPITObjForWIXPSvc.Cookie = 1030;
-		JAPITObjForWIXPSvc.CmdType = "Change";
-		JAPITObjForWIXPSvc.Fun = "UserInputControl";
-		
-		switch(keyCode) {
-			case 37: // Left
-				JAPITObjForWIXPSvc.CommandDetails = {
-					"VirtualKeyDetails": {
-						"VirtualKey": "HBBTV_VK_LEFT"
-					}
-				};
-				handleLeftButton();
-				break;
-				
-			case 39: // Right
-				JAPITObjForWIXPSvc.CommandDetails = {
-					"VirtualKeyDetails": {
-						"VirtualKey": "HBBTV_VK_RIGHT"
-					}
-				};
-				handleRightButton();
-				break;
-				
-			case 38: // Up
-				JAPITObjForWIXPSvc.CommandDetails = {
-					"VirtualKeyDetails": {
-						"VirtualKey": "HBBTV_VK_UP"
-					}
-				};
-				handleUpButton();
-				break;
-				
-			case 40: // Down
-				JAPITObjForWIXPSvc.CommandDetails = {
-					"VirtualKeyDetails": {
-						"VirtualKey": "HBBTV_VK_DOWN"
-					}
-				};
-				handleDownButton();
-				break;
-		}
-		
-		sendWIxPCommand(JAPITObjForWIXPSvc);
-		delete JAPITObjForWIXPSvc;
-		return 0;
-	}
-	return 1;
-	}
 }
+
+
+
+
+// function handleEntertainmentKeys(keyCode) {
+// 	if (document.querySelector('.entertainment-view').style.display === 'block') {
+// 		var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
+// 		JAPITObjForWIXPSvc.Cookie = 1030;
+// 		JAPITObjForWIXPSvc.CmdType = "Change";
+// 		JAPITObjForWIXPSvc.Fun = "UserInputControl";
+		
+// 		switch(keyCode) {
+// 			case 37: // Left
+// 				JAPITObjForWIXPSvc.CommandDetails = {
+// 					"VirtualKeyDetails": {
+// 						"VirtualKey": "HBBTV_VK_LEFT"
+// 					}
+// 				};
+// 				handleLeftButton();
+// 				break;
+				
+// 			case 39: // Right
+// 				JAPITObjForWIXPSvc.CommandDetails = {
+// 					"VirtualKeyDetails": {
+// 						"VirtualKey": "HBBTV_VK_RIGHT"
+// 					}
+// 				};
+// 				handleRightButton();
+// 				break;
+				
+// 			case 38: // Up
+// 				JAPITObjForWIXPSvc.CommandDetails = {
+// 					"VirtualKeyDetails": {
+// 						"VirtualKey": "HBBTV_VK_UP"
+// 					}
+// 				};
+// 				handleUpButton();
+// 				break;
+				
+// 			case 40: // Down
+// 				JAPITObjForWIXPSvc.CommandDetails = {
+// 					"VirtualKeyDetails": {
+// 						"VirtualKey": "HBBTV_VK_DOWN"
+// 					}
+// 				};
+// 				handleDownButton();
+// 				break;
+// 		}
+		
+// 		sendWIxPCommand(JAPITObjForWIXPSvc);
+// 		delete JAPITObjForWIXPSvc;
+// 		return 0;
+// 	}
+// 	return 1;
+// 	}
+// }
 
 // 
 

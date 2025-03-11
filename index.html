@@ -10,10 +10,8 @@
     <!-- Ignore favicon request -->
 		<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 		<!-- Initialize JAPIT Plugin first -->
-		<script type="text/javascript" src="japit-init.js"></script>
-		<script type="text/javascript" src="buttonclick.js"></script>
+		
 		<!-- Then load other scripts -->
-		<script type="text/javascript" src="remote-control.js"></script>
 		<script type="text/javascript" src="menu.js"></script>
 		<script type="text/javascript" src="entertainment.js"></script>
 		<script type="text/javascript" src="ExerciseController.js"></script>
@@ -84,7 +82,6 @@
                     <span>My Care</span>
                 </button>
                 <button class="menu-item japit-button"
-                            id="clinical-services-button"
                             data-type="clinical-services"
                             data-japit-control="true"
                         data-japit-focusable="true"
@@ -104,12 +101,14 @@
             </div>
             
             <!-- Default View -->
-            <div class="content default-view h-100 position-relative">
+            <div class="content default-view h-100 position-relative"
+                id="default_view"
+            >
                 <img src="logos/newfootscrayhospital.jpg" alt="newfootscrayhospital" class="main-image w-100 h-100 object-fit-contain p-3">
             </div>
 
             <!-- Entertainment View -->
-            <div class="content entertainment-view py-4" style="display: none;">
+            <div class="content entertainment-view py-4" style="display: none;" id="entertainment_menu">
                 <div class="container-fluid">
                     <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
                         <!-- TV Button -->
@@ -165,7 +164,7 @@
             </div>
 
             <!-- My Care View -->
-            <div class="content my-care-view" style="display: none;">
+            <div class="content my-care-view" style="display: none;" id="mycare_menu">
                 <div class="container-fluid">
                     <div class="my-care-grid">
                         <button class="mycare-card japit-button"
@@ -210,7 +209,7 @@
             </div>
 
             <!-- Clinical Services View -->
-            <div class="content clinical-services-view" style="display: none;">
+            <div class="content clinical-services-view" style="display: none;" id="clinicalservices_menu">
                 <div class="clinical-grid">
                     <button class="clinical-card japit-button" 
                             id="clinical-sharing-button"
@@ -226,7 +225,7 @@
             </div>
 
             <!-- Hospital Info View -->
-            <div class="content hospital-info-view" style="display: none;">
+            <div class="content hospital-info-view" style="display: none;" id="hospitalinfo_menu">
                 <div class="container-fluid">
                     <div class="row row-cols-1 row-cols-md-2 g-4 justify-content-center">
                         <!-- Welcome -->
