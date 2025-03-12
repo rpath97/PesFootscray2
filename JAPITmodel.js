@@ -253,8 +253,9 @@ function keyHandler(keyCode)
 				} else if (current_page == 'tv_view') {
 					current_page = "entertainment_menu";
 					previous_page = "default_view";
-					changeCDBstate('Activate');
 					switchToHDMI1();
+					changeCDBstate('Activate');
+
 					break;
 				}
 				 //activate the dashboard going back from where i am to dashboard
@@ -304,8 +305,8 @@ function keyHandler(keyCode)
 				} else if (current_page == 'tv_view') {
 					current_page = "entertainment_menu";
 					previous_page = "default_view";
-					changeCDBstate('Activate');
 					switchToHDMI1();
+					changeCDBstate('Activate');
 					break;
 				}
 				document.getElementById(current_page).style.display = 'none';
