@@ -12,7 +12,10 @@ function handleClinicalServicesClick() {
 
     document.getElementById("clinical-sharing-button").focus();
 
-    
 }
 
+function openClicnicalCasting() {
+    setRcControlAll()
+    switchToHDMI1()
+}
 
