@@ -285,7 +285,7 @@ function keyHandler(keyCode)
 				break;
 			case VK_BACK:
 				//coming after clinical cast
-				if (current_page == 'clinicalservices_menu'){
+				if (current_page == 'clinical_casting'){
 					setRcControlSelective();
 					current_page = "clinicalservices_menu";
 					previous_page = "default_view";

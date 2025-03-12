@@ -15,6 +15,10 @@ function handleClinicalServicesClick() {
 }
 
 function openClicnicalCasting() {
+    //setting previous and current page
+    previous_page = current_page;
+    current_page = "clinical_casting";
+
     setRcControlAll()
     switchToHDMI1()
 }
