@@ -287,6 +287,8 @@ function keyHandler(keyCode)
 				//coming after clinical cast
 				if (current_page == 'clinicalservices_menu'){
 					setRcControlSelective();
+					current_page = "default_view";
+					previous_page = "default_view";
 					changeCDBstate('Activate');
 					break;
 				}
