@@ -243,15 +243,15 @@ function keyHandler(keyCode)
 		switch (keyCode) { 
 			case VK_MENU:
 				channelStopPlaying(radio_channel_playing);
-				
-				 //activate the dashboard going back from where i am to dashboard
-				document.getElementById(current_page).style.display = 'none';
-				current_page = 'default_view';
-				document.getElementById(current_page).style.display = 'flex';
 				//coming after clinical cast
 				if (current_page == 'clinicalservices_menu'){
 					setRcControlSelective()
 				}
+				 //activate the dashboard going back from where i am to dashboard
+				document.getElementById(current_page).style.display = 'none';
+				current_page = 'default_view';
+				document.getElementById(current_page).style.display = 'flex';
+
 				
 				changeCDBstate('Activate');
 
@@ -301,63 +301,6 @@ function keyHandler(keyCode)
 	//Exit Keyhandler
 }
 
-
-
-
-// function handleEntertainmentKeys(keyCode) {
-// 	if (document.querySelector('.entertainment-view').style.display === 'block') {
-// 		var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
-// 		JAPITObjForWIXPSvc.Cookie = 1030;
-// 		JAPITObjForWIXPSvc.CmdType = "Change";
-// 		JAPITObjForWIXPSvc.Fun = "UserInputControl";
-		
-// 		switch(keyCode) {
-// 			case 37: // Left
-// 				JAPITObjForWIXPSvc.CommandDetails = {
-// 					"VirtualKeyDetails": {
-// 						"VirtualKey": "HBBTV_VK_LEFT"
-// 					}
-// 				};
-// 				handleLeftButton();
-// 				break;
-				
-// 			case 39: // Right
-// 				JAPITObjForWIXPSvc.CommandDetails = {
-// 					"VirtualKeyDetails": {
-// 						"VirtualKey": "HBBTV_VK_RIGHT"
-// 					}
-// 				};
-// 				handleRightButton();
-// 				break;
-				
-// 			case 38: // Up
-// 				JAPITObjForWIXPSvc.CommandDetails = {
-// 					"VirtualKeyDetails": {
-// 						"VirtualKey": "HBBTV_VK_UP"
-// 					}
-// 				};
-// 				handleUpButton();
-// 				break;
-				
-// 			case 40: // Down
-// 				JAPITObjForWIXPSvc.CommandDetails = {
-// 					"VirtualKeyDetails": {
-// 						"VirtualKey": "HBBTV_VK_DOWN"
-// 					}
-// 				};
-// 				handleDownButton();
-// 				break;
-// 		}
-		
-// 		sendWIxPCommand(JAPITObjForWIXPSvc);
-// 		delete JAPITObjForWIXPSvc;
-// 		return 0;
-// 	}
-// 	return 1;
-// 	}
-// }
-
-// 
 
 
 function handleExitButton() {
