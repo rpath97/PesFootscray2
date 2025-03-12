@@ -248,7 +248,11 @@ function keyHandler(keyCode)
 				document.getElementById(current_page).style.display = 'none';
 				current_page = 'default_view';
 				document.getElementById(current_page).style.display = 'flex';
-
+				//coming after clinical cast
+				if (current_page == 'clinicalservices_menu'){
+					setRcControlSelective()
+				}
+				
 				changeCDBstate('Activate');
 
 				const videoSrcFrame = document.getElementById('video-src-iframe');
@@ -280,7 +284,10 @@ function keyHandler(keyCode)
 				}
 				break;
 			case VK_BACK:
-			
+				document.getElementById(current_page).style.display = 'none';
+				document.getElementById(previous_page).style.display = 'flex';
+				current_page = "default_view";
+				previous_page = "default_view";
 			default:
 				alert("Nothing to handle \n");
 				break;
