@@ -243,34 +243,19 @@ function keyHandler(keyCode)
 		switch (keyCode) {  //activate the dashboard going back from where i am to dashboard
 			case VK_MENU:
 				channelStopPlaying(radio_channel_playing);
-				if(castState == 1) {
-					castState = 0;
-					//googlCastToggle('Off');
-					state = "Activate";
-					//changeCDBstate(state);
-					switchSource('HDMI1');
-					tvChannelsApp('Activate');
-					document.getElementById('ButtonTVChannel').focus();
-					//SelectCast('Deactivate');
-					//setTimeout(tvChannelsApp('Deactivate'), 1000);
-					setTimeout(changeCDBstate(state), 1000);
-					//applicationControl('TVChannels', 'Deactivate');
-					//activateApplications();
-					//applicationControl('Internet', 'Deactivate');
-					//applicationControl('Directshare', 'Deactivate');
-					//applicationControl('InternetHotspot', 'Deactivate');
-					//window.location.reload(true);
-				} 
-				else {
 				
+				document.getElementById(current_page).style.display = 'none';
+				current_page = 'default_view';
+				document.getElementById(current_page).style.display = 'flex';
+
 				changeCDBstate('Activate');
+
 				const videoSrcFrame = document.getElementById('video-src-iframe');
-				}
+		
 				if (videoSrcFrame) {
 					videoSrcFrame.src = '';  //d the welcome video and activated the dashbo
 					// ard
 				}
-				changeCDBstate('Activate');
 				
 				break;
 			case VK_1: //Refreshes the dashboard
