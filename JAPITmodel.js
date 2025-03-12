@@ -254,6 +254,7 @@ function keyHandler(keyCode)
 					current_page = "entertainment_menu";
 					previous_page = "default_view";
 					changeCDBstate('Activate');
+					switchToHDMI1();
 					break;
 				}
 				 //activate the dashboard going back from where i am to dashboard
@@ -304,6 +305,7 @@ function keyHandler(keyCode)
 					current_page = "entertainment_menu";
 					previous_page = "default_view";
 					changeCDBstate('Activate');
+					switchToHDMI1();
 					break;
 				}
 				document.getElementById(current_page).style.display = 'none';
