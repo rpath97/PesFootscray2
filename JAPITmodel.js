@@ -245,7 +245,7 @@ function keyHandler(keyCode)
 				channelStopPlaying(radio_channel_playing);
 				//coming after clinical cast
 				if (current_page == 'clinicalservices_menu'){
-					setRcControlSelective()
+					setRcControlSelective();
 				}
 				 //activate the dashboard going back from where i am to dashboard
 				document.getElementById(current_page).style.display = 'none';
@@ -284,10 +284,17 @@ function keyHandler(keyCode)
 				}
 				break;
 			case VK_BACK:
+				//coming after clinical cast
+				if (current_page == 'clinicalservices_menu'){
+					setRcControlSelective();
+					changeCDBstate('Activate');
+					break;
+				}
 				document.getElementById(current_page).style.display = 'none';
 				document.getElementById(previous_page).style.display = 'flex';
 				current_page = "default_view";
 				previous_page = "default_view";
+				break;
 			default:
 				alert("Nothing to handle \n");
 				break;
