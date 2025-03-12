@@ -244,7 +244,7 @@ function keyHandler(keyCode)
 			case VK_MENU:
 				channelStopPlaying(radio_channel_playing);
 				//coming after clinical cast
-				if (current_page == 'clinicalservices_menu'){
+				if (current_page == 'clinical_casting'){
 					setRcControlSelective();
 				}
 				 //activate the dashboard going back from where i am to dashboard
