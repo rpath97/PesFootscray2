@@ -287,13 +287,13 @@ function keyHandler(keyCode)
 				//coming after clinical cast
 				if (current_page == 'clinicalservices_menu'){
 					setRcControlSelective();
-					current_page = "default_view";
+					current_page = "clinicalservices_menu";
 					previous_page = "default_view";
 					changeCDBstate('Activate');
 					break;
 				}
 				document.getElementById(current_page).style.display = 'none';
-				document.getElementById(previous_page).style.display = 'flex';
+				document.getElementById(previous_page).style.display = 'block';
 				current_page = "default_view";
 				previous_page = "default_view";
 				break;
