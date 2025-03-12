@@ -240,10 +240,11 @@ function OnKeyReceivedHandler(event) {
 function keyHandler(keyCode)
  {
 	try {
-		switch (keyCode) {  //activate the dashboard going back from where i am to dashboard
+		switch (keyCode) { 
 			case VK_MENU:
 				channelStopPlaying(radio_channel_playing);
 				
+				 //activate the dashboard going back from where i am to dashboard
 				document.getElementById(current_page).style.display = 'none';
 				current_page = 'default_view';
 				document.getElementById(current_page).style.display = 'flex';
