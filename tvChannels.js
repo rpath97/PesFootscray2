@@ -9,6 +9,7 @@ var channel_list = [];
 var tv_channel_on = 0;
 
 function openTV() {
+    current_page == 'tv_view';
     //Ensuring multiple clicks of the button consecutively doesn't keep on removing and adding channels
     if (tv_channel_on == 0){
         tv_channel_on = 1;

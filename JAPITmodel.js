@@ -246,6 +246,15 @@ function keyHandler(keyCode)
 				//coming after clinical cast
 				if (current_page == 'clinical_casting'){
 					setRcControlSelective();
+					current_page = "clinicalservices_menu";
+					previous_page = "default_view";
+					changeCDBstate('Activate');
+					break;
+				} else if (current_page == 'tv_view') {
+					current_page = "entertainment_menu";
+					previous_page = "default_view";
+					changeCDBstate('Activate');
+					break;
 				}
 				 //activate the dashboard going back from where i am to dashboard
 				document.getElementById(current_page).style.display = 'none';
@@ -288,6 +297,11 @@ function keyHandler(keyCode)
 				if (current_page == 'clinical_casting'){
 					setRcControlSelective();
 					current_page = "clinicalservices_menu";
+					previous_page = "default_view";
+					changeCDBstate('Activate');
+					break;
+				} else if (current_page == 'tv_view') {
+					current_page = "entertainment_menu";
 					previous_page = "default_view";
 					changeCDBstate('Activate');
 					break;
