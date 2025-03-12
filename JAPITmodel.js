@@ -294,7 +294,7 @@ function keyHandler(keyCode)
 				}
 				document.getElementById(current_page).style.display = 'none';
 				document.getElementById(previous_page).style.display = 'block';
-				current_page = "default_view";
+				current_page = previous_page;
 				previous_page = "default_view";
 				break;
 			default:
