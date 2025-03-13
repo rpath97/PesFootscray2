@@ -107,9 +107,9 @@
                 <img src="logos/newfootscrayhospital.jpg" alt="newfootscrayhospital" class="main-image w-100 h-100 object-fit-contain p-3">
                
             </div>
-            <!-- <button onclick="backTemp()"  style="width: 50pm; height: 20px; position: absolute; bottom: 20px; right: 50px;" >
+            <button onclick="backTemp()"  style="width: 50pm; height: 20px; position: absolute; bottom: 2px; right: 50px;" >
                 Back
-            </button> -->
+            </button>
 
             <!-- Entertainment View -->
             <div class="content entertainment-view py-4" style="display: none;" id="entertainment_menu">
@@ -319,9 +319,15 @@
     </object>
 
      <!-- Video Frame -->
-     <div class="video-grid" id="video-frame">
-        <iframe id="video-src-iframe" src="" width="100%" height="100%" frameborder="0" allowfullscreen/>
-     </div>
+     <!-- <div class="video-grid" id="video-frame">
+        <iframe id="video-src-iframe" src="" width="100%" height="100%" frameborder="0" allowfullscreen>
+        </iframe>
+     </div> -->
+     <!-- Second type video frame -->
+     <video id="video-frame" controls autoplay>
+        <source id="video-src-iframe" src="" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

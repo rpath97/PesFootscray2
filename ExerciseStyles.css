@@ -1086,7 +1086,7 @@ body.refreshing::after {
     align-items: center;
 }
 
-
+/* VIDEO FRAME */
 #video-frame {
     display: none;
     position: fixed;
@@ -1096,10 +1096,15 @@ body.refreshing::after {
     height: 100%;
     z-index: 1000;
 }
-#video-src-iframe {
+/* #video-src-iframe {
     display: none;
+    object-fit: cover;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     
-}
+} */
 
 
 
