@@ -62,7 +62,7 @@ body {
     padding: 20px;
     background: white;  /* Add white background */
     border: none;  /* Remove default button border */
-    border-radius: 15px;
+    /* border-radius: 15px; */
     cursor: pointer;
     transition: all 0.3s ease;
     font-size: 24px;
@@ -533,25 +533,6 @@ div.Input_Output {
     filter: brightness(0) invert(1);  /* Keep image white on hover/focus */
 }
 
-/* Common image styles */
-.mycare-card img {
-    width: 150px;
-    height: 150px;
-    /* margin-top: 10px;
-    margin-bottom: 10px; */
-    object-fit: contain;
-    transition: transform 0.3s ease;
-}
-
-/* Text styling */
-.mycare-card span {
-    font-size: 24px;
-    font-weight: 500;
-    color: #333;
-    /* margin-top: 5px;*/
-    text-align: center;
-}
-
 /* Card border colors */
 .mycare-card[data-type="management-and-discharge"],
 .mycare-card[data-type="carers-survey"],
@@ -894,15 +875,17 @@ body.refreshing::after {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: calc(100vh - 100px);
-    margin-left: 21%;  /* Match sidebar width */
-    margin-top: 110px;  /* newfootscrayhospital logo moving up and down */
-    margin-right: 20px; /* Add right margin to not touch the edge */
+    height: 850px;
+    margin-left: 22%;
+    margin-top: 100px;
+    margin-right: 20px;
     padding: 20px;
-    width: calc(79% - 20px); /* Adjust width to account for right margin */
+    width: calc(78% - 20px);
+    position: relative;
 }
 
-/* White box container */
+/* Remove the white box container */
+/* Removing this entire block:
 .default-view::before {
     content: '';
     position: absolute;
@@ -910,10 +893,10 @@ body.refreshing::after {
     left: 0;
     right: 0;
     bottom: 0;
-    background: white;
-    border-radius: 15px;
+    background: #f5f5f5;
+    border-radius: 0;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
+} */
 
 .main-image {
     position: relative;
@@ -923,7 +906,8 @@ body.refreshing::after {
     padding: 20px;
     max-width: 1200px;
     max-height: 800px;
-    margin-top: -40px;
+    margin: 0;
+    z-index: 1;
 }
 
 /* Header styling */
@@ -1020,12 +1004,6 @@ body.refreshing::after {
     height: 140px;
     object-fit: contain;
     transition: transform 0.3s ease;
-}
-
-.radiochannels-card:hover img,
-.radiochannels-card:focus img {
-    transform: scale(1.1);
-    filter: brightness(0) invert(1);
 }
 
 .radiochannels-card span {
@@ -1324,3 +1302,130 @@ body.refreshing::after {
     background: #465f77;  /* Match the date/time background color */
     border-radius: 0;  /* Match the date/time corners */
 }
+
+/* Time display styling for sidebar */
+.sidebar-time {
+    width: 100%;  /* Full width of sidebar */
+    font-size: 32px;
+    font-weight: 500;
+    color: #ffffff;
+    padding: 40px;
+    margin: 0;
+    background: #465f77;
+    border-radius: 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center;  /* Center the text */
+}
+
+/* Update sidebar logo positioning */
+.sidebar-logo {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    padding: 40px;
+    margin: 0;
+    background: #465f77;
+    border-radius: 0;
+    margin-top: 20px;  /* Add space between time and logo */
+}
+
+/* Update sidebar layout */
+.sidebar {
+    width: 21%;
+    height: 100vh;
+    background: #f5f5f5;
+    padding: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* Specific hover/focus state for hospital info button */
+.menu-item[data-type="hospitalinfo"]:hover:not(.active),
+.menu-item[data-type="hospitalinfo"]:focus:not(.active) {
+    background: linear-gradient(135deg, #00BAA3, #00BAA3);
+    /* Green gradient */
+    color: white;
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(3, 95, 3, 0.2);  /* Green shadow */
+}
+
+/* Update the image source on hover/focus for hospital info button */
+.menu-item[data-type="hospitalinfo"]:hover:not(.active) img,
+.menu-item[data-type="hospitalinfo"]:focus:not(.active) img {
+    content: url("logos/sidemenu/hospitalinformationhover.png");  /* Switch to hover image */
+    transform: scale(1.1);
+}
+
+.menu-item[data-type="hospitalinfo"]:hover:not(.active) span,
+.menu-item[data-type="hospitalinfo"]:focus:not(.active) span {
+    color: white;  /* Keep text white */
+}
+
+/* Specific hover/focus state for my care button */
+.menu-item[data-type="my-care"]:hover:not(.active),
+.menu-item[data-type="my-care"]:focus:not(.active) {
+    background: linear-gradient(135deg, #d60707, #d60707);  /* Red gradient */
+    color: white;
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(214, 7, 7, 0.2);  /* Red shadow */
+}
+
+/* Update the image source on hover/focus for my care button */
+.menu-item[data-type="my-care"]:hover:not(.active) img,
+.menu-item[data-type="my-care"]:focus:not(.active) img {
+    content: url("logos/sidemenu/mycarehover.png");  /* Switch to hover image */
+    transform: scale(1.1);
+}
+
+.menu-item[data-type="my-care"]:hover:not(.active) span,
+.menu-item[data-type="my-care"]:focus:not(.active) span {
+    color: white;  /* Keep text white */
+}
+
+/* Specific hover/focus state for clinical services button */
+.menu-item[data-type="clinical-services"]:hover:not(.active),
+.menu-item[data-type="clinical-services"]:focus:not(.active) {
+    background: linear-gradient(135deg, #ff8c00, #ff8c00);  /* Orange gradient */
+    color: white;
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(255, 140, 0, 0.2);  /* Orange shadow */
+}
+
+/* Update the image source on hover/focus for clinical services button */
+.menu-item[data-type="clinical-services"]:hover:not(.active) img,
+.menu-item[data-type="clinical-services"]:focus:not(.active) img {
+    content: url("logos/sidemenu/clinicalserviceshover.png");  /* Switch to hover image */
+    transform: scale(1.1);
+}
+
+.menu-item[data-type="clinical-services"]:hover:not(.active) span,
+.menu-item[data-type="clinical-services"]:focus:not(.active) span {
+    color: white;  /* Keep text white */
+}
+
+/* Add new entertainment button hover/focus styles */
+.menu-item[data-type="entertainment"]:hover:not(.active),
+.menu-item[data-type="entertainment"]:focus:not(.active) {
+    background: linear-gradient(135deg, #05CBF9, #05CBF9);  /* Blue gradient */
+    color: white;
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 176, 240, 0.2);  /* Blue shadow */
+}
+
+/* Update the image source on hover/focus for entertainment button */
+.menu-item[data-type="entertainment"]:hover:not(.active) img,
+.menu-item[data-type="entertainment"]:focus:not(.active) img {
+    content: url("logos/sidemenu/entertainmenthover.png");  /* Switch to hover image */
+    transform: scale(1.1);
+}
+
+.menu-item[data-type="entertainment"]:hover:not(.active) span,
+.menu-item[data-type="entertainment"]:focus:not(.active) span {
+    color: white;  /* Keep text white */
+}
+
