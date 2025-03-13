@@ -242,7 +242,6 @@ function keyHandler(keyCode)
 	try {
 		switch (keyCode) { 
 			case VK_MENU:
-				channelStopPlaying(radio_channel_playing);
 				//coming after clinical cast
 				if (current_page == 'clinical_casting'){
 					setRcControlSelective();
@@ -255,6 +254,10 @@ function keyHandler(keyCode)
 					previous_page = "default_view";
 					switchToHDMI1();
 					changeCDBstate('Activate');
+
+					break;
+				} else if (current_page == 'radio_view') {
+					channelStopPlaying(radio_channel_playing);
 
 					break;
 				}
@@ -307,6 +310,10 @@ function keyHandler(keyCode)
 					previous_page = "default_view";
 					switchToHDMI1();
 					changeCDBstate('Activate');
+					break;
+				} else if (current_page == 'radio_view') {
+					channelStopPlaying(radio_channel_playing);
+
 					break;
 				}
 				document.getElementById(current_page).style.display = 'none';

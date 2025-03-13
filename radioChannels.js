@@ -171,65 +171,16 @@ function openRadio() {
     else {
         //Creating Hiding home dashbaord view and show radio view
 		radio_channel_on = 1;
-        document.querySelector(".entertainment-view").style.display = "flex";
-        // document.getElementById("patientMenu").style.display = "none";
-        // document.getElementById("gallery").style.display = "none";
-        // document.getElementById("radio_list").style.display = "flex";
+        previous_page = current_page;
+        current_page = "radio_view";
+    
+    
+        document.getElementById(previous_page).style.display = "none";
+        document.getElementById(current_page).style.display = "block";
 		document.getElementById(channel_list[0].BasicChannelDetails.ChannelName).focus();
         mute("Off");
         
-        // document.getElementById("left-column").style.display = "flex";
-        // document.getElementById("back_button").style.display = "flex";
-        // channel_list.forEach(button => {
-        //     const btnElement = document.getElementById(button.BasicChannelDetails.ChannelName);
-        //     // btnElement.style.display = "flex";
-        //     // btnElement.addEventListener('click', radio_ui);
-        //     btnElement.remove();
-        // });
-        // document.getElementsByClassName("radio-button-container");
-        // channel_list.forEach(button => {
-        //     const buttonContainer = document.createElement('div');
-        //     buttonContainer.classList.add('radio-button-container');
-
-        //     const btnElement = document.createElement('button');
-        //     btnElement.id = button.BasicChannelDetails.ChannelName;
-        //     btnElement.class = 'radio_chan_btn';
-
-        //     // Create image element
-        //     var image = document.createElement("img");
-        //     image.src = "UI_images/radioicon2.png";
-        //     image.style.width = "100px";
-        //     btnElement.appendChild(image);
-
-        //     // Create text element
-        //     var textSpan = document.createElement("span");
-        //     textSpan.className = "buttonText";
-        //     textSpan.textContent = button.BasicChannelDetails.ChannelName;
-        //     btnElement.appendChild(textSpan);
-
-        //     //btnElement.innerHTML = `<img src="UI_images/radioicon2.png" id="${button.BasicChannelDetails.ChannelName} + img" alt="${button.BasicChannelDetails.ChannelName}" style="vertical-align: middle; margin-right: 10px; width: 100px"><span> ${button.BasicChannelDetails.ChannelName}</span>`;
-        //     btnElement.style.fontSize = "30px"; 
-        //     btnElement.style.margin = "30px"
-        //     // btnElement.style.display = "flex";
-        //     // btnElement.style.alignItems = "center";
-        //     // btnElement.style.justifyContent = "center";
-        //     btnElement.style.width = "200px";
-        //     btnElement.style.height = "180px";
-        //     btnElement.addEventListener('click', radio_ui);
-        //     //debugger;
-        //     //Getting Channel Logo
-        //     channlName = button.BasicChannelDetails.ChannelName;
-        //     //channelLogoFetch(channlName);
-            
-
-        //     const titleElement = document.createElement('div');
-        //     titleElement.textContent = button.BasicChannelDetails.ChannelName;
-
-        //     buttonContainer.appendChild(btnElement);
-        //     //buttonContainer.appendChild(titleElement);
-
-        //     leftColumn.appendChild(buttonContainer);
-        // });
+        
     }
 
     
