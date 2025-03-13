@@ -258,8 +258,6 @@ function keyHandler(keyCode)
 					break;
 				} else if (current_page == 'radio_view') {
 					channelStopPlaying(radio_channel_playing);
-
-					break;
 				}
 				 //activate the dashboard going back from where i am to dashboard
 				document.getElementById(current_page).style.display = 'none';
@@ -313,8 +311,6 @@ function keyHandler(keyCode)
 					break;
 				} else if (current_page == 'radio_view') {
 					channelStopPlaying(radio_channel_playing);
-
-					break;
 				}
 				document.getElementById(current_page).style.display = 'none';
 				document.getElementById(previous_page).style.display = 'block';
