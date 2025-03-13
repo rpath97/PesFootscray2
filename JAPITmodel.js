@@ -265,7 +265,7 @@ function keyHandler(keyCode)
 						videoSrcFrame.src = '';  //d the welcome video and activated the dashbo
 						videoElement.currentTime = 0;
 						videoElement.pause();
-						videoElement.removeEventListener("ended", backTemp());
+						// videoElement.removeEventListener("ended", backTemp());
 					}
 				}
 				 //activate the dashboard going back from where i am to dashboard
@@ -320,7 +320,7 @@ function keyHandler(keyCode)
 						videoSrcFrame.src = '';  //d the welcome video and activated the dashbo
 						videoElement.currentTime = 0;
 						videoElement.pause();
-						videoElement.removeEventListener("ended", backTemp());
+						// videoElement.removeEventListener("ended", backTemp());
 					}
 				}
 				document.getElementById(current_page).style.display = 'none';
