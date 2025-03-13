@@ -9,9 +9,9 @@ function handleWelcomeClick() {
 
     document.getElementById(previous_page).style.display = 'none';
     document.getElementById(current_page).style.display = 'block';
-    document.getElementById(current_page).play();
 
     const videoSrcFrame = document.getElementById('video-src-iframe');
+    const videoElement = document.getElementById(current_page);
     if (videoSrcFrame) {
         //videoSrcFrame.style.display = 'flex';
         videoSrcFrame.src = 'logos/WelcomeToCountry.mp4';  //d the welcome video and activated the dashbo
