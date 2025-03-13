@@ -10,8 +10,8 @@ body {
 
 .sidebar {
     width: 21%;    /*4 buttons */
-    height: 100vh;  /* Reset to viewport height */
-    background: none;
+    height: 100vh;  /*  viewport height */
+    background: #f5f5f5;  /* side menubar background colour Change */
     padding: 0;
     position: fixed;
     top: 0;
@@ -19,7 +19,7 @@ body {
     z-index: 10;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;  /* Align to the left */
 }
 
 .logo {
@@ -43,12 +43,13 @@ body {
 .menu {
     display: flex;
     flex-direction: column;
-    gap: 35px;  /* This will maintain equal spacing between all buttons */
+    gap: 35px;  /* maintain equal spacing between all buttons */
     flex: 1;
     padding: 20px;
     width: 100%;
     align-items: center;
     margin-top: 20px;
+    background: #cecccc;
 }
 
 .menu-item {
@@ -59,7 +60,8 @@ body {
     width: 95%;
     height: 180px;
     padding: 20px;
-    background: none;
+    background: white;  /* Add white background */
+    border: none;  /* Remove default button border */
     border-radius: 15px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -79,6 +81,14 @@ body {
     transition: transform 0.3s ease;
 }
 
+.menu-item span {
+    font-size: 24px;
+    font-weight: 500;
+    color: #333;
+    text-align: center;
+}
+
+/* Hover and focus states */
 .menu-item:hover:not(.active),
 .menu-item:focus:not(.active) {
     background: linear-gradient(135deg, #00b0f0, #0098d6);
@@ -90,12 +100,12 @@ body {
 .menu-item:hover:not(.active) img,
 .menu-item:focus:not(.active) img {
     transform: scale(1.1);
-    filter: brightness(0) invert(1);
+    filter: brightness(0) invert(1);  /* Make icon white on hover/focus */
 }
 
 .menu-item:hover:not(.active) span,
 .menu-item:focus:not(.active) span {
-    color: white;
+    color: white;  /* Make text white on hover/focus */
 }
 
 .menu-item.active {
@@ -365,6 +375,8 @@ div.Input_Output {
 }
 
 /* .japit-button:focus {
+
+
     outline: 2px solid #00B0F0;
     outline-offset: -2px;
 } */ */
@@ -503,23 +515,23 @@ div.Input_Output {
 .Hospital-info-card:focus img { content: url("logos/reachhover.png"); } */
 
 /* Common hover/focus effects */
- .mycare-card:hover,
+.mycare-card:hover,
 .mycare-card:focus {
-    background-color: #c41e3a;  /* Red background on hover */
-     transform: translateY(-5px);
-    box-shadow: 0 4px 8px rgba(196, 30, 58, 0.3);  /* Red shadow */
- }
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    background: linear-gradient(135deg, #d60707, #d60707);  /* Changed to red gradient */
+}
 
 .mycare-card:hover span,
 .mycare-card:focus span {
-    color: white;  /* White text on hover */
-    
+    color: white;  /* Keep text white on hover/focus */
 }
 
 .mycare-card:hover img,
 .mycare-card:focus img {
-    transform: scale(1.05); 
-} 
+    transform: scale(1.1);
+    filter: brightness(0) invert(1);  /* Keep image white on hover/focus */
+}
 
 /* Common image styles */
 .mycare-card img {
@@ -587,6 +599,7 @@ div.Input_Output {
     background: linear-gradient(135deg, #d8bb15, #d8bb15);
     transform: scale(1.1);
     z-index: 2;
+   
 }
 
 .clinical-card img {
@@ -735,13 +748,19 @@ body.refreshing::after {
 .hospital-info-card:focus {
     transform: scale(1.05);
     box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-    background: linear-gradient(135deg, #00b0f0, #0098d6);
+    background: linear-gradient(135deg, #035f03, #035f03);  /* Changed to green gradient */
+   
+}
+
+.hospital-info-card:hover span,
+.hospital-info-card:focus span {
+    color: white;  /* Keep text white on hover/focus */
 }
 
 .hospital-info-card:hover img,
 .hospital-info-card:focus img {
     transform: scale(1.1);
-    filter: brightness(0) invert(1);
+    filter: brightness(0) invert(1);  /* Keep image white on hover/focus */
 }
 
 /* Add stronger shadow for more depth */
@@ -805,11 +824,11 @@ body.refreshing::after {
 
 /* Radio View Container */
 .radio-view {
-    background-color: #f5f9ff;
+    background-color: #f5f5f5;  /* Change this from #f5f9ff to match */
     height: calc(100vh - 60px);
     padding: 40px;
     overflow-y: auto;
-    margin-top: 60px; /* Add top margin to create space below header */
+    margin-top: 60px;
 }
 
 .radio-channel-grid {
@@ -870,28 +889,41 @@ body.refreshing::after {
     color: #000;
 }
 
-/* Main dashboard image styling */
+/* Main dashboard newfootscrayhospital logo styling */
 .default-view {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-    height: calc(100vh - 60px);
-    position: relative;
+    align-items: center;
+    height: calc(100vh - 100px);
+    margin-left: 21%;  /* Match sidebar width */
+    margin-top: 110px;  /* newfootscrayhospital logo moving up and down */
+    margin-right: 20px; /* Add right margin to not touch the edge */
     padding: 20px;
-    overflow: hidden;
-    margin-left: 18%;
-    width: 82%;
-    min-width: 0;  /* Ensure container can handle overflow */
+    width: calc(79% - 20px); /* Adjust width to account for right margin */
 }
 
-.main-image {  /* new footscray image */
-    width: 500%;  /* Increased from 430% */
-    height: 70%;
+/* White box container */
+.default-view::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.main-image {
+    position: relative;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
-    padding: 3px;
-    margin-top: 150px;
-    max-width: 5000px;  /* Increased from 4200px */
+    padding: 20px;
+    max-width: 1200px;
     max-height: 800px;
+    margin-top: -40px;
 }
 
 /* Header styling */
@@ -928,19 +960,19 @@ body.refreshing::after {
 .time {
     font-size: 32px;
     font-weight: 500;
-    color: #2c3e50;
-    padding: 0;
-    margin: 0;
-    background: none;
-    border: none;
-    box-shadow: none;
+    color: #ffffff;  /* font colour to white */
+    padding: 40px;
+    margin: 0px;
+    background: #465f77;  /* background of date and time */
+    border-radius: 0;  /* adjust this if you want curved corners */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 /* Date display styling */
 .date {
     font-size: 24px;
     font-weight: 400;
-    color: #2c3e50;
+    color: #ffffff;  /* font colour to white */
     padding: 0;
     margin: 0;
     background: none;
@@ -1256,4 +1288,39 @@ body.refreshing::after {
     width: 150px; /* Match other entertainment card image sizes */
     height: 150px;
     margin-bottom: 15px;
+}
+
+/* Logo styling */
+.sidebar img {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    margin: 20px;  /* Add some margin around the logo */
+}
+
+/* Add specific styling for entertainment button logo */
+.menu-item[data-type="entertainment"] img {
+    width: 70px;  /* Smaller width for entertainment icon */
+    height: 70px;  /* Smaller height for entertainment icon */
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+/* Keep other menu items' logos at their original size */
+.menu-item:not([data-type="entertainment"]) img {
+    width: 90px;
+    height: 90px;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+/* Logo container styling */
+.sidebar-logo {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    padding: 40px;
+    margin: 0;
+    background: #465f77;  /* Match the date/time background color */
+    border-radius: 0;  /* Match the date/time corners */
 }
