@@ -262,7 +262,7 @@ function keyHandler(keyCode)
 				 //activate the dashboard going back from where i am to dashboard
 				document.getElementById(current_page).style.display = 'none';
 				current_page = 'default_view';
-				document.getElementById(current_page).style.display = 'flex';
+				document.getElementById(current_page).style.display = 'block';
 
 				
 				changeCDBstate('Activate');

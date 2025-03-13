@@ -134,3 +134,29 @@ function add_channel() {
     buttonContainer.appendChild(btnElement);
     leftColumn.appendChild(buttonContainer);
 }
+
+//TEMPORARY BUTTON
+function backTemp() {
+    if (current_page == 'clinical_casting'){
+        setRcControlSelective();
+        current_page = "clinicalservices_menu";
+        previous_page = "default_view";
+        changeCDBstate('Activate');
+    } else if (current_page == 'tv_view') {
+        current_page = "entertainment_menu";
+        previous_page = "default_view";
+        switchToHDMI1();
+        changeCDBstate('Activate');
+    } else if (current_page == 'radio_view') {
+        channelStopPlaying(radio_channel_playing);
+    //     document.getElementById(current_page).style.display = 'none';
+    //     document.getElementById(previous_page).style.display = 'flex';
+    //     current_page = previous_page;
+    //     previous_page = "default_view";
+    //     return;
+    }
+    document.getElementById(current_page).style.display = 'none';
+    document.getElementById(previous_page).style.display = 'block';
+    current_page = previous_page;
+    previous_page = "default_view";
+}

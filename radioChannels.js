@@ -24,7 +24,7 @@ function openRadio() {
 
 
     document.getElementById(previous_page).style.display = "none";
-    document.getElementById(current_page).style.display = "block";
+    document.getElementById(current_page).style.display = "flex";
     
 
     //debugger;
@@ -171,12 +171,12 @@ function openRadio() {
     else {
         //Creating Hiding home dashbaord view and show radio view
 		radio_channel_on = 1;
-        previous_page = current_page;
-        current_page = "radio_view";
+        // previous_page = current_page;
+        // current_page = "radio_view";
     
-    
-        document.getElementById(previous_page).style.display = "none";
-        document.getElementById(current_page).style.display = "block";
+        // console.log("Making appear vew ", previous_page)
+        // document.getElementById(previous_page).style.display = "none";
+        // document.getElementById(current_page).style.display = "flex";
 		document.getElementById(channel_list[0].BasicChannelDetails.ChannelName).focus();
         mute("Off");
         
