@@ -159,8 +159,9 @@ function backTemp() {
         const videoElement = document.getElementById('video-frame');
         if (videoSrcFrame) {
             videoSrcFrame.src = '';  //d the welcome video and activated the dashbo
-            videoElement.pause()
             videoElement.currentTime = 0;
+            videoElement.pause();
+            videoElement.removeEventListener("ended", backTemp());
         }
     }
     document.getElementById(current_page).style.display = 'none';

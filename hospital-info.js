@@ -16,17 +16,7 @@ function handleWelcomeClick() {
         //videoSrcFrame.style.display = 'flex';
         videoSrcFrame.src = 'logos/WelcomeToCountry.mp4';  //d the welcome video and activated the dashbo
         videoElement.load(); // Reload the video element
-        //videoElement.play(); // Optional: Autoplay after changing the source
-        // make fulls screen
-        // if (videoSrcFrame.requestFullscreen) {
-        //     videoSrcFrame.requestFullscreen();
-        // } else if (videoSrcFrame.mozRequestFullScreen) { // Firefox
-        //     videoSrcFrame.mozRequestFullScreen();
-        // } else if (videoSrcFrame.webkitRequestFullscreen) { // Chrome, Safari, and Opera
-        //     videoSrcFrame.webkitRequestFullscreen();
-        // } else if (videoSrcFrame.msRequestFullscreen) { // IE/Edge
-        //     videoSrcFrame.msRequestFullscreen();
-        // }
+        videoElement.addEventListener("ended", backTemp());
     }
     
     // Calculate center position for the new window
