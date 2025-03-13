@@ -17,7 +17,7 @@ function handleWelcomeClick() {
         videoSrcFrame.src = 'logos/WelcomeToCountry.mp4';  //d the welcome video and activated the dashbo
         videoElement.load(); // Reload the video element
         videoElement.play();
-        videoElement.addEventListener("ended", backTemp());
+        // videoElement.addEventListener("ended", backTemp());
     }
     
     // Calculate center position for the new window

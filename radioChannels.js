@@ -119,9 +119,9 @@ function openRadio() {
                         const btnElement = document.createElement('button');
                         btnElement.className = 'radio_chan_btn japit-button';
                         btnElement.id = button.BasicChannelDetails.ChannelName;
-                        btnElement.setAttribute('data-channel-number', button.BasicChannelDetails.ChannelNo);
-                        btnElement.setAttribute('data-japit-control', 'true');
-                        btnElement.setAttribute('data-japit-focusable', 'true');
+                        // btnElement.setAttribute('data-channel-number', button.BasicChannelDetails.ChannelNo);
+                        // btnElement.setAttribute('data-japit-control', 'true');
+                        // btnElement.setAttribute('data-japit-focusable', 'true');
 
                         // Create image element
                         const image = document.createElement("img");

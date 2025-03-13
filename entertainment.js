@@ -36,12 +36,12 @@ function handleRadioClick() {
     }
 
     // Focus first radio card
-    setTimeout(() => {
-        const firstCard = document.querySelector('.radio-card[data-type="radio1"]');
-        if (firstCard) {
-            firstCard.focus();
-        }
-    }, 100);
+    // setTimeout(() => {
+    //     const firstCard = document.querySelector('.radio-card[data-type="radio1"]');
+    //     if (firstCard) {
+    //         firstCard.focus();
+    //     }
+    // }, 100);
 
     // Initialize radio channels
     openRadio();

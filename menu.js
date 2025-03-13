@@ -161,7 +161,7 @@ function backTemp() {
             videoSrcFrame.src = '';  //d the welcome video and activated the dashbo
             videoElement.currentTime = 0;
             videoElement.pause();
-            videoElement.removeEventListener("ended", backTemp());
+            // videoElement.removeEventListener("ended", backTemp());
         }
     }
     document.getElementById(current_page).style.display = 'none';
