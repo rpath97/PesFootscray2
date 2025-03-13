@@ -16,6 +16,7 @@ function handleWelcomeClick() {
         //videoSrcFrame.style.display = 'flex';
         videoSrcFrame.src = 'logos/WelcomeToCountry.mp4';  //d the welcome video and activated the dashbo
         videoElement.load(); // Reload the video element
+        videoElement.play();
         videoElement.addEventListener("ended", backTemp());
     }
     
