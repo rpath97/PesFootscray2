@@ -154,6 +154,14 @@ function backTemp() {
     //     current_page = previous_page;
     //     previous_page = "default_view";
     //     return;
+    } else if (current_page == 'video-frame') {
+        const videoSrcFrame = document.getElementById('video-src-iframe');
+        const videoElement = document.getElementById('video-frame');
+        if (videoSrcFrame) {
+            videoSrcFrame.src = '';  //d the welcome video and activated the dashbo
+            videoElement.pause()
+            videoElement.currentTime = 0;
+        }
     }
     document.getElementById(current_page).style.display = 'none';
     document.getElementById(previous_page).style.display = 'block';

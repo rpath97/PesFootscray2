@@ -15,8 +15,8 @@ function handleWelcomeClick() {
     if (videoSrcFrame) {
         //videoSrcFrame.style.display = 'flex';
         videoSrcFrame.src = 'logos/WelcomeToCountry.mp4';  //d the welcome video and activated the dashbo
-        document.getElementById(current_page).load(); // Reload the video element
-        document.getElementById(current_page).play(); // Optional: Autoplay after changing the source
+        videoElement.load(); // Reload the video element
+        //videoElement.play(); // Optional: Autoplay after changing the source
         // make fulls screen
         // if (videoSrcFrame.requestFullscreen) {
         //     videoSrcFrame.requestFullscreen();

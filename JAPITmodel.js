@@ -260,10 +260,11 @@ function keyHandler(keyCode)
 					channelStopPlaying(radio_channel_playing);
 				} else if (current_page == 'video-frame') {
 					const videoSrcFrame = document.getElementById('video-src-iframe');
+					const videoElement = document.getElementById('video-frame');
 					if (videoSrcFrame) {
 						videoSrcFrame.src = '';  //d the welcome video and activated the dashbo
-						videoSrcFrame.pause()
-						videoSrcFrame.currentTime = 0;
+						videoElement.pause()
+						videoElement.currentTime = 0;
 					}
 				}
 				 //activate the dashboard going back from where i am to dashboard
@@ -274,8 +275,6 @@ function keyHandler(keyCode)
 				
 				changeCDBstate('Activate');
 
-				
-				
 				break;
 			case VK_1: //Refreshes the dashboard
 				UtilityRefreshPage();
@@ -315,10 +314,11 @@ function keyHandler(keyCode)
 					channelStopPlaying(radio_channel_playing);
 				} else if (current_page == 'video-frame') {
 					const videoSrcFrame = document.getElementById('video-src-iframe');
+					const videoElement = document.getElementById('video-frame');
 					if (videoSrcFrame) {
 						videoSrcFrame.src = '';  //d the welcome video and activated the dashbo
-						videoSrcFrame.pause()
-						videoSrcFrame.currentTime = 0;
+						videoElement.pause()
+						videoElement.currentTime = 0;
 					}
 				}
 				document.getElementById(current_page).style.display = 'none';
