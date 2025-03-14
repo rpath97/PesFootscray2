@@ -84,11 +84,9 @@ function handleWelcomeClick() {
 
 function handleVisitingClick() {
     console.log('Opening Visiting Hours...');
-    clearHospitalInfoActive();
-    const card = document.querySelector('.hospital-info-card[data-type="visiting"]');
-    if (card) {
-        card.classList.add('active');
-    }
+    previous_page = current_page;
+    current_page = "visiting_hours";
+    openInternetWithPdf('Activate');
 }
 
 function handleSafetyClick() {

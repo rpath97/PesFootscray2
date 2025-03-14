@@ -267,62 +267,7 @@ function channelList() {
     delete JAPITObjForWIXPSvc;
 }
 
-
-
-// Add hospital info navigation key handling
-// function handleHospitalInfoKeys(keyCode) {
-//     if (document.querySelector('.hospital-info-view').style.display === 'block') {
-//         var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
-//         JAPITObjForWIXPSvc.Cookie = 2030;
-//         JAPITObjForWIXPSvc.CmdType = "Change";
-//         JAPITObjForWIXPSvc.Fun = "UserInputControl";
-        
-//         switch(keyCode) {
-//             case 37: // Left
-//                 JAPITObjForWIXPSvc.CommandDetails = {
-//                     "VirtualKeyDetails": {
-//                         "VirtualKey": "HBBTV_VK_LEFT"
-//                     }
-//                 };
-//                 handleHospitalLeftButton();
-//                 break;
-                
-//             case 39: // Right
-//                 JAPITObjForWIXPSvc.CommandDetails = {
-//                     "VirtualKeyDetails": {
-//                         "VirtualKey": "HBBTV_VK_RIGHT"
-//                     }
-//                 };
-//                 handleHospitalRightButton();
-//                 break;
-                
-//             case 38: // Up
-//                 JAPITObjForWIXPSvc.CommandDetails = {
-//                     "VirtualKeyDetails": {
-//                         "VirtualKey": "HBBTV_VK_UP"
-//                     }
-//                 };
-//                 handleHospitalUpButton();
-//                 break;
-                
-//             case 40: // Down
-//                 JAPITObjForWIXPSvc.CommandDetails = {
-//                     "VirtualKeyDetails": {
-//                         "VirtualKey": "HBBTV_VK_DOWN"
-//                     }
-//                 };
-//                 handleHospitalDownButton();
-//                 break;
-//         }
-        
-//         sendWIxPCommand(JAPITObjForWIXPSvc);
-//         delete JAPITObjForWIXPSvc;
-//         return 0;
-//     }
-//     return 1;
-	
-// }
-
+//stop playing channels feature
 function channelStopPlaying(channNo) {
  
 	var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
@@ -339,4 +284,24 @@ function channelStopPlaying(channNo) {
 	delete JAPITObjForWIXPSvc;
 }
 
+//OPENING INTERNET VIWTH URLS
 
+function openInternetWithPdf(state) {
+ 
+	var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
+	JAPITObjForWIXPSvc.Cookie  = 87;
+	JAPITObjForWIXPSvc.CmdType = "Change";
+	JAPITObjForWIXPSvc.Fun     = "ApplicationControl";
+	JAPITObjForWIXPSvc.CommandDetails = {
+		"ApplicationDetails": {
+			"ApplicationName": 'Internet',
+			"ApplicationAttributes": {
+				"WebsiteURL": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+			}
+		},
+		"ApplicationState": state,
+		
+	};
+	sendWIxPCommand(JAPITObjForWIXPSvc);
+	delete JAPITObjForWIXPSvc;
+}

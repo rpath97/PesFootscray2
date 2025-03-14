@@ -267,6 +267,10 @@ function keyHandler(keyCode)
 						videoElement.pause();
 						// videoElement.removeEventListener("ended", backTemp());
 					}
+				} else if (current_page == 'visiting_hours') {
+					current_page = "hospitalinfo_menu";
+					previous_page = "default_view";
+					openInternetWithPdf('Deactivate');
 				}
 				 //activate the dashboard going back from where i am to dashboard
 				document.getElementById(current_page).style.display = 'none';
@@ -322,6 +326,11 @@ function keyHandler(keyCode)
 						videoElement.pause();
 						// videoElement.removeEventListener("ended", backTemp());
 					}
+				} else if (current_page == 'visiting_hours') {
+					current_page = "hospitalinfo_menu";
+					previous_page = "default_view";
+					openInternetWithPdf('Deactivate');
+					break;
 				}
 				document.getElementById(current_page).style.display = 'none';
 				document.getElementById(previous_page).style.display = 'block';
