@@ -20,6 +20,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;  /* Align to the left */
+    box-shadow: none;  /* Explicitly remove any shadow */
 }
 
 .logo {
@@ -40,52 +41,62 @@ body {
     filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
 }
 
+/* Add container box for menu items */
 .menu {
     display: flex;
     flex-direction: column;
-    gap: 35px;  /* maintain equal spacing between all buttons */
-    flex: 1;
+    gap: 30px;  /* Add consistent small gap between buttons */
     padding: 20px;
-    width: 100%;
+    width: 350px;
+    height: 900px;
     align-items: center;
-    margin-top: 20px;
-    background: #cecccc;
+    margin-top: 130px;  /* gap between box and top of screen */
+    margin-left: 0px;  /* gap between box and left of screen */
+    margin-right: auto;
+    background: rgb(201, 199, 199);
+    /* border-radius: 15px; */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
+/* Update menu items to fit in container */
 .menu-item {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 95%;
-    height: 180px;
-    padding: 20px;
-    background: white;  /* Add white background */
-    border: none;  /* Remove default button border */
-    /* border-radius: 15px; */
+    width: 300px;  
+    height: 200px; 
+    padding: 0px;
+    background: white;
+    border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 500;
     color: #333;
     text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 176, 240, 0.1);
-    position: relative;
-    margin: 5px 0;
+    border-bottom: none;  /* Remove separator line */
+    margin: 0;  /* Remove margin */
 }
 
+/* Remove border from last item */
+.menu-item:last-child {
+    border-bottom: none;
+}
+
+/* Update menu item icons */
 .menu-item img {
-    width: 90px;
-    height: 90px;
-    margin-bottom: 15px;
+    width: 50px;  /* Smaller icons */
+    height: 50px;
+    margin-bottom: 8px;
     transition: transform 0.3s ease;
 }
 
+/* Update menu item text */
 .menu-item span {
-    font-size: 24px;
+    font-size: 18px;  /* Smaller text */
     font-weight: 500;
     color: #333;
-    text-align: center;
 }
 
 /* Hover and focus states */
@@ -122,16 +133,6 @@ body {
     color: white;
 }
 
-/* Entertainment Grid Layout */
-/* .entertainment-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    margin-top: 150px;
-} */
 
 .card-grid {
     display: grid;
@@ -168,7 +169,7 @@ body {
 .entertainment-card span {
     font-size: 24px;
     font-weight: 500;
-    color: #333;
+    /* color: #333; */
 }
 
 .entertainment-card:hover,
@@ -444,83 +445,65 @@ div.Input_Output {
 /* My Care Grid Layout */
 .my-care-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-gap: 100px;  /* Reduced gap between cards */
-    /* padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    margin-top:100px;
-    flex-wrap: wrap;
-    align-content: space-evenly;
-    justify-content: space-evenly; */
-    /* max-height: 1000px; */
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 80px;  /* Match reach button grid gap */
+    padding: 40px;
+    justify-content: center;
+    align-items: center;
 }
 
-/* My Care Card Styles */
+/* My Care Card Styles - Updated to match reach button dimensions */
 .mycare-card {
-    width: 300px;  /* Same as television button */
-    height: 300px; /* Same as television button */
+    width: 400px;  /* Match reach button width */
+    height: 400px; /* Match reach button height */
     background: white;
-    border-radius: 15px;
+    border-radius: 12px;  /* Match reach button border radius */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+    gap: 30px;  /* Increased gap between elements */
     transition: all 0.3s ease;
     cursor: pointer;
-    padding: 20px;
+    padding: 50px;  /* Match reach button padding */
     margin: 0 auto;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
-    
-/* Default image states */
-/* .mycare-card[data-type="management-and-discharge"] img { content: url("logos/Management and Discharge.png"); }
-.mycare-card[data-type="carers-survey"] img { content: url("logos/Carers Survey.png"); }
-.mycare-card[data-type="patient-survey"] img { content: url("logos/patientsurvey.png"); }
-.mycare-card[data-type="blacktown-surveys"] img { content: url("logos/blacktownsurvey.png"); } */
 
-/* Hover image states */
-/* .mycare-card[data-type="management-and-discharge"]:hover img { content: url("logos/Management and Dischargehover.png"); }
-.mycare-card[data-type="carers-survey"]:hover img { content: url("logos/CarersSurveyhover.png"); }
-.mycare-card[data-type="patient-survey"]:hover img { content: url("logos/patientsurveyhover.png"); }
-.mycare-card[data-type="blacktown-surveys"]:hover img { content: url("logos/BlacktownSurveyhover.png"); } */
+/* Update image sizes */
+.mycare-card img {
+    width: 180px;  /* Match reach button image size */
+    height: 180px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
 
-/* Focus states - same as hover */
-/* .mycare-card[data-type="management-and-discharge"]:focus img { content: url("logos/Management and Dischargehover.png"); }
-.mycare-card[data-type="carers-survey"]:focus img { content: url("logos/CarersSurveyhover.png"); }
-.mycare-card[data-type="patient-survey"]:focus img { content: url("logos/patientsurveyhover.png"); }
-.mycare-card[data-type="blacktown-surveys"]:focus img { content: url("logos/BlacktownSurveyhover.png"); } */
+/* Update text styling */
+.mycare-card span {
+    font-size: 32px;  /* Match reach button font size */
+    font-weight: 500;
+    color: #2c3e50;
+    margin-top: 15px;
+    text-align: center;
+    line-height: 1.2;
+}
 
-
-
-
-
-/* Default image states */
-/* .Hospital-info-card[data-type="welcome"] img { content: url("logos/welcome.png"); }
-.Hospital-info-card[data-type="visiting-hours"] img { content: url("logos/visitinghours.png"); }
-.Hospital-info-card[data-type="healthcare-rights"] img { content: url("logos/healthcarerights.png"); }
-.Hospital-info-card[data-type="reach"] img { content: url("logos/reach.png"); } */
-
-/* Hover image states */
-/* .Hospital-info-card[data-type="welcome"]:hover img { content: url("logos/welcomehover.png"); }
-.Hospital-info-card[data-type="visiting-hours"]:hover img { content: url("logos/visitinghourshover.png"); }
-.Hospital-info-card[data-type="healthcare-rights"]:hover img { content: url("logos/healthcarerightshover.png"); }
-.Hospital-info-card[data-type="reach"]:hover img { content: url("logos/reachhover.png"); } */
-
-/* Focus states - same as hover */
-/* .Hospital-info-card:focus img { content: url("logos/welcomehover.png"); } 
-.Hospital-info-card:focus img { content: url("logos/visitinghourshover.png"); }
-.Hospital-info-card:focus img { content: url("logos/healthcarerightshover.png"); }
-.Hospital-info-card:focus img { content: url("logos/reachhover.png"); } */
-
-/* Common hover/focus effects */
+/* Update hover/focus effects */
 .mycare-card:hover,
 .mycare-card:focus {
     transform: scale(1.05);
     box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-    background: linear-gradient(135deg, #d60707, #d60707);  /* Changed to red gradient */
+    background: linear-gradient(135deg, #d60707, #d60707);  /* Red gradient */
 }
+
+
+/* Common hover/focus effects */
+ .mycare-card:hover,
+.mycare-card:focus {
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    background: linear-gradient(135deg, #d60707, #d60707);  /* Red gradient */
+ }
 
 .mycare-card:hover span,
 .mycare-card:focus span {
@@ -875,37 +858,18 @@ body.refreshing::after {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 850px;
-    margin-left: 22%;
-    margin-top: 100px;
-    margin-right: 20px;
-    padding: 20px;
-    width: calc(78% - 20px);
+    margin-left: 21%;
+    margin-top: 110px;
+    width: 1200px;  /* Fixed width */
+    height: 900px;  /* Fixed height */
     position: relative;
+    padding: 20px;
 }
 
-/* Remove the white box container */
-/* Removing this entire block:
-.default-view::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: #f5f5f5;
-    border-radius: 0;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-} */
-
-.main-image {
-    position: relative;
+.default-view img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    padding: 20px;
-    max-width: 1200px;
-    max-height: 800px;
     margin: 0;
     z-index: 1;
 }
@@ -942,14 +906,10 @@ body.refreshing::after {
 
 /* Time display styling */
 .time {
-    font-size: 32px;
+    font-size: 28px;  /* Slightly smaller font */
     font-weight: 500;
-    color: #ffffff;  /* font colour to white */
-    padding: 40px;
-    margin: 0px;
-    background: #465f77;  /* background of date and time */
-    border-radius: 0;  /* adjust this if you want curved corners */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    color: #ffffff;
+    margin: 0;
 }
 
 /* Date display styling */
@@ -1290,12 +1250,12 @@ body.refreshing::after {
 /* Logo container styling */
 .sidebar-logo {
     width: 150px;
-    height: 150px;
+    height: 120px;  /* Reduced from 150px */
     object-fit: contain;
-    padding: 40px;
+    padding: 20px;  /* Reduced from 40px */
     margin: 0;
-    background: #465f77;  /* Match the date/time background color */
-    border-radius: 0;  /* Match the date/time corners */
+    background: white;  /* Changed to white as requested earlier */
+    border-radius: 0;
 }
 
 /* Time display styling for sidebar */
@@ -1310,18 +1270,18 @@ body.refreshing::after {
     border-radius: 0;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     text-align: center;  /* Center the text */
+    
 }
 
 /* Update sidebar logo positioning */
 .sidebar-logo {
     width: 150px;
-    height: 150px;
+    height: 120px;  /* Reduced from 150px */
     object-fit: contain;
-    padding: 40px;
+    padding: 20px;  /* Reduced from 40px */
     margin: 0;
-    background: #465f77;
+    background: white;  /* Changed to white as requested earlier */
     border-radius: 0;
-    margin-top: 20px;  /* Add space between time and logo */
 }
 
 /* Update sidebar layout */
@@ -1337,13 +1297,13 @@ body.refreshing::after {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    box-shadow: none;  /* Explicitly remove any shadow */
 }
 
 /* Specific hover/focus state for hospital info button */
 .menu-item[data-type="hospitalinfo"]:hover:not(.active),
 .menu-item[data-type="hospitalinfo"]:focus:not(.active) {
-    background: linear-gradient(135deg, #00BAA3, #00BAA3);
-    /* Green gradient */
+    background: linear-gradient(135deg, #035f03, #035f03);  /* Green gradient */
     color: white;
     transform: scale(1.02);
     box-shadow: 0 4px 8px rgba(3, 95, 3, 0.2);  /* Green shadow */
@@ -1382,7 +1342,7 @@ body.refreshing::after {
     color: white;  /* Keep text white */
 }
 
-/* Specific hover/focus state for clinical services button */
+/* Clinical services button hover/focus */
 .menu-item[data-type="clinical-services"]:hover:not(.active),
 .menu-item[data-type="clinical-services"]:focus:not(.active) {
     background: linear-gradient(135deg, #ff8c00, #ff8c00);  /* Orange gradient */
@@ -1406,7 +1366,7 @@ body.refreshing::after {
 /* Add new entertainment button hover/focus styles */
 .menu-item[data-type="entertainment"]:hover:not(.active),
 .menu-item[data-type="entertainment"]:focus:not(.active) {
-    background: linear-gradient(135deg, #05CBF9, #05CBF9);  /* Blue gradient */
+    background: linear-gradient(135deg, #00b0f0, #0098d6);  /* Blue gradient */
     color: white;
     transform: scale(1.02);
     box-shadow: 0 4px 8px rgba(0, 176, 240, 0.2);  /* Blue shadow */
@@ -1424,3 +1384,37 @@ body.refreshing::after {
     color: white;  /* Keep text white */
 }
 
+/* Time container styling */
+.time-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;  /* Changed from flex-end to space-between */
+    gap: 20px;
+    background: #7f93a5;
+    padding: 15px 30px;
+    margin: 0;
+    width: 100%;
+    z-index: 1000;
+    position: relative;
+}
+
+/* Update western health logo in time display styling */
+.time-logo {
+    width: 100px;  /* Increased to 100px */
+    height: 100px;  /* Increased to 100px */
+    object-fit: contain;
+    background: transparent;
+    padding: 8px;
+    border-radius: 6px;
+    order: -1;
+    filter: brightness(0) invert(1);
+}
+
+/* Update time display styling */
+.time {
+    font-size: 32px;
+    font-weight: 500;
+    color: #ffffff;
+    margin: 0;
+    margin-left: auto;  /* Push time to the right */
+}
