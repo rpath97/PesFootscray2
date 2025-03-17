@@ -1,4 +1,5 @@
 // Hospital Information card click handlers
+const videHlsSrcTest = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
 function handleWelcomeClick() {
     console.log('Opening Welcome Video in new window...');
 
@@ -14,9 +15,15 @@ function handleWelcomeClick() {
     const videoElement = document.getElementById(current_page);
     if (videoSrcFrame) {
         //videoSrcFrame.style.display = 'flex';
-        videoSrcFrame.src = 'logos/WelcomeToCountry.mp4';  //d the welcome video and activated the dashbo
-        videoElement.load(); // Reload the video element
-        videoElement.play();
+        var hls = new Hls();
+        hls.loadSource('https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8');
+        hls.attachMedia(videoElement);
+        hls.on(Hls.Events.MANIFEST_PARSED, function () {
+            video.play();
+        });
+        // videoSrcFrame.src = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';  //d the welcome video and activated the dashbo
+        // videoElement.load(); // Reload the video element
+        // videoElement.play();
         // videoElement.addEventListener("ended", backTemp());
     }
     
@@ -89,40 +96,42 @@ function handleVisitingClick() {
     openInternetWithPdf('Activate');
 }
 
-function handleSafetyClick() {
-    console.log('Opening Stay Safe...');
-    clearHospitalInfoActive();
-    const card = document.querySelector('.hospital-info-card[data-type="safety"]');
-    if (card) {
-        card.classList.add('active');
-    }
-}
+// function handleSafetyClick() {
+//     console.log('Opening Stay Safe...');
+//     clearHospitalInfoActive();
+//     const card = document.querySelector('.hospital-info-card[data-type="safety"]');
+//     if (card) {
+//         card.classList.add('active');
+//     }
+// }
 
-function handleMapsClick() {
-    console.log('Opening Campus Map...');
-    clearHospitalInfoActive();
-    const card = document.querySelector('.hospital-info-card[data-type="maps"]');
-    if (card) {
-        card.classList.add('active');
-    }
-}
+// function handleMapsClick() {
+//     console.log('Opening Campus Map...');
+//     clearHospitalInfoActive();
+//     const card = document.querySelector('.hospital-info-card[data-type="maps"]');
+//     if (card) {
+//         card.classList.add('active');
+//     }
+// }
 
 function handleRightsClick() {
-    console.log('Opening Healthcare Rights...');
-    clearHospitalInfoActive();
-    const card = document.querySelector('.hospital-info-card[data-type="rights"]');
-    if (card) {
-        card.classList.add('active');
-    }
+    // console.log('Opening Healthcare Rights...');
+    // clearHospitalInfoActive();
+    // const card = document.querySelector('.hospital-info-card[data-type="rights"]');
+    // if (card) {
+    //     card.classList.add('active');
+    // }
+    document.getElementById(current_page).style.display = 'none';
+    previous_page = current_page;
+    current_page = "pdf-viewer-3";
+    document.getElementById('pdf-viewer-3').style.display = 'flex';
 }
 
 function handleReachClick() {
-    console.log('Opening Reach...');
-    clearHospitalInfoActive();
-    const card = document.querySelector('.hospital-info-card[data-type="reach"]');
-    if (card) {
-        card.classList.add('active');
-    }
+    document.getElementById(current_page).style.display = 'none';
+    previous_page = current_page;
+    current_page = "pdf-viewer-2";
+    document.getElementById('pdf-viewer-2').style.display = 'flex';
 }
 
 function clearHospitalInfoActive() {

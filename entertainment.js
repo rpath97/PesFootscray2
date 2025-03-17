@@ -11,7 +11,7 @@ function handleRadioClick() {
     console.log('Opening Radio...');
     
     // Hide default view
-    document.querySelector('.default-view').style.display = 'none';
+    //document.querySelector('.default-view').style.display = 'none';
     
     // Hide entertainment view
     document.querySelector('.entertainment-view').style.display = 'none';
@@ -19,21 +19,21 @@ function handleRadioClick() {
     // Keep sidebar visible
     const sidebar = document.querySelector('.sidebar');
     if (sidebar) {
-        sidebar.style.display = 'block';
+        sidebar.style.display = 'none';
     }
     
     // Show radio view
     const radioView = document.querySelector('.radio-view');
     if (radioView) {
-        radioView.style.display = 'block';
-        radioView.style.marginLeft = '15%'; // Align with sidebar
+        radioView.style.display = 'flex';
+        //radioView.style.marginLeft = '15%'; // Align with sidebar
     }
 
     // Update button states
-    const entertainmentButton = document.getElementById('entertainmentButton');
-    if (entertainmentButton) {
-        entertainmentButton.classList.add('active');
-    }
+    // const entertainmentButton = document.getElementById('entertainmentButton');
+    // if (entertainmentButton) {
+    //     entertainmentButton.classList.add('active');
+    // }
 
     // Focus first radio card
     // setTimeout(() => {

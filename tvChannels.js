@@ -7,15 +7,27 @@
 var default_chan_no = 90;
 var channel_list = [];
 var tv_channel_on = 0;
+var tv_channel_list = [];
+var current_tv_channel = '';
 
 function openTV() {
     current_page = 'tv_view';
+    dashboard_on = false;
+    // SETTING RADIO CHANNEL STATUS
+    if (radio_channel_on != 0){
+		radio_channel_on = 2;
+	}
     //Ensuring multiple clicks of the button consecutively doesn't keep on removing and adding channels
     if (tv_channel_on == 0){
         tv_channel_on = 1;
     } else {
-        channelSelection(default_chan_no);
+        channelSelection(current_tv_channel);
         tvChannelsApp('Activate');
+        // OPENING HTML TV CHANNELS VIEW
+        // previous_page = current_page;
+        // current_page = 'tvChannelDiv';
+        // vidObject.bindToCurrentChannel();
+        // document.getElementById(current_page).style.display = 'flex';
         return;
     }
 
@@ -51,6 +63,7 @@ function openTV() {
             // looping through the different channel data and creating JAPIT objects
             for (let i = 0; i < jsonData.length; i++) {
                 channelNo_arr[i] = jsonData[i].Chan_No;
+                tv_channel_list[i] = jsonData[i].Chan_No;
                 channelName_arr[i] = jsonData[i].Chan_name;
                 channelIP_arr[i] = jsonData[i].Chan_IP;
 
@@ -70,14 +83,19 @@ function openTV() {
             }
 
             // Sending final list of channels to the TV
-            console.log("TV Channel: " + JSON.stringify(JAPITObjForWIXPSvc));
+            //console.log("TV Channel: " + JSON.stringify(JAPITObjForWIXPSvc));
             sendWIxPCommand(JAPITObjForWIXPSvc);
             delete JAPITObjForWIXPSvc;
 
             // Set default channel and activate TV app
-            default_chan_no = channelNo_arr[Math.floor(jsonData.length/2)];
-            channelSelection(default_chan_no);
-            tvChannelsApp('Activate');
+            current_tv_channel = channelNo_arr[Math.floor(jsonData.length/2)];
+            channelSelection(current_tv_channel);
+            //tvChannelsApp('Activate');
+            // OPENING HTML TV CHANNELS VIEW
+            // previous_page = current_page;
+            // current_page = 'tvChannelDiv';
+            // vidObject.bindToCurrentChannel();
+            // document.getElementById(current_page).style.display = 'flex';
         })
         .catch(error => {
             document.getElementById("logmsgcallback").value += '\n' + 'file could not be read' + '\n';

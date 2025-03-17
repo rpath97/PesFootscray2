@@ -205,6 +205,25 @@ function tvChannelsApp(state) {
 	console.log("TV Channels App opened");
 	delete JAPITObjForWIXPSvc;
 }
+// Shows Channels List
+function tvChannelsList(state) {
+	var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
+	
+	JAPITObjForWIXPSvc.Cookie  = 13;
+	JAPITObjForWIXPSvc.CmdType = "Change";
+	JAPITObjForWIXPSvc.Fun     = "ApplicationControl";
+	JAPITObjForWIXPSvc.CommandDetails = {
+		"ApplicationDetails": {
+			"ApplicationName": "TVChannels",
+            "ApplicationType": "Native",
+            "ApplicationSubState": "TVChannelAV+List"
+			},
+			"ApplicationState": state
+		};
+	sendWIxPCommand(JAPITObjForWIXPSvc);
+	console.log("TV Channels App opened");
+	delete JAPITObjForWIXPSvc;
+}
 
 // Mute/Unmute TV Audio
 function mute(status) {
@@ -302,6 +321,20 @@ function openInternetWithPdf(state) {
 		"ApplicationState": state,
 		
 	};
+	sendWIxPCommand(JAPITObjForWIXPSvc);
+	delete JAPITObjForWIXPSvc;
+}
+
+function removeRadioChannels(chann_arr){
+	var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
+
+	JAPITObjForWIXPSvc.Cookie = 17;
+	JAPITObjForWIXPSvc.CmdType = "Change";
+	JAPITObjForWIXPSvc.Fun = "ChannelList";
+	JAPITObjForWIXPSvc.CommandDetails = {
+		"Remove": chann_arr
+	};
+
 	sendWIxPCommand(JAPITObjForWIXPSvc);
 	delete JAPITObjForWIXPSvc;
 }

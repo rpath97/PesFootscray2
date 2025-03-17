@@ -142,13 +142,17 @@ function backTemp() {
         current_page = "clinicalservices_menu";
         previous_page = "default_view";
         changeCDBstate('Activate');
+        return;
     } else if (current_page == 'tv_view') {
         current_page = "entertainment_menu";
         previous_page = "default_view";
-        switchToHDMI1();
-        changeCDBstate('Activate');
+        console.log("Coming back from tv ", current_page)
+        // switchToHDMI1();
+        // changeCDBstate('Activate');
+        return;
     } else if (current_page == 'radio_view') {
         channelStopPlaying(radio_channel_playing);
+        document.querySelector('.sidebar').style.display = 'block';
     //     document.getElementById(current_page).style.display = 'none';
     //     document.getElementById(previous_page).style.display = 'flex';
     //     current_page = previous_page;
@@ -163,6 +167,10 @@ function backTemp() {
             videoElement.pause();
             // videoElement.removeEventListener("ended", backTemp());
         }
+    } else if (current_page.toLocaleLowerCase().includes('pdf')) {
+        // current_page = "pdf-viewer-3";
+        // previous_page = "hospitalinfo_menu";
+        //openInternetWithPdf('Deactivate');
     }
     document.getElementById(current_page).style.display = 'none';
     document.getElementById(previous_page).style.display = 'block';
