@@ -1,33 +1,161 @@
+/* Reset default styles */
 body {
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    background: #f5f5f5;
-    color: #2c3e50;
+    background: #000000;  /* Black background */
+    color: #ffffff;
     min-height: 100vh;
     overflow: hidden;
 }
 
-.sidebar {
-    width: 21%;    /*4 buttons */
-    height: 100vh;  /*  viewport height */
-    background: #f5f5f5;  /* side menubar background colour Change */
-    padding: 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 10;
+/* Main container - flex column */
+.container {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;  /* Align to the left */
-    box-shadow: none;  /* Explicitly remove any shadow */
+    width: 100%;
+    height: 100vh;
+    background: #000000;  /* Black background */
 }
 
-.logo {
-    padding: 10px;
+/* Header section */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 80px;
+    background: #4d5992;  /* Blue background */
+    padding: 0 20px;
+}
+
+/* Western Health logo container */
+.branding {
     width: 200px;
     height: 100px;
+    /* background: #0066cc;   */
     display: flex;
+<<<<<<< Updated upstream
+    align-items: center;
+    justify-content: center;
+}
+
+.branding img {
+    width: 150px;
+    height: 60px;
+    object-fit: contain;
+}
+
+/* Time display container */
+.time {
+    width: 600px;
+    height: 60px;
+    /* background: #949998;   */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+/* Non-header section - flex row */
+.non-header {
+    display: flex;
+    flex: 1;
+    background: #c9c6c6;  /* Light gray background */
+}
+
+/* Sidebar section */
+.sidebar {
+    width: 380px;
+    background: #b1aeae;  /* Dark gray background */
+    padding: 40px;
+}
+
+
+.sidebar-menu {
+    background: #e4e5ee;
+    margin-top: 50px;  /* Pushes sidebar content down */
+    padding: 30px;
+    height: calc(100% - 100px);
+    /* width: calc(100% - 20px); */
+    display: flex;
+    flex-direction: column;
+    gap: 30px;  /* Gap between buttons increased to 30px */
+}
+
+
+/* Menu buttons */
+.menu-item {
+    width: 110%;
+    height: 15%;
+    background: #ffffff;  /* Light gray background */
+    /* border: 2px solid #00B0F0;   */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* color: #000000; */
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+}
+
+.menu-item:hover {
+    /* background: #00B0F0; */
+    color: #ffffff;
+}
+
+/* Main content area */
+.non-sidebar {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #e4e5ee;
+}
+
+/* Default view with Footscray Hospital logo */
+.default-view {
+    width: 90%;
+    height: 90%;
+    background: #ffffff;  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.default-view img {
+    max-width: 100%;  /* Increased from 90% to 95% */
+    max-height: 90%;  /* Increased from 90% to 95% */
+    object-fit: contain;
+    border-radius: 7px; 
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+        /* width: 1200px;   
+    height: 800px;    */
+}
+
+/* Hide other views by default */
+.entertainment-view,
+.hospital-info-view,
+.my-care-view,
+.clinical-services-view {
+    display: none;
+}
+
+/* Utility class for active view */
+.active {
+    display: flex !important;
+}
+
+/* Remove border from last item */
+.menu-item:last-child {
+    border-bottom: none;
+=======
     align-items: right;
     background: none;
     border-bottom: none;
@@ -45,43 +173,31 @@ body {
 .menu {
     display: flex;
     flex-direction: column;
-    gap: 30px;  /* Add consistent small gap between buttons */
+    gap: 10px;  /* Keep consistent 10px gap between all buttons */
     padding: 20px;
-    width: 350px;
-    height: 900px;
+    width: 425px;  /* Increased from 400px to 600px */
+    height: 775px;
     align-items: center;
-    margin-top: 130px;  /* gap between box and top of screen */
-    margin-left: 0px;  /* gap between box and left of screen */
+    margin-top: 200px;
+    margin-left: 0px;
     margin-right: auto;
     background: rgb(201, 199, 199);
-    /* border-radius: 15px; */
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-/* Update menu items to fit in container */
+/* Keep menu item styling */
 .menu-item {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 300px;  
-    height: 200px; 
+    width: 400px;  /* Increased from 400px to match new container width */
+    height: 200px;
     padding: 0px;
     background: white;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 20px;
-    font-weight: 500;
-    color: #333;
-    text-align: center;
-    border-bottom: none;  /* Remove separator line */
-    margin: 0;  /* Remove margin */
-}
-
-/* Remove border from last item */
-.menu-item:last-child {
-    border-bottom: none;
+    border-radius: 6px;
+    margin: 0;  /* Remove any default margins */
+>>>>>>> Stashed changes
 }
 
 /* Update menu item icons */
@@ -94,15 +210,17 @@ body {
 
 /* Update menu item text */
 .menu-item span {
-    font-size: 18px;  /* Smaller text */
+    font-size: 26px;  /* Smaller text */
     font-weight: 500;
-    color: #333;
+    color: #c73c3c;
+    margin-top: 10px;
+    padding-left: 10px;
 }
 
 /* Hover and focus states */
 .menu-item:hover:not(.active),
 .menu-item:focus:not(.active) {
-    background: linear-gradient(135deg, #00b0f0, #0098d6);
+    /* background: linear-gradient(135deg, #00b0f0, #0098d6); */
     color: white;
     transform: scale(1.02);
     box-shadow: 0 4px 8px rgba(0, 176, 240, 0.2);
@@ -133,6 +251,11 @@ body {
     color: white;
 }
 
+/* Update focus styles for all buttons */
+.menu-item:focus {
+    outline: none !important;  /* Remove focus outline */
+    box-shadow: none !important;  /* Remove focus shadow */
+}
 
 .card-grid {
     display: grid;
@@ -269,8 +392,6 @@ body {
     transform: translateY(-2px);
 }
 
-
-
 /* Focus styles for back button navigation */
 .japit-button:focus {
     box-shadow: 0 0 15px rgba(0, 176, 240, 0.3);
@@ -349,38 +470,12 @@ div.Input_Output {
     visibility: hidden;
 }
 
-/* Style the log textareas */
-/* .JAPITFromTV textarea,
-.JAPITToTV_Misc textarea {
-    width: 100%;
-    height: calc(100% - 40px);
-    border: none;
-    padding: 10px;
-    font-family: monospace;
-    background: none;
-    display: none; /* Hide the textareas */
-/*} */
-
 /* Style the log headers */
 .IOContentsColor {
     margin: 0 0 10px;
     font-weight: bold;
     color: #333;
 }
-
-/* JAPIT Button Styles */
-/* .japit-button {
-    cursor: pointer;
-    -japit-focusable: true;
-    -japit-selectable: true;
-}
-
-/* .japit-button:focus {
-
-
-    outline: 2px solid #00B0F0;
-    outline-offset: -2px;
-} */ */
 
 /* Hospital Information Grid Layout */
 .hospital-grid {
@@ -482,7 +577,7 @@ div.Input_Output {
 .mycare-card span {
     font-size: 32px;  /* Match reach button font size */
     font-weight: 500;
-    color: #2c3e50;
+    color: #AD3054;
     margin-top: 15px;
     text-align: center;
     line-height: 1.2;
@@ -659,14 +754,7 @@ body.refreshing::after {
     }
 }
 
-/* Hospital Info View Layout */
-/* .hospital-info-view {
-    padding: 40px;
-    margin-left: 20%;
-    width: 80%;
-    height: calc(100vh - 60px);
-    background-color: #f5f9ff;
-} */
+
 
 .hospital-info-grid {
     display: grid;
@@ -853,76 +941,25 @@ body.refreshing::after {
     color: #000;
 }
 
+<<<<<<< Updated upstream
+=======
 /* Main dashboard newfootscrayhospital logo styling */
 .default-view {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-left: 21%;
-    margin-top: 110px;
-    width: 1200px;  /* Fixed width */
-    height: 900px;  /* Fixed height */
+    margin-top: 50px;
+    width: 1200px;
+    height: 900px;
     position: relative;
     padding: 20px;
 }
+>>>>>>> Stashed changes
 
-.default-view img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    margin: 0;
-    z-index: 1;
-}
 
-/* Header styling */
-.header {
-    height: 100px;
-    padding: 0 !important;
-    margin-left: 18%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    background: none;
-    box-shadow: none;
-    border: none;
-    position: fixed;
-    top: 0;
-    right: 40px;
-    left: 0;
-    z-index: 5;
-}
 
-/* Time and Date container */
-.datetime-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    background: none;
-    padding: 0;
-    margin: 0;
-    border: none;
-    box-shadow: none;
-}
 
-/* Time display styling */
-.time {
-    font-size: 28px;  /* Slightly smaller font */
-    font-weight: 500;
-    color: #ffffff;
-    margin: 0;
-}
-
-/* Date display styling */
-.date {
-    font-size: 24px;
-    font-weight: 400;
-    color: #ffffff;  /* font colour to white */
-    padding: 0;
-    margin: 0;
-    background: none;
-    border: none;
-    box-shadow: none;
-}
 
 /* Radio Channels Grid Layout */
 .radiochannels-grid {
@@ -1034,11 +1071,6 @@ body.refreshing::after {
     margin-top: 0;
 }
 
-/* Adjust font size for better proportion */
-.menu-item span {
-    font-size: 26px;
-    font-weight: 500;
-}
 
 /* Add specific margin for visiting hours button */
 .hospital-card[data-type="visiting"] {
@@ -1223,87 +1255,12 @@ body.refreshing::after {
     margin-bottom: 15px;
 }
 
-/* Logo styling */
-.sidebar img {
-    width: 150px;
-    height: 150px;
-    object-fit: contain;
-    margin: 20px;  /* Add some margin around the logo */
-}
 
-/* Add specific styling for entertainment button logo */
-.menu-item[data-type="entertainment"] img {
-    width: 70px;  /* Smaller width for entertainment icon */
-    height: 70px;  /* Smaller height for entertainment icon */
-    margin-bottom: 15px;
-    transition: transform 0.3s ease;
-}
-
-/* Keep other menu items' logos at their original size */
-.menu-item:not([data-type="entertainment"]) img {
-    width: 90px;
-    height: 90px;
-    margin-bottom: 15px;
-    transition: transform 0.3s ease;
-}
-
-/* Logo container styling */
-.sidebar-logo {
-    width: 150px;
-    height: 120px;  /* Reduced from 150px */
-    object-fit: contain;
-    padding: 20px;  /* Reduced from 40px */
-    margin: 0;
-    background: white;  /* Changed to white as requested earlier */
-    border-radius: 0;
-}
-
-/* Time display styling for sidebar */
-.sidebar-time {
-    width: 100%;  /* Full width of sidebar */
-    font-size: 32px;
-    font-weight: 500;
-    color: #ffffff;
-    padding: 40px;
-    margin: 0;
-    background: #465f77;
-    border-radius: 0;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    text-align: center;  /* Center the text */
-    
-}
-
-/* Update sidebar logo positioning */
-.sidebar-logo {
-    width: 150px;
-    height: 120px;  /* Reduced from 150px */
-    object-fit: contain;
-    padding: 20px;  /* Reduced from 40px */
-    margin: 0;
-    background: white;  /* Changed to white as requested earlier */
-    border-radius: 0;
-}
-
-/* Update sidebar layout */
-.sidebar {
-    width: 21%;
-    height: 100vh;
-    background: #f5f5f5;
-    padding: 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    box-shadow: none;  /* Explicitly remove any shadow */
-}
 
 /* Specific hover/focus state for hospital info button */
 .menu-item[data-type="hospitalinfo"]:hover:not(.active),
 .menu-item[data-type="hospitalinfo"]:focus:not(.active) {
-    background: linear-gradient(135deg, #035f03, #035f03);  /* Green gradient */
+    background: linear-gradient(135deg, #00BAA3, #00BAA3);  /* Green gradient */
     color: white;
     transform: scale(1.02);
     box-shadow: 0 4px 8px rgba(3, 95, 3, 0.2);  /* Green shadow */
@@ -1324,7 +1281,7 @@ body.refreshing::after {
 /* Specific hover/focus state for my care button */
 .menu-item[data-type="my-care"]:hover:not(.active),
 .menu-item[data-type="my-care"]:focus:not(.active) {
-    background: linear-gradient(135deg, #d60707, #d60707);  /* Red gradient */
+    background: linear-gradient(135deg, #AD3054, #AD3054);  /* Red gradient */
     color: white;
     transform: scale(1.02);
     box-shadow: 0 4px 8px rgba(214, 7, 7, 0.2);  /* Red shadow */
@@ -1366,7 +1323,7 @@ body.refreshing::after {
 /* Add new entertainment button hover/focus styles */
 .menu-item[data-type="entertainment"]:hover:not(.active),
 .menu-item[data-type="entertainment"]:focus:not(.active) {
-    background: linear-gradient(135deg, #00b0f0, #0098d6);  /* Blue gradient */
+    background: linear-gradient(135deg, #05CBF9, #05CBF9);  /* Blue gradient */
     color: white;
     transform: scale(1.02);
     box-shadow: 0 4px 8px rgba(0, 176, 240, 0.2);  /* Blue shadow */
@@ -1384,32 +1341,10 @@ body.refreshing::after {
     color: white;  /* Keep text white */
 }
 
-/* Time container styling */
-.time-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;  /* Changed from flex-end to space-between */
-    gap: 20px;
-    background: #7f93a5;
-    padding: 15px 30px;
-    margin: 0;
-    width: 100%;
-    z-index: 1000;
-    position: relative;
-}
 
-/* Update western health logo in time display styling */
-.time-logo {
-    width: 100px;  /* Increased to 100px */
-    height: 100px;  /* Increased to 100px */
-    object-fit: contain;
-    background: transparent;
-    padding: 8px;
-    border-radius: 6px;
-    order: -1;
-    filter: brightness(0) invert(1);
-}
 
+<<<<<<< Updated upstream
+=======
 /* Update time display styling */
 .time {
     font-size: 32px;
@@ -1418,3 +1353,20 @@ body.refreshing::after {
     margin: 0;
     margin-left: auto;  /* Push time to the right */
 }
+
+/* Update JAPIT button focus styles */
+.japit-button:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.japit-button:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Add specific spacing after entertainment button */
+.menu-item[data-type="entertainment"] {
+    margin-bottom: 0;  /* Remove extra space after entertainment button */
+}
+>>>>>>> Stashed changes
