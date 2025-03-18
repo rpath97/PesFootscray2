@@ -29,11 +29,10 @@ function WIXPResponseHandler(WIXPResponseJSON) {
 		// CHANNELS RESPONSE
 		if (parsedWIXPJSON.Fun == "ChannelSelection"){ //When TV responds with an error
 			if (tv_channel_on == 1 && dashboard_on) {
-				
 				if (parsedWIXPJSON.CommandDetails.ChannelTuningDetails.ChannelNumber){
 					if (parsedWIXPJSON.CommandDetails.ChannelSelectionStatus == 'Failure'){
 						setTimeout(loadChannel, 1000);
-						document.getElementById("loadingGif").style.display = 'block';
+						
 						//channelSelection(default_chan_no);
 					} else if (parsedWIXPJSON.CommandDetails.ChannelSelectionStatus == 'Started'){
 						//document.getElementById("loadingGif").style.display = 'none';
@@ -44,7 +43,7 @@ function WIXPResponseHandler(WIXPResponseJSON) {
 			
 			} else if (tv_channel_on == 1) {
 				current_tv_channel = parsedWIXPJSON.CommandDetails.ChannelTuningDetails.ChannelNumber;
-				document.getElementById("logmsgcallback").value += '\n' + 'Updated TV Channel to ' + current_tv_channel  + '\n';
+				document.getElementById("logmsgcallback").value += '\n' + 'Dasohboard value  ' + dashboard_on  + '\n';
 				document.getElementById("logmsgcallback").scrollTop=document.getElementById("logmsgcallback").scrollHeight;
 			}
 			
@@ -101,7 +100,7 @@ function loadChannel() {
 	// document.getElementById("gallery").style.display = "none";
 	// document.getElementById("topbar").style.display = "none";
 	// document.body.style.backgroundColor = '#000000';
-	document.getElementById("loadingGif").style.display = 'flex';
+	//document.getElementById("loadingGif").style.display = 'flex';
 	channelSelection(current_tv_channel);
 }
 
