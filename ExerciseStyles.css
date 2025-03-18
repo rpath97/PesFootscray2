@@ -72,11 +72,12 @@ body {
      background:#fafafaf0; /*#e1e1e1c4   */
     padding: 40px;
     height: 92.5vh;
+    
 }
 
 
 .sidebar-menu {
-    background: #e4e5ee;
+    background: #fafafaf0;
     margin-top: 40px;  /* Pushes sidebar content down */
     /* padding: 30px; */
     height: 75vh;
@@ -130,7 +131,7 @@ body {
 .default-view {
     width: 90%;
     height: 90%;
-    background: #ffffff;  
+    background: #e4e5ee;  
     display: flex;
     justify-content: center;
     align-items: center;
