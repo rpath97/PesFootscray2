@@ -35,7 +35,7 @@ function openRadio() {
     //Ensuring multiple clicks of the button consecutively doesn't keep on removing and adding channels
     if (radio_channel_on == 0){
         radio_channel_on = 1;
-        console.log("Previous page ", current_page)
+        //console.log("Previous page ", current_page)
         previous_page = current_page;
         current_page = "radio_view";
         document.getElementById(previous_page).style.display = "none";
@@ -98,7 +98,7 @@ function openRadio() {
                         
                     }
                     //Sending final list of channels to the tv
-                    console.log("Radio Channel: " + JSON.stringify(JAPITObjForWIXPSvc));
+                    //console.log("Radio Channel: " + JSON.stringify(JAPITObjForWIXPSvc));
                     sendWIxPCommand(JAPITObjForWIXPSvc);
                     delete JAPITObjForWIXPSvc;
                     // console.log("Channel List: " + channel_list);
@@ -108,7 +108,7 @@ function openRadio() {
                     default_chan_no = channelNo_arr[Math.floor(jsonData.length/2)];
 
                     //Creating Hiding home dashbaord view and show radio view
-                    document.querySelector(".entertainment-view").style.display = "none";
+                    //document.querySelector(".entertainment-view").style.display = "none";
                     //document.getElementById("patientMenu").style.display = "none";
                     //document.getElementById("gallery").style.display = "none";
                     //document.getElementById("left-column").style.display = "flex";
@@ -161,8 +161,8 @@ function openRadio() {
                     
                     document.getElementById(channel_list[0].BasicChannelDetails.ChannelName).focus();
                     //mute("Off");
-                    document.querySelector(".radio-view").style.display = "flex";
-                    console.log("Channel List: " + channel_list);
+                    // document.querySelector(".radio-view").style.display = "flex";
+                    // console.log("Channel List: " + channel_list);
                 })
             .catch(error => { //if the file coudl not be read
                 
@@ -174,6 +174,10 @@ function openRadio() {
     else if (radio_channel_on == 1) {
         //Creating Hiding home dashbaord view and show radio view
 		radio_channel_on = 2;
+        previous_page = current_page;
+        current_page = "radio_view";
+        document.getElementById(previous_page).style.display = "none";
+        document.getElementById(current_page).style.display = "flex";
         // previous_page = current_page;
         // current_page = "radio_view";
     
@@ -186,6 +190,10 @@ function openRadio() {
         
     } else if (radio_channel_on = 2) {
         radio_channel_on = 1;
+        previous_page = current_page;
+        current_page = "radio_view";
+        document.getElementById(previous_page).style.display = "none";
+        document.getElementById(current_page).style.display = "flex";
         //removeChannels();
         channel_list = [];
         // Arrays that will hold the values form the json data extracted from excel
@@ -253,7 +261,7 @@ function openRadio() {
                     default_chan_no = channelNo_arr[Math.floor(jsonData.length/2)];
 
                     //Creating Hiding home dashbaord view and show radio view
-                    document.querySelector(".entertainment-view").style.display = "none";
+                    //document.querySelector(".entertainment-view").style.display = "none";
                     //document.getElementById("patientMenu").style.display = "none";
                     //document.getElementById("gallery").style.display = "none";
                     //document.getElementById("left-column").style.display = "flex";
@@ -304,9 +312,9 @@ function openRadio() {
                     
                     document.getElementById(channel_list[0].BasicChannelDetails.ChannelName).focus();
                     //mute("Off");
-                    document.querySelector(".radio-view").style.display = "flex";
-                    previous_page = current_page;
-                    current_page = "radio_view";
+                    // document.querySelector(".radio-view").style.display = "flex";
+                    // previous_page = current_page;
+                    // current_page = "radio_view";
                     //console.log("Channel List: " + channel_list);
                 })
             .catch(error => { //if the file coudl not be read
