@@ -23,7 +23,7 @@ function openTV() {
         tv_channel_on = 1;
     } else {
         channelSelection(current_tv_channel);
-        tvChannelsApp('Activate');
+        //tvChannelsApp('Activate');
         // OPENING HTML TV CHANNELS VIEW
         // previous_page = current_page;
         // current_page = 'tvChannelDiv';

@@ -28,8 +28,8 @@ function WIXPResponseHandler(WIXPResponseJSON) {
 
 		// CHANNELS RESPONSE
 		if (parsedWIXPJSON.Fun == "ChannelSelection"){ //When TV responds with an error
-			if (tv_channel_on == 1 && dashboard_on && current_page == 'tv_view') {
-				if (parsedWIXPJSON.CommandDetails.ChannelTuningDetails.ChannelNumber){
+			if (tv_channel_on == 1 && dashboard_on && current_page == 'tv_view') {                        
+				if (parsedWIXPJSON.CommandDetails.ChannelTuningDetails.ChannelNumber){             
 					if (parsedWIXPJSON.CommandDetails.ChannelSelectionStatus == 'Failure'){
 						setTimeout(loadChannel, 1000);
 						
@@ -333,8 +333,9 @@ function keyHandler(keyCode) {
 					current_page = "entertainment_menu";
 					previous_page = "default_view";
 					setRcControlSelective();
-					switchToHDMI1();
-					dashboard_on = true;
+					// switchToHDMI1();
+					channelStopPlaying(current_tv_channel);
+					// dashboard_on = true;
 					changeCDBstate('Activate');
 
 					break;
@@ -396,8 +397,9 @@ function keyHandler(keyCode) {
 					current_page = "entertainment_menu";
 					previous_page = "default_view";
 					setRcControlSelective();
-					switchToHDMI1();
-					dashboard_on = true;
+					// switchToHDMI1();
+					channelStopPlaying(current_tv_channel);
+					// dashboard_on = true;
 					changeCDBstate('Activate');
 					break;
 				} else if (current_page == 'radio_view') {
@@ -424,6 +426,7 @@ function keyHandler(keyCode) {
 				previous_page = "default_view";
 				break;
 			case VK_LEFT: 
+			case VK_RIGHT: 
 				tvChannelsList('Activate');
 				break;
 			default:
@@ -431,9 +434,10 @@ function keyHandler(keyCode) {
 				break;
 		}
 	}
-
 	catch (e) {
 		//Keyhandler error
+		document.getElementById("logmsgcallback").value += '\n' + e + '\n';
+		document.getElementById("logmsgcallback").scrollTop = document.getElementById("logmsgcallback").scrollHeight;
 	}
 
 	//Exit Keyhandler
