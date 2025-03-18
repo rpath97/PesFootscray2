@@ -345,7 +345,7 @@ function keyHandler(keyCode) {
 					current_page = "entertainment_menu";
 					previous_page = "default_view";
 					//setRcControlSelective();
-					setRcControlNone();
+					//setRcControlNone();
 					// switchToHDMI1();
 					channelStopPlaying(current_tv_channel);
 					// dashboard_on = true;
@@ -410,7 +410,7 @@ function keyHandler(keyCode) {
 					current_page = "entertainment_menu";
 					previous_page = "default_view";
 					//setRcControlSelective();
-					setRcControlNone();
+					//setRcControlNone();
 					// switchToHDMI1();
 					channelStopPlaying(current_tv_channel);
 					// dashboard_on = true;
