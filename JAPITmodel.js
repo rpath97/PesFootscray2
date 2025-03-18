@@ -28,7 +28,7 @@ function WIXPResponseHandler(WIXPResponseJSON) {
 
 		// CHANNELS RESPONSE
 		if (parsedWIXPJSON.Fun == "ChannelSelection"){ //When TV responds with an error
-			if (tv_channel_on == 1 && dashboard_on) {
+			if (tv_channel_on == 1 && dashboard_on && current_page == 'tv_view') {
 				if (parsedWIXPJSON.CommandDetails.ChannelTuningDetails.ChannelNumber){
 					if (parsedWIXPJSON.CommandDetails.ChannelSelectionStatus == 'Failure'){
 						setTimeout(loadChannel, 1000);
@@ -41,7 +41,7 @@ function WIXPResponseHandler(WIXPResponseJSON) {
 					}	
 				}
 			
-			} else if (tv_channel_on == 1) {
+			} else if (tv_channel_on == 1 && current_page == 'tv_view') {
 				current_tv_channel = parsedWIXPJSON.CommandDetails.ChannelTuningDetails.ChannelNumber;
 				document.getElementById("logmsgcallback").value += '\n' + 'Dasohboard value  ' + dashboard_on  + '\n';
 				document.getElementById("logmsgcallback").scrollTop=document.getElementById("logmsgcallback").scrollHeight;
@@ -424,7 +424,7 @@ function keyHandler(keyCode) {
 				previous_page = "default_view";
 				break;
 			case VK_LEFT: 
-				tvChannelsList();
+				tvChannelsList('Activate');
 				break;
 			default:
 				alert("Nothing to handle \n");
