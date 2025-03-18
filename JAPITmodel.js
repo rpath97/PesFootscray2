@@ -334,7 +334,7 @@ function keyHandler(keyCode) {
 					previous_page = "default_view";
 					setRcControlSelective();
 					switchToHDMI1();
-					dashboard_on = false;
+					dashboard_on = true;
 					changeCDBstate('Activate');
 
 					break;
@@ -397,7 +397,7 @@ function keyHandler(keyCode) {
 					previous_page = "default_view";
 					setRcControlSelective();
 					switchToHDMI1();
-					dashboard_on = false;
+					dashboard_on = true;
 					changeCDBstate('Activate');
 					break;
 				} else if (current_page == 'radio_view') {
@@ -424,7 +424,6 @@ function keyHandler(keyCode) {
 				previous_page = "default_view";
 				break;
 			case VK_LEFT: 
-			case VK_RIGHT:
 				tvChannelsList();
 				break;
 			default:
