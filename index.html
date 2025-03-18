@@ -97,18 +97,17 @@
                 </div>
             </div>
 
+            <!-- TEMP BACK BUTTON -->
+            <!-- <button onclick="backTemp()"  style="width: 50px; height: 20px; position: absolute; top: 20px; right: 50px; z-index: 1100;" >
+                Back
+            </button> -->
+
             <!-- Non-sidebar / Main Content Area -->
             <div class="non-sidebar">
                 <!-- Default View -->
                 <div class="view1 default-view" id="default_view">
                     <img src="logos/newfootscrayhospital.jpg" alt="newfootscrayhospital" class="main-image">
-               
                 </div>
-
-            <!-- TEMP BACK BUTTON -->
-            <!-- <button onclick="backTemp()"  style="width: 50px; height: 20px; position: absolute; top: 20px; right: 50px; z-index: 1100;" >
-                Back
-            </button> -->
 
                 <!-- Other Views (Initially Hidden) -->
                 <div class="view2">
@@ -272,19 +271,8 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Radio View -->
-            <div class="radio-view" style="display: none;" id="radio_view">
-                <!-- Radio channels will be dynamically added here by handleRadioClick() -->
-            </div>
-
-            <!-- Video Frame -->
-            <!-- <div class="video-grid" id="video-frame">
-                <iframe id="video-src-iframe" src="" width="100%" display="none" height="100%" frameborder="0" allowfullscreen/>
-             </div> -->
-
-             <!-- Log Windows -->
-             <div id="IDJAPITToTV_Misc" class="JAPITToTV_Misc">
+            <!-- Log Windows -->
+            <div id="IDJAPITToTV_Misc" class="JAPITToTV_Misc">
                 <p id="IdHeadingLogMsg" class="IOContentsColor">WIXP (CDB --> TV) And Other Logs</p>
                 <textarea id="logmsg" rows="90" cols="70" style="resize:none" readonly></textarea>
             </div>
@@ -294,10 +282,8 @@
                 <textarea id="logmsgcallback" rows="90" cols="70" style="resize:none" readonly></textarea>
             </div>
         </div>
+        </div>
     </div>
-
-    <!-- TV LOADING BUFFER GIF -->
-    <img id="loadingGif" src="logos/tvLoadingGif.gif" alt="GIF">
     
 
     <!-- JAPIT WIXP Plugin -->
@@ -310,7 +296,7 @@
     </object>
 
      <!-- Video Frame -->
-     <!-- <div class="video-grid" id="video-frame">
+      <!-- <div class="video-grid" id="video-frame">
         <iframe id="video-src-iframe" src="" width="100%" height="100%" frameborder="0" allowfullscreen>
         </iframe>
      </div> -->
@@ -328,6 +314,7 @@
     <iframe id="pdf-viewer-2" src="https://pdfobject.com/pdf/sample.pdf" width="100%" height="1080px" display="none"></iframe>
     <!-- PDF VIEWER OPTION 3 -->
     <embed id="pdf-viewer-3" src="https://pdfobject.com/pdf/sample.pdf" type="application/pdf" width="100%" height="1080px"/>
+
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
