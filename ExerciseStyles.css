@@ -1387,3 +1387,15 @@ body.refreshing::after {
     margin-bottom: 0;  /* Remove extra space after entertainment button */
 }
 
+
+.radio-view {
+    background-color: #f5f5f5;  /* Change this from #f5f9ff to match */
+    height: calc(100vh - 60px);
+    padding: 40px;
+    height: calc(100vh);
+    padding: 80px;
+    overflow-y: auto;
+    margin-top: 60px;
+    flex-wrap: wrap;
+    gap: 100px;
+}
