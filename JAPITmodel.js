@@ -423,8 +423,10 @@ function keyHandler(keyCode) {
 				current_page = previous_page;
 				previous_page = "default_view";
 				break;
-			case VK_LEFT, VK_RIGHT:
+			case VK_LEFT: 
+			case VK_RIGHT:
 				tvChannelsList();
+				break;
 			default:
 				alert("Nothing to handle \n");
 				break;
