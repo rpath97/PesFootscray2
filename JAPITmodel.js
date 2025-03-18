@@ -37,7 +37,7 @@ function WIXPResponseHandler(WIXPResponseJSON) {
 					} else if (parsedWIXPJSON.CommandDetails.ChannelSelectionStatus == 'Started'){
 						//document.getElementById("loadingGif").style.display = 'none';
 						document.getElementById("loadingGif").style.display = 'none';
-						tvChannelsList('Activate');
+						tvChannelsApp('Activate');
 					}	
 				}
 			
@@ -254,13 +254,13 @@ function setArrowButtonsVirtual() {
 				//{ "vkkey" : "HBBTV_VK_HOME" }, // not existing
 				// { "vkkey" : "HBBTV_VK_PLAY_PAUSE" }, // previously was VK_OSRC
 				{ "vkkey": "HBBTV_VK_GUIDE" },
-				{ "vkkey" : "HBBTV_VK_UP" }, // not existing
+				//{ "vkkey" : "HBBTV_VK_UP" }, // not existing
 				// { "vkkey" : "HBBTV_VK_INFO" },
 				{ "vkkey" : "HBBTV_VK_LEFT" }, // not existing
 				// { "vkkey" : "HBBTV_VK_ACCEPT" }, // not existing
 				{ "vkkey" : "HBBTV_VK_RIGHT" }, // not existing
 				{ "vkkey": "HBBTV_VK_ADJUST" }, //SETTINGS BUTTON
-				{ "vkkey" : "HBBTV_VK_DOWN" }, // not existing
+				//{ "vkkey" : "HBBTV_VK_DOWN" }, // not existing
 				{ "vkkey": "HBBTV_VK_MENU" }, // Home Button
 				{ "vkkey": "HBBTV_VK_BACK" }, // not existing
 				{ "vkkey": "HBBTV_VK_RED" },
@@ -334,6 +334,7 @@ function keyHandler(keyCode) {
 					previous_page = "default_view";
 					setRcControlSelective();
 					switchToHDMI1();
+					dashboard_on = false;
 					changeCDBstate('Activate');
 
 					break;
@@ -396,6 +397,7 @@ function keyHandler(keyCode) {
 					previous_page = "default_view";
 					setRcControlSelective();
 					switchToHDMI1();
+					dashboard_on = false;
 					changeCDBstate('Activate');
 					break;
 				} else if (current_page == 'radio_view') {
@@ -421,6 +423,8 @@ function keyHandler(keyCode) {
 				current_page = previous_page;
 				previous_page = "default_view";
 				break;
+			case VK_LEFT, VK_RIGHT:
+				tvChannelsList();
 			default:
 				alert("Nothing to handle \n");
 				break;

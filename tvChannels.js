@@ -13,7 +13,7 @@ var current_tv_channel = '';
 function openTV() {
     current_page = 'tv_view';
     document.getElementById("loadingGif").style.display = 'flex';
-    setArrowButtonsVirtual() //disabling arrow keys
+    setArrowButtonsVirtual(); //disabling arrow keys
     // SETTING RADIO CHANNEL STATUS
     if (radio_channel_on != 0){
 		radio_channel_on = 2;
