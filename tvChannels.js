@@ -13,6 +13,7 @@ var current_tv_channel = '';
 function openTV() {
     current_page = 'tv_view';
     dashboard_on = false;
+    setArrowButtonsVirtual() //disabling arrow keys
     // SETTING RADIO CHANNEL STATUS
     if (radio_channel_on != 0){
 		radio_channel_on = 2;
@@ -33,7 +34,7 @@ function openTV() {
 
     mute("Off"); //turns audio on channels off when coming back to the dashboard
     // Removing all previous channels, so that no radio channels will pop up
-    removeChannels();
+    //removeChannels();
 
     // Arrays that will hold the values from the json data extracted from excel
     var channelNo_arr = [];

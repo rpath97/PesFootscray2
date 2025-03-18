@@ -33,7 +33,7 @@ function WIXPResponseHandler(WIXPResponseJSON) {
 				if (parsedWIXPJSON.CommandDetails.ChannelTuningDetails.ChannelNumber){
 					if (parsedWIXPJSON.CommandDetails.ChannelSelectionStatus == 'Failure'){
 						setTimeout(loadChannel, 1000);
-						//document.getElementById("loadingGif").style.display = 'block';
+						document.getElementById("loadingGif").style.display = 'block';
 						//channelSelection(default_chan_no);
 					} else if (parsedWIXPJSON.CommandDetails.ChannelSelectionStatus == 'Started'){
 						//document.getElementById("loadingGif").style.display = 'none';
@@ -231,11 +231,60 @@ function setRcControlSelective() {
 	sendWIxPCommand(JAPITObjForWIXPSvc);
 	delete JAPITObjForWIXPSvc;
 }
+// MAKING ARROW BUTTONS TO VIRTUAL KEYS
+function setArrowButtonsVirtual() {
+
+	var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
+	JAPITObjForWIXPSvc.Cookie = 6;
+	JAPITObjForWIXPSvc.CmdType = "Change";
+	JAPITObjForWIXPSvc.Fun = "UserInputControl";
+	JAPITObjForWIXPSvc.CommandDetails = {
+		"VirtualKeyForwardMode": "SelectiveVirtualKeyForward",
+		"VirtualKeyToBeForwarded":
+			[
+				// { "vkkey" : "HBBTV_VK_POWER" }, // not existing 
+				// { "vkkey" : "HBBTV_VK_MYCHOICE" },
+				{ "vkkey": "HBBTV_VK_CLOCK" },
+				// { "vkkey" : "HBBTV_VK_SMARTTV" },
+				//{ "vkkey" : "HBBTV_VK_CHANNELGRID" },
+				{ "vkkey": "HBBTV_VK_ALARM" },
+				{ "vkkey": "HBBTV_VK_SMARTINFO" },
+				// { "vkkey" : "HBBTV_VK_SOURCE" },
+				{ "vkkey": "HBBTV_VK_TV" },
+				// { "vkkey" : "HBBTV_VK_FORMAT" },
+				//{ "vkkey" : "HBBTV_VK_HOME" }, // not existing
+				// { "vkkey" : "HBBTV_VK_PLAY_PAUSE" }, // previously was VK_OSRC
+				{ "vkkey": "HBBTV_VK_GUIDE" },
+				{ "vkkey" : "HBBTV_VK_UP" }, // not existing
+				// { "vkkey" : "HBBTV_VK_INFO" },
+				{ "vkkey" : "HBBTV_VK_LEFT" }, // not existing
+				// { "vkkey" : "HBBTV_VK_ACCEPT" }, // not existing
+				{ "vkkey" : "HBBTV_VK_RIGHT" }, // not existing
+				{ "vkkey": "HBBTV_VK_ADJUST" }, //SETTINGS BUTTON
+				{ "vkkey" : "HBBTV_VK_DOWN" }, // not existing
+				{ "vkkey": "HBBTV_VK_MENU" }, // Home Button
+				{ "vkkey": "HBBTV_VK_BACK" }, // not existing
+				{ "vkkey": "HBBTV_VK_RED" },
+				{ "vkkey": "HBBTV_VK_GREEN" },
+				{ "vkkey": "HBBTV_VK_YOUTUBE" },
+				{ "vkkey": "HBBTV_VK_WEATHER" },
+				//{"vkkey": "	HBBTV_VK_SETTINGS"}, //doesn't affect settings button
+				{ "vkkey": "HBBTV_VK_OPTIONS" },
+				{ "vkkey": "HBBTV_VK_1" },
+				{ "vkkey": "HBBTV_VK_2" },
+				{ "vkkey": "HBBTV_VK_3" },
+				{ "vkkey": "HBBTV_VK_4" }
+			]
+	}
+
+	sendWIxPCommand(JAPITObjForWIXPSvc);
+	delete JAPITObjForWIXPSvc;
+}
 
 function changeCDBstate(state) {
 	//updating ui status
 	if (state == 'Activate'){
-		homepage_on = true;
+		dashboard_on = true;
 	}
 	var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
 	JAPITObjForWIXPSvc.Cookie = 1020;
@@ -284,6 +333,7 @@ function keyHandler(keyCode) {
 				} else if (current_page == 'tv_view') {
 					current_page = "entertainment_menu";
 					previous_page = "default_view";
+					setRcControlSelective();
 					switchToHDMI1();
 					changeCDBstate('Activate');
 
@@ -345,6 +395,7 @@ function keyHandler(keyCode) {
 				} else if (current_page == 'tv_view') {
 					current_page = "entertainment_menu";
 					previous_page = "default_view";
+					setRcControlSelective();
 					switchToHDMI1();
 					changeCDBstate('Activate');
 					break;
