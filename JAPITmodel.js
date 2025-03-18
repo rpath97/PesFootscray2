@@ -168,6 +168,18 @@ function setRcControlAll() {
 	}
 	sendWIxPCommand(JAPITObjForWIXPSvc);
 }
+//SET VIRTUAL KEYS TO NONE
+function setRcControlNone() {
+
+	var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
+	JAPITObjForWIXPSvc.Cookie = 1011;
+	JAPITObjForWIXPSvc.CmdType = "Change";
+	JAPITObjForWIXPSvc.Fun = "UserInputControl";
+	JAPITObjForWIXPSvc.CommandDetails = {
+		"VirtualKeyForwardMode": "DontForwardAnyVirtualKey"
+	}
+	sendWIxPCommand(JAPITObjForWIXPSvc);
+}
 
 function setRcControlExTxt() {
 
@@ -332,7 +344,8 @@ function keyHandler(keyCode) {
 				} else if (current_page == 'tv_view') {
 					current_page = "entertainment_menu";
 					previous_page = "default_view";
-					setRcControlSelective();
+					//setRcControlSelective();
+					setRcControlNone();
 					// switchToHDMI1();
 					channelStopPlaying(current_tv_channel);
 					// dashboard_on = true;
@@ -396,7 +409,8 @@ function keyHandler(keyCode) {
 				} else if (current_page == 'tv_view') {
 					current_page = "entertainment_menu";
 					previous_page = "default_view";
-					setRcControlSelective();
+					//setRcControlSelective();
+					setRcControlNone();
 					// switchToHDMI1();
 					channelStopPlaying(current_tv_channel);
 					// dashboard_on = true;
