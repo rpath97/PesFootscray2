@@ -7,7 +7,7 @@
 /* global variables */
 var current_page = "default_view";
 var previous_page = "";
-var dashboard_on = false;
+var dashboard_on = true;
 
 
 function Exercise01ModelInit() {
@@ -29,8 +29,7 @@ function WIXPResponseHandler(WIXPResponseJSON) {
 		// CHANNELS RESPONSE
 		if (parsedWIXPJSON.Fun == "ChannelSelection"){ //When TV responds with an error
 			if (tv_channel_on == 1 && dashboard_on) {
-				// document.getElementById("logmsgcallback").value += '\n' + 'DEFAULT CHANNEL NUMBERS=' + default_chan_no  + '\n';
-				// document.getElementById("logmsgcallback").scrollTop=document.getElementById("logmsgcallback").scrollHeight;
+				
 				if (parsedWIXPJSON.CommandDetails.ChannelTuningDetails.ChannelNumber){
 					if (parsedWIXPJSON.CommandDetails.ChannelSelectionStatus == 'Failure'){
 						setTimeout(loadChannel, 1000);
@@ -45,6 +44,8 @@ function WIXPResponseHandler(WIXPResponseJSON) {
 			
 			} else if (tv_channel_on == 1) {
 				current_tv_channel = parsedWIXPJSON.CommandDetails.ChannelTuningDetails.ChannelNumber;
+				document.getElementById("logmsgcallback").value += '\n' + 'Updated TV Channel to ' + current_tv_channel  + '\n';
+				document.getElementById("logmsgcallback").scrollTop=document.getElementById("logmsgcallback").scrollHeight;
 			}
 			
 		} 

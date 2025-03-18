@@ -188,6 +188,9 @@ function requestState() {
 
 // Turn TV Channels On
 function tvChannelsApp(state) {
+	if (state == 'Activate'){
+		homepage_on = false;
+	}
 	var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
 	
 	JAPITObjForWIXPSvc.Cookie  = 13;

@@ -1,5 +1,6 @@
 // Hospital Information card click handlers
 const videHlsSrcTest = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
+const videoLocalFileSrc = 'logos/WelcomeToCountry.mp4'
 function handleWelcomeClick() {
     console.log('Opening Welcome Video in new window...');
 
@@ -15,16 +16,16 @@ function handleWelcomeClick() {
     const videoElement = document.getElementById(current_page);
     if (videoSrcFrame) {
         //videoSrcFrame.style.display = 'flex';
-        var hls = new Hls();
-        hls.loadSource('https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8');
-        hls.attachMedia(videoElement);
-        hls.on(Hls.Events.MANIFEST_PARSED, function () {
-            video.play();
-        });
-        // videoSrcFrame.src = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';  //d the welcome video and activated the dashbo
-        // videoElement.load(); // Reload the video element
-        // videoElement.play();
-        // videoElement.addEventListener("ended", backTemp());
+        // var hls = new Hls();
+        // hls.loadSource('https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8');
+        // hls.attachMedia(videoElement);
+        // hls.on(Hls.Events.MANIFEST_PARSED, function () {
+        //     video.play();
+        // });
+        videoSrcFrame.src = videoLocalFileSrc;  //d the welcome video and activated the dashbo
+        videoElement.load(); // Reload the video element
+        videoElement.play();
+        //videoElement.addEventListener("ended", backTemp());
     }
     
     // Calculate center position for the new window
