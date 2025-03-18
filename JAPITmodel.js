@@ -440,8 +440,11 @@ function keyHandler(keyCode) {
 				previous_page = "default_view";
 				break;
 			case VK_LEFT: 
-			case VK_RIGHT: 
-				tvChannelsList('Activate');
+			case VK_RIGHT:
+				if (current_page == 'tv_view'){
+					tvChannelsList('Activate');
+				} 
+				
 				break;
 			default:
 				alert("Nothing to handle \n");
