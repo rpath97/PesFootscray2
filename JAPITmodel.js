@@ -50,7 +50,7 @@ function WIXPResponseHandler(WIXPResponseJSON) {
 		} 
 	} catch (e) {
 		//Error - can print to logs view
-		document.getElementById("logmsgcallback").value += '\n' + e + '\n';
+		document.getElementById("logmsgcallback").value += '\n' + "JAPITmode.js line 53" +e + '\n';
 		document.getElementById("logmsgcallback").scrollTop = document.getElementById("logmsgcallback").scrollHeight;
 		errorCount++;
 		//This is turn the tv screen off and reset the errorCount. Mainly to over the Googlecast error.
@@ -280,7 +280,7 @@ function setArrowButtonsVirtual() {
 				{ "vkkey": "HBBTV_VK_YOUTUBE" },
 				{ "vkkey": "HBBTV_VK_WEATHER" },
 				//{"vkkey": "	HBBTV_VK_SETTINGS"}, //doesn't affect settings button
-				{ "vkkey": "HBBTV_VK_OPTIONS" },
+				//{ "vkkey": "HBBTV_VK_OPTIONS" },
 				{ "vkkey": "HBBTV_VK_1" },
 				{ "vkkey": "HBBTV_VK_2" },
 				{ "vkkey": "HBBTV_VK_3" },
@@ -344,7 +344,7 @@ function keyHandler(keyCode) {
 				} else if (current_page == 'tv_view') {
 					current_page = "entertainment_menu";
 					previous_page = "default_view";
-					//setRcControlSelective();
+					setRcControlSelective();
 					//setRcControlNone();
 					// switchToHDMI1();
 					channelStopPlaying(current_tv_channel);
@@ -409,7 +409,7 @@ function keyHandler(keyCode) {
 				} else if (current_page == 'tv_view') {
 					current_page = "entertainment_menu";
 					previous_page = "default_view";
-					//setRcControlSelective();
+					setRcControlSelective();
 					//setRcControlNone();
 					// switchToHDMI1();
 					channelStopPlaying(current_tv_channel);
@@ -453,7 +453,7 @@ function keyHandler(keyCode) {
 	}
 	catch (e) {
 		//Keyhandler error
-		document.getElementById("logmsgcallback").value += '\n' + e + '\n';
+		document.getElementById("logmsgcallback").value += '\n' + "JAPITmode.js line 456" + e + '\n';
 		document.getElementById("logmsgcallback").scrollTop = document.getElementById("logmsgcallback").scrollHeight;
 	}
 
