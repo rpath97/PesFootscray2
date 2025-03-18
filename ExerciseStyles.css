@@ -63,44 +63,54 @@ body {
     display: flex;
     flex: 1;
     background: #c9c6c6;  /* Light gray background */
+    height: 92.5vh;
 }
 
 /* Sidebar section */
 .sidebar {
-    width: 380px;
-    background: #b1aeae;  /* Dark gray background */
+    width: 430px;
+     background:#fafafaf0; /*#e1e1e1c4   */
     padding: 40px;
+    height: 92.5vh;
+    
 }
 
 
 .sidebar-menu {
-    background: #e4e5ee;
-    margin-top: 50px;  /* Pushes sidebar content down */
-    padding: 30px;
-    height: calc(100% - 100px);
+    background: #fafafaf0;
+    margin-top: 40px;  /* Pushes sidebar content down */
+    /* padding: 30px; */
+    height: 75vh;
     /* width: calc(100% - 20px); */
     display: flex;
     flex-direction: column;
-    gap: 30px;  /* Gap between buttons increased to 30px */
+    align-items: center;
+    justify-content: center;
+    gap: 100px; 
+    margin-bottom: 20px;
 }
 
 
 /* Menu buttons */
 .menu-item {
-    width: 110%;
-    height: 15%;
-    background: #ffffff;  /* Light gray background */
+    width: 300px;
+    height: 150px;
+    background: #ffffff;  
     /* border: 2px solid #00B0F0;   */
     display: flex;
     align-items: center;
     justify-content: center;
     /* color: #000000; */
-    font-size: 18px;
+    font-size: 24px;
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
-    border-radius: 5px;
-}
+    border-radius: 7px;
+    margin: 20px;
+    /* padding-left: 5px; 
+    /* margin-bottom: 20px;
+    margin-top: 20px;*/
+} 
 
 .menu-item:hover {
     /* background: #00B0F0; */
@@ -110,10 +120,10 @@ body {
 /* Main content area */
 .non-sidebar {
     flex: 1;
-    padding: 40px;
+    padding: 80px;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: left;
+    /* align-items: center; */
     background: #e4e5ee;
 }
 
@@ -121,7 +131,7 @@ body {
 .default-view {
     width: 90%;
     height: 90%;
-    background: #ffffff;  
+    background: #e4e5ee;  
     display: flex;
     justify-content: center;
     align-items: center;
@@ -129,13 +139,19 @@ body {
 }
 
 .default-view img {
-    max-width: 100%;  /* Increased from 90% to 95% */
-    max-height: 90%;  /* Increased from 90% to 95% */
+    max-width: 100%;
+    max-height: 90%;
     object-fit: contain;
-    border-radius: 7px; 
-    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
-        /* width: 1200px;   
-    height: 800px;    */
+    border-radius: 7px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15),  /* Soft outer shadow */
+                0 5px 15px rgba(0, 0, 0, 0.12);    /* Inner shadow for depth */
+    transition: box-shadow 0.3s ease;              /* Smooth shadow transition */
+}
+
+/* Optional: Add slightly stronger shadow on hover */
+.default-view img:hover {
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2),   /* Stronger outer shadow */
+                0 8px 20px rgba(0, 0, 0, 0.15);    /* Stronger inner shadow */
 }
 
 /* Hide other views by default */
@@ -152,9 +168,9 @@ body {
 }
 
 /* Remove border from last item */
-.menu-item:last-child {
+/* .menu-item:last-child {
     border-bottom: none;
-}
+} */
 
 /* Update menu item icons */
 .menu-item img {
@@ -164,14 +180,6 @@ body {
     transition: transform 0.3s ease;
 }
 
-/* Update menu item text */
-.menu-item span {
-    font-size: 26px;  /* Smaller text */
-    font-weight: 500;
-    color: #c73c3c;
-    margin-top: 10px;
-    padding-left: 10px;
-}
 
 /* Hover and focus states */
 .menu-item:hover:not(.active),
@@ -179,7 +187,7 @@ body {
     /* background: linear-gradient(135deg, #00b0f0, #0098d6); */
     color: white;
     transform: scale(1.02);
-    box-shadow: 0 4px 8px rgba(0, 176, 240, 0.2);
+    /* box-shadow: 0 4px 8px rgba(0, 176, 240, 0.2); */
 }
 
 .menu-item:hover:not(.active) img,
@@ -193,11 +201,7 @@ body {
     color: white;  /* Make text white on hover/focus */
 }
 
-.menu-item.active {
-    background: linear-gradient(135deg, #00b0f0, #0098d6);
-    color: white;
-    box-shadow: 0 4px 8px rgba(0, 176, 240, 0.2);
-}
+
 
 .menu-item.active img {
     filter: brightness(0) invert(1);
@@ -656,10 +660,10 @@ div.Input_Output {
 .clinical-services-view,
 .hospital-info-view {
     background-color: #f5f9ff;
-    height: calc(100vh - 60px);
+    height: calc(100vh - 25vh);
     overflow: hidden;
     margin-left: 20%;
-    width: 80%;
+    width: 100%;
     padding-top: 120px;
     padding-right: 40px;
     padding-left: 40px;
@@ -1202,6 +1206,11 @@ body.refreshing::after {
     box-shadow: 0 4px 8px rgba(3, 95, 3, 0.2);  /* Green shadow */
 }
 
+.menu-item[data-type="hospitalinfo"] span {
+    color: #00BAA3;  /* Specific blue color for entertainment text */
+}
+
+
 /* Update the image source on hover/focus for hospital info button */
 .menu-item[data-type="hospitalinfo"]:hover:not(.active) img,
 .menu-item[data-type="hospitalinfo"]:focus:not(.active) img {
@@ -1221,6 +1230,10 @@ body.refreshing::after {
     color: white;
     transform: scale(1.02);
     box-shadow: 0 4px 8px rgba(214, 7, 7, 0.2);  /* Red shadow */
+}
+
+.menu-item[data-type="my-care"] span {
+    color: #AD3054;  /* Specific blue color for entertainment text */
 }
 
 /* Update the image source on hover/focus for my care button */
@@ -1243,13 +1256,18 @@ body.refreshing::after {
     transform: scale(1.02);
     box-shadow: 0 4px 8px rgba(255, 140, 0, 0.2);  /* Orange shadow */
 }
+.menu-item[data-type="clinical-services"] span {
+    color: #ff8c00;  /* Specific blue color for entertainment text */
+}
 
 /* Update the image source on hover/focus for clinical services button */
 .menu-item[data-type="clinical-services"]:hover:not(.active) img,
 .menu-item[data-type="clinical-services"]:focus:not(.active) img {
     content: url("logos/sidemenu/clinicalserviceshover.png");  /* Switch to hover image */
     transform: scale(1.1);
-}
+    /* filter: invert(65%) sepia(75%) saturate(4000%) hue-rotate(360deg) brightness(103%) contrast(104%);  */
+    
+} 
 
 .menu-item[data-type="clinical-services"]:hover:not(.active) span,
 .menu-item[data-type="clinical-services"]:focus:not(.active) span {
@@ -1263,6 +1281,9 @@ body.refreshing::after {
     color: white;
     transform: scale(1.02);
     box-shadow: 0 4px 8px rgba(0, 176, 240, 0.2);  /* Blue shadow */
+}
+.menu-item[data-type="entertainment"] span {
+    color: #0098d6;  /* Specific blue color for entertainment text */
 }
 
 /* Update the image source on hover/focus for entertainment button */
@@ -1319,9 +1340,9 @@ body.refreshing::after {
 }
 
 /* Add specific spacing after entertainment button */
-.menu-item[data-type="entertainment"] {
+/* .menu-item[data-type="entertainment"] {
     margin-bottom: 0;  /* Remove extra space after entertainment button */
-}
+/*} */
 
 
 .radio-view {
@@ -1335,3 +1356,5 @@ body.refreshing::after {
     flex-wrap: wrap;
     gap: 100px;
 }
+
+
