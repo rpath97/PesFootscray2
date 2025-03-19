@@ -36,7 +36,7 @@ function WIXPResponseHandler(WIXPResponseJSON) {
 						//channelSelection(default_chan_no);
 					} else if (parsedWIXPJSON.CommandDetails.ChannelSelectionStatus == 'Started'){
 						const tv_buffer = document.getElementById("loadingGif");
-						setTimeout(()=>tv_buffer.style.display = 'none', 1000);
+						setTimeout(()=>tv_buffer.style.display = 'none', 2000);
 						//document.getElementById("loadingGif").style.display = 'none';
 						tvChannelsApp('Activate');
 					}	

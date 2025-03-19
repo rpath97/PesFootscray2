@@ -33,8 +33,8 @@ function UtilityToggleLogsWindow(){
 		document.getElementById('logmsgcallback').style.display = "flex";
 		document.getElementById('logmsg').style.display = "flex";
 		
-		document.getElementById('ButtonToggleLogs').innerHTML="Hide Logs";
-		document.getElementById('ButtonToggleLogs').style.display="none";
+		// document.getElementById('ButtonToggleLogs').innerHTML="Hide Logs";
+		// document.getElementById('ButtonToggleLogs').style.display="none";
 
 	}
 	else
@@ -47,8 +47,8 @@ function UtilityToggleLogsWindow(){
 		document.getElementById('IDJAPITFromTV').style.display = "none";
 		document.getElementById('IDJAPITToTV_Misc').style.display = "none";
 		
-		document.getElementById('ButtonToggleLogs').innerHTML="Show Logs";
-		document.getElementById('ButtonToggleLogs').style.display="none";
+		// document.getElementById('ButtonToggleLogs').innerHTML="Show Logs";
+		// document.getElementById('ButtonToggleLogs').style.display="none";
 	}
 }
 

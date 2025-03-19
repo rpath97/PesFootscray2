@@ -142,7 +142,7 @@ function handleReachClick() {
     current_page = "pdf-viewers";
     //const pdf_canvas = document.getElementById('pdf-canvas');
     const proxyUrl = "https://cors-anywhere.herokuapp.com/";
-    renderPDF('https://api.printnode.com/static/test/pdf/multipage.pdf', current_page);
+    renderPDF2('https://api.printnode.com/static/test/pdf/multipage.pdf', current_page);
     //pdf_canvas.style.display = 'flex';
     document.getElementById("pdf-viewers").style.display = 'flex';
 }
