@@ -91,36 +91,53 @@ async function renderPDF2(url, pdf_container_id) {
 
 //non-canvas: html canvas block
 function renderPDF3(url, pdf_container_id) {
-    pdfjsLib.GlobalWorkerOptions.workerSrc = "pdf.worker.js";
+    //pdfjsLib.GlobalWorkerOptions.workerSrc = "pdf.worker.js";
 
     const container = document.getElementById(pdf_container_id);
     container.innerHTML = ''; // Clear previous content
 
-    pdfjsLib.getDocument(url).promise.then(pdf => {
-        for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
-            pdf.getPage(pageNum).then(page => {
-                const scale = 1.5;
-                const viewport = page.getViewport({ scale });
+    // var pdfjsLib = window['pdfjs-dist/build/pdf'];
+    //PDFJS.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/1.10.100/pdf.worker.min.js';
+    PDFJS.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/1.0.907/pdf.worker.js';
 
-                const canvas = document.createElement('canvas');
-                const context = canvas.getContext('2d');
-                canvas.width = viewport.width;
-                canvas.height = viewport.height;
-
-                const renderContext = {
-                    canvasContext: context,
-                    viewport: viewport
-                };
-                page.render(renderContext).promise.then(() => {
-                    // Convert Canvas to Image
-                    const img = document.createElement('img');
-                    img.src = canvas.toDataURL('image/png');
-                    img.style.width = '100%'; // Fit within container
-                    container.appendChild(img);
-                });
-            });
-        }
-    });
+    try {
+        PDFJS.getDocument(url).then(function (pdf) {
+            console.log("PDF loaded, pages:", pdf.numPages);
+    
+            for (var pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+                (function (pageNum) { // Use IIFE to capture pageNum correctly
+                    pdf.getPage(pageNum).then(function (page) {
+                        var scale = 1.5;
+                        var viewport = page.getViewport(scale);
+    
+                        var canvas = document.createElement('canvas');
+                        var context = canvas.getContext('2d');
+                        canvas.width = viewport.width;
+                        canvas.height = viewport.height;
+    
+                        var renderContext = {
+                            canvasContext: context,
+                            viewport: viewport
+                        };
+    
+                        page.render(renderContext).then(function () {
+                            var img = document.createElement('img');
+                            img.src = canvas.toDataURL('image/png');
+                            img.style.width = '100%';
+                            container.appendChild(img);
+                        });
+                    });
+                })(pageNum);
+            }
+        }).catch(function (error) {
+            console.error("Error loading PDF:", error);
+        });
+    } catch (err) {
+        console.log(err)
+        document.getElementById("logmsgcallback").value += '\n' + "Erro fetch pdf url" + err + '\n';
+		document.getElementById("logmsgcallback").scrollTop = document.getElementById("logmsgcallback").scrollHeight;
+    }
+    
     
 }
 
