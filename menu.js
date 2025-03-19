@@ -171,6 +171,7 @@ function backTemp() {
         // current_page = "pdf-viewer-3";
         // previous_page = "hospitalinfo_menu";
         //openInternetWithPdf('Deactivate');
+        document.getElementById('pdf-viewer-3').style.display = 'none';
     }
     document.getElementById(current_page).style.display = 'none';
     document.getElementById(previous_page).style.display = 'block';

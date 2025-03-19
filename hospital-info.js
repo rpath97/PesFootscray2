@@ -134,8 +134,8 @@ function handleRightsClick() {
 function handleReachClick() {
     document.getElementById(current_page).style.display = 'none';
     previous_page = current_page;
-    current_page = "pdf-viewer-2";
-    document.getElementById('pdf-viewer-2').style.display = 'flex';
+    current_page = "pdf-viewer-3";
+    document.getElementById('pdf-viewer-3').style.display = 'flex';
     document.getElementById("pdf-viewers").style.display = 'flex';
 }
 

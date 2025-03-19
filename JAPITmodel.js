@@ -35,8 +35,9 @@ function WIXPResponseHandler(WIXPResponseJSON) {
 						
 						//channelSelection(default_chan_no);
 					} else if (parsedWIXPJSON.CommandDetails.ChannelSelectionStatus == 'Started'){
+						const tv_buffer = document.getElementById("loadingGif");
+						setTimeout(()=>tv_buffer.style.display = 'none', 1000);
 						//document.getElementById("loadingGif").style.display = 'none';
-						document.getElementById("loadingGif").style.display = 'none';
 						tvChannelsApp('Activate');
 					}	
 				}
@@ -407,6 +408,10 @@ function keyHandler(keyCode) {
 					changeCDBstate('Activate');
 					break;
 				} else if (current_page == 'tv_view') {
+					if (channel_list_view_on == true){
+						tvChannelsList('Deactivate');
+						break;
+					}
 					current_page = "entertainment_menu";
 					previous_page = "default_view";
 					setRcControlSelective();

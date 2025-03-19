@@ -4,6 +4,7 @@
 // Global variables
 var radioOn = 0;
 var castState = 0;
+var channel_list_view_on = false;
 
 // Channel Selection
 function channelSelection(chan_no) {
@@ -210,6 +211,12 @@ function tvChannelsApp(state) {
 }
 // Shows Channels List
 function tvChannelsList(state) {
+	// setting channel list view status
+	if (state == 'Activate'){
+		channel_list_view_on = true;
+	} else if (state == 'Deactivate') {
+		channel_list_view_on = false;
+	}
 	var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
 	
 	JAPITObjForWIXPSvc.Cookie  = 13;
@@ -318,7 +325,7 @@ function openInternetWithPdf(state) {
 		"ApplicationDetails": {
 			"ApplicationName": 'Internet',
 			"ApplicationAttributes": {
-				"WebsiteURL": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+				"WebsiteURL": "https://pdfobject.com/pdf/sample.pdf"
 			}
 		},
 		"ApplicationState": state,
