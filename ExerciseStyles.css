@@ -70,7 +70,7 @@ body {
 .sidebar {
     width: 430px;
      background:#fafafaf0; /*#e1e1e1c4   */
-    padding: 40px;
+    padding: 20px;
     height: 92.5vh;
     
 }
@@ -78,23 +78,24 @@ body {
 
 .sidebar-menu {
     background: #fafafaf0;
-    margin-top: 40px;  /* Pushes sidebar content down */
-    /* padding: 30px; */
-    height: 75vh;
-    /* width: calc(100% - 20px); */
+    height: 78vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 100px; 
+    justify-content: flex-start;  /* Align to the top first */
+    gap: 30px;
     margin-bottom: 20px;
+    padding-top: 100px; /* Adjust this value to lower the buttons */
 }
 
+/* .menu-item:first-child {
+    margin-top: 120px; /* Adjust this value 
+} */
 
 /* Menu buttons */
 .menu-item {
-    width: 300px;
-    height: 150px;
+    width: 100%;
+    height: 100%;
     background: #ffffff;  
     /* border: 2px solid #00B0F0;   */
     display: flex;
@@ -120,7 +121,7 @@ body {
 /* Main content area */
 .non-sidebar {
     flex: 1;
-    padding: 80px;
+    padding: 10px;  /* reduced from 80px to 10px */
     display: flex;
     justify-content: left;
     /* align-items: center; */
@@ -129,8 +130,8 @@ body {
 
 /* Default view with Footscray Hospital logo */
 .default-view {
-    width: 90%;
-    height: 90%;
+    width: 100%;  /* Ensure it spans the available space */
+    height: calc(100vh - 60px);  /* Adjust height to fit well */
     background: #e4e5ee;  
     display: flex;
     justify-content: center;
@@ -138,15 +139,18 @@ body {
     padding: 20px;
 }
 
+/* Make sure the image properly fits within the highlighted area */
 .default-view img {
-    max-width: 100%;
-    max-height: 90%;
-    object-fit: contain;
-    border-radius: 7px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15),  /* Soft outer shadow */
-                0 5px 15px rgba(0, 0, 0, 0.12);    /* Inner shadow for depth */
-    transition: box-shadow 0.3s ease;              /* Smooth shadow transition */
+    width: 95%;  /* Reduce width slightly for better spacing */
+    height: auto;  /* Maintain aspect ratio */
+    max-height: 85vh;  /* Limit max height to avoid overflow */
+    object-fit: cover;  /* Ensure it fills the space nicely */
+    border-radius: 12px; /* Smoother rounded corners */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15),  
+                0 5px 15px rgba(0, 0, 0, 0.12);
+    transition: box-shadow 0.3s ease;
 }
+
 
 /* Optional: Add slightly stronger shadow on hover */
 .default-view img:hover {
@@ -155,12 +159,12 @@ body {
 }
 
 /* Hide other views by default */
-.entertainment-view,
+/* .entertainment-view,
 .hospital-info-view,
 .my-care-view,
 .clinical-services-view {
     display: none;
-}
+} */
 
 /* Utility class for active view */
 .active {
@@ -174,10 +178,13 @@ body {
 
 /* Update menu item icons */
 .menu-item img {
-    width: 50px;  /* Smaller icons */
-    height: 50px;
-    margin-bottom: 8px;
+    width: 70px;  /* Smaller icons */
+    height: 70px;
+    /* margin-bottom: 8px; */
     transition: transform 0.3s ease;
+    align-self: initial;
+    margin-left: -10px;
+    padding-left: 0px;
 }
 
 
@@ -288,7 +295,7 @@ body {
 .entertainment-card[data-type="tv"],
 .entertainment-card[data-type="movies"],
 .entertainment-card[data-type="radio"] {
-    margin-top: 100px;  /* Add space above main menu items */
+    margin-top: 0px;  /* Add space above main menu items */
 }
 
 .entertainment-card[data-type="tv"] img,
@@ -315,17 +322,92 @@ body {
     transition: opacity 0.3s ease-in-out;
 }
 
+
+
 /* Entertainment view background */
 .entertainment-view {
-    background-color: #8f9195;
-    height: calc(100vh - 60px);
-    overflow: hidden;
-    margin-left: 20%;
-    width: 80%;
-    padding: 50px;
-    padding-top: 100px;
-    display: none;  /* Hidden by default */
+    background-color: #e4e5ee;
+    padding: 40px;
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr; /* Default: 1 column */
+    gap: 20px;
+    justify-content: center;
 }
+
+/* Entertainment card styles */
+.entertainment-card {
+    width: 100%;
+    max-width: 400px; /* Prevents oversized cards */
+    min-height: 180px;
+    background: #ffffff;
+    border: none;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    padding: 60px;
+    margin: 0 auto;
+}
+
+/* Responsive grid for medium screens (3 cards per row) */
+@media (min-width: 768px) {
+    .entertainment-view {
+        grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+    }
+}
+
+/* Ensure Casting button appears below Television */
+@media (min-width: 768px) {
+    .casting-card {
+        grid-column: 1 / span 1; /* Places Casting under the first column (Television) */
+    }
+}
+
+
+
+.entertainment-card img {
+    width: 200px;
+    height: 60px;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.entertainment-card span {
+    font-size: 24px;
+    font-weight: 500;
+    color: #05CBF9;
+}
+
+/* Hover effects */
+.entertainment-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.entertainment-card:hover img {
+    transform: scale(1.1);
+}
+
+/* Spacing adjustments */
+.row.g-4 {
+    --bs-gutter-y: 2rem;
+}
+
+.mt-4 {
+    margin-top: 2rem !important;
+}
+
+/* Specific row gap for streaming services */
+/* .entertainment-grid .col:nth-child(n+4) {
+    margin-top: 60px;
+}
+.row.g-4 {
+    gap: 15px !important;
+} */
+
 
 /* Back Button */
 .back-button {
@@ -432,147 +514,6 @@ div.Input_Output {
     color: #333;
 }
 
-/* Hospital Information Grid Layout */
-.hospital-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 80px;
-    gap: 120px;  /* Increased from 80px to 120px */
-    padding: 40px;
-    justify-content: center;
-    align-items: center;
-}
-
-.hospital-card {
-    background: white;
-    border-radius: 12px;
-    padding: 50px;
-    text-align: center;
-    color: #2c3e50;
-    transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
-    justify-content: center;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    border: none;
-    cursor: pointer;
-    height: 400px;
-    width: 400px;
-    position: relative;
-    overflow: hidden;
-    -japit-focusable: true;
-    -japit-selectable: true;
-}
-
-.hospital-card img {
-    width: 180px;
-    height: 180px;
-    transition: transform 0.3s ease;
-}
-
-.hospital-card span {
-    font-size: 32px;
-    font-weight: 500;
-    color: #2c3e50;
-    margin-top: 15px;
-    text-align: center;
-    line-height: 1.2;
-}
-
-/* My Care view container */
-.my-care-view {
-    background-color: #f5f5f5;  /* Light gray background */
-    height: calc(100vh - 60px);
-    overflow: hidden;
-    margin-left: 20%;
-    width: 80%;
-    padding: 40px;
-    display: none;  /* Hidden by default */
-}
-
-/* My Care Grid Layout */
-.my-care-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 80px;  /* Match reach button grid gap */
-    padding: 40px;
-    justify-content: center;
-    align-items: center;
-}
-
-/* My Care Card Styles - Updated to match reach button dimensions */
-.mycare-card {
-    width: 400px;  /* Match reach button width */
-    height: 400px; /* Match reach button height */
-    background: white;
-    border-radius: 12px;  /* Match reach button border radius */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;  /* Increased gap between elements */
-    transition: all 0.3s ease;
-    cursor: pointer;
-    padding: 50px;  /* Match reach button padding */
-    margin: 0 auto;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-}
-
-/* Update image sizes */
-.mycare-card img {
-    width: 180px;  /* Match reach button image size */
-    height: 180px;
-    object-fit: contain;
-    transition: transform 0.3s ease;
-}
-
-/* Update text styling */
-.mycare-card span {
-    font-size: 32px;  /* Match reach button font size */
-    font-weight: 500;
-    color: #AD3054;
-    margin-top: 15px;
-    text-align: center;
-    line-height: 1.2;
-}
-
-/* Update hover/focus effects */
-.mycare-card:hover,
-.mycare-card:focus {
-    transform: scale(1.05);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-    background: linear-gradient(135deg, #d60707, #d60707);  /* Red gradient */
-}
-
-
-/* Common hover/focus effects */
- .mycare-card:hover,
-.mycare-card:focus {
-    transform: scale(1.05);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-    background: linear-gradient(135deg, #d60707, #d60707);  /* Red gradient */
- }
-
-.mycare-card:hover span,
-.mycare-card:focus span {
-    color: white;  /* Keep text white on hover/focus */
-}
-
-.mycare-card:hover img,
-.mycare-card:focus img {
-    transform: scale(1.1);
-    filter: brightness(0) invert(1);  /* Keep image white on hover/focus */
-}
-
-/* Card border colors */
-.mycare-card[data-type="management-and-discharge"],
-.mycare-card[data-type="carers-survey"],
-.mycare-card[data-type="patient-survey"],
-.mycare-card[data-type="blacktown-surveys"] {
-    border-top: 4px solid #c41e3a; /*border line on top of card */
-}
 
 /* Clinical Services Grid Layout */
 .clinical-grid {
@@ -607,55 +548,41 @@ div.Input_Output {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
-/* Clinical card hover/focus effects */
-.clinical-card:hover, .clinical-card:focus {
-    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-    background: linear-gradient(135deg, #d8bb15, #d8bb15);
+/* Update hover and focus effects for clinical card */
+.clinical-card:hover, 
+.clinical-card:focus {
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, #ff8c00, #ff8c00);  /* Changed from yellow to orange */
     transform: scale(1.1);
     z-index: 2;
-   
 }
 
-.clinical-card img {
-    width: 140px;
-    height: 140px;
-    transition: transform 0.3s ease;
-}
-
-.clinical-card:hover img, .clinical-card:focus img {
-    transform: scale(1.1);
-    filter: brightness(0) invert(1);
-}
-
-.clinical-card span {
-    font-size: 32px;
-    font-weight: 500;
-    color: #2c3e50;
-    margin-top: 15px;
-    text-align: center;
-    line-height: 1.2;
-}
-
+/* Update text and image color on hover/focus */
 .clinical-card:hover span,
 .clinical-card:focus span {
     color: white;
+}
+
+.clinical-card:hover img,
+.clinical-card:focus img {
+    filter: brightness(0) invert(1);  /* Makes the image white */
 }
 
 /* Specific grid areas for clinical cards */
 .clinical-card[data-type="sharing"] { grid-area: sharing; }
 
 /* Clinical Services view background */
-.clinical-services-view {
+/* .clinical-services-view {
     background-color: #f5f9ff;
     height: calc(100vh - 60px);
     overflow: hidden;
     margin-left: 20%;
     width: 80%;
     padding: 40px;
-}
+} */
 
 /* Update the full-width state for content views sidemenu bar */
-.entertainment-view,
+/* .entertainment-view,
 .my-care-view,
 .clinical-services-view,
 .hospital-info-view {
@@ -667,7 +594,7 @@ div.Input_Output {
     padding-top: 120px;
     padding-right: 40px;
     padding-left: 40px;
-}
+} */
 
 /* Add refresh animation */
 @keyframes refresh-spin {
@@ -755,7 +682,7 @@ body.refreshing::after {
 .hospital-info-card:focus {
     transform: scale(1.05);
     box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-    background: linear-gradient(135deg, #035f03, #035f03);  /* Changed to green gradient */
+    background: linear-gradient(135deg, #00BAA3, #00BAA3);  /* Changed to green gradient */
    
 }
 
@@ -770,22 +697,6 @@ body.refreshing::after {
     filter: brightness(0) invert(1);  /* Keep image white on hover/focus */
 }
 
-/* Add stronger shadow for more depth */
-.entertainment-card:hover,
-.entertainment-card:focus,
-.hospital-info-card:hover,
-.hospital-info-card:focus,
-.mycare-card:hover,
-.mycare-card:focus,
-.clinical-card:hover,
-.clinical-card:focus {
-    box-shadow: 0 12px 20px rgba(0,0,0,0.15) !important;
-}
-
-/* Update grid gaps */
-.row.g-4 {
-    gap: 50px !important;
-}
 
 /* Update container padding */
 .container-fluid {
@@ -996,10 +907,7 @@ body.refreshing::after {
     padding: 40px;
 }
 
-/* Specific row gap for streaming services */
-.entertainment-grid .col:nth-child(n+4) {
-    margin-top: 60px;
-}
+
 
 /* Add a separator class for specific menu items */
 .menu-separator {
@@ -1210,6 +1118,11 @@ body.refreshing::after {
     color: #00BAA3;  /* Specific blue color for entertainment text */
 }
 
+/* Add gap between logo and text for hospital info button */
+.menu-item[data-type="hospitalinfo"] {
+    gap: 10px;  
+}
+
 
 /* Update the image source on hover/focus for hospital info button */
 .menu-item[data-type="hospitalinfo"]:hover:not(.active) img,
@@ -1236,6 +1149,12 @@ body.refreshing::after {
     color: #AD3054;  /* Specific blue color for entertainment text */
 }
 
+/* Add gap between logo and text for my care button */
+.menu-item[data-type="my-care"] {
+    gap: 35px;  
+}
+
+
 /* Update the image source on hover/focus for my care button */
 .menu-item[data-type="my-care"]:hover:not(.active) img,
 .menu-item[data-type="my-care"]:focus:not(.active) img {
@@ -1259,6 +1178,12 @@ body.refreshing::after {
 .menu-item[data-type="clinical-services"] span {
     color: #ff8c00;  /* Specific blue color for entertainment text */
 }
+
+/* Add gap between logo and text for clinical services button */
+.menu-item[data-type="clinical-services"] {
+    gap: 10px;  
+}
+
 
 /* Update the image source on hover/focus for clinical services button */
 .menu-item[data-type="clinical-services"]:hover:not(.active) img,
@@ -1285,6 +1210,12 @@ body.refreshing::after {
 .menu-item[data-type="entertainment"] span {
     color: #0098d6;  /* Specific blue color for entertainment text */
 }
+
+/* Add gap between logo and text for entertainment button */
+.menu-item[data-type="entertainment"] {
+    gap: 10px;  
+}
+
 
 /* Update the image source on hover/focus for entertainment button */
 .menu-item[data-type="entertainment"]:hover:not(.active) img,
@@ -1372,5 +1303,218 @@ body.refreshing::after {
     flex-wrap: wrap;
     gap: 100px;
 }
+
+/* Update hover images for entertainment cards */
+.entertainment-card[data-type="tv"]:hover:not(.active) img,
+.entertainment-card[data-type="tv"]:focus:not(.active) img {
+    content: url("logos/entertainment/televisionhover.png");
+    transform: scale(1.1);
+}
+
+.entertainment-card[data-type="movies"]:hover:not(.active) img,
+.entertainment-card[data-type="movies"]:focus:not(.active) img {
+    content: url("logos/entertainment/movieshover.png");
+    transform: scale(1.1);
+}
+
+.entertainment-card[data-type="radio"]:hover:not(.active) img,
+.entertainment-card[data-type="radio"]:focus:not(.active) img {
+    content: url("logos/entertainment/radiohover.png");
+    transform: scale(1.1);
+}
+
+.entertainment-card[data-type="casting"]:hover:not(.active) img,
+.entertainment-card[data-type="casting"]:focus:not(.active) img {
+    content: url("logos/entertainment/castinghover.png");
+    transform: scale(1.1);
+}
+
+* Hospital info view styles */
+.hospital-info-view {
+    background-color: #e4e5ee;
+    padding: 40px;
+    height: 100%;
+}
+
+/* Hospital info card styles */
+.hospital-info-card {
+    /* width: 400px; */
+    min-height: 180px;
+    background: #ffffff;
+    border: none;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    padding: 60px;
+    margin: 0 auto;
+}
+
+.hospital-info-card img {
+    width: 110px;
+    height: 110px;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.hospital-info-card span {
+    font-size: 30px;
+    font-weight: 700;
+    color: #00BAA3;  /* Hospital info theme color */
+}
+
+/* Hover effects */
+.hospital-info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.hospital-info-card:hover img {
+    transform: scale(1.1);
+}
+
+/* Spacing adjustments */
+.hospital-info-view .row.g-4 {
+    --bs-gutter-x: 30px !important;
+    --bs-gutter-y: 30px !important;
+}
+
+.hospital-info-view .col-md-3 {
+     padding: 8px 85px; /* gap between buttons */
+    margin-bottom: 30px;
+}
+
+.mt-4 {
+    margin-top: 2rem !important;
+}
+
+/* My Care view styles */
+.my-care-view {
+    background-color: #e4e5ee;
+    padding: 40px;
+    height: 100%;
+}
+
+/* My Care card styles */
+.mycare-card {
+    width: 300px;
+    min-height: 180px;
+    background: #ffffff;
+    border: none;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    padding: 60px;
+    margin: 0 auto;
+}
+
+
+.mycare-card img {
+    width: 110px;
+    height: 110px;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.mycare-card span {
+    font-size: 30px;
+    font-weight: 700;
+    color: #AD3054;  /* My Care theme color */
+}
+
+/* Update hover/focus effects */
+.mycare-card:hover,
+.mycare-card:focus {
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    background: linear-gradient(135deg, #d60707, #d60707);  /* Red gradient */
+}
+
+.mycare-card:hover span,
+.mycare-card:focus span {
+    color: white;  /* Keep text white on hover/focus */
+}
+
+.mycare-card:hover img,
+.mycare-card:focus img {
+    transform: scale(1.1);
+    filter: brightness(0) invert(1);  /* Keep image white on hover/focus */
+}
+
+/* Spacing adjustments */
+.my-care-view .row.g-4 {
+    --bs-gutter-x: 30px !important;
+    --bs-gutter-y: 30px !important;
+}
+
+.my-care-view .col-md-3 {
+    padding: 8px 85px;  /* gap between buttons */
+    margin-bottom: 30px;
+}
+
+/* Clinical services view styles */
+.clinical-services-view {
+    background-color: #e4e5ee;
+    padding: 40px;
+    height: 100%;
+}
+
+/* Clinical card styles */
+.clinical-card {
+    width: 300px;
+    min-height: 180px;
+    background: #ffffff;
+    border: none;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    padding: 60px;
+    margin: 0 auto;
+}
+
+.clinical-card img {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.clinical-card span {
+    font-size: 33px;
+    font-weight: 700;
+    color: #ff8c00;  /* Clinical services theme color */
+}
+
+/* Hover effects */
+.clinical-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.clinical-card:hover img {
+    transform: scale(1.1);
+}
+
+/* Spacing adjustments */
+.clinical-services-view .row.g-4 {
+    --bs-gutter-x: 30px !important;
+    --bs-gutter-y: 30px !important;
+}
+
+.clinical-services-view .col-md-3 {
+    padding: 8px 85px;  /* gap between buttons */
+    margin-bottom: 30px;
+}
+
+
+
 
 
