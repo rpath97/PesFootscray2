@@ -131,7 +131,7 @@ function handleRightsClick() {
     // document.getElementById("pdf-viewers").style.display = 'flex';
     //const pdf_canvas = document.getElementById('pdf-canvas');
     const proxyUrl = "https://cors-anywhere.herokuapp.com/";
-    renderPDF('https://pdfobject.com/pdf/sample.pdf', current_page);
+    renderPDF3('https://pdfobject.com/pdf/sample.pdf', current_page);
     //pdf_canvas.style.display = 'flex';
     document.getElementById("pdf-viewers").style.display = 'flex';
 }
@@ -142,7 +142,7 @@ function handleReachClick() {
     current_page = "pdf-viewers";
     //const pdf_canvas = document.getElementById('pdf-canvas');
     const proxyUrl = "https://cors-anywhere.herokuapp.com/";
-    renderPDF2('https://api.printnode.com/static/test/pdf/multipage.pdf', current_page);
+    renderPDF3('https://api.printnode.com/static/test/pdf/multipage.pdf', current_page);
     //pdf_canvas.style.display = 'flex';
     document.getElementById("pdf-viewers").style.display = 'flex';
 }

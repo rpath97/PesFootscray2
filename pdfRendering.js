@@ -88,3 +88,40 @@ async function renderPDF2(url, pdf_container_id) {
     }
     
 }
+
+//non-canvas: html canvas block
+function renderPDF3(url, pdf_container_id) {
+    pdfjsLib.GlobalWorkerOptions.workerSrc = "pdf.worker.js";
+
+    const container = document.getElementById(pdf_container_id);
+    container.innerHTML = ''; // Clear previous content
+
+    pdfjsLib.getDocument(url).promise.then(pdf => {
+        for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+            pdf.getPage(pageNum).then(page => {
+                const scale = 1.5;
+                const viewport = page.getViewport({ scale });
+
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
+
+                const renderContext = {
+                    canvasContext: context,
+                    viewport: viewport
+                };
+                page.render(renderContext).promise.then(() => {
+                    // Convert Canvas to Image
+                    const img = document.createElement('img');
+                    img.src = canvas.toDataURL('image/png');
+                    img.style.width = '100%'; // Fit within container
+                    container.appendChild(img);
+                });
+            });
+        }
+    });
+    
+}
+
+
