@@ -134,8 +134,11 @@ function handleRightsClick() {
 function handleReachClick() {
     document.getElementById(current_page).style.display = 'none';
     previous_page = current_page;
-    current_page = "pdf-viewer-3";
-    document.getElementById('pdf-viewer-3').style.display = 'flex';
+    current_page = "pdf-viewers";
+    //const pdf_canvas = document.getElementById('pdf-canvas');
+    const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+    renderPDF('https://api.printnode.com/static/test/pdf/multipage.pdf', current_page);
+    //pdf_canvas.style.display = 'flex';
     document.getElementById("pdf-viewers").style.display = 'flex';
 }
 
