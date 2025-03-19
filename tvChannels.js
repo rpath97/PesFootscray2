@@ -14,9 +14,11 @@ function openTV() {
     current_page = 'tv_view';
     document.getElementById("loadingGif").style.display = 'flex';
     setArrowButtonsVirtual(); //disabling arrow keys
+    
     // SETTING RADIO CHANNEL STATUS
     if (radio_channel_on != 0){
 		radio_channel_on = 2;
+        removeRadioChannels(radio_channel_num_list);
 	}
     //Ensuring multiple clicks of the button consecutively doesn't keep on removing and adding channels
     if (tv_channel_on == 0){

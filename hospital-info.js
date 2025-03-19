@@ -124,8 +124,11 @@ function handleRightsClick() {
     // }
     document.getElementById(current_page).style.display = 'none';
     previous_page = current_page;
-    current_page = "pdf-viewer-3";
-    document.getElementById('pdf-viewer-3').style.display = 'flex';
+    current_page = "pdf-viewers";
+    // document.getElementById('pdf-viewer-3').style.display = 'flex';
+    document.getElementById("pdfViewer").data = 'https://pdfobject.com/pdf/sample.pdf';
+    document.getElementById("pdfViewer").style.display = 'flex';
+    document.getElementById("pdf-viewers").style.display = 'flex';
 }
 
 function handleReachClick() {
@@ -133,6 +136,7 @@ function handleReachClick() {
     previous_page = current_page;
     current_page = "pdf-viewer-2";
     document.getElementById('pdf-viewer-2').style.display = 'flex';
+    document.getElementById("pdf-viewers").style.display = 'flex';
 }
 
 function clearHospitalInfoActive() {

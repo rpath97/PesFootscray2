@@ -280,7 +280,7 @@ function setArrowButtonsVirtual() {
 				{ "vkkey": "HBBTV_VK_YOUTUBE" },
 				{ "vkkey": "HBBTV_VK_WEATHER" },
 				//{"vkkey": "	HBBTV_VK_SETTINGS"}, //doesn't affect settings button
-				//{ "vkkey": "HBBTV_VK_OPTIONS" },
+				{ "vkkey": "HBBTV_VK_OPTIONS" },
 				{ "vkkey": "HBBTV_VK_1" },
 				{ "vkkey": "HBBTV_VK_2" },
 				{ "vkkey": "HBBTV_VK_3" },
