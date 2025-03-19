@@ -126,8 +126,13 @@ function handleRightsClick() {
     previous_page = current_page;
     current_page = "pdf-viewers";
     // document.getElementById('pdf-viewer-3').style.display = 'flex';
-    document.getElementById("pdfViewer").data = 'https://pdfobject.com/pdf/sample.pdf';
-    document.getElementById("pdfViewer").style.display = 'flex';
+    // document.getElementById("pdfViewer").data = 'https://pdfobject.com/pdf/sample.pdf';
+    // document.getElementById("pdfViewer").style.display = 'flex';
+    // document.getElementById("pdf-viewers").style.display = 'flex';
+    //const pdf_canvas = document.getElementById('pdf-canvas');
+    const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+    renderPDF('https://pdfobject.com/pdf/sample.pdf', current_page);
+    //pdf_canvas.style.display = 'flex';
     document.getElementById("pdf-viewers").style.display = 'flex';
 }
 
