@@ -8,6 +8,7 @@
 var current_page = "default_view";
 var previous_page = "";
 var dashboard_on = true;
+var videoPlaying = false;
 
 
 function Exercise01ModelInit() {
@@ -292,6 +293,73 @@ function setArrowButtonsVirtual() {
 	sendWIxPCommand(JAPITObjForWIXPSvc);
 	delete JAPITObjForWIXPSvc;
 }
+// MAKING ALL BUTTONS EXCPET BACK & HOME TO VIRTUAL KEYS
+function setBackHomeVirtual() {
+
+	var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
+	JAPITObjForWIXPSvc.Cookie = 6;
+	JAPITObjForWIXPSvc.CmdType = "Change";
+	JAPITObjForWIXPSvc.Fun = "UserInputControl";
+	JAPITObjForWIXPSvc.CommandDetails = {
+		"VirtualKeyForwardMode": "SelectiveVirtualKeyForward",
+		"VirtualKeyToBeForwarded":
+			[
+				{ "vkkey": "HBBTV_VK_MENU" }, // Home Button
+				{ "vkkey": "HBBTV_VK_BACK" }, // not existing
+
+			]
+	}
+
+	sendWIxPCommand(JAPITObjForWIXPSvc);
+	delete JAPITObjForWIXPSvc;
+}
+// MAKING ACEPT VIRTUAL FOR VIDEO PAUSE PLAY
+function setVideoKeys() {
+
+	var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
+	JAPITObjForWIXPSvc.Cookie = 6;
+	JAPITObjForWIXPSvc.CmdType = "Change";
+	JAPITObjForWIXPSvc.Fun = "UserInputControl";
+	JAPITObjForWIXPSvc.CommandDetails = {
+		"VirtualKeyForwardMode": "SelectiveVirtualKeyForward",
+		"VirtualKeyToBeForwarded":
+			[
+				{ "vkkey": "HBBTV_VK_CLOCK" },
+				// { "vkkey" : "HBBTV_VK_SMARTTV" },
+				//{ "vkkey" : "HBBTV_VK_CHANNELGRID" },
+				{ "vkkey": "HBBTV_VK_ALARM" },
+				{ "vkkey": "HBBTV_VK_SMARTINFO" },
+				// { "vkkey" : "HBBTV_VK_SOURCE" },
+				{ "vkkey": "HBBTV_VK_TV" },
+				// { "vkkey" : "HBBTV_VK_FORMAT" },
+				//{ "vkkey" : "HBBTV_VK_HOME" }, // not existing
+				// { "vkkey" : "HBBTV_VK_PLAY_PAUSE" }, // previously was VK_OSRC
+				{ "vkkey": "HBBTV_VK_GUIDE" },
+				//{ "vkkey" : "HBBTV_VK_UP" }, // not existing
+				// { "vkkey" : "HBBTV_VK_INFO" },
+				{ "vkkey" : "HBBTV_VK_LEFT" }, // not existing
+				{ "vkkey" : "HBBTV_VK_ACCEPT" }, // not existing
+				{ "vkkey" : "HBBTV_VK_RIGHT" }, // not existing
+				{ "vkkey": "HBBTV_VK_ADJUST" }, //SETTINGS BUTTON
+				//{ "vkkey" : "HBBTV_VK_DOWN" }, // not existing
+				{ "vkkey": "HBBTV_VK_MENU" }, // Home Button
+				{ "vkkey": "HBBTV_VK_BACK" }, // not existing
+				{ "vkkey": "HBBTV_VK_RED" },
+				{ "vkkey": "HBBTV_VK_GREEN" },
+				{ "vkkey": "HBBTV_VK_YOUTUBE" },
+				{ "vkkey": "HBBTV_VK_WEATHER" },
+				//{"vkkey": "	HBBTV_VK_SETTINGS"}, //doesn't affect settings button
+				{ "vkkey": "HBBTV_VK_OPTIONS" },
+				{ "vkkey": "HBBTV_VK_1" },
+				{ "vkkey": "HBBTV_VK_2" },
+				{ "vkkey": "HBBTV_VK_3" },
+				{ "vkkey": "HBBTV_VK_4" }
+			]
+	}
+
+	sendWIxPCommand(JAPITObjForWIXPSvc);
+	delete JAPITObjForWIXPSvc;
+}
 
 function changeCDBstate(state) {
 	//updating ui status
@@ -312,10 +380,25 @@ function changeCDBstate(state) {
 	sendWIxPCommand(JAPITObjForWIXPSvc);
 }
 
+var keyPressTimer;
+const LONG_PRESS_DELAY = 500; // Time in milliseconds to detect long press
 function keyDownHandler(e) {
 	keyHandler(e.keyCode);
 	// document.getElementById("logmsgcallback").value += '\n' + 'Remote Key Press: '+e.keyCode + '\n';
 	// document.getElementById("logmsgcallback").scrollTop=document.getElementById("logmsgcallback").scrollHeight;
+	if (current_page == 'video-frame'){
+		if (keyPressTimer) return;
+        keyPressTimer = setInterval(() => {
+            console.log("Long press detected:");
+            startSeeking();
+        }, LONG_PRESS_DELAY);
+	}
+}
+
+function startSeeking() {
+	console.log("Seeking")
+	document.getElementById("logmsgcallback").value += '\n' + 'Long Press deteched' + '\n';
+	document.getElementById("logmsgcallback").scrollTop=document.getElementById("logmsgcallback").scrollHeight;
 }
 
 function OnKeyReceivedHandler(event) {
@@ -357,6 +440,7 @@ function keyHandler(keyCode) {
 					channelStopPlaying(radio_channel_playing);
 					document.querySelector('.sidebar').style.display = 'block';
 				} else if (current_page == 'video-frame') {
+					setRcControlSelective(); //setting virtual keys back to standard
 					const videoSrcFrame = document.getElementById('video-src-iframe');
 					const videoElement = document.getElementById('video-frame');
 					if (videoSrcFrame) {
@@ -365,6 +449,7 @@ function keyHandler(keyCode) {
 						videoElement.pause();
 						// videoElement.removeEventListener("ended", backTemp());
 					}
+					document.removeEventListener("keyup", handleKeyUp);
 				} else if (current_page == 'visiting_hours') {
 					current_page = "hospitalinfo_menu";
 					previous_page = "default_view";
@@ -399,7 +484,7 @@ function keyHandler(keyCode) {
 					element.style.display = 'none';  // Hide the element
 				}
 				break;
-			case VK_BACK:
+			case VK_BACK: //BACK BUTTNO FUNCTIONALITIES //
 				//coming after clinical cast
 				if (current_page == 'clinical_casting') {
 					setRcControlSelective();
@@ -425,6 +510,7 @@ function keyHandler(keyCode) {
 					channelStopPlaying(radio_channel_playing);
 					document.querySelector('.sidebar').style.display = 'block';
 				} else if (current_page == 'video-frame') {
+					setRcControlSelective(); //setting virtual keys back to standard
 					const videoSrcFrame = document.getElementById('video-src-iframe');
 					const videoElement = document.getElementById('video-frame');
 					if (videoSrcFrame) {
@@ -433,6 +519,7 @@ function keyHandler(keyCode) {
 						videoElement.pause();
 						// videoElement.removeEventListener("ended", backTemp());
 					}
+					document.removeEventListener("keyup", handleKeyUp);
 				} else if (current_page == 'visiting_hours') {
 					current_page = "hospitalinfo_menu";
 					previous_page = "default_view";
@@ -445,12 +532,35 @@ function keyHandler(keyCode) {
 				previous_page = "default_view";
 				break;
 			case VK_LEFT: 
+				if (current_page == 'tv_view'){
+					tvChannelsList('Activate');
+				} else if (current_page == 'video-frame') {
+					const videoElement = document.getElementById('video-frame');
+					videoElement.currentTime = Math.max(videoElement.currentTime - 1, 0);
+					break;
+				}
 			case VK_RIGHT:
 				if (current_page == 'tv_view'){
 					tvChannelsList('Activate');
-				} 
+				} else if (current_page == 'video-frame') {
+					const videoElement = document.getElementById('video-frame');
+					videoElement.currentTime = Math.min(videoElement.currentTime + 1, videoElement.duration);
+					break;
+				}
 				
 				break;
+			case VK_ACCEPT:
+				if (current_page == 'video-frame'){
+        			const videoElement = document.getElementById('video-frame');
+					if (videoPlaying){
+						videoElement.pause();
+						videoPlaying = !videoPlaying;
+					} else if (!videoPlaying) {
+						videoElement.play();
+						videoPlaying = !videoPlaying;
+					}
+					
+				}
 			default:
 				alert("Nothing to handle \n");
 				break;

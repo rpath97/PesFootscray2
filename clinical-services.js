@@ -10,7 +10,7 @@ function handleClinicalServicesClick() {
     document.getElementById(previous_page).style.display = 'none';
     document.getElementById(current_page).style.display = 'block';
 
-    document.getElementById("clinical-sharing-button").focus();
+    //document.getElementById("clinical-sharing-button").focus();
 
 }
 
@@ -19,7 +19,7 @@ function openClicnicalCasting() {
     previous_page = current_page;
     current_page = "clinical_casting";
 
-    setRcControlAll()
-    switchToHDMI1()
+    setBackHomeVirtual(); //sets all buttons except back and home to virtual keys
+    switchToHDMI1();
 }
 

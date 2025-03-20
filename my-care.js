@@ -126,7 +126,7 @@ function handleMyCareButtonClick() {
     document.getElementById(previous_page).style.display = 'none';
     document.getElementById(current_page).style.display = 'block';
 
-    document.getElementById("management-and-discharge-button").focus();
+    //document.getElementById("management-and-discharge-button").focus();
 
     // document.querySelector('.default-view').style.display = 'none';
     // document.querySelector('.entertainment-view').style.display = 'none'; //hide entertainment display

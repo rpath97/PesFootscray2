@@ -61,10 +61,10 @@ const directoryPath = 'logos/channel_logos/';
 // }
 
 function radio_ui(event) {
-    const leftColumn = document.querySelector(".radio-view");
+    //const leftColumn = document.querySelector(".radio-view");
     // const rightColumn = document.getElementById("right-column");
-    // const rightColumnLogo = document.getElementById("radio-logo-right");
-    // const gifTitle = document.getElementById("gif-title");
+    const rightColumnLogo = document.getElementById("radio-logo-right");
+    const gifTitle = document.getElementById("gif-title");
     
     //leftColumn.style.flex = 2; // Change the left column to 2/3 of the container
     // rightColumn.style.flex = 1; // Make the right column visible (1/3 of the container)
@@ -74,21 +74,21 @@ function radio_ui(event) {
     const channel_no = channel_list.find(item => item.BasicChannelDetails.ChannelName === buttonId);
     channelSelection(channel_no.BasicChannelDetails.ChannelNo);
     radio_channel_playing = channel_no.BasicChannelDetails.ChannelNo; //it plays as defined in the channel_list
-    // gifTitle.innerHTML = `<div>${buttonId}</div>`;
+    gifTitle.innerHTML = `<div>${buttonId}</div>`;
     // channelSelection(buttonId);
     const logoname = buttonId + '.png';
     const img_src = directoryPath + logoname;
-    // rightColumnLogo.src = img_src.toLocaleLowerCase();
-    // img_url = rightColumnLogo.src;
+    rightColumnLogo.src = img_src.toLocaleLowerCase();
+    const img_url = rightColumnLogo.src;
     
-    // checkImageExists(img_url, function(exists) {
-    //     if (exists) {
-    //         console.log('Image exists.');
-    //     } else {
-    //         //rightColumnLogo.src = 'UI_images/radioicon2.png';
-    //         console.log('Image does not exist.');
-    //     }
-    // });
+    checkImageExists(img_url, function(exists) {
+        if (exists) {
+            console.log('Image exists.');
+        } else {
+            rightColumnLogo.src = 'logos/entertainment/radio.png';
+            console.log('Image does not exist.');
+        }
+    });
 
     document.getElementById(clickedButton.id).focus(); 
 }
@@ -167,6 +167,7 @@ function backTemp() {
             videoElement.pause();
             // videoElement.removeEventListener("ended", backTemp());
         }
+
     } else if (current_page.toLocaleLowerCase().includes('pdf')) {
         // current_page = "pdf-viewer-3";
         // previous_page = "hospitalinfo_menu";
@@ -177,4 +178,31 @@ function backTemp() {
     document.getElementById(previous_page).style.display = 'block';
     current_page = previous_page;
     previous_page = "default_view";
+}
+// temporary enter button
+function tempEnter() {
+    if (current_page == 'video-frame'){
+        const videoElement = document.getElementById('video-frame');
+        if (videoPlaying){
+            videoElement.pause();
+            videoPlaying = !videoPlaying;
+        } else if (!videoPlaying) {
+            videoElement.play();
+            videoPlaying = !videoPlaying;
+        }
+    }
+}
+// temporary right button
+function tempRightButton() {
+    if (current_page == 'video-frame') {
+        const videoElement = document.getElementById('video-frame');
+        videoElement.currentTime = Math.min(videoElement.currentTime + 1, videoElement.duration);
+    }
+}
+// temporary left button
+function tempLeftButton() {
+    if (current_page == 'video-frame') {
+        const videoElement = document.getElementById('video-frame');
+        videoElement.currentTime = Math.max(videoElement.currentTime - 1, 0);
+    }
 }

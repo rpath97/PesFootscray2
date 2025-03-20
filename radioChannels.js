@@ -116,7 +116,7 @@ function openRadio() {
                    // const leftColumn = document.getElementById("left-column");
                     
                     //const gifTitle = document.getElementById("gif-title");
-                    const radioView = document.querySelector(".radio-view");
+                    const radioView = document.querySelector("#radio-left-column");
                     
                     channel_list.forEach(button => {
                         const btnElement = document.createElement('button');

@@ -76,7 +76,7 @@ function handleEntertainmentClick() {
     document.getElementById(previous_page).style.display = 'none';
     document.getElementById(current_page).style.display = 'block';
 
-    document.getElementById("tv_button").focus();
+    //document.getElementById("tv_button").focus();
 
 }
 
