@@ -24,8 +24,8 @@ body {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    height: 80px;
-    background: #4d5992;  /* Blue background */
+    height: 155px;
+    background: #131b42;  /* Blue background */
     padding: 0 20px;
 }
 
@@ -36,12 +36,13 @@ body {
     /* background: #0066cc;   */
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
+    margin-top: 20px;
 }
 
 .branding img {
     width: 150px;
-    height: 60px;
+    height: 75px;
     object-fit: contain;
 }
 
@@ -56,7 +57,20 @@ body {
     color: #ffffff;
     font-size: 36px;
     font-weight: bold;
+    margin-top: 20px;
+    margin-left: auto;  /* Push time to the right */
+    
 }
+
+/* Update time display styling */
+/* .time {
+    font-size: 32px;
+    font-weight: 500;
+    color: #ffffff;
+    margin: 0;
+    margin-left: auto;   
+}*/
+
 
 /* Non-header section - flex row */
 .non-header {
@@ -78,14 +92,13 @@ body {
 
 .sidebar-menu {
     background: #fafafaf0;
-    height: 78vh;
+    height: 90%; /* Adjust height to match the image */
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;  /* Align to the top first */
-    gap: 30px;
-    margin-bottom: 20px;
-    padding-top: 100px; /* Adjust this value to lower the buttons */
+    justify-content: space-between; /* Distribute buttons evenly */
+    margin-top: 10px; /* Adjust to align with image */
+    padding: 0;
 }
 
 /* .menu-item:first-child {
@@ -95,23 +108,32 @@ body {
 /* Menu buttons */
 .menu-item {
     width: 100%;
-    height: 100%;
-    background: #ffffff;  
-    /* border: 2px solid #00B0F0;   */
+    height: 180px; /* Set a fixed height */
+    background: #ffffff;
     display: flex;
     align-items: center;
-    justify-content: center;
-    /* color: #000000; */
-    font-size: 24px;
+    justify-content: flex-start;
+    font-size: 30px;
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
-    border-radius: 7px;
-    margin: 20px;
-    /* padding-left: 5px; 
-    /* margin-bottom: 20px;
-    margin-top: 20px;*/
-} 
+    border-radius: 9px;
+    padding: 20px 30px;
+    flex-direction: row;
+    /* gap: 35px; */
+}
+
+
+/* Update menu item icons */
+.menu-item img {
+    width: 80px; /* Adjust image size if necessary */
+    height: 80px;
+    flex-shrink: 0; /* Prevents image from shrinking */
+    /* padding-right: 10px; */
+    margin-right: 20px;
+  
+}
+
 
 .menu-item:hover {
     /* background: #00B0F0; */
@@ -131,24 +153,27 @@ body {
 /* Default view with Footscray Hospital logo */
 .default-view {
     width: 100%;  /* Ensure it spans the available space */
-    height: calc(100vh - 60px);  /* Adjust height to fit well */
+    height: 100%;  /* Adjust height to fit well */
     background: #e4e5ee;  
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+    justify-content: cover;
+    align-items: cover;
+    padding: 0px; /* from 20 */
 }
+
 
 /* Make sure the image properly fits within the highlighted area */
 .default-view img {
-    width: 95%;  /* Reduce width slightly for better spacing */
-    height: auto;  /* Maintain aspect ratio */
-    max-height: 85vh;  /* Limit max height to avoid overflow */
+    width: 75vw;  /* Reduce width slightly for better spacing */
+   /*  height: auto;  Maintain aspect ratio */
+    max-height: 81vh;  /* Limit max height to avoid overflow */
     object-fit: cover;  /* Ensure it fills the space nicely */
     border-radius: 12px; /* Smoother rounded corners */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15),  
                 0 5px 15px rgba(0, 0, 0, 0.12);
     transition: box-shadow 0.3s ease;
+    margin-left: 15px;
+    margin-top: 20px;
 }
 
 
@@ -158,13 +183,6 @@ body {
                 0 8px 20px rgba(0, 0, 0, 0.15);    /* Stronger inner shadow */
 }
 
-/* Hide other views by default */
-/* .entertainment-view,
-.hospital-info-view,
-.my-care-view,
-.clinical-services-view {
-    display: none;
-} */
 
 /* Utility class for active view */
 .active {
@@ -176,16 +194,6 @@ body {
     border-bottom: none;
 } */
 
-/* Update menu item icons */
-.menu-item img {
-    width: 70px;  /* Smaller icons */
-    height: 70px;
-    /* margin-bottom: 8px; */
-    transition: transform 0.3s ease;
-    align-self: initial;
-    margin-left: -10px;
-    padding-left: 0px;
-}
 
 
 /* Hover and focus states */
@@ -515,126 +523,6 @@ div.Input_Output {
 }
 
 
-/* Clinical Services Grid Layout */
-.clinical-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 80px;
-    padding: 40px;
-    max-width: fit-content;
-    margin: 0;
-    grid-template-areas:
-        "sharing . ."
-        ". . ."
-        ". . .";
-    height: 100%;
-    justify-content: center;
-}
-
-.clinical-card {
-    width: 300px;  /* Same as television button */
-    height: 300px; /* Same as television button */
-    background: white;
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    padding: 20px;
-    margin: 0 auto;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-}
-
-/* Update hover and focus effects for clinical card */
-.clinical-card:hover, 
-.clinical-card:focus {
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-    background: linear-gradient(135deg, #ff8c00, #ff8c00);  /* Changed from yellow to orange */
-    transform: scale(1.1);
-    z-index: 2;
-}
-
-/* Update text and image color on hover/focus */
-.clinical-card:hover span,
-.clinical-card:focus span {
-    color: white;
-}
-
-.clinical-card:hover img,
-.clinical-card:focus img {
-    filter: brightness(0) invert(1);  /* Makes the image white */
-}
-
-/* Specific grid areas for clinical cards */
-.clinical-card[data-type="sharing"] { grid-area: sharing; }
-
-/* Clinical Services view background */
-/* .clinical-services-view {
-    background-color: #f5f9ff;
-    height: calc(100vh - 60px);
-    overflow: hidden;
-    margin-left: 20%;
-    width: 80%;
-    padding: 40px;
-} */
-
-/* Update the full-width state for content views sidemenu bar */
-/* .entertainment-view,
-.my-care-view,
-.clinical-services-view,
-.hospital-info-view {
-    background-color: #f5f9ff;
-    height: calc(100vh - 25vh);
-    overflow: hidden;
-    margin-left: 20%;
-    width: 100%;
-    padding-top: 120px;
-    padding-right: 40px;
-    padding-left: 40px;
-} */
-
-/* Add refresh animation */
-@keyframes refresh-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-.refreshing {
-    animation: refresh-spin 1s linear;
-}
-
-body.refreshing {
-    position: relative;
-    pointer-events: none;
-}
-
-body.refreshing::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0.8);
-    z-index: 999;
-    animation: refresh-spin 1s linear;
-}
-
-@keyframes refresh-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
 
 
 
@@ -1117,9 +1005,9 @@ body.refreshing::after {
 }
 
 /* Add gap between logo and text for hospital info button */
-.menu-item[data-type="hospitalinfo"] {
-    gap: 10px;  
-}
+/* .menu-item[data-type="hospitalinfo"] {
+    gap: 20px;  
+} */
 
 
 /* Update the image source on hover/focus for hospital info button */
@@ -1148,9 +1036,9 @@ body.refreshing::after {
 }
 
 /* Add gap between logo and text for my care button */
-.menu-item[data-type="my-care"] {
+/* .menu-item[data-type="my-care"] {
     gap: 35px;  
-}
+} */
 
 
 /* Update the image source on hover/focus for my care button */
@@ -1165,37 +1053,7 @@ body.refreshing::after {
     color: white;  /* Keep text white */
 }
 
-/* Clinical services button hover/focus */
-.menu-item[data-type="clinical-services"]:hover:not(.active),
-.menu-item[data-type="clinical-services"]:focus:not(.active) {
-    background: linear-gradient(135deg, #ff8c00, #ff8c00);  /* Orange gradient */
-    color: white;
-    transform: scale(1.02);
-    box-shadow: 0 4px 8px rgba(255, 140, 0, 0.2);  /* Orange shadow */
-}
-.menu-item[data-type="clinical-services"] span {
-    color: #ff8c00;  /* Specific blue color for entertainment text */
-}
 
-/* Add gap between logo and text for clinical services button */
-.menu-item[data-type="clinical-services"] {
-    gap: 10px;  
-}
-
-
-/* Update the image source on hover/focus for clinical services button */
-.menu-item[data-type="clinical-services"]:hover:not(.active) img,
-.menu-item[data-type="clinical-services"]:focus:not(.active) img {
-    content: url("logos/sidemenu/clinicalserviceshover.png");  /* Switch to hover image */
-    transform: scale(1.1);
-    /* filter: invert(65%) sepia(75%) saturate(4000%) hue-rotate(360deg) brightness(103%) contrast(104%);  */
-    
-} 
-
-.menu-item[data-type="clinical-services"]:hover:not(.active) span,
-.menu-item[data-type="clinical-services"]:focus:not(.active) span {
-    color: white;  /* Keep text white */
-}
 
 /* Add new entertainment button hover/focus styles */
 .menu-item[data-type="entertainment"]:hover:not(.active),
@@ -1207,12 +1065,13 @@ body.refreshing::after {
 }
 .menu-item[data-type="entertainment"] span {
     color: #0098d6;  /* Specific blue color for entertainment text */
+    /* margin-left: 10px; */
 }
 
 /* Add gap between logo and text for entertainment button */
-.menu-item[data-type="entertainment"] {
-    gap: 10px;  
-}
+/* .menu-item[data-type="entertainment"] {
+    gap: 30px;  
+} */
 
 
 /* Update the image source on hover/focus for entertainment button */
@@ -1264,14 +1123,6 @@ body.refreshing::after {
     justify-content: center;
 } 
 
-/* Update time display styling */
-.time {
-    font-size: 32px;
-    font-weight: 500;
-    color: #ffffff;
-    margin: 0;
-    margin-left: auto;  /* Push time to the right */
-}
 
 /* Update JAPIT button focus styles */
 .japit-button:focus {
@@ -1509,11 +1360,151 @@ body.refreshing::after {
     margin-bottom: 30px;
 }
 
-/* Clinical services view styles */
+
+
+/*------------------------------ Clinical Services Grid Layout ----------------------------*/
+
+
+
+/* Clinical services button hover/focus */
+.menu-item[data-type="clinical-services"]:hover:not(.active),
+.menu-item[data-type="clinical-services"]:focus:not(.active) {
+    background: linear-gradient(135deg, #ff8c00, #ff8c00);  /* Orange gradient */
+    color: white;
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(255, 140, 0, 0.2);  /* Orange shadow */
+}
+.menu-item[data-type="clinical-services"] span {
+    color: #ff8c00;  /* Specific blue color for entertainment text */
+}
+
+/* Add gap between logo and text for clinical services button */
+/* .menu-item[data-type="clinical-services"] {
+    gap: 20px;  
+} */
+
+
+/* Update the image source on hover/focus for clinical services button */
+.menu-item[data-type="clinical-services"]:hover:not(.active) img,
+.menu-item[data-type="clinical-services"]:focus:not(.active) img {
+    content: url("logos/sidemenu/clinicalserviceshover.png");  /* Switch to hover image */
+    transform: scale(1.1);
+    /* filter: invert(65%) sepia(75%) saturate(4000%) hue-rotate(360deg) brightness(103%) contrast(104%);  */
+    
+} 
+
+.menu-item[data-type="clinical-services"]:hover:not(.active) span,
+.menu-item[data-type="clinical-services"]:focus:not(.active) span {
+    color: white;  /* Keep text white */
+}
+
+/* Clinical Services Grid Layout */
+.clinical-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 80px;
+    padding: 40px;
+    max-width: fit-content;
+    margin: 0;
+    grid-template-areas:
+        "sharing . ."
+        ". . ."
+        ". . .";
+    height: 100%;
+    justify-content: center;
+}
+
+/* Clinical Card Button */
+.clinical-card {
+    width: 100%;
+    min-height: 180px;
+    background: white;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border: none;
+    margin-left: 0px;
+}
+
+/* Update hover and focus effects for clinical card */
+.clinical-card:hover, 
+.clinical-card:focus {
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, #ff8c00, #ff8c00);  /* Changed from yellow to orange */
+    transform: scale(1.1);
+    z-index: 2;
+}
+
+/* Update text and image color on hover/focus */
+.clinical-card:hover span,
+.clinical-card:focus span {
+    color: white;
+}
+
+.clinical-card:hover img,
+.clinical-card:focus img {
+    filter: brightness(0) invert(1);  /* Makes the image white */
+}
+
+/* Specific grid areas for clinical cards */
+.clinical-card[data-type="sharing"] { grid-area: sharing; }
+
+
+/* Add refresh animation */
+@keyframes refresh-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.refreshing {
+    animation: refresh-spin 1s linear;
+}
+
+body.refreshing {
+    position: relative;
+    pointer-events: none;
+}
+
+body.refreshing::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    z-index: 999;
+    animation: refresh-spin 1s linear;
+}
+
+@keyframes refresh-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* Clinical Services View */
 .clinical-services-view {
     background-color: #e4e5ee;
     padding: 40px;
     height: 100%;
+    display: flex;
+    justify-content: flex-start; /* Align items to the left */
+    align-items: center;
 }
 
 /* Clinical card styles */
@@ -1555,14 +1546,16 @@ body.refreshing::after {
     transform: scale(1.1);
 }
 
-/* Spacing adjustments */
-.clinical-services-view .row.g-4 {
-    --bs-gutter-x: 30px !important;
-    --bs-gutter-y: 30px !important;
+/* Clinical Grid */
+.row.g-4 {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: flex-start; /* Move button to the left */
 }
 
 .clinical-services-view .col-md-3 {
-    padding: 8px 85px;  /* gap between buttons */
+    padding: 8px 85px;  
     margin-bottom: 30px;
 }
 
