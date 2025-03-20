@@ -50,7 +50,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    
+
 </head>
 
 <body onload="init();">
@@ -111,7 +111,7 @@
                 style="width: 50px; height: 20px; position: absolute; top: 20px; right: 200px; z-index: 1100;">
                 Leeft
             </button> -->
-             <!-- TEMP BUTTONs -->
+            <!-- TEMP BUTTONs -->
 
             <!-- Non-sidebar / Main Content Area -->
             <div class="non-sidebar">
@@ -127,121 +127,94 @@
 
                 <!-- Other Views (Initially Hidden) -->
                 <!-- <div class="view2"> -->
-            <!-- Entertainment View -->
-                    <div class="entertainment-view" id="entertainment_menu" style="display: none;">
-                        <div class="row g-4 justify-content-center">
-                            <!-- First Row -->
-                            <div class="col-md-3">
-                            <button class="entertainment-card japit-button"
-                                    data-type="tv"
-                                    id="tv_button"
-                                    data-japit-control="true"
-                                    data-japit-focusable="true"
-                                    data-action="tv"
-                                    onclick="openTV()">
-                                    <img src="logos/entertainment/television.png" alt="TV">
+                <!-- Entertainment View -->
+                <div class="entertainment-view" id="entertainment_menu" style="display: none;">
+                    <div class="row g-4 justify-content-center">
+                        <!-- First Row -->
+                        <div class="col-md-3">
+                            <button class="entertainment-card japit-button" data-type="tv" id="tv_button"
+                                data-japit-control="true" data-japit-focusable="true" data-action="tv"
+                                onclick="openTV()">
+                                <img src="logos/entertainment/television.png" alt="TV">
                                 <span>Television</span>
                             </button>
-                                <!-- Casting under Television -->
-                                <div class="mt-4">
-                                    <button class="entertainment-card japit-button"
-                                            data-type="casting"
-                                            data-japit-control="true"
-                                            data-japit-focusable="true"
-                                            data-action="casting"
-                                            onclick="handleCastingClick()">
-                                        <img src="logos/entertainment/casting.png" alt="Casting">
-                                        <span>Casting</span>
-                                    </button>
-                                </div>
+                            <!-- Casting under Television -->
+                            <div class="mt-4">
+                                <button class="entertainment-card japit-button" data-type="casting"
+                                    data-japit-control="true" data-japit-focusable="true" data-action="casting"
+                                    onclick="handleCastingClick()">
+                                    <img src="logos/entertainment/casting.png" alt="Casting">
+                                    <span>Casting</span>
+                                </button>
                             </div>
-                            
-                            <div class="col-md-3">
-                            <button class="entertainment-card japit-button"
-                                    data-type="movies"
-                                    data-japit-control="true"
-                                    data-japit-focusable="true"
-                                    data-action="movies"
-                                    onclick="handleMoviesClick()">
-                                    <img src="logos/entertainment/movies.png" alt="Movies">
+                        </div>
+
+                        <div class="col-md-3">
+                            <button class="entertainment-card japit-button" data-type="movies" data-japit-control="true"
+                                data-japit-focusable="true" data-action="movies" onclick="handleMoviesClick()">
+                                <img src="logos/entertainment/movies.png" alt="Movies">
                                 <span>Movies</span>
                             </button>
-                            </div>
-                            
-                            <div class="col-md-3">
-                            <button class="entertainment-card japit-button"
-                                    data-type="radio"
-                                    data-japit-control="true"
-                                    data-japit-focusable="true"
-                                    data-action="radio"
-                                    onclick="handleRadioClick()">
-                                    <img src="logos/entertainment/radio.png" alt="Radio">
+                        </div>
+
+                        <div class="col-md-3">
+                            <button class="entertainment-card japit-button" data-type="radio" data-japit-control="true"
+                                data-japit-focusable="true" data-action="radio" onclick="handleRadioClick()">
+                                <img src="logos/entertainment/radio.png" alt="Radio">
                                 <span>Radio</span>
                             </button>
-                            </div>
-                    </div>
-            </div>
-
-            <!-- My Care View -->
-            <div class="my-care-view" id="mycare_menu" style="display: none;">
-                <div class="row g-4 justify-content-center">
-                    <!-- First Row -->
-                    <div class="col-md-3">
-                        <button class="mycare-card japit-button"
-                                id="management-and-discharge-button"
-                                data-type="management-and-discharge"
-                                data-japit-control="true"
-                                data-japit-focusable="true"
-                                data-action="management-and-discharge"
-                                onclick="handleManagementandDischargeClick()">
-                                <img src="logos/mycare/managementanddischarge.png" alt="Management and Discharge">
-                            <span>Management and Discharge</span>
-                        </button>
-                        <!-- Blacktown Surveys under Management and Discharge -->
-                        <div class="mt-4">
-                            <button class="mycare-card japit-button"
-                                    data-type="blacktown-surveys"
-                                    data-japit-control="true"
-                                    data-japit-focusable="true"
-                                    data-action="blacktown-surveys"
-                                    onclick="handleBlacktownSurveysClick()">
-                                <img src="logos/mycare/blacktownsurvey.png" alt="Blacktown Surveys">
-                            <span>Blacktown Surveys</span>
-                        </button>
                         </div>
                     </div>
-                    
-                    <div class="col-md-3">
-                        <button class="mycare-card japit-button"
-                                data-type="carers-survey"
-                                data-japit-control="true"
-                                data-japit-focusable="true"
-                                data-action="carers-survey"
+                </div>
+
+                <!-- My Care View -->
+                <div class="my-care-view" id="mycare_menu" style="display: none;">
+                    <div class="row g-4 justify-content-center">
+                        <!-- First Row -->
+                        <div class="col-md-3">
+                            <button class="mycare-card japit-button" id="management-and-discharge-button"
+                                data-type="management-and-discharge" data-japit-control="true"
+                                data-japit-focusable="true" data-action="management-and-discharge"
+                                onclick="handleManagementandDischargeClick()">
+                                <img src="logos/mycare/managementanddischarge.png" alt="Management and Discharge">
+                                <span>Management and Discharge</span>
+                            </button>
+                            <!-- Blacktown Surveys under Management and Discharge -->
+                            <div class="mt-4">
+                                <button class="mycare-card japit-button" data-type="blacktown-surveys"
+                                    data-japit-control="true" data-japit-focusable="true"
+                                    data-action="blacktown-surveys" onclick="handleBlacktownSurveysClick()">
+                                    <img src="logos/mycare/blacktownsurvey.png" alt="Blacktown Surveys">
+                                    <span>Blacktown Surveys</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <button class="mycare-card japit-button" data-type="carers-survey" data-japit-control="true"
+                                data-japit-focusable="true" data-action="carers-survey"
                                 onclick="handleCarersSurveyClick()">
-                            <img src="logos/mycare/CarersSurvey.png" alt="Carers Survey">
-                            <span>Carers Survey</span>
-                        </button>
-                    </div>
-                    
-                    <div class="col-md-3">
-                        <button class="mycare-card japit-button"
-                                data-type="patient-survey"
-                                data-japit-control="true"
-                                data-japit-focusable="true"
-                                data-action="patient-survey"
+                                <img src="logos/mycare/CarersSurvey.png" alt="Carers Survey">
+                                <span>Carers Survey</span>
+                            </button>
+                        </div>
+
+                        <div class="col-md-3">
+                            <button class="mycare-card japit-button" data-type="patient-survey"
+                                data-japit-control="true" data-japit-focusable="true" data-action="patient-survey"
                                 onclick="handlePatientSurveyClick()">
-                            <img src="logos/mycare/patientsurvey.png" alt="Patient Survey">
-                            <span>Patient Survey</span>
-                        </button>
+                                <img src="logos/mycare/patientsurvey.png" alt="Patient Survey">
+                                <span>Patient Survey</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-                    <!-- Clinical Services View -->
-                    <!-- <div class="clinical-services-view" id="clinicalservices_menu" style="display: none;">
+                <!-- Clinical Services View -->
+                <!-- <div class="clinical-services-view" id="clinicalservices_menu" style="display: none;">
                 <div class="row g-4 justify-content-center"> -->
-                    <!-- First Row -->
-                    <!-- <div class="col-md-3">
+                <!-- First Row -->
+                <!-- <div class="col-md-3">
                         <button class="clinical-card japit-button" 
                                 id="clinical-sharing-button"
                                 data-type="sharing"
@@ -256,24 +229,20 @@
                 </div>
             </div> -->
 
-            <!-- Clinical Services View -->
-            <div class="clinical-services-view" id="clinicalservices_menu" style="display: none;">
-                <div class="row g-4 justify-content-start"> 
-                    <div class="col-md-3">
-                        <button class="clinical-card japit-button" 
-                                id="clinical-sharing-button"
-                                data-type="sharing"
-                                data-japit-control="true"
-                                data-japit-focusable="true"
-                                data-action="sharing"
+                <!-- Clinical Services View -->
+                <div class="clinical-services-view" id="clinicalservices_menu" style="display: none;">
+                    <div class="row g-4 justify-content-start">
+                        <div class="col-md-3">
+                            <button class="clinical-card japit-button" id="clinical-sharing-button" data-type="sharing"
+                                data-japit-control="true" data-japit-focusable="true" data-action="sharing"
                                 onclick="openClicnicalCasting()">
-                            <img src="logos/clinicalservices/clinicalsharing.png" alt="Clinical Sharing">
-                            <span>Clinical Sharing</span>
-                        </button>
-                    </div>
-                    
-                    <!-- Placeholder elements to maintain 3x3 grid structure for future use -->
-                    <!-- <div class="col-md-4"><div class="clinical-card empty-card"></div></div>
+                                <img src="logos/clinicalservices/clinicalsharing.png" alt="Clinical Sharing">
+                                <span>Clinical Sharing</span>
+                            </button>
+                        </div>
+
+                        <!-- Placeholder elements to maintain 3x3 grid structure for future use -->
+                        <!-- <div class="col-md-4"><div class="clinical-card empty-card"></div></div>
                     <div class="col-md-4"><div class="clinical-card empty-card"></div></div>
                     <div class="col-md-4"><div class="clinical-card empty-card"></div></div>
                     <div class="col-md-4"><div class="clinical-card empty-card"></div></div>
@@ -281,98 +250,82 @@
                     <div class="col-md-4"><div class="clinical-card empty-card"></div></div>
                     <div class="col-md-4"><div class="clinical-card empty-card"></div></div>
                     <div class="col-md-4"><div class="clinical-card empty-card"></div></div> -->
+                    </div>
                 </div>
-            </div>
 
 
-                    <!-- Hospital Info View -->
-                    <div class="hospital-info-view" id="hospitalinfo_menu" style="display: none;">
-                <div class="row g-4 justify-content-center">
-                    <!-- First Row -->
-                    <div class="col-md-3">
-                            <button class="hospital-info-card japit-button"
-                                    id="welcome-button"
-                                    data-type="welcome"
-                                    data-japit-control="true"
-                                    data-japit-focusable="true"
-                                    data-action="welcome"
-                                    onclick="handleWelcomeClick()">
+                <!-- Hospital Info View -->
+                <div class="hospital-info-view" id="hospitalinfo_menu" style="display: none;">
+                    <div class="row g-4 justify-content-center">
+                        <!-- First Row -->
+                        <div class="col-md-3">
+                            <button class="hospital-info-card japit-button" id="welcome-button" data-type="welcome"
+                                data-japit-control="true" data-japit-focusable="true" data-action="welcome"
+                                onclick="handleWelcomeClick()">
                                 <img src="logos/welcome.png" alt="Welcome">
                                 <span>Welcome</span>
                             </button>
-                        <!-- Visiting Hours under Welcome -->
-                        <div class="mt-4">
-                            <button class="hospital-info-card japit-button"
-                                    id="hospital-info-button"
-                                    data-type="visiting"
-                                    data-japit-control="true"
-                                    data-japit-focusable="true"
-                                    data-action="visiting"
-                                    onclick="handleVisitingClick()">
-                                <img src="logos/visitinghours.png" alt="Visiting Hours">
-                                <span>Visiting Hours</span>
-                            </button>
+                            <!-- Visiting Hours under Welcome -->
+                            <div class="mt-4">
+                                <button class="hospital-info-card japit-button" id="hospital-info-button"
+                                    data-type="visiting" data-japit-control="true" data-japit-focusable="true"
+                                    data-action="visiting" onclick="handleVisitingClick()">
+                                    <img src="logos/visitinghours.png" alt="Visiting Hours">
+                                    <span>Visiting Hours</span>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="col-md-3">
-                            <button class="hospital-info-card japit-button"
-                                    id="healthcare-rights-button"
-                                    data-type="rights"
-                                    data-japit-control="true"
-                                    data-japit-focusable="true"
-                                    data-action="rights"
-                                    onclick="handleRightsClick()">
+
+                        <div class="col-md-3">
+                            <button class="hospital-info-card japit-button" id="healthcare-rights-button"
+                                data-type="rights" data-japit-control="true" data-japit-focusable="true"
+                                data-action="rights" onclick="handleRightsClick()">
                                 <img src="logos/healthcarerights.png" alt="Healthcare Rights">
                                 <span>Healthcare Rights</span>
                             </button>
-                    </div>
-                    
-                    <div class="col-md-3">
-                            <button class="hospital-info-card japit-button"
-                                    data-type="reach"
-                                    data-japit-control="true"
-                                    data-japit-focusable="true"
-                                    data-action="reach"
-                                    onclick="handleReachClick()">
+                        </div>
+
+                        <div class="col-md-3">
+                            <button class="hospital-info-card japit-button" data-type="reach" data-japit-control="true"
+                                data-japit-focusable="true" data-action="reach" onclick="handleReachClick()">
                                 <img src="logos/reach.png" alt="Reach">
                                 <span>Reach</span>
                             </button>
-                    </div>
-                </div>
-            </div>
-
-                    <!-- Radio View -->
-                    <div class="radio-view" id="radio_view" style="display: none;">
-                        <!-- Radio channels will be dynamically added here by handleRadioClick() -->
-                        <div id="radio-left-column">
-                            <!-- Buttons will be generated here -->
-        
-                        </div>
-                        <div id="radio-right-column">
-                            <p id="radio_title">RADIO</p>
-                            <div style="display: flex; flex-direction: column; align-items: center;">
-                                <img id="radio-logo-right" src="">
-                                <img id="gif" src="logos/soundbarcircle.gif" alt="GIF">
-                                <div id="gif-title" class="marquee"></div>
-                            </div>
-                            <div></div>
-                           
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- Log Windows -->
-            <div id="IDJAPITToTV_Misc" class="JAPITToTV_Misc">
-                <p id="IdHeadingLogMsg" class="IOContentsColor">WIXP (CDB --> TV) And Other Logs</p>
-                <textarea id="logmsg" rows="90" cols="70" style="resize:none" readonly></textarea>
-            </div>
 
-            <div id="IDJAPITFromTV" class="JAPITFromTV">
-                <p id="IdHeadingLogMsgCallback" class="IOContentsColor">WIXP (TV --> CDB)</p>
-                <textarea id="logmsgcallback" rows="90" cols="70" style="resize:none" readonly></textarea>
+                <!-- Radio View -->
+                <div class="radio-view" id="radio_view" style="display: none;">
+                    <!-- Radio channels will be dynamically added here by handleRadioClick() -->
+                    <div id="radio-left-column">
+                        <!-- Buttons will be generated here -->
+
+                    </div>
+                    <div id="radio-right-column">
+                        <p id="radio_title">RADIO</p>
+                        <div style="display: flex; flex-direction: column; align-items: center;">
+                            <img id="radio-logo-right" src="">
+                            <img id="gif" src="logos/soundbarcircle.gif" alt="GIF">
+                            <div id="gif-title" class="marquee"></div>
+                        </div>
+                        <div></div>
+
+                    </div>
+                </div>
             </div>
         </div>
+        <!-- Log Windows -->
+        <div id="IDJAPITToTV_Misc" class="JAPITToTV_Misc">
+            <p id="IdHeadingLogMsg" class="IOContentsColor">WIXP (CDB --> TV) And Other Logs</p>
+            <textarea id="logmsg" rows="90" cols="70" style="resize:none" readonly></textarea>
+        </div>
+
+        <div id="IDJAPITFromTV" class="JAPITFromTV">
+            <p id="IdHeadingLogMsgCallback" class="IOContentsColor">WIXP (TV --> CDB)</p>
+            <textarea id="logmsgcallback" rows="90" cols="70" style="resize:none" readonly></textarea>
+        </div>
+    </div>
 
     </div>
     <!-- TV LOADING BUFFER -->

@@ -516,7 +516,10 @@ function keyHandler(keyCode) {
 					if (videoSrcFrame) {
 						videoSrcFrame.src = '';  //d the welcome video and activated the dashbo
 						videoElement.currentTime = 0;
-						videoElement.pause();
+						if (videoPlaying) {
+							videoElement.pause();
+						}
+						
 						// videoElement.removeEventListener("ended", backTemp());
 					}
 					document.removeEventListener("keyup", handleKeyUp);
