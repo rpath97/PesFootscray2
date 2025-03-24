@@ -9,6 +9,12 @@ var current_page = "default_view";
 var previous_page = "";
 var dashboard_on = true;
 var videoPlaying = false;
+var tv_info = {
+	roomid: 1,
+	tv_ip: "",
+	tv_serial: "",
+	last_update: ""
+};
 
 
 function Exercise01ModelInit() {
@@ -27,12 +33,26 @@ function WIXPResponseHandler(WIXPResponseJSON) {
 		parsedWIXPJSON = JSON.parse(WIXPResponseJSON);
 		PrintLogsWIXPFromTV(parsedWIXPJSON);
 
+		//PROFESSIONAL SETTINGS RESPONSE
+		if(parsedWIXPJSON.Fun == "ProfessionalSettingsControl") {
+			const roomid = parsedWIXPJSON.CommandDetails.IdentificationSettings.RoomID;
+			const tv_ip_new = parsedWIXPJSON.CommandDetails.NetworkStatus.IPAddress;
+			const serial_no = parsedWIXPJSON.CommandDetails.SerialNumber;
+			const deviceName = parsedWIXPJSON.CommandDetails.IdentificationSettings.DeviceName.CustomName;
+			const today = new Date();
+			tv_info.roomid = roomid;
+			tv_info.tv_ip = tv_ip_new;
+			tv_info.tv_serial = serial_no;
+			tv_info.last_update = today.toLocaleTimeString();
+			
+		}
+
 		// CHANNELS RESPONSE
 		if (parsedWIXPJSON.Fun == "ChannelSelection"){ //When TV responds with an error
 			if (tv_channel_on == 1 && dashboard_on && current_page == 'tv_view') {                        
 				if (parsedWIXPJSON.CommandDetails.ChannelTuningDetails.ChannelNumber){             
 					if (parsedWIXPJSON.CommandDetails.ChannelSelectionStatus == 'Failure'){
-						setTimeout(loadChannel, 1000);
+						setTimeout(loadChannel, 500);
 						
 						//channelSelection(default_chan_no);
 					} else if (parsedWIXPJSON.CommandDetails.ChannelSelectionStatus == 'Started'){
@@ -47,9 +67,10 @@ function WIXPResponseHandler(WIXPResponseJSON) {
 				current_tv_channel = parsedWIXPJSON.CommandDetails.ChannelTuningDetails.ChannelNumber;
 				document.getElementById("logmsgcallback").value += '\n' + 'Dasohboard value  ' + dashboard_on  + '\n';
 				document.getElementById("logmsgcallback").scrollTop=document.getElementById("logmsgcallback").scrollHeight;
-			}
-			
+			}		
 		} 
+
+
 	} catch (e) {
 		//Error - can print to logs view
 		document.getElementById("logmsgcallback").value += '\n' + "JAPITmode.js line 53" +e + '\n';
@@ -424,6 +445,7 @@ function keyHandler(keyCode) {
 					current_page = "clinicalservices_menu";
 					previous_page = "default_view";
 					changeCDBstate('Activate');
+					UtilityRefreshPage();
 					break;
 				} else if (current_page == 'tv_view') {
 					current_page = "entertainment_menu";
@@ -434,11 +456,35 @@ function keyHandler(keyCode) {
 					channelStopPlaying(current_tv_channel);
 					// dashboard_on = true;
 					changeCDBstate('Activate');
+					UtilityRefreshPage();
 
+					break;
+				} else if (current_page == 'movies') {
+					current_page = "entertainment_menu";
+					previous_page = "default_view";
+					openMovies('Deactivate');
+					changeCDBstate('Activate');
+					UtilityRefreshPage();
 					break;
 				} else if (current_page == 'radio_view') {
 					channelStopPlaying(radio_channel_playing);
 					document.querySelector('.sidebar').style.display = 'block';
+
+					// readjusting radio view
+					const leftColumn = document.querySelector("#radio-left-column");
+					const rightColumn = document.getElementById("radio-right-column");
+					
+					leftColumn.style.width = '100vw';
+					rightColumn.style.width = '0vw'; 
+					rightColumn.style.display = 'none';
+					
+					UtilityRefreshPage();
+				} else if (current_page == 'phillips_cast') {
+					SelectCast('Deactivate');
+					current_page = "entertainment_menu";
+					previous_page = "default_view";
+					UtilityRefreshPage();
+					break;
 				} else if (current_page == 'video-frame') {
 					setRcControlSelective(); //setting virtual keys back to standard
 					const videoSrcFrame = document.getElementById('video-src-iframe');
@@ -506,9 +552,28 @@ function keyHandler(keyCode) {
 					// dashboard_on = true;
 					changeCDBstate('Activate');
 					break;
+				} else if (current_page == 'movies') {
+					current_page = "entertainment_menu";
+					previous_page = "default_view";
+					openMovies('Deactivate');
+					changeCDBstate('Activate');
+					break;
 				} else if (current_page == 'radio_view') {
 					channelStopPlaying(radio_channel_playing);
 					document.querySelector('.sidebar').style.display = 'block';
+
+					// readjusting radio view
+					const leftColumn = document.querySelector("#radio-left-column");
+					const rightColumn = document.getElementById("radio-right-column");
+					
+					leftColumn.style.width = '100vw';
+					rightColumn.style.width = '0vw'; 
+					rightColumn.style.display = 'none';
+				} else if (current_page == 'phillips_cast') { 
+					SelectCast('Deactivate');
+					current_page = "entertainment_menu";
+					previous_page = "default_view";
+					break;
 				} else if (current_page == 'video-frame') {
 					setRcControlSelective(); //setting virtual keys back to standard
 					const videoSrcFrame = document.getElementById('video-src-iframe');
@@ -516,10 +581,7 @@ function keyHandler(keyCode) {
 					if (videoSrcFrame) {
 						videoSrcFrame.src = '';  //d the welcome video and activated the dashbo
 						videoElement.currentTime = 0;
-						if (videoPlaying) {
-							videoElement.pause();
-						}
-						
+						videoElement.pause();
 						// videoElement.removeEventListener("ended", backTemp());
 					}
 					document.removeEventListener("keyup", handleKeyUp);
@@ -528,7 +590,7 @@ function keyHandler(keyCode) {
 					previous_page = "default_view";
 					openInternetWithPdf('Deactivate');
 					break;
-				}
+				}  
 				document.getElementById(current_page).style.display = 'none';
 				document.getElementById(previous_page).style.display = 'block';
 				current_page = previous_page;

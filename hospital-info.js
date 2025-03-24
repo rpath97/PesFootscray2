@@ -104,61 +104,7 @@ function handleHospitalInfoClick() {
     //document.getElementById("welcome-button").focus();
 }
 
-function videoPlayerMp4(videoUrl) {
-    //setting virtual keys
-    setVideoKeys();
 
-    // //OPENING VIDEO FRAME
-    // //setting previous and current page
-    previous_page = current_page;
-    current_page = "video-frame";
-
-    document.getElementById(previous_page).style.display = 'none';
-    document.getElementById(current_page).style.display = 'block';
-
-    document.addEventListener("keyup", handleKeyUp);
-    
-    const videoSrcFrame = document.getElementById('video-src-iframe');
-    const videoElement = document.getElementById(current_page);
-    if (videoSrcFrame) {
-        //videoSrcFrame.style.display = 'flex';
-        // var hls = new Hls();
-        // hls.loadSource('https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8');
-        // hls.attachMedia(videoElement);
-        // hls.on(Hls.Events.MANIFEST_PARSED, function () {
-        //     video.play();
-        // });
-        videoSrcFrame.src = videoUrl;  //d the welcome video and activated the dashbo
-        videoElement.load(); // Reload the video element
-        videoElement.play();
-        //videoElement.addEventListener("ended", backTemp());
-    }
-}
-function videoPlayerHls(videoUrl) {
-    //setting virtual keys
-    setVideoKeys();
-
-    //OPENING VIDEO FRAME
-    //setting previous and current page
-    previous_page = current_page;
-    current_page = "video-frame";
-    document.addEventListener("keyup", handleKeyUp);
-    const videoSrcFrame = document.getElementById('video-src-iframe');
-    const videoElement = document.getElementById(current_page);
-    if (videoSrcFrame) {
-        //videoSrcFrame.style.display = 'flex';
-        var hls = new Hls();
-        hls.loadSource(videoUrl);
-        hls.attachMedia(videoElement);
-        hls.on(Hls.Events.MANIFEST_PARSED, function () {
-            video.play();
-        });
-        // videoSrcFrame.src = videoLocalFileSrc;  //d the welcome video and activated the dashbo
-        // videoElement.load(); // Reload the video element
-        // videoElement.play();
-        //videoElement.addEventListener("ended", backTemp());
-    }
-}
 
 //handle keyup when in video
 function handleKeyUp() {

@@ -44,11 +44,11 @@
 // Card click handlers
 function handleManagementandDischargeClick() {
     console.log('Opening Management and Discharge...');
-    clearMyCareActive();
-    const card = document.querySelector('.mycare-card[data-type="management-and-discharge"]');
-    if (card) {
-        card.classList.add('active');
-    }
+    // const sampleDashVideoUrl = 'https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd';
+    // videoPlayerDash(sampleDashVideoUrl);
+
+    const sampleHlsVideoUrl = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
+    videoPlayerHls(sampleHlsVideoUrl);
 }
 
 function handleCarersSurveyClick() {

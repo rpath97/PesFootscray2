@@ -1,3 +1,12 @@
+/* Define constants */
+:root {
+    --entertaintment-color: #05CBF9;
+    --hosp-info-color: #00BAA3;
+    --mycare-color: #AD3054;
+    --clinical-color: #ff8c00;
+    --font-size-large: 18px;
+  }
+
 /* Reset default styles */
 body {
     margin: 0;
@@ -677,9 +686,10 @@ div.Input_Output {
 
 .radio_chan_btn .buttonText {
     font-size: 18px;
-    color: #333;
+    color: var(--entertaintment-color);
     text-align: center;
 }
+
 
 .radio_chan_btn:focus,
 .radio_chan_btn.active {
@@ -690,7 +700,7 @@ div.Input_Output {
 }
 
 .radio_chan_btn.active .buttonText {
-    color: #000;
+    color: #ffffff;
 }
 
 
@@ -870,11 +880,7 @@ div.Input_Output {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.radio_chan_btn:focus {
-    background-color: #f0c87f;
-    transform: scale(1.07);
-    outline: none;
-}
+
 
 #radio-logo-right {
     width: 100px;
@@ -934,10 +940,10 @@ div.Input_Output {
 }
 
 /* Keep icon and text color dark on hover/focus */
-.radio-channel-button:hover span,
+/* .radio-channel-button:hover span,
 .radio-channel-button:focus span {
     color: #333;
-}
+} */
 
 .radio-channel-button:hover img,
 .radio-channel-button:focus img {
@@ -1147,67 +1153,147 @@ div.Input_Output {
     height: 100vh;
     transition: all 1s ease;
     flex-direction: row;
+    overflow-x: hidden;
+    margin-top: -0.5%;
+    margin-left: 0;
+    transition: all 1s ease-in-out;
 }
 #radio-left-column {
     display: flex;
-    width: 70vw;
+    width: 100vw;
     height: 100%;
     overflow-y: auto;
     flex-direction: row;
     flex-wrap: wrap;
     padding: 30px;
     gap: 20px;
+    transition: all 1s ease-in-out;
 }
 #radio-left-column::-webkit-scrollbar {
     display: none; /* For Chrome, Safari, and Opera */
   }
 #radio-right-column {
-    display: flex;
-    background-color: #ebcfb5;
-    width: 30vw;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.15);
+    width: 0vw;
     height: 100%;
     flex-direction: column;
     gap: 10px;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
+    transition: all 1s ease-in-out;
 }
 #radio-right-column img {
     max-width: 100%;
     max-height: 100%;
+    transition: all 1s ease-in-out;
 }
 #radio_title {
-	font-size: 56px;
+	font-size: 60px;
 	font-family: Arial, sans-serif;
 	font-weight: bold;
     padding: 10px;
-	opacity: 0.7; 
-	top: 200px;
+    margin-top: 10vh;
+	opacity: 0.8; 
 }
 #radio-logo-right {
-	width: 100px;
-	margin-bottom: 50px;
+	width: 130px;
+	margin-bottom: 20px;
 }
+.radio-channel-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Force exactly 3 columns */
+    gap: 20px;
+    padding: 20px;
+    max-width: 800px; /* Control overall grid width */
+    margin: 0 auto; /* Center the grid */
+}
+
+.radio-channel-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 200px; /* Fixed width */
+    height: 200px; /* Fixed height */
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 18px;
+    color: #333;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 0 auto; /* Center button in grid cell */
+}
+
+.radio-channel-button img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+/* .radio-channel-button span {
+    font-size: 16px;
+    color: #266d41;
+    text-align: center;
+}
+.radio-channel-button span:focus {
+    color: #fff;
+} */
+
+.radio-channel-button:hover,
+.radio-channel-button:focus {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    background: white;
+    outline: none;
+}
+.radio_chan_btn:focus {
+    background-color: var(--entertaintment-color);
+    transform: scale(1.07);
+    outline: none;
+}
+
+/* Keep icon and text color dark on hover/focus */
+.radio-channel-button:hover span,
+.radio_chan_btn:focus:focus .buttonText {
+    color: #ffffff;
+}
+
+.radio-channel-button:hover img,
+.radio-channel-button:focus img {
+    filter: none;
+}
+
+
 
 .marquee {
     width: 20vw;
     white-space: nowrap;
     overflow: hidden;
     box-sizing: border-box;
-    margin-top: 20px;
+    margin-bottom: 50px;
 	font-size: 32px; /* Increase the font size */
     font-weight: bold; 
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    transition: all 1s ease-in-out;
 }
 
 .marquee div {
-    display: inline-block;
-    padding-left: 100%;
-    animation: marquee 10s linear infinite;
+    /* display: inline-block; */
+    /* padding-left: 100%; */
+    /* animation: marquee 10s linear infinite; */
 }
 
-@keyframes marquee {
+/* @keyframes marquee {
     0% { transform: translate(0, 0); }
     100% { transform: translate(-100%, 0); }
-}
+} */
 /* RADIO VIEW */
 
 /* Update hover images for entertainment cards */

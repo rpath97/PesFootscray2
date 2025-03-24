@@ -61,13 +61,14 @@ const directoryPath = 'logos/channel_logos/';
 // }
 
 function radio_ui(event) {
-    //const leftColumn = document.querySelector(".radio-view");
-    // const rightColumn = document.getElementById("right-column");
+    const leftColumn = document.querySelector("#radio-left-column");
+    const rightColumn = document.getElementById("radio-right-column");
     const rightColumnLogo = document.getElementById("radio-logo-right");
     const gifTitle = document.getElementById("gif-title");
     
-    //leftColumn.style.flex = 2; // Change the left column to 2/3 of the container
-    // rightColumn.style.flex = 1; // Make the right column visible (1/3 of the container)
+    leftColumn.style.width = '70vw'; // Change the left column to 2/3 of the container
+    rightColumn.style.width = '30vw'; // Make the right column visible (1/3 of the container)
+    rightColumn.style.display = 'flex';
     
     const clickedButton = event.currentTarget;  // Get the clicked element
     const buttonId = clickedButton.id;   // Access the ID property
@@ -153,11 +154,15 @@ function backTemp() {
     } else if (current_page == 'radio_view') {
         channelStopPlaying(radio_channel_playing);
         document.querySelector('.sidebar').style.display = 'block';
-    //     document.getElementById(current_page).style.display = 'none';
-    //     document.getElementById(previous_page).style.display = 'flex';
-    //     current_page = previous_page;
-    //     previous_page = "default_view";
-    //     return;
+        
+        // readjusting radio view
+        const leftColumn = document.querySelector("#radio-left-column");
+        const rightColumn = document.getElementById("radio-right-column");
+        
+        leftColumn.style.width = '100vw';
+        rightColumn.style.width = '0vw'; 
+        rightColumn.style.display = 'none';
+
     } else if (current_page == 'video-frame') {
         const videoSrcFrame = document.getElementById('video-src-iframe');
         const videoElement = document.getElementById('video-frame');

@@ -120,8 +120,9 @@ function openRadio() {
                     
                     channel_list.forEach(button => {
                         const btnElement = document.createElement('button');
-                        btnElement.className = 'radio_chan_btn japit-button';
+                        btnElement.className = 'radio_chan_btn';
                         btnElement.id = button.BasicChannelDetails.ChannelName;
+                        btnElement.style.width = '20vw';
                         // btnElement.setAttribute('data-channel-number', button.BasicChannelDetails.ChannelNo);
                         // btnElement.setAttribute('data-japit-control', 'true');
                         // btnElement.setAttribute('data-japit-focusable', 'true');
@@ -149,6 +150,8 @@ function openRadio() {
                         // Create text element
                         const textSpan = document.createElement("span");
                         textSpan.className = "buttonText";
+                        textSpan.style.fontSize = '30px';
+                        textSpan.style.fontWeight = 'bold';
                         textSpan.textContent = button.BasicChannelDetails.ChannelName;
                         btnElement.appendChild(textSpan);
 

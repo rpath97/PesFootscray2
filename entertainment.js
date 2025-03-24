@@ -2,7 +2,9 @@
 
 function handleMoviesClick() {
     console.log('Opening Movies...');
-    openMovies();
+    //setting previous and current page
+    current_page = 'movies';
+    openMovies('Activate');
     
 
 }
@@ -29,42 +31,29 @@ function handleRadioClick() {
         //radioView.style.marginLeft = '15%'; // Align with sidebar
     }
 
-    // Update button states
-    // const entertainmentButton = document.getElementById('entertainmentButton');
-    // if (entertainmentButton) {
-    //     entertainmentButton.classList.add('active');
-    // }
-
-    // Focus first radio card
-    // setTimeout(() => {
-    //     const firstCard = document.querySelector('.radio-card[data-type="radio1"]');
-    //     if (firstCard) {
-    //         firstCard.focus();
-    //     }
-    // }, 100);
 
     // Initialize radio channels
     openRadio();
 }
 
 // Add handler for radio channel clicks
-function handleRadioChannelClick(channelNumber) {
-    console.log('Opening Radio Channel:', channelNumber);
+// function handleRadioChannelClick(channelNumber) {
+//     console.log('Opening Radio Channel:', channelNumber);
     
-    // Clear active state from all radio cards
-    document.querySelectorAll('.radio-card').forEach(card => {
-        card.classList.remove('active');
-    });
+//     // // Clear active state from all radio cards
+//     // document.querySelectorAll('.radio-card').forEach(card => {
+//     //     card.classList.remove('active');
+//     // });
     
-    // Add active state to clicked card
-    const clickedCard = document.querySelector(`.radio-card[data-type="radio${channelNumber}"]`);
-    if (clickedCard) {
-        clickedCard.classList.add('active');
-    }
+//     // // Add active state to clicked card
+//     // const clickedCard = document.querySelector(`.radio-card[data-type="radio${channelNumber}"]`);
+//     // if (clickedCard) {
+//     //     clickedCard.classList.add('active');
+//     // }
 
-    // Use existing radio channel selection function
-    selectRadioChannel(channelNumber);
-}
+//     // Use existing radio channel selection function
+//     selectRadioChannel(channelNumber);
+// }
 
 function handleEntertainmentClick() {
     console.log('Opening Entertainment...');
@@ -80,57 +69,6 @@ function handleEntertainmentClick() {
 
 }
 
-// function clearEntertainmentActive() {
-//     document.querySelectorAll('.entertainment-card').forEach(card => {
-//         card.classList.remove('active');
-//     });
-// }
-
-// // Disney+ handler
-// function handleDisneyPlusClick() {
-//     console.log('Opening Disney+...');
-//     // Add your Disney+ handling code
-//     applicationControl("Disney+", "Activate");
-// }
-
-// // 7plus handler
-// function handle7PlusClick() {
-//     console.log('Opening 7plus...');
-//     // Add your 7plus handling code
-//     applicationControl("7plus", "Activate");
-// }
-
-// // Add these new handler functions
-
-// function handleParamountClick() {
-//     console.log('Opening Paramount+...');
-//     applicationControl("Paramount+", "Activate");
-// }
-
-// function handleAppleTVClick() {
-//     console.log('Opening Apple TV...');
-//     applicationControl("Apple TV", "Activate");
-// }
-
-// function handle9NowClick() {
-//     console.log('Opening 9 Now...');
-//     applicationControl("9Now", "Activate");
-// }
-
-// function handle10PlayClick() {
-//     console.log('Opening 10 Play...');
-//     applicationControl("10 play", "Activate");
-// }
-
-// function handleBingeClick() {
-//     console.log('Opening Binge...');
-//     applicationControl("Binge", "Activate");
-// }
-
-// function handleABCiViewClick() {
-//     console.log('Opening ABC iView...');
-//     applicationControl("ABC iview", "Activate");
-// }
 
 // Add entertainment casting handler
 function handleCastingClick() {
@@ -138,6 +76,7 @@ function handleCastingClick() {
     
     // Hide entertainment view
    // document.querySelector('.entertainment-view').style.display = 'none';
+   current_page = 'phillips_cast';
     SelectCast('Activate');
     changeCDBstate('Deactivate');
 
