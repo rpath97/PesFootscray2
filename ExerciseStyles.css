@@ -245,9 +245,18 @@ body {
     padding-top: 300px;
 }
 
+/* SUB MENU BUTTONS */
+.sub-menu-buttons {
+    display: flex;
+    width: 25vw;
+    height: 20vh;
+    justify-content: center;
+    align-items: center;
+} 
+
 .entertainment-card {
-    width: 300px;
-    height: 300px;
+    width: 25vw;
+    height: 25vh;
     background: white;
     border-radius: 15px;
     display: flex;
@@ -294,45 +303,6 @@ body {
     transform: scale(1.05);
 }
 
-.entertainment-card.active {
-    background: linear-gradient(135deg, #00b0f0, #0098d6);
-    color: white;
-    box-shadow: 0 12px 20px rgba(0, 176, 240, 0.3);
-    border-radius: 15px;
-}
-
-.entertainment-card.active span {
-    color: white;
-}
-
-.entertainment-card.active img {
-    filter: brightness(0) invert(1);
-}
-
-/* Main menu items (TV, Movies, Radio) */
-.entertainment-card[data-type="tv"],
-.entertainment-card[data-type="movies"],
-.entertainment-card[data-type="radio"] {
-    margin-top: 0px;  /* Add space above main menu items */
-}
-
-.entertainment-card[data-type="tv"] img,
-.entertainment-card[data-type="movies"] img,
-.entertainment-card[data-type="radio"] img {
-    width: 120px;
-    height: 120px;
-    object-fit: contain;
-    transition: transform 0.3s ease;
-}
-
-.entertainment-card[data-type="tv"] span,
-.entertainment-card[data-type="movies"] span,
-.entertainment-card[data-type="casting"] span,
-.entertainment-card[data-type="radio"] span {
-    font-size: 28px;
-    margin-top: 10px;
-}
-
 
 
 /* View transitions */
@@ -345,7 +315,7 @@ body {
 /* Entertainment view background */
 .entertainment-view {
     background-color: #e4e5ee;
-    padding: 40px;
+    padding: 30px;
     height: 100%;
     width: 100%;
     /* display: grid;
@@ -354,14 +324,13 @@ body {
     flex-direction: row;
     flex-wrap: wrap;
     gap: 20px;
-    align-items: flex-start;
+    line-height: normal;
+    margin-top: 5%;
 }
 
 /* Entertainment card styles */
-.entertainment-card {
-    width: 100%;
-    max-width: 400px; /* Prevents oversized cards */
-    min-height: 180px;
+/* .entertainment-card {
+    width: 25vw;
     background: #ffffff;
     border: none;
     border-radius: 8px;
@@ -369,9 +338,8 @@ body {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    padding: 60px;
-    margin: 0 auto;
-}
+    padding: 20px;
+} */
 
 /* Responsive grid for medium screens (3 cards per row) */
 
@@ -975,25 +943,17 @@ div.Input_Output {
 }
 
 /* Casting button specific styles */
-.entertainment-card[data-type="casting"] {
-    /* Remove the blue gradient background */
-    /* background: linear-gradient(135deg, #2196F3, #1976D2); */
-    background: white; /* Set to white like other buttons */
-}
+/*  */
 
-.entertainment-card[data-type="casting"]:hover,
-.entertainment-card[data-type="casting"]:focus {
+.entertainment-card:hover,
+.entertainment-card:focus {
     /* Use the same hover/focus style as other entertainment cards */
     transform: translateY(-5px);
     box-shadow: 0 12px 20px rgba(0, 176, 240, 0.3);
     background: linear-gradient(135deg, #00b0f0, #0098d6);
 }
 
-.entertainment-card[data-type="casting"] img {
-    width: 150px; /* Match other entertainment card image sizes */
-    height: 150px;
-    margin-bottom: 15px;
-}
+
 
 
 
@@ -1296,31 +1256,13 @@ div.Input_Output {
 /* RADIO VIEW */
 
 /* Update hover images for entertainment cards */
-.entertainment-card[data-type="tv"]:hover:not(.active) img,
-.entertainment-card[data-type="tv"]:focus:not(.active) img {
+/* .entertainment-card:hover:not(.active) img,
+.entertainment-card:focus:not(.active) img {
     content: url("logos/entertainment/televisionhover.png");
     transform: scale(1.1);
-}
+} */
 
-.entertainment-card[data-type="movies"]:hover:not(.active) img,
-.entertainment-card[data-type="movies"]:focus:not(.active) img {
-    content: url("logos/entertainment/movieshover.png");
-    transform: scale(1.1);
-}
-
-.entertainment-card[data-type="radio"]:hover:not(.active) img,
-.entertainment-card[data-type="radio"]:focus:not(.active) img {
-    content: url("logos/entertainment/radiohover.png");
-    transform: scale(1.1);
-}
-
-.entertainment-card[data-type="casting"]:hover:not(.active) img,
-.entertainment-card[data-type="casting"]:focus:not(.active) img {
-    content: url("logos/entertainment/castinghover.png");
-    transform: scale(1.1);
-}
-
-* Hospital info view styles */
+/* Hospital info view styles */
 .hospital-info-view {
     background-color: #e4e5ee;
     padding: 40px;

@@ -181,7 +181,7 @@ function backTemp() {
         //document.getElementById('pdf-viewer-3').style.display = 'none';
     }
     document.getElementById(current_page).style.display = 'none';
-    document.getElementById(previous_page).style.display = 'block';
+    document.getElementById(previous_page).style.display = 'flex';
     current_page = previous_page;
     previous_page = "default_view";
 }
