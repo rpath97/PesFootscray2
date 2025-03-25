@@ -47,13 +47,6 @@ function videoPlayerMp4(videoUrl) {
     // const videoSrcFrame = document.getElementById('video-src-iframe');
     const videoElement = document.getElementById(current_page);
     if (videoElement) {
-        //videoSrcFrame.style.display = 'flex';
-        // var hls = new Hls();
-        // hls.loadSource('https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8');
-        // hls.attachMedia(videoElement);
-        // hls.on(Hls.Events.MANIFEST_PARSED, function () {
-        //     video.play();
-        // });
         videoElement.src = videoUrl;  //d the welcome video and activated the dashbo
         videoElement.load(); // Reload the video element
         videoElement.play();
@@ -76,12 +69,25 @@ function videoPlayerHls(videoUrl) {
     const videoElement = document.getElementById(current_page);
     if (videoElement) {
         //videoSrcFrame.style.display = 'flex';
-        var hls = new Hls();
-        hls.loadSource(videoUrl);
-        hls.attachMedia(videoElement);
-        hls.on(Hls.Events.MANIFEST_PARSED, function () {
-            video.play();
-        });
+        try {
+            if (Hls.isSupported()) {
+                var hls = new Hls();
+                hls.loadSource(videoUrl);
+                hls.attachMedia(videoElement);
+                hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                    video.play();
+                });
+            } else if (videoElement.canPlayType('application/vnd.apple.mpegurl')) {
+                videoElement.src = videoUrl;
+                videoElement.addEventListener('loadedmetadata', function () {
+                    videoElement.play();
+                });
+            }
+        } catch (err) {
+            document.getElementById("logmsgcallback").value += '\n' + "HLS Video error" + err + '\n';
+		    document.getElementById("logmsgcallback").scrollTop = document.getElementById("logmsgcallback").scrollHeight;
+        }
+       
         // videoSrcFrame.src = videoLocalFileSrc;  //d the welcome video and activated the dashbo
         // videoElement.load(); // Reload the video element
         // videoElement.play();

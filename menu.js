@@ -166,10 +166,11 @@ function backTemp() {
     } else if (current_page == 'video-frame') {
         const videoSrcFrame = document.getElementById('video-src-iframe');
         const videoElement = document.getElementById('video-frame');
-        if (videoSrcFrame) {
-            videoSrcFrame.src = '';  //d the welcome video and activated the dashbo
+        if (videoElement) {
+            videoElement.src = '';  //d the welcome video and activated the dashbo
             videoElement.currentTime = 0;
             videoElement.pause();
+            console.log("Video stopped");
             // videoElement.removeEventListener("ended", backTemp());
         }
 

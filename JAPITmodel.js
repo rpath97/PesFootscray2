@@ -489,7 +489,7 @@ function keyHandler(keyCode) {
 					setRcControlSelective(); //setting virtual keys back to standard
 					// const videoSrcFrame = document.getElementById('video-src-iframe');
 					const videoElement = document.getElementById('video-frame');
-					if (videoSrcFrame) {
+					if (videoElement) {
 						videoElement.src = '';  //d the welcome video and activated the dashbo
 						videoElement.currentTime = 0;
 						videoElement.pause();
@@ -578,7 +578,7 @@ function keyHandler(keyCode) {
 					setRcControlSelective(); //setting virtual keys back to standard
 					// const videoSrcFrame = document.getElementById('video-src-iframe');
 					const videoElement = document.getElementById('video-frame');
-					if (videoSrcFrame) {
+					if (videoElement) {
 						videoElement.src = '';  //d the welcome video and activated the dashbo
 						videoElement.currentTime = 0;
 						videoElement.pause();

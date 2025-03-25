@@ -35,7 +35,7 @@ body {
     width: 100%;
     height: 155px;
     background: #131b42;  /* Blue background */
-    padding: 0 20px;
+
 }
 
 /* Western Health logo container */
@@ -53,6 +53,7 @@ body {
     width: 150px;
     height: 75px;
     object-fit: contain;
+    margin: 1vw;
 }
 
 /* Time display container */
