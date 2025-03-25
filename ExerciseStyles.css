@@ -523,20 +523,21 @@ div.Input_Output {
 }
 
 .hospital-info-card {
-    width: 300px;
-    height: 300px;
-    padding: 20px;
-    background-color: white;
-    border-radius: 15px;
+    width: 400px;
+    height: 280px;
+    min-height: 180px;
+    background: #ffffff;
+    border: none;
+    border-radius: 8px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 20px;
     transition: all 0.3s ease;
-    cursor: pointer;
+    /* padding: 60px; */
     margin: 0 auto;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    margin-left: -90px;
+    margin-top: -20px;
 }
 
 .hospital-info-card img {
@@ -546,12 +547,7 @@ div.Input_Output {
     transition: transform 0.3s ease;
 }
 
-.hospital-info-card span {
-    font-size: 24px;
-    font-weight: 500;
-    color: #333;
-    text-align: center;
-}
+
 
 .hospital-info-card:hover,
 .hospital-info-card:focus {
@@ -1279,28 +1275,6 @@ div.Input_Output {
     height: 100%;
 }
 
-/* Hospital info card styles */
-.hospital-info-card {
-    /* width: 400px; */
-    min-height: 180px;
-    background: #ffffff;
-    border: none;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    padding: 60px;
-    margin: 0 auto;
-}
-
-.hospital-info-card img {
-    width: 110px;
-    height: 110px;
-    margin-bottom: 15px;
-    transition: transform 0.3s ease;
-}
 
 .hospital-info-card span {
     font-size: 30px;
@@ -1308,15 +1282,8 @@ div.Input_Output {
     color: #00BAA3;  /* Hospital info theme color */
 }
 
-/* Hover effects */
-.hospital-info-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-}
 
-.hospital-info-card:hover img {
-    transform: scale(1.1);
-}
+
 
 /* Spacing adjustments */
 .hospital-info-view .row.g-4 {
@@ -1456,20 +1423,21 @@ div.Input_Output {
 
 /* Clinical Card Button */
 .clinical-card {
-    width: 100%;
+    width: 400px;
+    height: 280px;
     min-height: 180px;
-    background: white;
-    border-radius: 15px;
+    background: #ffffff;
+    border: none;
+    border-radius: 8px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    border: none;
-    margin-left: 0px;
+    /* padding: 60px; */
+    margin: 0 auto;
+    margin-left: -70px;
+    margin-top: -20px;
 }
 
 /* Update hover and focus effects for clinical card */
@@ -1547,21 +1515,7 @@ body.refreshing::after {
     align-items: center;
 }
 
-/* Clinical card styles */
-.clinical-card {
-    width: 300px;
-    min-height: 180px;
-    background: #ffffff;
-    border: none;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    padding: 60px;
-    margin: 0 auto;
-}
+
 
 .clinical-card img {
     width: 150px;
