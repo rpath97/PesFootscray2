@@ -63,7 +63,7 @@ function handleEntertainmentClick() {
     current_page = "entertainment_menu";
 
     document.getElementById(previous_page).style.display = 'none';
-    document.getElementById(current_page).style.display = 'block';
+    document.getElementById(current_page).style.display = 'flex';
 
     //document.getElementById("tv_button").focus();
 

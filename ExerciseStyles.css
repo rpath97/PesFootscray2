@@ -348,10 +348,13 @@ body {
     padding: 40px;
     height: 100%;
     width: 100%;
-    display: grid;
-    grid-template-columns: 1fr; /* Default: 1 column */
+    /* display: grid;
+    grid-template-columns: 1fr;  */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 20px;
-    justify-content: center;
+    align-items: flex-start;
 }
 
 /* Entertainment card styles */
@@ -371,11 +374,7 @@ body {
 }
 
 /* Responsive grid for medium screens (3 cards per row) */
-@media (min-width: 768px) {
-    .entertainment-view {
-        grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
-    }
-}
+
 
 /* Ensure Casting button appears below Television */
 @media (min-width: 768px) {
@@ -1156,7 +1155,6 @@ div.Input_Output {
     flex-direction: row;
     overflow-x: hidden;
     margin-top: -0.5%;
-    margin-left: -0.5%;
     transition: all 1s ease-in-out;
 }
 #radio-left-column {
