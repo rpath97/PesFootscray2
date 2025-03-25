@@ -477,7 +477,7 @@ function keyHandler(keyCode) {
 					leftColumn.style.width = '100vw';
 					rightColumn.style.width = '0vw'; 
 					rightColumn.style.display = 'none';
-					
+
 					UtilityRefreshPage();
 				} else if (current_page == 'phillips_cast') {
 					SelectCast('Deactivate');
@@ -487,10 +487,10 @@ function keyHandler(keyCode) {
 					break;
 				} else if (current_page == 'video-frame') {
 					setRcControlSelective(); //setting virtual keys back to standard
-					const videoSrcFrame = document.getElementById('video-src-iframe');
+					// const videoSrcFrame = document.getElementById('video-src-iframe');
 					const videoElement = document.getElementById('video-frame');
 					if (videoSrcFrame) {
-						videoSrcFrame.src = '';  //d the welcome video and activated the dashbo
+						videoElement.src = '';  //d the welcome video and activated the dashbo
 						videoElement.currentTime = 0;
 						videoElement.pause();
 						// videoElement.removeEventListener("ended", backTemp());
@@ -576,10 +576,10 @@ function keyHandler(keyCode) {
 					break;
 				} else if (current_page == 'video-frame') {
 					setRcControlSelective(); //setting virtual keys back to standard
-					const videoSrcFrame = document.getElementById('video-src-iframe');
+					// const videoSrcFrame = document.getElementById('video-src-iframe');
 					const videoElement = document.getElementById('video-frame');
 					if (videoSrcFrame) {
-						videoSrcFrame.src = '';  //d the welcome video and activated the dashbo
+						videoElement.src = '';  //d the welcome video and activated the dashbo
 						videoElement.currentTime = 0;
 						videoElement.pause();
 						// videoElement.removeEventListener("ended", backTemp());

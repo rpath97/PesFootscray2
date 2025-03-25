@@ -44,7 +44,7 @@ function videoPlayerMp4(videoUrl) {
 
     document.addEventListener("keyup", handleKeyUp);
 
-    const videoSrcFrame = document.getElementById('video-src-iframe');
+    // const videoSrcFrame = document.getElementById('video-src-iframe');
     const videoElement = document.getElementById(current_page);
     if (videoElement) {
         //videoSrcFrame.style.display = 'flex';
@@ -72,7 +72,7 @@ function videoPlayerHls(videoUrl) {
     document.getElementById(previous_page).style.display = 'none';
     document.getElementById(current_page).style.display = 'block';
     document.addEventListener("keyup", handleKeyUp);
-    const videoSrcFrame = document.getElementById('video-src-iframe');
+    // const videoSrcFrame = document.getElementById('video-src-iframe');
     const videoElement = document.getElementById(current_page);
     if (videoElement) {
         //videoSrcFrame.style.display = 'flex';

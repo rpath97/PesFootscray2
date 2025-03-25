@@ -1155,7 +1155,7 @@ div.Input_Output {
     flex-direction: row;
     overflow-x: hidden;
     margin-top: -0.5%;
-    margin-left: 0;
+    margin-left: -0.5%;
     transition: all 1s ease-in-out;
 }
 #radio-left-column {
