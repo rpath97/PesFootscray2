@@ -252,6 +252,8 @@ body {
     height: 20vh;
     justify-content: center;
     align-items: center;
+    margin-inline: 30px;
+    margin-block: 50px;
 } 
 
 .entertainment-card {
@@ -265,8 +267,6 @@ body {
     justify-content: center;
     transition: all 0.3s ease;
     padding: 20px;
-    margin-inline: 5%;
-    margin-block: 5%;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
@@ -282,6 +282,7 @@ body {
     transform: translateY(-5px);
     box-shadow: 0 12px 20px rgba(0, 176, 240, 0.3);
     background: linear-gradient(135deg, #00b0f0, #0098d6);
+    outline: none;
   
 }
 
