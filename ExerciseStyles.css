@@ -252,8 +252,7 @@ body {
     height: 20vh;
     justify-content: center;
     align-items: center;
-    margin-inline: 30px;
-    margin-block: 50px;
+    margin: 50px;
 } 
 
 .entertainment-card {
