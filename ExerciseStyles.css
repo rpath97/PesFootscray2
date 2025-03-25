@@ -248,14 +248,14 @@ body {
 /* SUB MENU BUTTONS */
 .sub-menu-buttons {
     display: flex;
-    width: 25vw;
+    width: 21vw;
     height: 20vh;
     justify-content: center;
     align-items: center;
 } 
 
 .entertainment-card {
-    width: 25vw;
+    width: 21vw;
     height: 25vh;
     background: white;
     border-radius: 15px;
@@ -263,20 +263,13 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 20px;
     transition: all 0.3s ease;
-    cursor: pointer;
     padding: 20px;
-    margin: 0 auto;
+    margin-inline: 5%;
+    margin-block: 5%;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
-.entertainment-card img {
-    width: 150px;
-    height: 150px;
-    object-fit: contain;
-    transition: transform 0.3s ease;
-}
 
 .entertainment-card span {
     font-size: 24px;
@@ -323,8 +316,7 @@ body {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 20px;
-    line-height: normal;
+    row-gap: 5vh;
     margin-top: 5%;
 }
 
@@ -354,8 +346,8 @@ body {
 
 
 .entertainment-card img {
-    width: 200px;
-    height: 60px;
+    width: 5vw;
+    height: auto;
     margin-bottom: 15px;
     transition: transform 0.3s ease;
 }
