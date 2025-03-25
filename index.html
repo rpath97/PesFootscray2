@@ -62,7 +62,7 @@
 
 </head>
 
-<body onload="init(); getProfessionalSettings();">
+<body onload="init(); getProfessionalSettings(); focusImageChange();">
     <div class="container-fluid  p-0 mw-100 mh-100">
         <!-- Header -->
         <div class="header">
@@ -142,7 +142,7 @@
 
                     <!-- First Row -->
                     <div class="sub-menu-buttons">
-                        <button class="entertainment-card" onclick="openTV()">
+                        <button class="entertainment-card" onclick="openTV()" button-focus="television">
                             <img src="logos/entertainment/television.png" alt="TV">
                             <span>Television</span>
                         </button>
@@ -150,7 +150,7 @@
                     <!-- Casting under Television -->
                     <!-- <div class="mt-4"> -->
                     <div class="sub-menu-buttons">
-                        <button class="entertainment-card" onclick="handleCastingClick()">
+                        <button class="entertainment-card" onclick="handleCastingClick()" button-focus="casting">
                             <img src="logos/entertainment/casting.png" alt="Casting">
                             <span>Casting</span>
                         </button>
@@ -160,7 +160,7 @@
 
                     <!-- <div class="col-md-3"> -->
                     <div class="sub-menu-buttons">
-                        <button class="entertainment-card" onclick="handleMoviesClick()">
+                        <button class="entertainment-card" onclick="handleMoviesClick()" button-focus="movies">
                             <img src="logos/entertainment/movies.png" alt="Movies">
                             <span>Movies</span>
                         </button>
@@ -169,7 +169,7 @@
 
                     <!-- <div class="col-md-3"> -->
                     <div class="sub-menu-buttons">
-                        <button class="entertainment-card" onclick="handleRadioClick()">
+                        <button class="entertainment-card" onclick="handleRadioClick()" button-focus="radio">
                             <img src="logos/entertainment/radio.png" alt="Radio">
                             <span>Radio</span>
                         </button>

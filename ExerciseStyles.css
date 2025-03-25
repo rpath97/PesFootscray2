@@ -257,6 +257,23 @@ body {
     margin-bottom: 50px;
     margin-top: 50px;
 } 
+/* Update the image source on hover/focus for hospital info button */
+.entertainment-card[button-focus="television"]:focus img {
+    content: url("logos/entertainment/televisionhover.png");  /* Switch to hover image */
+    transform: scale(1.1);
+}
+.entertainment-card[button-focus="casting"]:focus img {
+    content: url("logos/entertainment/castinghover.png");  /* Switch to hover image */
+    transform: scale(1.1);
+}
+.entertainment-card[button-focus="movies"]:focus img {
+    content: url("logos/entertainment/movieshover.png");  /* Switch to hover image */
+    transform: scale(1.1);
+}
+.entertainment-card[button-focus="radio"]:focus img {
+    content: url("logos/entertainment/radiohover.png");  /* Switch to hover image */
+    transform: scale(1.1);
+}
 
 .entertainment-card {
     width: 21vw;
@@ -295,7 +312,6 @@ body {
 
 .entertainment-card:hover img,
 .entertainment-card:focus img {
-    filter: brightness(0) invert(1);
     transform: scale(1.05);
 }
 

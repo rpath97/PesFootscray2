@@ -2,64 +2,8 @@
 let currentSection = 'default';
 const directoryPath = 'logos/channel_logos/'; 
 
-// Menu click handlers
-// function handleMenuClick(section, event) {
-//     console.log('Menu click:', section);
-    
-//     // Remove active class from all menu items
-//     document.querySelectorAll('.menu-item').forEach(item => {
-//         item.classList.remove('active');
-//     });
 
-//     // Add active class to clicked item
-//     if (event && event.currentTarget) {
-//         event.currentTarget.classList.add('active');
-//     }
-
-//     // Hide all content sections
-//     document.querySelectorAll('.content').forEach(content => {
-//         content.style.display = 'none';
-//     });
-
-//     // Show selected section
-//     if (section === 'entertainment') {
-//         document.querySelector('.entertainment-view').style.display = 'block';
-//         currentSection = 'entertainment';
-        
-//         // Focus first entertainment card
-//         setTimeout(() => {
-//             const firstCard = document.querySelector('.entertainment-card');
-//             if (firstCard) {
-//                 firstCard.focus();
-//             }
-//         }, 100);
-//     } else {
-//         document.querySelector('.default-view').style.display = 'block';
-//         currentSection = 'default';
-//     }
-// }
-
-// Function to return to home/default view
-// function returnToHome() {
-//     JAPITReturnToHome();
-// }
-
-
-
-
-
-// Handle entertainment button click specifically
-
-
-// function back2dashboard() {
-//     document.getElementById("radio_list").style.display = "none";
-//     document.getElementById("nav").style.display = "flex";
-//     document.getElementById("patientMenu").style.display = "block";
-//     document.getElementById("gallery").style.display = "flex";
-
-//     document.getElementById('ButtonTVChannel').focus();
-// }
-
+// radio button action function
 function radio_ui(event) {
     const leftColumn = document.querySelector("#radio-left-column");
     const rightColumn = document.getElementById("radio-right-column");
@@ -94,47 +38,27 @@ function radio_ui(event) {
     document.getElementById(clickedButton.id).focus(); 
 }
 
-function remove_channel() {
-    document.querySelector('.radio-button-container').remove();
+// MENU FOCUS ACTION FUNCTION
+function focusImageChange() {
+    const buttons = document.querySelectorAll(".sub-menu-buttons");
+
+    buttons.forEach(button => {
+        const imageElement = button.querySelector("img");
+        const defaultSrc = button.getAttribute("data-default-src"); // Get the default image from the data attribute
+        const focusedSrc = button.getAttribute("data-focused-src"); // Get the focused image from the data attribute
+
+        // Change image source when the button is focused
+        button.addEventListener("focus", function() {
+            imageElement.src = focusedSrc; // Change the image on focus
+        });
+
+        // Reset image source when the button loses focus
+        button.addEventListener("blur", function() {
+            imageElement.src = defaultSrc; // Restore the original image on blur
+        });
+    });
 }
 
-function add_channel() {
-    const leftColumn = document.getElementById("left-column");
-    const rightColumn = document.getElementById("right-column");
-    const gifTitle = document.getElementById("gif-title");
-    const buttonContainer = document.createElement('div');
-    buttonContainer.classList.add('radio-button-container');
-    
-    const btnElement = document.createElement('button');
-    btnElement.id = channel_list[1].BasicChannelDetails.ChannelName;
-    btnElement.class = 'radio_chan_btn';
-
-    // Create image element
-    var image = document.createElement("img");
-    image.src = "UI_images/radioicon2.png";
-    image.style.width = "100px";
-    btnElement.appendChild(image);
-
-    // Create text element
-    var textSpan = document.createElement("span");
-    textSpan.className = "buttonText";
-    textSpan.textContent = channel_list[1].BasicChannelDetails.ChannelName;
-    btnElement.appendChild(textSpan);
-
-    btnElement.style.fontSize = "30px"; 
-    btnElement.style.margin = "30px";
-    btnElement.style.width = "200px";
-    btnElement.style.height = "180px";
-    btnElement.addEventListener('click', radio_ui);
-
-    const channlName = channel_list[1].BasicChannelDetails.ChannelName;
-
-    const titleElement = document.createElement('div');
-    titleElement.textContent = channel_list[1].BasicChannelDetails.ChannelName;
-
-    buttonContainer.appendChild(btnElement);
-    leftColumn.appendChild(buttonContainer);
-}
 
 //TEMPORARY BUTTON
 function backTemp() {
