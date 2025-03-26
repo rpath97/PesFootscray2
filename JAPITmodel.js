@@ -381,6 +381,53 @@ function setVideoKeys() {
 	sendWIxPCommand(JAPITObjForWIXPSvc);
 	delete JAPITObjForWIXPSvc;
 }
+// MAKING UP AND DOWN ARROW KEYS SCROLL
+function setPDFViewKeys() {
+
+	var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
+	JAPITObjForWIXPSvc.Cookie = 6;
+	JAPITObjForWIXPSvc.CmdType = "Change";
+	JAPITObjForWIXPSvc.Fun = "UserInputControl";
+	JAPITObjForWIXPSvc.CommandDetails = {
+		"VirtualKeyForwardMode": "SelectiveVirtualKeyForward",
+		"VirtualKeyToBeForwarded":
+			[
+				{ "vkkey": "HBBTV_VK_CLOCK" },
+				// { "vkkey" : "HBBTV_VK_SMARTTV" },
+				//{ "vkkey" : "HBBTV_VK_CHANNELGRID" },
+				{ "vkkey": "HBBTV_VK_ALARM" },
+				{ "vkkey": "HBBTV_VK_SMARTINFO" },
+				// { "vkkey" : "HBBTV_VK_SOURCE" },
+				{ "vkkey": "HBBTV_VK_TV" },
+				// { "vkkey" : "HBBTV_VK_FORMAT" },
+				//{ "vkkey" : "HBBTV_VK_HOME" }, // not existing
+				// { "vkkey" : "HBBTV_VK_PLAY_PAUSE" }, // previously was VK_OSRC
+				{ "vkkey": "HBBTV_VK_GUIDE" },
+				{ "vkkey" : "HBBTV_VK_UP" }, // not existing
+				// { "vkkey" : "HBBTV_VK_INFO" },
+				{ "vkkey" : "HBBTV_VK_LEFT" }, // not existing
+				{ "vkkey" : "HBBTV_VK_ACCEPT" }, // not existing
+				{ "vkkey" : "HBBTV_VK_RIGHT" }, // not existing
+				{ "vkkey": "HBBTV_VK_ADJUST" }, //SETTINGS BUTTON
+				{ "vkkey" : "HBBTV_VK_DOWN" }, // not existing
+				{ "vkkey": "HBBTV_VK_MENU" }, // Home Button
+				{ "vkkey": "HBBTV_VK_BACK" }, // not existing
+				{ "vkkey": "HBBTV_VK_RED" },
+				{ "vkkey": "HBBTV_VK_GREEN" },
+				{ "vkkey": "HBBTV_VK_YOUTUBE" },
+				{ "vkkey": "HBBTV_VK_WEATHER" },
+				//{"vkkey": "	HBBTV_VK_SETTINGS"}, //doesn't affect settings button
+				{ "vkkey": "HBBTV_VK_OPTIONS" },
+				{ "vkkey": "HBBTV_VK_1" },
+				{ "vkkey": "HBBTV_VK_2" },
+				{ "vkkey": "HBBTV_VK_3" },
+				{ "vkkey": "HBBTV_VK_4" }
+			]
+	}
+
+	sendWIxPCommand(JAPITObjForWIXPSvc);
+	delete JAPITObjForWIXPSvc;
+}
 
 function changeCDBstate(state) {
 	//updating ui status
@@ -502,6 +549,8 @@ function keyHandler(keyCode) {
 					current_page = "hospitalinfo_menu";
 					previous_page = "default_view";
 					openInternetWithPdf('Deactivate');
+				} else if (current_page == 'pdf-viewers'){
+					setRcControlSelective();
 				}
 				//activate the dashboard going back from where i am to dashboard
 				document.getElementById(current_page).style.display = 'none';
@@ -595,7 +644,9 @@ function keyHandler(keyCode) {
 					previous_page = "default_view";
 					openInternetWithPdf('Deactivate');
 					break;
-				}  
+				} else if (current_page == 'pdf-viewers'){
+					setRcControlSelective();
+				}
 				document.getElementById(current_page).style.display = 'none';
 				document.getElementById(previous_page).style.display = 'flex';
 				current_page = previous_page;
@@ -608,7 +659,28 @@ function keyHandler(keyCode) {
 					const videoElement = document.getElementById('video-frame');
 					videoElement.currentTime = Math.max(videoElement.currentTime - 1, 0);
 					break;
+				} else if (current_page == 'pdf-viewers'){
+        			break; // do nothing
 				}
+			case VK_RIGHT:
+				if (current_page == 'tv_view'){
+					tvChannelsList('Activate');
+				} else if (current_page == 'video-frame') {
+					const videoElement = document.getElementById('video-frame');
+					videoElement.currentTime = Math.min(videoElement.currentTime + 1, videoElement.duration);
+					break;
+				} else if (current_page == 'pdf-viewers'){
+        			break; // do nothing
+				}
+				
+				break;
+			case VK_UP:
+				if (current_page == 'pdf-viewers'){
+        			window.scrollBy(0, -50); // Scroll up 50 pixels
+					
+				}
+			case VK_DOWN: 
+				window.scrollBy(0, 50); // Scroll down 50 pixels
 			case VK_RIGHT:
 				if (current_page == 'tv_view'){
 					tvChannelsList('Activate');
@@ -619,18 +691,6 @@ function keyHandler(keyCode) {
 				}
 				
 				break;
-			case VK_ACCEPT:
-				if (current_page == 'video-frame'){
-        			const videoElement = document.getElementById('video-frame');
-					if (videoPlaying){
-						videoElement.pause();
-						videoPlaying = !videoPlaying;
-					} else if (!videoPlaying) {
-						videoElement.play();
-						videoPlaying = !videoPlaying;
-					}
-					
-				}
 			default:
 				alert("Nothing to handle \n");
 				break;
