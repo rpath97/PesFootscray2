@@ -2,7 +2,7 @@
 
 function apiGetCall(url) {
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', 'https://cors-anywhere.herokuapp.com/'+url, true); // Replace with your API URL
+    xhr.open('GET', url, true); // Replace with your API URL
 
     // Set custom headers
     xhr.setRequestHeader('Access-Control-Allow-Origin', '*'); // Allow all origins (could be restricted for security)
