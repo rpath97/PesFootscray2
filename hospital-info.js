@@ -44,7 +44,7 @@ function handleWelcomeClick() {
 
 function handleVisitingClick() {
     console.log('Opening Visiting Hours...');
-    setPDFViewKeys(); 
+    //setPDFViewKeys(); 
 
     document.getElementById(current_page).style.display = 'none';
     previous_page = current_page;

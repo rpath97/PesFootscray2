@@ -649,7 +649,7 @@ function keyHandler(keyCode) {
 					openInternetWithPdf('Deactivate');
 					break;
 				} else if (current_page == 'pdf-viewers'){
-					setRcControlSelective();
+					//setRcControlSelective();
 					const sidebar = document.querySelector('.sidebar');
 					if (sidebar) {
 						sidebar.style.display = 'block';
@@ -685,21 +685,21 @@ function keyHandler(keyCode) {
 				}
 				
 				break;
-			case VK_UP:
-				if (current_page == 'pdf-viewers'){
-					const pdfContainer = document.getElementById("pdf-viewers");
-        			pdfContainer.scrollTop -= 50;
-					break;
-				}
-				break;
-			case VK_DOWN: 
-				if (current_page == 'pdf-viewers'){
-					const pdfContainer = document.getElementById("pdf-viewers");
-					pdfContainer.scrollTop += 50;
-					break;
-				}
+			// case VK_UP:
+			// 	if (current_page == 'pdf-viewers'){
+			// 		const pdfContainer = document.getElementById("pdf-viewers");
+        	// 		pdfContainer.scrollTop -= 50;
+			// 		break;
+			// 	}
+			// 	break;
+			// case VK_DOWN: 
+			// 	if (current_page == 'pdf-viewers'){
+			// 		const pdfContainer = document.getElementById("pdf-viewers");
+			// 		pdfContainer.scrollTop += 50;
+			// 		break;
+			// 	}
 				
-				break;
+			// 	break;
 			default:
 				alert("Nothing to handle \n");
 				break;
