@@ -679,12 +679,12 @@ function keyHandler(keyCode) {
 			case VK_UP:
 				if (current_page == 'pdf-viewers'){
 					const pdfContainer = document.getElementById("pdf-viewers");
-        			pdfContainer.scrollBy({ top: -50, behavior: "smooth" }); // Scroll up 50 pixels
+        			pdfContainer.scrollTop -= 50;
 					
 				}
 			case VK_DOWN: 
 				const pdfContainer = document.getElementById("pdf-viewers");
-				pdfContainer.scrollBy({ top: 50, behavior: "smooth" }); // Scroll down 50 pixels
+				pdfContainer.scrollTop += 50;
 			case VK_RIGHT:
 				if (current_page == 'tv_view'){
 					tvChannelsList('Activate');
