@@ -4,6 +4,10 @@ function apiGetCall(url) {
     const xhr = new XMLHttpRequest();
     xhr.open('GET', url, true); // Replace with your API URL
 
+    // Set custom headers
+    xhr.setRequestHeader('Access-Control-Allow-Origin', '*'); // Allow all origins (could be restricted for security)
+    xhr.setRequestHeader('Content-Type', 'application/json'); // Set the content type if needed
+
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
             // Successful response
