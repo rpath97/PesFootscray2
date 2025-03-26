@@ -16,7 +16,7 @@ function handleRadioClick() {
     //document.querySelector('.default-view').style.display = 'none';
     
     // Hide entertainment view
-    document.querySelector('.entertainment-view').style.display = 'none';
+    document.querySelector('#entertainment_menu').style.display = 'none';
     
     // Keep sidebar visible
     const sidebar = document.querySelector('.sidebar');
