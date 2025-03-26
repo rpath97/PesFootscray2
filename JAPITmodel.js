@@ -663,6 +663,7 @@ function keyHandler(keyCode) {
         			document.getElementById("pdf-viewers").focus();
         			break; 
 				}
+				break;
 			case VK_RIGHT:
 				if (current_page == 'tv_view'){
 					tvChannelsList('Activate');
@@ -680,17 +681,13 @@ function keyHandler(keyCode) {
 				if (current_page == 'pdf-viewers'){
 					const pdfContainer = document.getElementById("pdf-viewers");
         			pdfContainer.scrollTop -= 50;
-					
+					break;
 				}
+				break;
 			case VK_DOWN: 
-				const pdfContainer = document.getElementById("pdf-viewers");
-				pdfContainer.scrollTop += 50;
-			case VK_RIGHT:
-				if (current_page == 'tv_view'){
-					tvChannelsList('Activate');
-				} else if (current_page == 'video-frame') {
-					const videoElement = document.getElementById('video-frame');
-					videoElement.currentTime = Math.min(videoElement.currentTime + 1, videoElement.duration);
+				if (current_page == 'pdf-viewers'){
+					const pdfContainer = document.getElementById("pdf-viewers");
+					pdfContainer.scrollTop += 50;
 					break;
 				}
 				

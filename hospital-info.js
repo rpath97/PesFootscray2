@@ -57,7 +57,7 @@ function handleVisitingClick() {
     for (var i = 0; i < images.length; i++) {
         images[i].style.display = 'block';
     }
-    }
+}
 
 
 function handleRightsClick() {
