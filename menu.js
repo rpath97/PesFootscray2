@@ -5,14 +5,17 @@ const directoryPath = 'logos/channel_logos/';
 
 // radio button action function
 function radio_ui(event) {
-    const leftColumn = document.querySelector("#radio-left-column");
-    const rightColumn = document.getElementById("radio-right-column");
+    const gif = document.querySelector("#gif");
+    const rightColumn = document.getElementById("radio_title");
     const rightColumnLogo = document.getElementById("radio-logo-right");
     const gifTitle = document.getElementById("gif-title");
     
-    leftColumn.style.width = '70vw'; // Change the left column to 2/3 of the container
-    rightColumn.style.width = '30vw'; // Make the right column visible (1/3 of the container)
-    rightColumn.style.display = 'flex';
+    // leftColumn.style.width = '70vw'; // Change the left column to 2/3 of the container
+    rightColumn.innerText = 'Now Playing'; // Make the right column visible (1/3 of the container)
+    gifTitle.style.display = 'flex';
+    gif.style.display = 'flex';
+    rightColumnLogo.style.display = 'flex';
+    // rightColumn.style.display = 'flex';
     
     const clickedButton = event.currentTarget;  // Get the clicked element
     const buttonId = clickedButton.id;   // Access the ID property
@@ -79,13 +82,15 @@ function backTemp() {
         channelStopPlaying(radio_channel_playing);
         document.querySelector('.sidebar').style.display = 'block';
         
-        // readjusting radio view
-        const leftColumn = document.querySelector("#radio-left-column");
-        const rightColumn = document.getElementById("radio-right-column");
-        
-        leftColumn.style.width = '100vw';
-        rightColumn.style.width = '0vw'; 
-        rightColumn.style.display = 'none';
+        // ADJUSTING DISPLAY ELEMENTS
+        const gif = document.querySelector("#gif");
+        const rightColumn = document.getElementById("radio_title");
+        const gifTitle = document.getElementById("gif-title");
+        const rightColumnLogo = document.getElementById("radio-logo-right");
+        rightColumn.innerText = 'Press Radio Channel to Play';
+        gif.style.display = 'none';
+        gifTitle.style.display = 'none';
+        rightColumnLogo.style.display = 'none';
 
     } else if (current_page == 'video-frame') {
         const videoSrcFrame = document.getElementById('video-src-iframe');

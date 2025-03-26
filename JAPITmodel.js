@@ -470,13 +470,15 @@ function keyHandler(keyCode) {
 					channelStopPlaying(radio_channel_playing);
 					document.querySelector('.sidebar').style.display = 'block';
 
-					// readjusting radio view
-					const leftColumn = document.querySelector("#radio-left-column");
-					const rightColumn = document.getElementById("radio-right-column");
-					
-					leftColumn.style.width = '100vw';
-					rightColumn.style.width = '0vw'; 
-					rightColumn.style.display = 'none';
+					// ADJUSTING DISPLAY ELEMENTS
+					const gif = document.querySelector("#gif");
+					const rightColumn = document.getElementById("radio_title");
+					const gifTitle = document.getElementById("gif-title");
+					const rightColumnLogo = document.getElementById("radio-logo-right");
+					rightColumn.innerText = 'Press Radio Channel to Play';
+					gif.style.display = 'none';
+					gifTitle.style.display = 'none';
+					rightColumnLogo.style.display = 'none';
 
 					UtilityRefreshPage();
 				} else if (current_page == 'phillips_cast') {
@@ -562,13 +564,16 @@ function keyHandler(keyCode) {
 					channelStopPlaying(radio_channel_playing);
 					document.querySelector('.sidebar').style.display = 'block';
 
-					// readjusting radio view
-					const leftColumn = document.querySelector("#radio-left-column");
-					const rightColumn = document.getElementById("radio-right-column");
-					
-					leftColumn.style.width = '100vw';
-					rightColumn.style.width = '0vw'; 
-					rightColumn.style.display = 'none';
+					// ADJUSTING DISPLAY ELEMENTS
+					const gif = document.querySelector("#gif");
+					const rightColumn = document.getElementById("radio_title");
+					const gifTitle = document.getElementById("gif-title");
+					const rightColumnLogo = document.getElementById("radio-logo-right");
+					rightColumn.innerText = 'Press Radio Channel to Play';
+					gif.style.display = 'none';
+					gifTitle.style.display = 'none';
+					rightColumnLogo.style.display = 'none';
+
 				} else if (current_page == 'phillips_cast') { 
 					SelectCast('Deactivate');
 					current_page = "entertainment_menu";

@@ -44,9 +44,15 @@ function handleWelcomeClick() {
 
 function handleVisitingClick() {
     console.log('Opening Visiting Hours...');
+    document.getElementById(current_page).style.display = 'none';
     previous_page = current_page;
-    current_page = "visiting_hours";
-    openInternetWithPdf('Activate');
+    current_page = "pdf-viewers";
+
+    document.getElementById("pdf-viewers").style.display = 'flex';
+    
+    document.querySelectorAll('.pdfImageContainer').forEach(img => {
+        img.style.display = 'block';
+    });
 }
 
 
