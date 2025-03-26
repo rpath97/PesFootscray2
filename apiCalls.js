@@ -19,8 +19,8 @@ function apiGetCall(url) {
 
 
     //method 2: only for testing, will not work on tv browser
-    fetch('http://10.5.5.244/moduleData.php')
-        .then(response => response.json())  // Assuming JSON is returned
-        .then(data => console.log(data))
-        .catch(error => console.error('Error:', error));
+    // fetch('http://10.5.5.244/moduleData.php')
+    //     .then(response => response.json())  // Assuming JSON is returned
+    //     .then(data => console.log(data))
+    //     .catch(error => console.error('Error:', error));
 }
