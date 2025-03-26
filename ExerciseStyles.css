@@ -1002,9 +1002,9 @@ div.Input_Output {
     align-items: center;
     padding-bottom: 20vh;
 }
-#pdf-viewers::-webkit-scrollbar {
+/* #pdf-viewers::-webkit-scrollbar {
     display: none; /* For Chrome, Safari, and Opera */
-  }
+ /* } */
 /* IMAGE PDF CONTAINER */
 .pdfImageContainer {
     display: none;
