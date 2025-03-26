@@ -660,7 +660,8 @@ function keyHandler(keyCode) {
 					videoElement.currentTime = Math.max(videoElement.currentTime - 1, 0);
 					break;
 				} else if (current_page == 'pdf-viewers'){
-        			return; // do nothing
+        			document.getElementById("pdf-viewers").focus();
+        			break; 
 				}
 			case VK_RIGHT:
 				if (current_page == 'tv_view'){
@@ -670,19 +671,20 @@ function keyHandler(keyCode) {
 					videoElement.currentTime = Math.min(videoElement.currentTime + 1, videoElement.duration);
 					break;
 				} else if (current_page == 'pdf-viewers'){
-        			return; // do nothing
+					document.getElementById("pdf-viewers").focus();
+        			break; 
 				}
 				
 				break;
 			case VK_UP:
 				if (current_page == 'pdf-viewers'){
 					const pdfContainer = document.getElementById("pdf-viewers");
-        			pdfContainer.scrollBy(0, -50); // Scroll up 50 pixels
+        			pdfContainer.scrollBy({ top: -50, behavior: "smooth" }); // Scroll up 50 pixels
 					
 				}
 			case VK_DOWN: 
 				const pdfContainer = document.getElementById("pdf-viewers");
-				pdfContainer.scrollBy(0, 50); // Scroll down 50 pixels
+				pdfContainer.scrollBy({ top: 50, behavior: "smooth" }); // Scroll down 50 pixels
 			case VK_RIGHT:
 				if (current_page == 'tv_view'){
 					tvChannelsList('Activate');
