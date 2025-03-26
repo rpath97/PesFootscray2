@@ -50,6 +50,11 @@ function handleVisitingClick() {
     previous_page = current_page;
     current_page = "pdf-viewers";
 
+    const sidebar = document.querySelector('.sidebar');
+    if (sidebar) {
+        sidebar.style.display = 'none';
+    }
+
     document.getElementById("pdf-viewers").style.display = 'flex';
     document.getElementById("pdf-viewers").focus();
     

@@ -108,6 +108,10 @@ function backTemp() {
         // previous_page = "hospitalinfo_menu";
         //openInternetWithPdf('Deactivate');
         //document.getElementById('pdf-viewer-3').style.display = 'none';
+        const sidebar = document.querySelector('.sidebar');
+        if (sidebar) {
+            sidebar.style.display = 'block';
+        }
     }
     document.getElementById(current_page).style.display = 'none';
     document.getElementById(previous_page).style.display = 'flex';
