@@ -50,10 +50,11 @@ function handleVisitingClick() {
 
     document.getElementById("pdf-viewers").style.display = 'flex';
     
-    document.querySelectorAll('.pdfImageContainer').forEach(img => {
-        img.style.display = 'block';
-    });
-}
+    var images = document.querySelectorAll('.pdfImageContainer');
+    for (var i = 0; i < images.length; i++) {
+        images[i].style.display = 'block';
+    }
+    }
 
 
 function handleRightsClick() {
