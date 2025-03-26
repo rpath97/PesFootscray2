@@ -56,12 +56,14 @@ function handleVisitingClick() {
     }
 
     document.getElementById("pdf-viewers").style.display = 'flex';
-    document.getElementById("pdf-viewers").focus();
+    
     
     var images = document.querySelectorAll('.pdfImageContainer');
     for (var i = 0; i < images.length; i++) {
         images[i].style.display = 'block';
     }
+
+    document.getElementById("pdf-viewers").focus();
 }
 
 

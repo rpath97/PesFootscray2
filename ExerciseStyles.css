@@ -510,7 +510,9 @@ div.Input_Output {
 }
 
 
-
+#entertainmentButton {
+    display: none;
+}
 
 
 .hospital-info-grid {
@@ -990,17 +992,20 @@ div.Input_Output {
 }
 #pdf-viewers {
     display: none;
-    z-index: 1300;
-    position: absolute;
+    z-index: 1100;
+    position: fixed;
     right: 5vw;
     top: 13vh;
     width: 65%;
     height: 90vh;
-    overflow-y: auto;
     flex-direction: column;
     padding: 5vh;
     align-items: center;
     padding-bottom: 20vh;
+}
+#pdf-viewers:focus {
+    outline: #0098d6;
+    outline-width: 10px;
 }
 /* #pdf-viewers::-webkit-scrollbar {
     display: none; /* For Chrome, Safari, and Opera */
