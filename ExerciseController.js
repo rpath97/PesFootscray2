@@ -7,6 +7,8 @@
 /* a function to initialize our module */
 function init() {
 	UtilityInit();
+
+	apiGetCall("http://10.5.5.244/moduleData.php");
 	
 	// Add datetime update function
 	function updateDateTime() {
