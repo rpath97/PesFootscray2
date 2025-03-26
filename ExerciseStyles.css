@@ -998,9 +998,9 @@ div.Input_Output {
     height: 100vh;
     overflow-y: auto;
     flex-direction: column;
-    padding-bottom: 5vh;
+    padding: 5vh;
     align-items: center;
-    margin-bottom: 5vh;
+    padding-bottom: 20vh;
 }
 #pdf-viewers::-webkit-scrollbar {
     display: none; /* For Chrome, Safari, and Opera */
@@ -1008,9 +1008,6 @@ div.Input_Output {
 /* IMAGE PDF CONTAINER */
 .pdfImageContainer {
     display: none;
-    width: 100%;
-    height: 100vh;
-    margin-top: -10vh;
 
 }
 
