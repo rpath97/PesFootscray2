@@ -124,7 +124,7 @@ function handleMyCareButtonClick() {
     current_page = "mycare_menu";
 
     document.getElementById(previous_page).style.display = 'none';
-    document.getElementById(current_page).style.display = 'block';
+    document.getElementById(current_page).style.display = 'flex';
 
     //document.getElementById("management-and-discharge-button").focus();
 

@@ -140,11 +140,11 @@
                 <!-- Other Views (Initially Hidden) -->
                 <!-- <div class="view2"> -->
                 <!-- Entertainment View -->
-                <div class="entertainment-view" id="entertainment_menu" style="display: none;">
+                <div class="submenu-view" id="entertainment_menu" style="display: none;">
 
                     <!-- First Row -->
                     <div class="sub-menu-buttons">
-                        <button class="entertainment-card" onclick="openTV()" button-focus="television">
+                        <button class="submenu-card" onclick="openTV()" button-focus="television">
                             <img src="logos/entertainment/television.png" alt="TV">
                             <span>Television</span>
                         </button>
@@ -152,7 +152,7 @@
                     <!-- Casting under Television -->
                     <!-- <div class="mt-4"> -->
                     <div class="sub-menu-buttons">
-                        <button class="entertainment-card" onclick="handleCastingClick()" button-focus="casting">
+                        <button class="submenu-card" onclick="handleCastingClick()" button-focus="casting">
                             <img src="logos/entertainment/casting.png" alt="Casting">
                             <span>Casting</span>
                         </button>
@@ -162,7 +162,7 @@
 
                     <!-- <div class="col-md-3"> -->
                     <div class="sub-menu-buttons">
-                        <button class="entertainment-card" onclick="handleMoviesClick()" button-focus="movies">
+                        <button class="submenu-card" onclick="handleMoviesClick()" button-focus="movies">
                             <img src="logos/entertainment/movies.png" alt="Movies">
                             <span>Movies</span>
                         </button>
@@ -171,7 +171,7 @@
 
                     <!-- <div class="col-md-3"> -->
                     <div class="sub-menu-buttons">
-                        <button class="entertainment-card" onclick="handleRadioClick()" button-focus="radio">
+                        <button class="submenu-card" onclick="handleRadioClick()" button-focus="radio">
                             <img src="logos/entertainment/radio.png" alt="Radio">
                             <span>Radio</span>
                         </button>
@@ -181,46 +181,46 @@
                 </div>
 
                 <!-- My Care View -->
-                <div class="my-care-view" id="mycare_menu" style="display: none;">
-                    <div class="row g-4 justify-content-center">
+                <div class="submenu-view" id="mycare_menu" style="display: none;">
+        
                         <!-- First Row -->
-                        <div class="col-md-3">
-                            <button class="mycare-card japit-button" id="management-and-discharge-button"
-                                data-type="management-and-discharge" data-japit-control="true"
-                                data-japit-focusable="true" data-action="management-and-discharge"
+                        <div class="sub-menu-buttons">
+                            <button class="submenu-card2" id="management-and-discharge-button"
+                                button-focus="management-and-discharge-button"
                                 onclick="handleManagementandDischargeClick()">
                                 <img src="logos/mycare/managementanddischarge.png" alt="Management and Discharge">
                                 <span>Management and Discharge</span>
                             </button>
-                            <!-- Blacktown Surveys under Management and Discharge -->
-                            <div class="mt-4">
-                                <button class="mycare-card japit-button" data-type="blacktown-surveys"
-                                    data-japit-control="true" data-japit-focusable="true"
-                                    data-action="blacktown-surveys" onclick="handleBlacktownSurveysClick()">
-                                    <img src="logos/mycare/blacktownsurvey.png" alt="Blacktown Surveys">
-                                    <span>Blacktown Surveys</span>
-                                </button>
-                            </div>
+                        </div>
+                        <!-- Blacktown Surveys under Management and Discharge -->
+                        <div class="sub-menu-buttons">
+                            <button class="submenu-card2"
+                                button-focus="blacktown-surveys"
+                                onclick="handleBlacktownSurveysClick()">
+                                <img src="logos/mycare/blacktownsurvey.png" alt="Blacktown Surveys">
+                                <span>Blacktown Surveys</span>
+                            </button>
                         </div>
 
-                        <div class="col-md-3">
-                            <button class="mycare-card japit-button" data-type="carers-survey" data-japit-control="true"
-                                data-japit-focusable="true" data-action="carers-survey"
+
+                        <div class="sub-menu-buttons">
+                            <button class="submenu-card2"
+                                button-focus="carers-surveys"
                                 onclick="handleCarersSurveyClick()">
                                 <img src="logos/mycare/CarersSurvey.png" alt="Carers Survey">
                                 <span>Carers Survey</span>
                             </button>
                         </div>
 
-                        <div class="col-md-3">
-                            <button class="mycare-card japit-button" data-type="patient-survey"
-                                data-japit-control="true" data-japit-focusable="true" data-action="patient-survey"
+                        <div class="sub-menu-buttons">
+                            <button class="submenu-card2"
+                                 button-focus="patient-survey"
                                 onclick="handlePatientSurveyClick()">
                                 <img src="logos/mycare/patientsurvey.png" alt="Patient Survey">
                                 <span>Patient Survey</span>
                             </button>
                         </div>
-                    </div>
+                    
                 </div>
 
                 <!-- Clinical Services View -->
@@ -362,8 +362,10 @@
     <div id="pdf-viewers">
         <!-- PDF VIEWER OPTION 2 -->
 
-        <img src="https://images.squarespace-cdn.com/content/v1/580d687ac534a57edb75c0ea/1594182141925-DV8LR3RFTOLFKWWKF2I0/2.jpg?format=2500w" class="pdfImageContainer" alt="img1"/>
-        <img src="https://images.squarespace-cdn.com/content/v1/580d687ac534a57edb75c0ea/1594182141925-DV8LR3RFTOLFKWWKF2I0/2.jpg?format=2500w" class="pdfImageContainer" alt="img2"/>
+        <img src="https://images.squarespace-cdn.com/content/v1/580d687ac534a57edb75c0ea/1594182141925-DV8LR3RFTOLFKWWKF2I0/2.jpg?format=2500w"
+            class="pdfImageContainer" alt="img1" />
+        <img src="https://images.squarespace-cdn.com/content/v1/580d687ac534a57edb75c0ea/1594182141925-DV8LR3RFTOLFKWWKF2I0/2.jpg?format=2500w"
+            class="pdfImageContainer" alt="img2" />
     </div>
 
 

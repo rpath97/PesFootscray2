@@ -8,16 +8,12 @@ function apiGetCall(url) {
     const xhr = new XMLHttpRequest();
     xhr.open('GET', url, true); // Replace with your API URL
 
-    // Set custom headers
-    // Allow CORS (if the server supports it)
-    xhr.withCredentials = true; 
-    xhr.setRequestHeader('Access-Control-Allow-Origin', '*'); // Allow all origins (could be restricted for security)
-    xhr.setRequestHeader('Content-Type', 'application/json'); // Set the content type if needed
 
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
             // Successful response
-            console.log('Response:', xhr.responseText);
+            //console.log('Response:', xhr.responseText);
+            aflexSampleData = xhr.responseText;
         } else if (xhr.readyState === 4 && xhr.status !== 200) {
             // Error handling
             console.log('Error:', xhr.status);
