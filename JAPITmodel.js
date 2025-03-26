@@ -660,7 +660,7 @@ function keyHandler(keyCode) {
 					videoElement.currentTime = Math.max(videoElement.currentTime - 1, 0);
 					break;
 				} else if (current_page == 'pdf-viewers'){
-        			break; // do nothing
+        			return; // do nothing
 				}
 			case VK_RIGHT:
 				if (current_page == 'tv_view'){
@@ -670,7 +670,7 @@ function keyHandler(keyCode) {
 					videoElement.currentTime = Math.min(videoElement.currentTime + 1, videoElement.duration);
 					break;
 				} else if (current_page == 'pdf-viewers'){
-        			break; // do nothing
+        			return; // do nothing
 				}
 				
 				break;
