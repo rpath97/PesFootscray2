@@ -260,7 +260,7 @@ body {
     margin-top: 50px;
 } 
 /* ENTERTAINTMENT CARD */
-/* Update the image source on hover/focus for hospital info button */
+/* Update the image source on hover/focus for  button */
 .submenu-card[button-focus="television"]:focus img {
     content: url("logos/entertainment/televisionhover.png");  /* Switch to hover image */
     transform: scale(1.1);
@@ -280,7 +280,7 @@ body {
 
 .submenu-card {
     width: 21vw;
-    height: 25vh;
+    height: 20vh;
     background: white;
     border-radius: 15px;
     display: flex;
@@ -387,7 +387,7 @@ body {
 
 
 /* MYCARE CARD */
-/* Update the image source on hover/focus for hospital info button */
+/* Update the image source on hover/focus for button */
 .submenu-card2[button-focus="management-and-discharge-button"]:focus img {
     content: url("logos/mycare/ManagementandDischargehover.png");  /* Switch to hover image */
     transform: scale(1.1);
@@ -407,7 +407,7 @@ body {
 
 .submenu-card2 {
     width: 21vw;
-    height: 25vh;
+    height: 20vh;
     background: white;
     border-radius: 15px;
     display: flex;
@@ -416,7 +416,7 @@ body {
     justify-content: center;
     transition: all 0.3s ease;
     padding: 20px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 16px rgba(194, 41, 3, 0.1);
 }
 
 
@@ -429,7 +429,7 @@ body {
 .submenu-card2:hover,
 .submenu-card2:focus {
     transform: translateY(-5px);
-    box-shadow: 0 12px 20px rgba(0, 176, 240, 0.3);
+    box-shadow: 0 12px 20px rgba(235, 36, 1, 0.3);
     background: linear-gradient(135deg,  var(--mycare-color), var(--mycare-color));
     outline: none;
   
@@ -467,10 +467,6 @@ body {
 .submenu-card2:hover img {
     transform: scale(1.1);
 }
-
-
-
-
 
 /* Spacing adjustments */
 .row.g-4 {
@@ -598,71 +594,6 @@ div.Input_Output {
 
 #entertainmentButton {
     display: none;
-}
-
-
-.hospital-info-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 120px;
-    padding: 40px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.hospital-info-card {
-    width: 400px;
-    height: 280px;
-    min-height: 180px;
-    background: #ffffff;
-    border: none;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    /* padding: 60px; */
-    margin: 0 auto;
-    margin-left: -90px;
-    margin-top: -20px;
-}
-
-.hospital-info-card img {
-    width: 150px;
-    height: 150px;
-    object-fit: contain;
-    transition: transform 0.3s ease;
-}
-
-
-
-.hospital-info-card:hover,
-.hospital-info-card:focus {
-    transform: scale(1.05);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-    background: linear-gradient(135deg, #00BAA3, #00BAA3);  /* Changed to green gradient */
-   
-}
-
-.hospital-info-card:hover span,
-.hospital-info-card:focus span {
-    color: white;  /* Keep text white on hover/focus */
-}
-
-.hospital-info-card:hover img,
-.hospital-info-card:focus img {
-    transform: scale(1.1);
-    filter: brightness(0) invert(1);  /* Keep image white on hover/focus */
-}
-
-
-/* Update container padding */
-.container-fluid {
-    padding: 40px;
-    max-width: fit-content;
-    grid-template-columns: repeat(4, 1fr);
-    margin: 0 auto;
 }
 
 /* TV Loading Styles */
@@ -852,21 +783,7 @@ div.Input_Output {
 
 
 
-/* Add a separator class for specific menu items */
-.menu-separator {
-    height: 0;
-}
 
-/* Or alternatively, add margin to specific menu items */
-.menu-item[data-action="hospitalinfo"] {
-    margin-top: 0;
-}
-
-
-/* Add specific margin for visiting hours button */
-.hospital-card[data-type="visiting"] {
-    margin-top: 20px;  /* Additional spacing for visiting hours */
-}
 
 /* Radio Info Grid Layout style */
 .radio-info-grid {
@@ -963,43 +880,6 @@ div.Input_Output {
 /* Casting button specific styles */
 /*  */
 
-
-
-
-
-
-
-/* Specific hover/focus state for hospital info button */
-.menu-item[data-type="hospitalinfo"]:hover:not(.active),
-.menu-item[data-type="hospitalinfo"]:focus:not(.active) {
-    background: linear-gradient(135deg, #00BAA3, #00BAA3);  /* Green gradient */
-    color: white;
-    transform: scale(1.02);
-    box-shadow: 0 4px 8px rgba(3, 95, 3, 0.2);  /* Green shadow */
-}
-
-.menu-item[data-type="hospitalinfo"] span {
-    color: #00BAA3;  /* Specific blue color for entertainment text */
-}
-
-/* Add gap between logo and text for hospital info button */
-/* .menu-item[data-type="hospitalinfo"] {
-    gap: 20px;  
-} */
-
-
-/* Update the image source on hover/focus for hospital info button */
-.menu-item[data-type="hospitalinfo"]:hover:not(.active) img,
-.menu-item[data-type="hospitalinfo"]:focus:not(.active) img {
-    content: url("logos/sidemenu/hospitalinformationhover.png");  /* Switch to hover image */
-    transform: scale(1.1);
-}
-
-.menu-item[data-type="hospitalinfo"]:hover:not(.active) span,
-.menu-item[data-type="hospitalinfo"]:focus:not(.active) span {
-    color: white;  /* Keep text white */
-}
-
 /* Specific hover/focus state for my care button */
 .menu-item[data-type="my-care"]:hover:not(.active),
 .menu-item[data-type="my-care"]:focus:not(.active) {
@@ -1010,7 +890,7 @@ div.Input_Output {
 }
 
 .menu-item[data-type="my-care"] span {
-    color: #AD3054;  /* Specific blue color for entertainment text */
+    color: #AD3054;  
 }
 
 /* Add gap between logo and text for my care button */
@@ -1217,11 +1097,11 @@ div.Input_Output {
     transition: all 1s ease-in-out;
 }
 
-.marquee div {
+/* .marquee div { */
     /* display: inline-block; */
     /* padding-left: 100%; */
     /* animation: marquee 10s linear infinite; */
-}
+/* } */
 
 /* @keyframes marquee {
     0% { transform: translate(0, 0); }
@@ -1235,38 +1115,6 @@ div.Input_Output {
     content: url("logos/entertainment/televisionhover.png");
     transform: scale(1.1);
 } */
-
-/* Hospital info view styles */
-.hospital-info-view {
-    background-color: #e4e5ee;
-    padding: 40px;
-    height: 100%;
-}
-
-
-.hospital-info-card span {
-    font-size: 30px;
-    font-weight: 700;
-    color: #00BAA3;  /* Hospital info theme color */
-}
-
-
-
-
-/* Spacing adjustments */
-.hospital-info-view .row.g-4 {
-    --bs-gutter-x: 30px !important;
-    --bs-gutter-y: 30px !important;
-}
-
-.hospital-info-view .col-md-3 {
-     padding: 8px 85px; /* gap between buttons */
-    margin-bottom: 30px;
-}
-
-.mt-4 {
-    margin-top: 2rem !important;
-}
 
 /* My Care view styles */
 .my-care-view {
@@ -1340,59 +1188,100 @@ div.Input_Output {
 /*------------------------------ Clinical Services Grid Layout ----------------------------*/
 
 
-
-/* Clinical services button hover/focus */
+/* Specific hover/focus state for Clinical Services button */
 .menu-item[data-type="clinical-services"]:hover:not(.active),
 .menu-item[data-type="clinical-services"]:focus:not(.active) {
-    background: linear-gradient(135deg, #ff8c00, #ff8c00);  /* Orange gradient */
+    background: linear-gradient(135deg, #ff8c00, #ff8c00); /* Orange gradient */
     color: white;
     transform: scale(1.02);
-    box-shadow: 0 4px 8px rgba(255, 140, 0, 0.2);  /* Orange shadow */
+    box-shadow: 0 4px 8px rgba(255, 140, 0, 0.2); /* Orange shadow */
 }
+
 .menu-item[data-type="clinical-services"] span {
-    color: #ff8c00;  /* Specific blue color for entertainment text */
+    color: #ff8c00;
 }
 
-/* Add gap between logo and text for clinical services button */
-/* .menu-item[data-type="clinical-services"] {
-    gap: 20px;  
-} */
-
-
-/* Update the image source on hover/focus for clinical services button */
+/* Update the image source on hover/focus for Clinical Services button */
 .menu-item[data-type="clinical-services"]:hover:not(.active) img,
 .menu-item[data-type="clinical-services"]:focus:not(.active) img {
-    content: url("logos/sidemenu/clinicalserviceshover.png");  /* Switch to hover image */
+    content: url("logos/sidemenu/clinicalserviceshover.png"); /* Switch to hover image */
     transform: scale(1.1);
-    /* filter: invert(65%) sepia(75%) saturate(4000%) hue-rotate(360deg) brightness(103%) contrast(104%);  */
-    
-} 
+}
 
 .menu-item[data-type="clinical-services"]:hover:not(.active) span,
 .menu-item[data-type="clinical-services"]:focus:not(.active) span {
-    color: white;  /* Keep text white */
+    color: white; /* Keep text white */
 }
 
-/* Clinical Services Grid Layout */
-.clinical-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 80px;
-    padding: 40px;
-    max-width: fit-content;
-    margin: 0;
-    grid-template-areas:
-        "sharing . ."
-        ". . ."
-        ". . .";
-    height: 100%;
+.submenu-card3[button-focus="clinical-sharing"]:focus img {
+    content: url("logos/clinicalservices/clinicalsharinghover.png");  /* Switch to hover image */
+    transform: scale(1.1);
+}
+.submenu-card3[button-focus="time"]:focus img {
+    content: url("logos/clinicalservices/timehover.png");  /* Switch to hover image */
+    transform: scale(1.1);
+}
+.submenu-card3[button-focus="information"]:focus img {
+    content: url("logos/clinicalservices/informationhover.png");  /* Switch to hover image */
+    transform: scale(1.1);
+}
+/* CLINICAL SERVICES CARD */
+.submenu-card3 {
+    width: 21vw;
+    height: 20vh;
+    background: white;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
+    transition: all 0.3s ease;
+    padding: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
-/* Clinical Card Button */
-.clinical-card {
-    width: 400px;
-    height: 280px;
+.submenu-card3 span {
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--clinical-color);
+}
+
+/* Hover/focus effects */
+.submenu-card3:hover,
+.submenu-card3:focus {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(255, 140, 0, 0.3);
+    background: linear-gradient(135deg, var(--clinical-color), var(--clinical-color));
+    outline: none;
+}
+
+.submenu-card3:hover span,
+.submenu-card3:focus span {
+    color: white;
+}
+
+.submenu-card3:hover img,
+.submenu-card3:focus img {
+    transform: scale(1.05);
+}
+
+.submenu-card3 img {
+    width: 5vw;
+    height: auto;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+/* Clinical Services View Styles */
+.clinical-services-view {
+    background-color: #e4e5ee;
+    padding: 40px;
+    height: 100%;
+}
+
+/* Clinical Services card styles */
+.clinical-services-card {
+    width: 300px;
     min-height: 180px;
     background: #ffffff;
     border: none;
@@ -1402,126 +1291,235 @@ div.Input_Output {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    /* padding: 60px; */
+    padding: 60px;
     margin: 0 auto;
-    margin-left: -70px;
-    margin-top: -20px;
 }
 
-/* Update hover and focus effects for clinical card */
-.clinical-card:hover, 
-.clinical-card:focus {
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-    background: linear-gradient(135deg, #ff8c00, #ff8c00);  /* Changed from yellow to orange */
-    transform: scale(1.1);
-    z-index: 2;
-}
-
-/* Update text and image color on hover/focus */
-.clinical-card:hover span,
-.clinical-card:focus span {
-    color: white;
-}
-
-.clinical-card:hover img,
-.clinical-card:focus img {
-    filter: brightness(0) invert(1);  /* Makes the image white */
-}
-
-/* Specific grid areas for clinical cards */
-.clinical-card[data-type="sharing"] { grid-area: sharing; }
-
-
-/* Add refresh animation */
-@keyframes refresh-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-.refreshing {
-    animation: refresh-spin 1s linear;
-}
-
-body.refreshing {
-    position: relative;
-    pointer-events: none;
-}
-
-body.refreshing::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0.8);
-    z-index: 999;
-    animation: refresh-spin 1s linear;
-}
-
-@keyframes refresh-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-
-/* Clinical Services View */
-.clinical-services-view {
-    background-color: #e4e5ee;
-    padding: 40px;
-    height: 100%;
-    display: flex;
-    justify-content: flex-start; /* Align items to the left */
-    align-items: center;
-}
-
-
-
-.clinical-card img {
-    width: 150px;
-    height: 150px;
+.clinical-services-card img {
+    width: 110px;
+    height: 110px;
     margin-bottom: 15px;
     transition: transform 0.3s ease;
 }
 
-.clinical-card span {
-    font-size: 33px;
+.clinical-services-card span {
+    font-size: 30px;
     font-weight: 700;
-    color: #ff8c00;  /* Clinical services theme color */
+    color: #ff8c00; /* Clinical Services theme color */
 }
 
-/* Hover effects */
-.clinical-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+/* Hover/focus effects */
+.clinical-services-card:hover,
+.clinical-services-card:focus {
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    background: linear-gradient(135deg, #ff8c00, #ff8c00);
 }
 
-.clinical-card:hover img {
+.clinical-services-card:hover span,
+.clinical-services-card:focus span {
+    color: white;
+}
+
+.clinical-services-card:hover img,
+.clinical-services-card:focus img {
     transform: scale(1.1);
+    filter: brightness(0) invert(1);
 }
 
-/* Clinical Grid */
-.row.g-4 {
-    width: 100%;
-    max-width: 1200px;
-    display: flex;
-    justify-content: flex-start; /* Move button to the left */
+/* Spacing adjustments */
+.clinical-services-view .row.g-4 {
+    --bs-gutter-x: 30px !important;
+    --bs-gutter-y: 30px !important;
 }
 
 .clinical-services-view .col-md-3 {
-    padding: 8px 85px;  
+    padding: 8px 85px;
     margin-bottom: 30px;
 }
 
 
 
 
+/* HOSPITAL INFO CARD */
+
+/* Update the image source on hover/focus for button */
+.submenu-card4[button-focus="welcome"]:focus img {
+    content: url("logos/hospitalInfo/welcomehover.png");  /* Switch to hover image */
+    transform: scale(1.1);
+}
+.submenu-card4[button-focus="visiting"]:focus img {
+    content: url("logos/hospitalInfo/visitinghourshover.png");  /* Switch to hover image */
+    transform: scale(1.1);
+}
+.submenu-card4[button-focus="rights"]:focus img {
+    content: url("logos/hospitalInfo/healthcarerightshover.png");  /* Switch to hover image */
+    transform: scale(1.1);
+}
+.submenu-card4[button-focus="reach"]:focus img {
+    content: url("logos/hospitalInfo/reachhover.png");  /* Switch to hover image */
+    transform: scale(1.1);
+}
+
+.submenu-card4 {
+    width: 21vw;
+    height: 20vh;
+    background: white;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    padding: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.submenu-card4 span {
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--hosp-info-color);
+}
+
+.submenu-card4:hover,
+.submenu-card4:focus {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(37, 197, 6, 0.3);
+    background: linear-gradient(135deg, var(--hosp-info-color), var(--hosp-info-color));
+    outline: none;
+}
+
+.submenu-card4:hover span,
+.submenu-card4:focus span {
+    color: white;
+}
+
+.submenu-card4:hover img,
+.submenu-card4:focus img {
+    transform: scale(1.05);
+}
+
+.submenu-card4 img {
+    width: 5vw;
+    height: auto;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.submenu-card4 span {
+    font-size: 24px;
+    font-weight: 500;
+    color: var( --hosp-info-color);
+}
+
+/* Hover effects */
+.submenu-card4:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.submenu-card4:hover img {
+    transform: scale(1.1);
+}
+
+
+/* Spacing adjustments */
+.row.g-4 {
+    --bs-gutter-y: 2rem;
+}
+
+.mt-4 {
+    margin-top: 2rem !important;
+}
+
+/* Hospital Info view styles  */
+.hospital-info-view {
+    background-color: #e4e5ee;
+    padding: 40px;
+    height: 100%;
+}
+
+/* My Care card styles */
+.hospital-info-card {
+    width: 300px;
+    min-height: 180px;
+    background: #ffffff;
+    border: none;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    padding: 60px;
+    margin: 0 auto;
+}
+
+
+.hospital-info-card img {
+    width: 110px;
+    height: 110px;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.hospital-info-card span {
+    font-size: 30px;
+    font-weight: 700;
+    color: #00BAA3;  /* My Care theme color */
+}
+
+/* Update hover/focus effects */
+.hospital-info-card:hover,
+.hospital-info-card:focus {
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    background: linear-gradient(135deg, #00BAA3, #00BAA3);  /* gradient */
+}
+
+.hospital-info-card:hover span,
+.hospital-info-card:focus span {
+    color: white;  /* Keep text white on hover/focus */
+}
+
+.hospital-info-card:hover img,
+.hospital-info-card:focus img {
+    transform: scale(1.1);
+    filter: brightness(0) invert(1);  /* Keep image white on hover/focus */
+}
+
+/* Spacing adjustments */
+.hospital-info-view .row.g-4 {
+    --bs-gutter-x: 30px !important;
+    --bs-gutter-y: 30px !important;
+}
+
+.hospital-info-view .col-md-3 {
+    padding: 8px 85px;  /* gap between buttons */
+    margin-bottom: 30px;
+}
+
+/* Update the image source on hover/focus for my care button */
+.menu-item[data-type="hospitalinfo"]:hover:not(.active) img,
+.menu-item[data-type="hospitalinfo"]:focus:not(.active) img {
+    content: url("logos/sidemenu/hospitalinformationhover.png");  /* Switch to hover image */
+    transform: scale(1.1);
+}
+
+.menu-item[data-type="hospitalinfo"]:hover:not(.active) span,
+.menu-item[data-type="hospitalinfo"]:focus:not(.active) span {
+    color: white;  /* Keep text white */
+}
+/* Specific hover/focus state for my care button */
+.menu-item[data-type="hospitalinfo"]:hover:not(.active),
+.menu-item[data-type="hospitalinfo"]:focus:not(.active) {
+    background: linear-gradient(135deg, #00BAA3, #00BAA3);  /* Red gradient */
+    color: white;
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(7, 214, 179, 0.568);  /* Red shadow */
+}
+
+.menu-item[data-type="hospitalinfo"] span {
+    color: #00BAA3;  
+}
 

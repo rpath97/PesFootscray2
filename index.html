@@ -28,7 +28,6 @@
     <script type="text/javascript" src="apiCalls.js"></script>
     <script type="text/javascript" src="mainMenu.js"></script>
     <!-- Add this in the head section -->
-    <script type="text/javascript" src="my-care.js"></script>
     <script type="text/javascript" src="hospital-info.js"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/1.0.907/pdf.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.2.8/es6-promise.auto.min.js"></script> -->
@@ -141,7 +140,6 @@
                 <!-- <div class="view2"> -->
                 <!-- Entertainment View -->
                 <div class="submenu-view" id="entertainment_menu" style="display: none;">
-
                     <!-- First Row -->
                     <div class="sub-menu-buttons">
                         <button class="submenu-card" onclick="openTV()" button-focus="television">
@@ -181,7 +179,7 @@
                 </div>
 
                 <!-- My Care View -->
-                <div class="submenu-view" id="mycare_menu" style="display: none;">
+                    <div class="submenu-view" id="mycare_menu" style="display: none;">
         
                         <!-- First Row -->
                         <div class="sub-menu-buttons">
@@ -221,92 +219,82 @@
                             </button>
                         </div>
                     
-                </div>
+                     </div>
+
 
                 <!-- Clinical Services View -->
-                <!-- <div class="clinical-services-view" id="clinicalservices_menu" style="display: none;">
-                <div class="row g-4 justify-content-center"> -->
-                <!-- First Row -->
-                <!-- <div class="col-md-3">
-                        <button class="clinical-card japit-button" 
-                                id="clinical-sharing-button"
-                                data-type="sharing"
-                                data-japit-control="true"
-                                data-japit-focusable="true"
-                                data-action="sharing"
-                                onclick="openClicnicalCasting()">
+                <div class="submenu-view" id="clinicalservices_menu" style="display: none;">
+                    <!-- First Row -->
+                    <div class="sub-menu-buttons">
+                        <button class="submenu-card3" id="clinical-sharing-button"
+                            button-focus="clinical-sharing"
+                            onclick="openClinicalSharing()">
                             <img src="logos/clinicalservices/clinicalsharing.png" alt="Clinical Sharing">
                             <span>Clinical Sharing</span>
                         </button>
                     </div>
-                </div>
-            </div> -->
 
-                <!-- Clinical Services View -->
-                <div class="clinical-services-view" id="clinicalservices_menu" style="display: none;">
-                    <div class="row g-4 justify-content-start">
-                        <div class="col-md-3">
-                            <button class="clinical-card japit-button" id="clinical-sharing-button" data-type="sharing"
-                                data-japit-control="true" data-japit-focusable="true" data-action="sharing"
-                                onclick="openClicnicalCasting()">
-                                <img src="logos/clinicalservices/clinicalsharing.png" alt="Clinical Sharing">
-                                <span>Clinical Sharing</span>
-                            </button>
-                        </div>
+                    <!-- Clinical Section -->
+                    <div class="sub-menu-buttons">
+                        <button class="submenu-card3" id="time-button"
+                            button-focus="time"
+                            onclick="handleClinicalClick()">
+                            <img src="logos/clinicalservices/time.png" alt="Clinical">
+                            <span>Time</span>
+                        </button>
+                    </div>
 
-                        <!-- Placeholder elements to maintain 3x3 grid structure for future use -->
-                        <!-- <div class="col-md-4"><div class="clinical-card empty-card"></div></div>
-                    <div class="col-md-4"><div class="clinical-card empty-card"></div></div>
-                    <div class="col-md-4"><div class="clinical-card empty-card"></div></div>
-                    <div class="col-md-4"><div class="clinical-card empty-card"></div></div>
-                    <div class="col-md-4"><div class="clinical-card empty-card"></div></div>
-                    <div class="col-md-4"><div class="clinical-card empty-card"></div></div>
-                    <div class="col-md-4"><div class="clinical-card empty-card"></div></div>
-                    <div class="col-md-4"><div class="clinical-card empty-card"></div></div> -->
+                    <!-- Information Section -->
+                    <div class="sub-menu-buttons">
+                        <button class="submenu-card3" id="information-button"
+                            button-focus="information"
+                            onclick="handleInformationClick()">
+                            <img src="logos/clinicalservices/information.png" alt="Information">
+                            <span>Information</span>
+                        </button>
                     </div>
                 </div>
-
-
                 <!-- Hospital Info View -->
-                <div class="hospital-info-view" id="hospitalinfo_menu" style="display: none;">
-                    <div class="row g-4 justify-content-center">
-                        <!-- First Row -->
-                        <div class="col-md-3">
-                            <button class="hospital-info-card japit-button" id="welcome-button" data-type="welcome"
-                                data-japit-control="true" data-japit-focusable="true" data-action="welcome"
-                                onclick="handleWelcomeClick()">
-                                <img src="logos/welcome.png" alt="Welcome">
-                                <span>Welcome</span>
-                            </button>
-                            <!-- Visiting Hours under Welcome -->
-                            <div class="mt-4">
-                                <button class="hospital-info-card japit-button" id="hospital-info-button"
-                                    data-type="visiting" data-japit-control="true" data-japit-focusable="true"
-                                    data-action="visiting" onclick="handleVisitingClick()">
-                                    <img src="logos/visitinghours.png" alt="Visiting Hours">
-                                    <span>Visiting Hours</span>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <button class="hospital-info-card japit-button" id="healthcare-rights-button"
-                                data-type="rights" data-japit-control="true" data-japit-focusable="true"
-                                data-action="rights" onclick="handleRightsClick()">
-                                <img src="logos/healthcarerights.png" alt="Healthcare Rights">
-                                <span>Healthcare Rights</span>
-                            </button>
-                        </div>
-
-                        <div class="col-md-3">
-                            <button class="hospital-info-card japit-button" data-type="reach" data-japit-control="true"
-                                data-japit-focusable="true" data-action="reach" onclick="handleReachClick()">
-                                <img src="logos/reach.png" alt="Reach">
-                                <span>Reach</span>
-                            </button>
-                        </div>
+                <div class="submenu-view" id="hospitalinfo_menu" style="display: none;">
+                    <!-- First Row -->
+                    <div class="sub-menu-buttons">
+                        <button class="submenu-card4" id="welcome-button"
+                            button-focus="welcome"
+                            onclick="handleWelcomeClick()">
+                            <img src="logos/welcome.png" alt="Welcome">
+                            <span>Welcome</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Visiting Hours under Welcome -->
+                    <div class="sub-menu-buttons">
+                        <button class="submenu-card4" id="hospital-info-button"
+                            button-focus="visiting"
+                            onclick="handleVisitingClick()">
+                            <img src="logos/visitinghours.png" alt="Visiting Hours">
+                            <span>Visiting Hours</span>
+                        </button>
+                    </div>
+                    
+                    <div class="sub-menu-buttons">
+                        <button class="submenu-card4" id="healthcare-rights-button"
+                            button-focus="rights"
+                            onclick="handleRightsClick()">
+                            <img src="logos/healthcarerights.png" alt="Healthcare Rights">
+                            <span>Healthcare Rights</span>
+                        </button>
+                    </div>
+                    
+                    <div class="sub-menu-buttons">
+                        <button class="submenu-card4" id="reach-button"
+                            button-focus="reach"
+                            onclick="handleReachClick()">
+                            <img src="logos/reach.png" alt="Reach">
+                            <span>Reach</span>
+                        </button>
                     </div>
                 </div>
+
 
                 <!-- Radio View -->
                 <div class="radio-view" id="radio_view" style="display: none;">
