@@ -140,10 +140,20 @@ function loadMainMenu(data) {
                 const moduleAction = subModulesData[j].moduleAction.packageName;
                 if (moduleAction && moduleAction.includes('video')) {
                     const videoApi = subModulesData[j].moduleAction.moduleUrl;
-                    const videourl = apiGetCall(videoApi, 'submenu');
-                    if (videourl){
-                        console.log(JSON.parse(videourl));
-                    }
+                    const videourl = '';
+                    apiGetCall(videoApi, 'submenu', function(response) {
+                        if (response) {
+                            console.log('API Response:', response);
+                            // Process the response here (e.g., parse JSON)
+                            videourl = response;
+                            
+                        } else {
+                            console.log('API request failed');
+                        }
+                    });
+                    // if (videourl){
+                    //     console.log(JSON.parse(videourl));
+                    // }
                     
                 }
 
@@ -182,8 +192,75 @@ function loadMainMenu(data) {
                 // For example:
                 hospMenu.appendChild(subMenuButtons); // Or any other parent element
              }
+        } else {
+            const menuItemData = data[i];
+            var colorScheme = data[i].colorScheme;
+            var button = document.createElement('button');
+            button.className = 'menu-item japit-button';
+            button.id = menuItemData.title.split(' ').join('');
+
+            // 2. Set data attributes (Opera 32 supports dataset or setAttribute)
+            button.setAttribute('data-type', button.id);
+            button.setAttribute('data-japit-control', 'true');
+            button.setAttribute('data-japit-focusable', 'true');
+            button.setAttribute('data-action', button.id);
+
+            // 2. Style the span element (assuming you created it)
+            var span = document.createElement('span');
+            span.textContent = menuItemData.title;
+            span.style.color = colorScheme.selectionColor;
+
+            // Add image and text
+            var img = document.createElement('img');
+            img.src = menuItemData.icon.imageUrl;
+            img.alt = menuItemData.title;
+
+            
+            button.appendChild(img);
+            button.appendChild(span);
+
+            // Repeat similar for focus/blur events
+            // Use a CLOSURE to capture the correct values for each button
+            (function(btn, scheme, itemData) {
+                btn.addEventListener('focus', function() {
+                    if (!this.classList.contains('active')) {
+                        this.style.background = 'linear-gradient(135deg, ' + scheme.selectionColor + ', ' + scheme.selectionColor + ')';
+                        this.style.color = scheme.selectionColor.baseColor;
+                        this.style.transform = 'scale(1.02)';
+                        this.style.boxShadow = '0 4px 8px rgba(3, 95, 3, 0.2)';
+                        
+                        var btnImg = this.querySelector('img');
+                        btnImg.src = itemData.icon.focusedImageUrl;
+                        btnImg.style.transform = 'scale(1.1)';
+                        
+                        var btnSpan = this.querySelector('span');
+                        btnSpan.style.color = scheme.baseColor;
+                    }
+                });
+
+                btn.addEventListener('blur', function() {
+                    if (!this.classList.contains('active')) {
+                        this.style.background = '';
+                        this.style.color = '';
+                        this.style.transform = '';
+                        this.style.boxShadow = '';
+                        
+                        var btnImg = this.querySelector('img');
+                        btnImg.src = itemData.icon.imageUrl;
+                        btnImg.style.transform = '';
+                        
+                        var btnSpan = this.querySelector('span');
+                        btnSpan.style.color = scheme.selectionColor;
+                    }
+                });
+            })(button, colorScheme, menuItemData); // Pass current loop values to the closure
+
+            
+            // Add to container (replace with your actual container)
+            document.querySelector('.sidebar-menu').appendChild(button);
+                    
         }
     }
 
-    console.log(mainMenuButtons); // Output: ["Alice", "Bob", "Charlie"]
+ 
 }

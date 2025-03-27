@@ -1,6 +1,6 @@
 var rawAflexData = '';
 
-function apiGetCall(url, menuType) {
+function apiGetCall(url, menuType, callback) {
     
     if (menuType == 'mainMenu'){
         console.log(aflexDataParsed);
@@ -16,11 +16,11 @@ function apiGetCall(url, menuType) {
         if (xhr.readyState === 4 && xhr.status === 200) {
             // Successful response
             //console.log('Response:', xhr.responseText);
-            return xhr.responseText;
+            callback(xhr.responseText);
         } else if (xhr.readyState === 4 && xhr.status !== 200) {
             // Error handling
             console.log('Error:', xhr.status);
-            return null;
+            callback(null);
         }
     };
 

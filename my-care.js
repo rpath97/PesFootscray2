@@ -87,11 +87,13 @@ function handlePatientSurveyClick() {
 
 function handleBlacktownSurveysClick() {
     console.log('Opening Blacktown Surveys...');
-    clearMyCareActive();
-    const card = document.querySelector('.mycare-card[data-type="blacktown-surveys"]');
-    if (card) {
-        card.classList.add('active');
-    }
+    // clearMyCareActive();
+    // const card = document.querySelector('.mycare-card[data-type="blacktown-surveys"]');
+    // if (card) {
+    //     card.classList.add('active');
+    // }
+    const sampleHlsVideoUrl = 'http://staging1.stellar.care:8080/hls/1660022838-31032960.mp4/index.m3u8';
+    videoPlayerHls(sampleHlsVideoUrl);
 }
 
 // Handle keyboard navigation
