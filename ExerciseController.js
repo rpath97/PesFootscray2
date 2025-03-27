@@ -8,7 +8,7 @@
 function init() {
 	UtilityInit();
 
-	apiGetCall("http://10.5.5.244/moduleData.php");
+	rawAflexData = apiGetCall("http://10.5.5.244/moduleData.php", 'mainMenu');
 	
 	// Add datetime update function
 	function updateDateTime() {
