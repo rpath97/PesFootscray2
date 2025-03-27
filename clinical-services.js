@@ -8,7 +8,7 @@ function handleClinicalServicesClick() {
     current_page = "clinicalservices_menu";
 
     document.getElementById(previous_page).style.display = 'none';
-    document.getElementById(current_page).style.display = 'block';
+    document.getElementById(current_page).style.display = 'flex';
 
     //document.getElementById("clinical-sharing-button").focus();
 
