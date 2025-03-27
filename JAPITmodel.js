@@ -428,6 +428,53 @@ function setPDFViewKeys() {
 	sendWIxPCommand(JAPITObjForWIXPSvc);
 	delete JAPITObjForWIXPSvc;
 }
+// LETTING MOVIES APP TAKE CONTROL OF BACK BUTTONS	
+function setMoviesKeys() {
+
+	var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
+	JAPITObjForWIXPSvc.Cookie = 6;
+	JAPITObjForWIXPSvc.CmdType = "Change";
+	JAPITObjForWIXPSvc.Fun = "UserInputControl";
+	JAPITObjForWIXPSvc.CommandDetails = {
+		"VirtualKeyForwardMode": "SelectiveVirtualKeyForward",
+		"VirtualKeyToBeForwarded":
+			[
+				{ "vkkey": "HBBTV_VK_CLOCK" },
+				// { "vkkey" : "HBBTV_VK_SMARTTV" },
+				//{ "vkkey" : "HBBTV_VK_CHANNELGRID" },
+				{ "vkkey": "HBBTV_VK_ALARM" },
+				{ "vkkey": "HBBTV_VK_SMARTINFO" },
+				// { "vkkey" : "HBBTV_VK_SOURCE" },
+				{ "vkkey": "HBBTV_VK_TV" },
+				// { "vkkey" : "HBBTV_VK_FORMAT" },
+				//{ "vkkey" : "HBBTV_VK_HOME" }, // not existing
+				// { "vkkey" : "HBBTV_VK_PLAY_PAUSE" }, // previously was VK_OSRC
+				{ "vkkey": "HBBTV_VK_GUIDE" },
+				//{ "vkkey" : "HBBTV_VK_UP" }, // not existing
+				{ "vkkey" : "HBBTV_VK_INFO" },
+				//{ "vkkey" : "HBBTV_VK_LEFT" }, // not existing
+				//{ "vkkey" : "HBBTV_VK_ACCEPT" }, // not existing
+				//{ "vkkey" : "HBBTV_VK_RIGHT" }, // not existing
+				{ "vkkey": "HBBTV_VK_ADJUST" }, //SETTINGS BUTTON
+				//{ "vkkey" : "HBBTV_VK_DOWN" }, // not existing
+				{ "vkkey": "HBBTV_VK_MENU" }, // Home Button
+				//{ "vkkey": "HBBTV_VK_BACK" }, // not existing
+				{ "vkkey": "HBBTV_VK_RED" },
+				{ "vkkey": "HBBTV_VK_GREEN" },
+				{ "vkkey": "HBBTV_VK_YOUTUBE" },
+				{ "vkkey": "HBBTV_VK_WEATHER" },
+				//{"vkkey": "	HBBTV_VK_SETTINGS"}, //doesn't affect settings button
+				{ "vkkey": "HBBTV_VK_OPTIONS" },
+				{ "vkkey": "HBBTV_VK_1" },
+				{ "vkkey": "HBBTV_VK_2" },
+				{ "vkkey": "HBBTV_VK_3" },
+				{ "vkkey": "HBBTV_VK_4" }
+			]
+	}
+
+	sendWIxPCommand(JAPITObjForWIXPSvc);
+	delete JAPITObjForWIXPSvc;
+}
 
 function changeCDBstate(state) {
 	//updating ui status
@@ -510,6 +557,7 @@ function keyHandler(keyCode) {
 					current_page = "entertainment_menu";
 					previous_page = "default_view";
 					openMovies('Deactivate');
+					setRcControlSelective();
 					changeCDBstate('Activate');
 					UtilityRefreshPage();
 					break;
@@ -611,6 +659,7 @@ function keyHandler(keyCode) {
 					current_page = "entertainment_menu";
 					previous_page = "default_view";
 					openMovies('Deactivate');
+					setRcControlSelective();
 					changeCDBstate('Activate');
 					break;
 				} else if (current_page == 'radio_view') {

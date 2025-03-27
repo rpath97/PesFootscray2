@@ -4,7 +4,7 @@ function apiGetCall(url, menuType, callback) {
     
     if (menuType == 'mainMenu'){
         console.log(aflexDataParsed);
-        //loadMainMenu(aflexDataParsed);
+        loadMainMenu(aflexDataParsed);
     }
     
 

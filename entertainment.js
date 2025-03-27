@@ -5,6 +5,7 @@ function handleMoviesClick() {
     //setting previous and current page
     current_page = 'movies';
     openMovies('Activate');
+    setMoviesKeys();
     
 
 }
