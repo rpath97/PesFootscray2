@@ -734,6 +734,17 @@ function keyHandler(keyCode) {
 				}
 				
 				break;
+			case VK_ACCEPT:
+				if (current_page == 'video-frame'){
+					const videoElement = document.getElementById('video-frame');
+					if (videoPlaying){
+						videoElement.pause();
+						videoPlaying = !videoPlaying;
+					} else if (!videoPlaying) {
+						videoElement.play();
+						videoPlaying = !videoPlaying;
+					}
+				}
 			// case VK_UP:
 			// 	if (current_page == 'pdf-viewers'){
 			// 		const pdfContainer = document.getElementById("pdf-viewers");
