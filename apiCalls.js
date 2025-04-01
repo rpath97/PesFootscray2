@@ -13,6 +13,8 @@ function apiGetCall(url, menuType, callback) {
     xhr.open('GET', url, true); // Replace with your API URL
     // Set CORS headers in the request
     xhr.setRequestHeader("Access-Control-Allow-Origin", "*"); // Allow all origins
+    xhr.setRequestHeader("Content-Type", "application/json"); // Adjust according to your request type
+    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
 
 
     xhr.onreadystatechange = function() {
