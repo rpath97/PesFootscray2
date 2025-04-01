@@ -1,4 +1,5 @@
 var rawAflexData = '';
+var aflexApiUrl = 'http://10.5.5.244/moduleData.php';
 
 function apiGetCall(url, menuType, callback) {
     
@@ -7,6 +8,9 @@ function apiGetCall(url, menuType, callback) {
         //loadMainMenu(aflexDataParsed);
     }
     
+    
+    // Set CORS headers in the request
+    xhr.setRequestHeader("Access-Control-Allow-Origin", "*"); // Allow all origins
 
     const xhr = new XMLHttpRequest();
     xhr.open('GET', url, true); // Replace with your API URL
