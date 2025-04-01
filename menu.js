@@ -165,6 +165,7 @@ window.openPdf = function (url) {
     document.getElementById(current_page).style.display = 'none';
     previous_page = current_page;
     current_page = "pdf-viewers";
+    current_page.innerHTML = '';
     const sidebar = document.querySelector('.sidebar');
     if (sidebar) {
         sidebar.style.display = 'none';
@@ -187,7 +188,7 @@ window.openPdf = function (url) {
 
 function renderPage(pdf, pageNum) {
     pdf.getPage(pageNum).then(function (page) {
-        var scale = 5;  // Adjust the zoom level of the page
+        var scale = 4;  // Adjust the zoom level of the page
         var viewport = page.getViewport(scale);
 
         var canvas = document.createElement('canvas');  // Create a new canvas for each page

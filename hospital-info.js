@@ -67,18 +67,18 @@ function handleVisitingClick() {
 }
 
 function handleReachClick() {
-    document.getElementById(current_page).style.display = 'none';
-    previous_page = current_page;
-    current_page = "pdf-viewers";
-    const sidebar = document.querySelector('.sidebar');
-    if (sidebar) {
-        sidebar.style.display = 'none';
-    }
+    // document.getElementById(current_page).style.display = 'none';
+    // previous_page = current_page;
+    // current_page = "pdf-viewers";
+    // const sidebar = document.querySelector('.sidebar');
+    // if (sidebar) {
+    //     sidebar.style.display = 'none';
+    // }
     //const pdf_canvas = document.getElementById('pdf-canvas');
     //const proxyUrl = "https://cors-anywhere.herokuapp.com/";
     //renderPDF3('https://api.printnode.com/static/test/pdf/multipage.pdf', current_page);
     //pdf_canvas.style.display = 'flex';
-    document.getElementById("pdf-viewers").style.display = 'flex';
+    // document.getElementById(current_page).style.display = 'flex';
     //pdfViewer('https://api.printnode.com/static/test/pdf/multipage.pdf');
     // PDFJS.workerSrc = "pdf.worker.js";
     // PDFJS.getDocument('https://pdfobject.com/pdf/sample.pdf').then(function(pdf) {
@@ -90,7 +90,7 @@ function handleReachClick() {
     //     console.error("Error loading PDF:", error);
     // });
     openPdf('https://pdfobject.com/pdf/sample.pdf');
-    document.getElementById('pdf-viewers').focus();
+    // document.getElementById('pdf-viewers').focus();
 }
 
 
