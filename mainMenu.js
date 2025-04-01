@@ -66,7 +66,7 @@ function loadMainMenu(data) {
                 // TV CHANNELS API CALL
                 if (tvChannelsApiUrl) { // Check if moduleUrl exists
                     apiGetCall(tvChannelsApiUrl, 'submenu', function (response) {
-                        if (response) console.log('API Response:', response);
+                        //if (response) console.log('API Response:', response);
                     });
                 }
                 // RADIO CHANNELS API CALL
@@ -79,7 +79,9 @@ function loadMainMenu(data) {
                     var radioChannelsApiUrl = radioChannelsObjects[0].moduleAction.moduleUrl;
                     console.log("Radio api call", radioChannelsApiUrl);
                     apiGetCall(radioChannelsApiUrl, 'submenu', function (response) {
-                        if (response) console.log('API Response:', response);
+                        if (response){
+
+                        } //console.log('API Response:', response);
                     });
                     // for (var k=0; k<radioChannelsObjects.length; k++){
                     //     var radioChannelsApiUrl = radioChannelsObjects[k].moduleAction.moduleUrl;
@@ -167,8 +169,15 @@ function loadMainMenu(data) {
 
                                 var videoApi = subModule.moduleAction.moduleUrl;
                                 if (videoApi) { // Check if moduleUrl exists
-                                    apiGetCall('https://api.codetabs.com/v1/proxy/?quest='+videoApi, 'submenu', function (response) {
-                                        if (response) console.log('API Response:', response);
+                                    apiGetCall(videoApi, 'submenu', function (response) {
+                                        if (response){
+                                            var videoData = JSON.parse(response);
+                                            console.log(videoData);
+                                            var videoUrl = videoData.subModules[0].moduleAction.url;
+                                            button.addEventListener('click', function () {
+                                                videoPlayerHls(videoUrl);
+                                            });
+                                        }
                                     });
                                 }
                             } else if (subModule.moduleAction.url) {

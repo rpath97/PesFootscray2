@@ -1,4 +1,6 @@
 var rawAflexData = '';
+var corsProxy = 'https://api.codetabs.com/v1/proxy/?quest=';
+var corsProxy2 = 'https://corsproxy.github.io/';
 var aflexApiUrl = 'http://10.5.5.244/moduleData.php';
 
 function apiGetCall(url, menuType, callback) {
@@ -10,11 +12,11 @@ function apiGetCall(url, menuType, callback) {
 
 
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true); // Replace with your API URL
+    xhr.open('GET', corsProxy+url, true); // Replace with your API URL
     // Set CORS headers in the request
-    xhr.setRequestHeader("Access-Control-Allow-Origin", "*"); // Allow all origins
-    xhr.setRequestHeader("Content-Type", "application/json"); // Adjust according to your request type
-    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+    // xhr.setRequestHeader("Access-Control-Allow-Origin", "*"); // Allow all origins
+    // xhr.setRequestHeader("Content-Type", "application/json"); // Adjust according to your request type
+    // xhr.setRequestHeader("X-Requested-With", "XMLHttpsRequest");
 
 
     xhr.onreadystatechange = function() {
