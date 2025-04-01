@@ -113,7 +113,7 @@ body {
     width: 100%;
     height: 180px; /* Set a fixed height */
     background: #ffffff;
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: flex-start;
     font-size: 30px;
@@ -1000,22 +1000,23 @@ div.Input_Output {
     width: 100%;
    
 }
-#pdf-viewers {
+#pdf-viewers, #pdf-container {
     display: none;
     z-index: 1100;
     position: fixed;
+    flex-direction: column;
     right: 5vw;
     top: 13vh;
-    width: 65%;
-    height: 90vh;
-    flex-direction: column;
-    padding: 5vh;
-    align-items: center;
-    padding-bottom: 20vh;
+    width: 90vw;
+    padding: 0;
+    box-shadow: none;
+    visibility: visible;
+    overflow-y: auto;
 }
-#pdf-viewers:focus {
+#pdf-container:focus {
     outline: #0098d6;
     outline-width: 10px;
+    color: #0098d6;
 }
 /* #pdf-viewers::-webkit-scrollbar {
     display: none; /* For Chrome, Safari, and Opera */

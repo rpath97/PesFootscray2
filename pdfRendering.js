@@ -141,4 +141,27 @@ function renderPDF3(url, pdf_container_id) {
     
 }
 
+function pdfViewer(url) {
+    pdfjsLib.getDocument(url).then(function(pdf) {
+        pdf.getPage(1).then(function(page) {
+            var scale = 1.5;
+            var viewport = page.getViewport(scale);
+
+            var canvas = document.getElementById('pdf-render');
+            var ctx = canvas.getContext('2d');
+            canvas.width = viewport.width;
+            canvas.height = viewport.height;
+
+            var renderContext = {
+                canvasContext: ctx,
+                viewport: viewport
+            };
+
+            page.render(renderContext);
+        });
+    }).catch(function(error) {
+        console.error("Error loading PDF:", error);
+    });
+}
+
 
