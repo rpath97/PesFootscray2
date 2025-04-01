@@ -7,13 +7,12 @@ function apiGetCall(url, menuType, callback) {
         console.log(aflexDataParsed);
         //loadMainMenu(aflexDataParsed);
     }
-    
-    
-    // Set CORS headers in the request
-    xhr.setRequestHeader("Access-Control-Allow-Origin", "*"); // Allow all origins
+
 
     const xhr = new XMLHttpRequest();
     xhr.open('GET', url, true); // Replace with your API URL
+    // Set CORS headers in the request
+    xhr.setRequestHeader("Access-Control-Allow-Origin", "*"); // Allow all origins
 
 
     xhr.onreadystatechange = function() {
