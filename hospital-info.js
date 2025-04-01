@@ -80,16 +80,16 @@ function handleReachClick() {
     //pdf_canvas.style.display = 'flex';
     document.getElementById("pdf-viewers").style.display = 'flex';
     //pdfViewer('https://api.printnode.com/static/test/pdf/multipage.pdf');
-    PDFJS.workerSrc = "pdf.worker.js";
-    PDFJS.getDocument('https://pdfobject.com/pdf/sample.pdf').then(function(pdf) {
-        var numPages = pdf.numPages;  // Get the total number of pages
-        for (var pageNum = 1; pageNum <= numPages; pageNum++) {
-            renderPage(pdf, pageNum);
-        }
-    }).catch(function(error) {
-        console.error("Error loading PDF:", error);
-    });
-    //openPdf('https://pdfobject.com/pdf/sample.pdf');
+    // PDFJS.workerSrc = "pdf.worker.js";
+    // PDFJS.getDocument('https://pdfobject.com/pdf/sample.pdf').then(function(pdf) {
+    //     var numPages = pdf.numPages;  // Get the total number of pages
+    //     for (var pageNum = 1; pageNum <= numPages; pageNum++) {
+    //         renderPage(pdf, pageNum);
+    //     }
+    // }).catch(function(error) {
+    //     console.error("Error loading PDF:", error);
+    // });
+    openPdf('https://pdfobject.com/pdf/sample.pdf');
     document.getElementById('pdf-viewers').focus();
 }
 
