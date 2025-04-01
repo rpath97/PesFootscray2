@@ -78,7 +78,7 @@ function handleReachClick() {
     //const proxyUrl = "https://cors-anywhere.herokuapp.com/";
     //renderPDF3('https://api.printnode.com/static/test/pdf/multipage.pdf', current_page);
     //pdf_canvas.style.display = 'flex';
-    document.getElementById("pdf-container").style.display = 'flex';
+    document.getElementById("pdf-viewers").style.display = 'flex';
     //pdfViewer('https://api.printnode.com/static/test/pdf/multipage.pdf');
     PDFJS.workerSrc = "pdf.worker.js";
     PDFJS.getDocument('https://api.printnode.com/static/test/pdf/multipage.pdf').then(function(pdf) {
@@ -89,6 +89,7 @@ function handleReachClick() {
     }).catch(function(error) {
         console.error("Error loading PDF:", error);
     });
+    document.getElementById('pdf-viewers').focus();
 }
 function renderPage(pdf, pageNum) {
     pdf.getPage(pageNum).then(function(page) {
@@ -96,7 +97,7 @@ function renderPage(pdf, pageNum) {
         var viewport = page.getViewport(scale);
 
         var canvas = document.createElement('canvas');  // Create a new canvas for each page
-        document.getElementById('pdf-container').appendChild(canvas);  // Append the canvas to the container
+        document.getElementById('pdf-viewers').appendChild(canvas);  // Append the canvas to the container
 
         var ctx = canvas.getContext('2d');
         canvas.width = viewport.width;
