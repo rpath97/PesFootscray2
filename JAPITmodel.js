@@ -714,7 +714,7 @@ function keyHandler(keyCode) {
 					tvChannelsList('Activate');
 				} else if (current_page == 'video-frame') {
 					const videoElement = document.getElementById('video-frame');
-					videoElement.currentTime = Math.max(videoElement.currentTime - 1, 0);
+					videoElement.currentTime = Math.max(videoElement.currentTime - 5, 0);
 					break;
 				} else if (current_page == 'pdf-viewers'){
         			document.getElementById("pdf-viewers").focus();
@@ -726,7 +726,7 @@ function keyHandler(keyCode) {
 					tvChannelsList('Activate');
 				} else if (current_page == 'video-frame') {
 					const videoElement = document.getElementById('video-frame');
-					videoElement.currentTime = Math.min(videoElement.currentTime + 1, videoElement.duration);
+					videoElement.currentTime = Math.min(videoElement.currentTime + 5, videoElement.duration);
 					break;
 				} else if (current_page == 'pdf-viewers'){
 					document.getElementById("pdf-viewers").focus();

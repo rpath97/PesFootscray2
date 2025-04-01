@@ -1006,19 +1006,19 @@ div.Input_Output {
     position: fixed;
     flex-direction: column;
     right: 5vw;
-    top: 13vh;
+    top: 14vh;
     width: 90vw;
     height: 90vh;
     padding: 0;
     box-shadow: none;
     visibility: visible;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
-#pdf-container:focus {
+/* #pdf-container:focus {
     outline: #0098d6;
     outline-width: 10px;
     color: #0098d6;
-}
+} */
 /* #pdf-viewers::-webkit-scrollbar {
     display: none; /* For Chrome, Safari, and Opera */
  /* } */
