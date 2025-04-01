@@ -162,9 +162,7 @@ function loadMainMenu(data) {
                             button.setAttribute('button-focus', subModule.title.split(' ').join(''));
 
                             // Module Action - with proper undefined checks
-                            if (subModule.moduleAction &&
-                                subModule.moduleAction.packageName &&
-                                typeof subModule.moduleAction.packageName.includes === 'function' &&
+                            if (subModule.moduleAction.packageName &&
                                 subModule.moduleAction.packageName.includes('video')) {
 
                                 var videoApi = subModule.moduleAction.moduleUrl;
@@ -173,6 +171,11 @@ function loadMainMenu(data) {
                                         if (response) console.log('API Response:', response);
                                     });
                                 }
+                            } else if (subModule.moduleAction.url) {
+                                button.addEventListener('click', function () {
+                                    console.log("Opening PDF ", subModule.moduleAction.url)
+                                    openPdf(subModule.moduleAction.url);
+                                });
                             }
 
                             // Rest of your submodule creation code...
@@ -303,9 +306,8 @@ function loadMainMenu(data) {
                             button.setAttribute('button-focus', subModule.title.split(' ').join(''));
 
                             // Module Action - with proper undefined checks
-                            if (subModule.moduleAction &&
-                                subModule.moduleAction.packageName &&
-                                typeof subModule.moduleAction.packageName.includes === 'function' &&
+                            // Module Action - with proper undefined checks
+                            if (subModule.moduleAction && subModule.moduleAction.packageName &&
                                 subModule.moduleAction.packageName.includes('video')) {
 
                                 var videoApi = subModule.moduleAction.moduleUrl;
@@ -314,7 +316,13 @@ function loadMainMenu(data) {
                                         if (response) console.log('API Response:', response);
                                     });
                                 }
+                            } else if (subModule.moduleAction && subModule.moduleAction.url) {
+                                button.addEventListener('click', function () {
+                                    console.log("Opening PDF ", subModule.moduleAction.url)
+                                    openPdf(subModule.moduleAction.url);
+                                });
                             }
+
 
                             // Rest of your submodule creation code...
                             var img = document.createElement('img');

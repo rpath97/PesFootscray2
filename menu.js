@@ -1,6 +1,6 @@
 // Track active section
-let currentSection = 'default';
-const directoryPath = 'logos/channel_logos/'; 
+var currentSection = 'default';
+const directoryPath = 'logos/channel_logos/';
 
 
 // radio button action function
@@ -9,14 +9,14 @@ function radio_ui(event) {
     const rightColumn = document.getElementById("radio_title");
     const rightColumnLogo = document.getElementById("radio-logo-right");
     const gifTitle = document.getElementById("gif-title");
-    
+
     // leftColumn.style.width = '70vw'; // Change the left column to 2/3 of the container
     rightColumn.innerText = 'Now Playing'; // Make the right column visible (1/3 of the container)
     gifTitle.style.display = 'flex';
     gif.style.display = 'flex';
     rightColumnLogo.style.display = 'flex';
     // rightColumn.style.display = 'flex';
-    
+
     const clickedButton = event.currentTarget;  // Get the clicked element
     const buttonId = clickedButton.id;   // Access the ID property
     const channel_no = channel_list.find(item => item.BasicChannelDetails.ChannelName === buttonId);
@@ -28,8 +28,8 @@ function radio_ui(event) {
     const img_src = directoryPath + logoname;
     rightColumnLogo.src = img_src.toLocaleLowerCase();
     const img_url = rightColumnLogo.src;
-    
-    checkImageExists(img_url, function(exists) {
+
+    checkImageExists(img_url, function (exists) {
         if (exists) {
             console.log('Image exists.');
         } else {
@@ -38,7 +38,7 @@ function radio_ui(event) {
         }
     });
 
-    document.getElementById(clickedButton.id).focus(); 
+    document.getElementById(clickedButton.id).focus();
 }
 
 // MENU FOCUS ACTION FUNCTION
@@ -51,12 +51,12 @@ function focusImageChange() {
         const focusedSrc = button.getAttribute("data-focused-src"); // Get the focused image from the data attribute
 
         // Change image source when the button is focused
-        button.addEventListener("focus", function() {
+        button.addEventListener("focus", function () {
             imageElement.src = focusedSrc; // Change the image on focus
         });
 
         // Reset image source when the button loses focus
-        button.addEventListener("blur", function() {
+        button.addEventListener("blur", function () {
             imageElement.src = defaultSrc; // Restore the original image on blur
         });
     });
@@ -65,7 +65,7 @@ function focusImageChange() {
 
 //TEMPORARY BUTTON
 function backTemp() {
-    if (current_page == 'clinical_casting'){
+    if (current_page == 'clinical_casting') {
         setRcControlSelective();
         current_page = "clinicalservices_menu";
         previous_page = "default_view";
@@ -81,7 +81,7 @@ function backTemp() {
     } else if (current_page == 'radio_view') {
         channelStopPlaying(radio_channel_playing);
         document.querySelector('.sidebar').style.display = 'block';
-        
+
         // ADJUSTING DISPLAY ELEMENTS
         const gif = document.querySelector("#gif");
         const rightColumn = document.getElementById("radio_title");
@@ -120,9 +120,9 @@ function backTemp() {
 }
 // temporary enter button
 function tempEnter() {
-    if (current_page == 'video-frame'){
+    if (current_page == 'video-frame') {
         const videoElement = document.getElementById('video-frame');
-        if (videoPlaying){
+        if (videoPlaying) {
             videoElement.pause();
             videoPlaying = !videoPlaying;
         } else if (!videoPlaying) {
@@ -159,4 +159,51 @@ function handleSubmenuClick(openedView) {
     //document.getElementById("tv_button").focus();
 
 }
+
+//open pdf function
+window.openPdf = function (url) {
+    document.getElementById(current_page).style.display = 'none';
+    previous_page = current_page;
+    current_page = "pdf-viewers";
+    const sidebar = document.querySelector('.sidebar');
+    if (sidebar) {
+        sidebar.style.display = 'none';
+    }
+
+    document.getElementById("pdf-viewers").style.display = 'flex';
+
+    PDFJS.workerSrc = "pdf.worker.js";
+    var proxyUrl = "https://cors-anywhere.herokuapp.com/";
+    PDFJS.getDocument(url).then(function (pdf) {
+        var numPages = pdf.numPages;  // Get the total number of pages
+        for (var pageNum = 1; pageNum <= numPages; pageNum++) {
+            renderPage(pdf, pageNum);
+        }
+    }).catch(function (error) {
+        console.error("Error loading PDF:", error);
+    });
+    document.getElementById('pdf-viewers').focus();
+}
+
+function renderPage(pdf, pageNum) {
+    pdf.getPage(pageNum).then(function (page) {
+        var scale = 5;  // Adjust the zoom level of the page
+        var viewport = page.getViewport(scale);
+
+        var canvas = document.createElement('canvas');  // Create a new canvas for each page
+        document.getElementById('pdf-viewers').appendChild(canvas);  // Append the canvas to the container
+
+        var ctx = canvas.getContext('2d');
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+
+        var renderContext = {
+            canvasContext: ctx,
+            viewport: viewport
+        };
+
+        page.render(renderContext);
+    });
+}
+
 

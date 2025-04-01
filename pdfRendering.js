@@ -141,7 +141,7 @@ function renderPDF3(url, pdf_container_id) {
     
 }
 
-function pdfViewer(url) {
+window.pdfViewer = function(url) {
     pdfjsLib.getDocument(url).then(function(pdf) {
         pdf.getPage(1).then(function(page) {
             var scale = 1.5;
