@@ -9,7 +9,7 @@ function init() {
 	UtilityInit();
 
 	//rawAflexData = apiGetCall("http://10.5.5.244/moduleData.php", 'mainMenu');
-	apiGetCall('http://10.5.5.244/moduleData.php', 'mainMenu', function(response) {
+	apiGetCall(aflexApiUrl, 'mainMenu', function(response) {
 		if (response) {
 			console.log('API Response:', response);
 			// Process the response here (e.g., parse JSON)

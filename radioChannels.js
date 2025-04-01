@@ -21,7 +21,9 @@ function openRadio() {
     // const currentPage = document.querySelector('.current-page');
     // currentPage.textContent = 'Radio';
 
-    
+    //AFLEX RADIO CHANNELS DATA
+    var radioObjects = aflexSampleRadioChannelsData.subModules;
+    console.log(radioObjects);
 
     //debugger;
     // window.onload = function() {

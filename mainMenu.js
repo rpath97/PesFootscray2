@@ -1,266 +1,363 @@
-
-
 function loadMainMenu(data) {
+    console.log("hello");
     const mainMenuButtons = [];
     for (var i = 0; i < data.length; i++) {
-        const title = data[i].title;
-        mainMenuButtons.push(title);
+        (function (currentData) { // Closure to capture current iteration data
+            var title = currentData.title;
+            mainMenuButtons.push(title);
+            console.log("Title ", title);
 
-        const entertainmentButton = document.getElementById('entertainmentButton');
-        const clinicalServiceButton = document.querySelector('.menu-item.japit-button[data-type="clinical-services"]');
-        const hospitalInfoButton = document.querySelector('.menu-item.japit-button[data-type="hospitalinfo"]');
-        const entertainmentButtonSubmenu = document.querySelector('.submenu-card')
-        const colourScheme = data[i].colorScheme.selectionColor;
-        const hoverColour = data[i].colorScheme.baseColor;
+            const entertainmentButton = document.getElementById('entertainmentButton');
+            const clinicalServiceButton = document.querySelector('.menu-item.japit-button[data-type="clinical-services"]');
+            const hospitalInfoButton = document.querySelector('.menu-item.japit-button[data-type="hospitalinfo"]');
 
-        if (title.toLowerCase().includes('entertainment')) {
-            entertainmentButton.style.display = 'flex';
-            const img = entertainmentButton.getElementsByTagName("img")[0];
-            const span = entertainmentButton.getElementsByTagName("span")[0];
-            if (data[i].icon.imageUrl){
-                img.src = data[i].icon.imageUrl;
-            }
-            if (colourScheme){
-                //span.style.color = data[i].colorScheme.selectionColor;
-                entertainmentButton.addEventListener("focus", function() {
-                    var span = this.querySelector("span");
-                    if (span) {
-                        span.style.color = hoverColour; // Change text color on focus
-                    }
-                });
-            
-                entertainmentButton.addEventListener("blur", function() {
-                    var span = this.querySelector("span");
-                    if (span) {
-                        span.style.color = colourScheme; // Reset text color on blur
-                    }
-                });
-            }
-            //adding submenu color
-            document.querySelectorAll(".submenu-card").forEach(function(card) {
-                card.tabIndex = 0; // Make focusable in Opera v32
-            
-                card.addEventListener("focus", function() {
-                    var span = this.querySelector("span");
-                    if (span) {
-                        span.style.color = hoverColour; // Change text color on focus
-                    }
-                });
-            
-                card.addEventListener("blur", function() {
-                    var span = this.querySelector("span");
-                    if (span) {
-                        span.style.color = colourScheme; // Reset text color on blur
-                    }
-                });
-            });
-            
-            
-        } else if (title.toLowerCase().includes('clinical')) {
-            // CLINICAL SERVICE MAIN MENU BUTTON
-            clinicalServiceButton.style.display = 'flex';
-            const img = clinicalServiceButton.getElementsByTagName("img")[0];
-            const span = clinicalServiceButton.getElementsByTagName("span")[0];
-            if (data[i].icon.imageUrl){
-                img.src = data[i].icon.imageUrl;
-            }
-            if (colourScheme){
-                //span.style.color = data[i].colorScheme.selectionColor;
-                clinicalServiceButton.addEventListener("focus", function() {
-                    var span = this.querySelector("span");
-                    if (span) {
-                        span.style.color = hoverColour; // Change text color on focus
-                    }
-                });
-            
-                clinicalServiceButton.addEventListener("blur", function() {
-                    var span = this.querySelector("span");
-                    if (span) {
-                        span.style.color = colourScheme; // Reset text color on blur
-                    }
-                });
-            }
-            //adding submenu color
-            // document.querySelectorAll(".submenu-card4").forEach(function(card) {
-            //     card.tabIndex = 0; // Make focusable in Opera v32
-            
-            //     card.addEventListener("focus", function() {
-            //         var span = this.querySelector("span");
-            //         if (span) {
-            //             span.style.color = hoverColour; // Change text color on focus
-            //         }
-            //     });
-            
-            //     card.addEventListener("blur", function() {
-            //         var span = this.querySelector("span");
-            //         if (span) {
-            //             span.style.color = colourScheme; // Reset text color on blur
-            //         }
-            //     });
-            // });
-        } else if (title.toLowerCase().includes('hospital')) {
-             // HOSPITAL INFO MAIN MENU BUTTON
-             hospitalInfoButton.style.display = 'flex';
-             const img = hospitalInfoButton.getElementsByTagName("img")[0];
-             const span = hospitalInfoButton.getElementsByTagName("span")[0];
-             if (data[i].icon.imageUrl){
-                 img.src = data[i].icon.imageUrl;
-             }
-             if (colourScheme){
-                 //span.style.color = data[i].colorScheme.selectionColor;
-                 hospitalInfoButton.addEventListener("focus", function() {
-                     var span = this.querySelector("span");
-                     if (span) {
-                         span.style.color = hoverColour; // Change text color on focus
-                     }
-                 });
-             
-                 hospitalInfoButton.addEventListener("blur", function() {
-                     var span = this.querySelector("span");
-                     if (span) {
-                         span.style.color = colourScheme; // Reset text color on blur
-                     }
-                 });
-             }
-             //SUB MODULES
-             const subModulesData = data[i].subModules;
-             for (var j = 0; j < subModulesData.length; j++) {
-                // Create the parent div
-                const hospMenu = document.getElementById('hospitalinfo_menu');
-                const subMenuButtons = document.createElement('div');
-                subMenuButtons.className = 'sub-menu-buttons';
+            const colourScheme = currentData.colorScheme.selectionColor;
+            const hoverColour = currentData.colorScheme.baseColor;
 
-                // Create the button element
-                const button = document.createElement('button');
-                button.className = 'submenu-card2';
-                button.id = subModulesData[j].id;
-                button.setAttribute('button-focus', subModulesData[j].title.split(' ').join(''));
+            if (title.toLowerCase().includes('entertainment')) {
+                entertainmentButton.style.display = 'flex';
+                var img = entertainmentButton.getElementsByTagName("img")[0];
+                var span = entertainmentButton.getElementsByTagName("span")[0];
 
-                //MODULE ACTION
-                const moduleAction = subModulesData[j].moduleAction.packageName;
-                if (moduleAction && moduleAction.includes('video')) {
-                    const videoApi = subModulesData[j].moduleAction.moduleUrl;
-                    const videourl = '';
-                    apiGetCall(videoApi, 'submenu', function(response) {
-                        if (response) {
-                            console.log('API Response:', response);
-                            // Process the response here (e.g., parse JSON)
-                            videourl = response;
-                            
-                        } else {
-                            console.log('API request failed');
-                        }
-                    });
-                    // if (videourl){
-                    //     console.log(JSON.parse(videourl));
-                    // }
-                    
+                if (currentData.icon.imageUrl) {
+                    img.src = currentData.icon.imageUrl;
                 }
 
-                // button.onclick = handleManagementandDischargeClick;
+                if (colourScheme) {
+                    (function (hover, defaultColour, iconData) {
+                        entertainmentButton.addEventListener("focus", function () {
+                            var span = this.querySelector("span");
+                            var img = this.querySelector("img");
+                            if (span) span.style.color = hover;
+                            if (img && iconData.focusedImageUrl) img.src = iconData.focusedImageUrl;
+                        });
 
-                // Create the image element
-                const img = document.createElement('img');
-                img.src = subModulesData[j].icon.imageUrl;                ;
-                img.alt = subModulesData[j].title;
+                        entertainmentButton.addEventListener("blur", function () {
+                            var span = this.querySelector("span");
+                            var img = this.querySelector("img");
+                            if (span) span.style.color = defaultColour;
+                            if (img && iconData.imageUrl) img.src = iconData.imageUrl;
+                        });
+                    })(hoverColour, colourScheme, currentData.icon);
 
-                //console.log("Focused image ", subModulesData[j].icon.focusedImageUrl)
-                // Apply hover effects on focus
-                button.addEventListener('focus', function() {
-                    img.src = subModulesData[j].icon.focusedImageUrl;
-                    img.style.transform = "scale(1.1)";
+                    // Submenu cards
+                    var cards = document.querySelectorAll(".submenu-card");
+                    for (var j = 0; j < cards.length; j++) {
+                        (function (card, hover, defaultColour) {
+                            card.tabIndex = 0;
+                            card.addEventListener("focus", function () {
+                                var span = this.querySelector("span");
+                                if (span) span.style.color = hover;
+                            });
+                            card.addEventListener("blur", function () {
+                                var span = this.querySelector("span");
+                                if (span) span.style.color = defaultColour;
+                            });
+                        })(cards[j], hoverColour, colourScheme);
+                    }
+                }
+                // GETTING CHANNELS
+                var subModulesData = currentData.subModules;
+                var tvModuleMatches = subModulesData.filter(function(item) {
+                    return item.title === "Freeview TV";
                 });
-
-                // Revert on blur (when focus is lost)
-                button.addEventListener('blur', function() {
-                    img.src = subModulesData[j].icon.imageUrl; 
-                    img.style.transform = "scale(1)";
+                var tvChannelsApiUrl = tvModuleMatches[0].moduleAction.moduleUrl;
+                console.log("TV api call", tvChannelsApiUrl);
+                // TV CHANNELS API CALL
+                if (tvChannelsApiUrl) { // Check if moduleUrl exists
+                    apiGetCall(tvChannelsApiUrl, 'submenu', function (response) {
+                        if (response) console.log('API Response:', response);
+                    });
+                }
+                // RADIO CHANNELS API CALL
+                var radioModuleMatches = subModulesData.filter(function(item) {
+                    return item.title === "Radio";
                 });
+                var radioChannelsObjects = radioModuleMatches[0].subModules;
+                
+                if (radioChannelsObjects) { // Check if moduleUrl exists
+                    var radioChannelsApiUrl = radioChannelsObjects[0].moduleAction.moduleUrl;
+                    console.log("Radio api call", radioChannelsApiUrl);
+                    apiGetCall(radioChannelsApiUrl, 'submenu', function (response) {
+                        if (response) console.log('API Response:', response);
+                    });
+                    // for (var k=0; k<radioChannelsObjects.length; k++){
+                    //     var radioChannelsApiUrl = radioChannelsObjects[k].moduleAction.moduleUrl;
+                    //     console.log(radioChannelsApiUrl);
+                    // }
+                    // apiGetCall(radioChannelsApiUrl, 'submenu', function (response) {
+                    //     if (response) console.log('API Response:', response);
+                    // });
+                }
+                
 
-                // Create the text span
-                const span = document.createElement('span');
-                span.textContent = subModulesData[j].title;
+            } else if (title.toLowerCase().includes('clinical')) {
+                clinicalServiceButton.style.display = 'flex';
+                var img = clinicalServiceButton.getElementsByTagName("img")[0];
+                var span = clinicalServiceButton.getElementsByTagName("span")[0];
 
-                // Append image and span to the button
+                if (currentData.icon.imageUrl) {
+                    img.src = currentData.icon.imageUrl;
+                }
+
+                if (colourScheme) {
+                    (function (hover, defaultColour, iconData) {
+                        clinicalServiceButton.addEventListener("focus", function () {
+                            var span = this.querySelector("span");
+                            var img = this.querySelector("img");
+                            if (span) span.style.color = hover;
+                            if (img && iconData.focusedImageUrl) img.src = iconData.focusedImageUrl;
+                        });
+
+                        clinicalServiceButton.addEventListener("blur", function () {
+                            var span = this.querySelector("span");
+                            var img = this.querySelector("img");
+                            if (span) span.style.color = defaultColour;
+                            if (img && iconData.imageUrl) img.src = iconData.imageUrl;
+                        });
+                    })(hoverColour, colourScheme, currentData.icon);
+                }
+
+                
+
+            } else if (title.toLowerCase().includes('hospital')) {
+                hospitalInfoButton.style.display = 'flex';
+                var img = hospitalInfoButton.getElementsByTagName("img")[0];
+                var span = hospitalInfoButton.getElementsByTagName("span")[0];
+
+                if (currentData.icon.imageUrl) {
+                    img.src = currentData.icon.imageUrl;
+                }
+
+                if (colourScheme) {
+                    (function (hover, defaultColour, iconData) {
+                        hospitalInfoButton.addEventListener("focus", function () {
+                            var span = this.querySelector("span");
+                            var img = this.querySelector("img");
+                            if (span) span.style.color = hover;
+                            if (img && iconData.focusedImageUrl) img.src = iconData.focusedImageUrl;
+                        });
+
+                        hospitalInfoButton.addEventListener("blur", function () {
+                            var span = this.querySelector("span");
+                            var img = this.querySelector("img");
+                            if (span) span.style.color = defaultColour;
+                            if (img && iconData.imageUrl) img.src = iconData.imageUrl;
+                        });
+                    })(hoverColour, colourScheme, currentData.icon);
+                }
+
+                // SUB MODULES
+                var subModulesData = currentData.subModules;
+                if (subModulesData) { // Check if subModules exists
+                    for (var j = 0; j < subModulesData.length; j++) {
+                        (function (subModule) {
+                            var hospMenu = document.getElementById('hospitalinfo_menu');
+                            var subMenuButtons = document.createElement('div');
+                            subMenuButtons.className = 'sub-menu-buttons';
+
+                            var button = document.createElement('button');
+                            button.className = 'submenu-card-x';
+                            button.id = subModule.id;
+                            button.setAttribute('button-focus', subModule.title.split(' ').join(''));
+
+                            // Module Action - with proper undefined checks
+                            if (subModule.moduleAction &&
+                                subModule.moduleAction.packageName &&
+                                typeof subModule.moduleAction.packageName.includes === 'function' &&
+                                subModule.moduleAction.packageName.includes('video')) {
+
+                                var videoApi = subModule.moduleAction.moduleUrl;
+                                if (videoApi) { // Check if moduleUrl exists
+                                    apiGetCall(videoApi, 'submenu', function (response) {
+                                        if (response) console.log('API Response:', response);
+                                    });
+                                }
+                            }
+
+                            // Rest of your submodule creation code...
+                            var img = document.createElement('img');
+                            img.src = subModule.icon.imageUrl || ''; // Optional chaining with fallback
+                            img.alt = subModule.title || ''; // Fallback for alt text
+
+                            var span = document.createElement('span');
+                            span.textContent = subModule.title || ''; // Fallback for text content
+                            if (currentData.colorScheme.selectionColor) { // Check if color exists
+                                span.style.color = currentData.colorScheme.selectionColor;
+                            }
+
+
+                            button.addEventListener('focus', function () {
+                                if (subModule.icon.focusedImageUrl) { // Check if focusedImageUrl exists
+                                    img.src = subModule.icon.focusedImageUrl;
+                                    img.style.transform = "scale(1.1)";
+                                    span.style.color = currentData.colorScheme.baseColor;
+                                    button.style.background = currentData.colorScheme.selectionColor;
+                                }
+                            });
+
+                            button.addEventListener('blur', function () {
+                                if (subModule.icon.imageUrl) { // Check if imageUrl exists
+                                    img.src = subModule.icon.imageUrl;
+                                    img.style.transform = "scale(1)";
+                                    span.style.color = currentData.colorScheme.selectionColor;
+                                    button.style.background = currentData.colorScheme.baseColor;
+                                }
+                            });
+
+
+                            button.appendChild(img);
+                            button.appendChild(span);
+                            subMenuButtons.appendChild(button);
+                            hospMenu.appendChild(subMenuButtons);
+                        })(subModulesData[j]);
+                    }
+                }
+
+            } else {
+
+                //MAIN MENU
+                var colorScheme = currentData.colorScheme;
+                var button = document.createElement('button');
+                button.className = 'menu-item japit-button';
+                button.style.display = 'flex';
+                // button.id = currentData.title.split(' ').join('');
+
+                // button.setAttribute('data-type', button.id);
+                // button.setAttribute('data-japit-control', 'true');
+                // button.setAttribute('data-japit-focusable', 'true');
+                // button.setAttribute('data-action', button.id);
+
+                var span = document.createElement('span');
+                span.textContent = currentData.title;
+                span.style.color = colorScheme.selectionColor;
+
+                var img = document.createElement('img');
+                img.src = currentData.icon.imageUrl;
+                img.alt = currentData.title;
+
                 button.appendChild(img);
                 button.appendChild(span);
 
-                // Append button to the parent div
-                subMenuButtons.appendChild(button);
 
-                // Now you can append subMenuButtons to wherever it needs to go in your DOM
-                // For example:
-                hospMenu.appendChild(subMenuButtons); // Or any other parent element
-             }
-        } else {
-            const menuItemData = data[i];
-            var colorScheme = data[i].colorScheme;
-            var button = document.createElement('button');
-            button.className = 'menu-item japit-button';
-            button.id = menuItemData.title.split(' ').join('');
+                (function (btn, scheme, itemData) {
+                    btn.addEventListener('focus', function () {
+                        if (!this.classList.contains('active')) {
+                            this.style.background = 'linear-gradient(135deg, ' + scheme.selectionColor + ', ' + scheme.selectionColor + ')';
+                            this.style.transform = 'scale(1.02)';
+                            this.style.boxShadow = '0 4px 8px rgba(3, 95, 3, 0.2)';
 
-            // 2. Set data attributes (Opera 32 supports dataset or setAttribute)
-            button.setAttribute('data-type', button.id);
-            button.setAttribute('data-japit-control', 'true');
-            button.setAttribute('data-japit-focusable', 'true');
-            button.setAttribute('data-action', button.id);
+                            var btnImg = this.querySelector('img');
+                            btnImg.src = itemData.icon.focusedImageUrl;
+                            btnImg.style.transform = 'scale(1.1)';
 
-            // 2. Style the span element (assuming you created it)
-            var span = document.createElement('span');
-            span.textContent = menuItemData.title;
-            span.style.color = colorScheme.selectionColor;
+                            var btnSpan = this.querySelector('span');
+                            btnSpan.style.color = scheme.baseColor;
+                        }
+                    });
 
-            // Add image and text
-            var img = document.createElement('img');
-            img.src = menuItemData.icon.imageUrl;
-            img.alt = menuItemData.title;
+                    btn.addEventListener('blur', function () {
+                        if (!this.classList.contains('active')) {
+                            this.style.background = '';
+                            this.style.transform = '';
+                            this.style.boxShadow = '';
 
-            
-            button.appendChild(img);
-            button.appendChild(span);
+                            var btnImg = this.querySelector('img');
+                            btnImg.src = itemData.icon.imageUrl;
+                            btnImg.style.transform = '';
 
-            // Repeat similar for focus/blur events
-            // Use a CLOSURE to capture the correct values for each button
-            (function(btn, scheme, itemData) {
-                btn.addEventListener('focus', function() {
-                    if (!this.classList.contains('active')) {
-                        this.style.background = 'linear-gradient(135deg, ' + scheme.selectionColor + ', ' + scheme.selectionColor + ')';
-                        this.style.color = scheme.selectionColor.baseColor;
-                        this.style.transform = 'scale(1.02)';
-                        this.style.boxShadow = '0 4px 8px rgba(3, 95, 3, 0.2)';
-                        
-                        var btnImg = this.querySelector('img');
-                        btnImg.src = itemData.icon.focusedImageUrl;
-                        btnImg.style.transform = 'scale(1.1)';
-                        
-                        var btnSpan = this.querySelector('span');
-                        btnSpan.style.color = scheme.baseColor;
-                    }
+                            var btnSpan = this.querySelector('span');
+                            btnSpan.style.color = scheme.selectionColor;
+                        }
+                    });
+                })(button, colorScheme, currentData);
+
+                document.querySelector('.sidebar-menu').appendChild(button);
+
+                //SUB MENU CREATION
+                // create menu box
+                var subMenuBox = document.createElement('div');
+                subMenuBox.className = 'submenu-view';
+                subMenuBox.id = currentData.title.split(' ').join('');
+                button.addEventListener("focus", function () {
+                    //handleSubmenuClick(subMenuBox.id);
+                    previous_page = current_page;
+                    current_page = subMenuBox.id;
+
+                    document.getElementById(previous_page).style.display = 'none';
+                    document.getElementById(current_page).style.display = 'flex';
                 });
+                //append to parent div box
+                const nonSideBar = document.querySelector('.non-sidebar');
+                nonSideBar.appendChild(subMenuBox);
+                var subModulesData = data[i].subModules;
+                if (subModulesData) { // Check if subModules exists
+                    for (var j = 0; j < subModulesData.length; j++) {
+                        (function (subModule) {
+                            var subMenuButtons = document.createElement('div');
+                            subMenuButtons.className = 'sub-menu-buttons';
 
-                btn.addEventListener('blur', function() {
-                    if (!this.classList.contains('active')) {
-                        this.style.background = '';
-                        this.style.color = '';
-                        this.style.transform = '';
-                        this.style.boxShadow = '';
-                        
-                        var btnImg = this.querySelector('img');
-                        btnImg.src = itemData.icon.imageUrl;
-                        btnImg.style.transform = '';
-                        
-                        var btnSpan = this.querySelector('span');
-                        btnSpan.style.color = scheme.selectionColor;
+                            var button = document.createElement('button');
+                            button.className = 'submenu-card-x';
+                            button.id = subModule.id;
+                            button.setAttribute('button-focus', subModule.title.split(' ').join(''));
+
+                            // Module Action - with proper undefined checks
+                            if (subModule.moduleAction &&
+                                subModule.moduleAction.packageName &&
+                                typeof subModule.moduleAction.packageName.includes === 'function' &&
+                                subModule.moduleAction.packageName.includes('video')) {
+
+                                var videoApi = subModule.moduleAction.moduleUrl;
+                                if (videoApi) { // Check if moduleUrl exists
+                                    apiGetCall(videoApi, 'submenu', function (response) {
+                                        if (response) console.log('API Response:', response);
+                                    });
+                                }
+                            }
+
+                            // Rest of your submodule creation code...
+                            var img = document.createElement('img');
+                            img.src = subModule.icon.imageUrl || ''; // Optional chaining with fallback
+                            img.alt = subModule.title || ''; // Fallback for alt text
+
+                            var span = document.createElement('span');
+                            span.textContent = subModule.title || ''; // Fallback for text content
+                            if (currentData.colorScheme.selectionColor) { // Check if color exists
+                                span.style.color = currentData.colorScheme.selectionColor;
+                            }
+
+
+                            button.addEventListener('focus', function () {
+                                if (subModule.icon.focusedImageUrl) { // Check if focusedImageUrl exists
+                                    img.src = subModule.icon.focusedImageUrl;
+                                    img.style.transform = "scale(1.1)";
+                                    span.style.color = currentData.colorScheme.baseColor;
+                                    button.style.background = currentData.colorScheme.selectionColor;
+                                }
+                            });
+
+                            button.addEventListener('blur', function () {
+                                if (subModule.icon.imageUrl) { // Check if imageUrl exists
+                                    img.src = subModule.icon.imageUrl;
+                                    img.style.transform = "scale(1)";
+                                    span.style.color = currentData.colorScheme.selectionColor;
+                                    button.style.background = currentData.colorScheme.baseColor;
+                                }
+                            });
+
+
+                            button.appendChild(img);
+                            button.appendChild(span);
+                            subMenuButtons.appendChild(button);
+                            subMenuBox.appendChild(subMenuButtons);
+                        })(subModulesData[j]);
                     }
-                });
-            })(button, colorScheme, menuItemData); // Pass current loop values to the closure
+                }
+            }
 
-            
-            // Add to container (replace with your actual container)
-            document.querySelector('.sidebar-menu').appendChild(button);
-                    
-        }
+
+
+        })(data[i]); // Pass current iteration data to closure
     }
-
- 
 }

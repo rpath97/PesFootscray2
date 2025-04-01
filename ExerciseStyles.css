@@ -99,7 +99,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between; /* Distribute buttons evenly */
+    justify-content: center; /* Distribute buttons evenly */
     margin-top: 10px; /* Adjust to align with image */
     padding: 0;
 }
@@ -123,7 +123,12 @@ body {
     border-radius: 9px;
     /* padding: 20px 30px; */
     flex-direction: row;
-    /* gap: 35px; */
+    flex-grow: 1;
+    margin-bottom: calc(20px - 0.5vh);
+}
+/* Ensure last button has no bottom margin */
+.menu-item:last-child {
+    margin-bottom: 0;
 }
 
 
@@ -356,7 +361,7 @@ body {
     width: 100%;
     /* display: grid;
     grid-template-columns: 1fr;  */
-    display: flex;
+    display: none;
     flex-direction: row;
     flex-wrap: wrap;
 }
@@ -456,6 +461,65 @@ body {
 }
 
 .submenu-card2:hover img {
+    transform: scale(1.1);
+}
+
+/* GENERIC SUB MENU BUTTON CSS */
+.submenu-card-x {
+    width: 21vw;
+    height: 20vh;
+    background: white;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    padding: 20px;
+    box-shadow: 0 8px 16px rgba(194, 41, 3, 0.1);
+}
+
+
+.submenu-card-x span {
+    font-size: 24px;
+    font-weight: 500;
+    /* color: #333; */
+}
+
+.submenu-card-x:hover,
+.submenu-card-x:focus {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+    /* background: linear-gradient(135deg,  var(--mycare-color), var(--mycare-color)); */
+    outline: none;
+  
+}
+
+.submenu-card-x:hover span,
+.submenu-card-x:focus span {
+    color: white;
+}
+
+.submenu-card-x:hover img,
+.submenu-card-x:focus img {
+    transform: scale(1.05);
+}
+
+.submenu-card-x img {
+    width: 5vw;
+    height: auto;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.submenu-card-x span {
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--mycare-color);
+}
+
+
+.submenu-card-x:hover img {
     transform: scale(1.1);
 }
 
@@ -884,11 +948,6 @@ div.Input_Output {
     color: #AD3054;  
 }
 
-/* Add gap between logo and text for my care button */
-/* .menu-item[data-type="my-care"] {
-    gap: 35px;  
-} */
-
 
 /* Update the image source on hover/focus for my care button */
 .menu-item[data-type="my-care"]:hover:not(.active) img,
@@ -941,23 +1000,25 @@ div.Input_Output {
     width: 100%;
    
 }
-#pdf-viewers {
+#pdf-viewers, #pdf-container {
     display: none;
     z-index: 1100;
     position: fixed;
-    right: 5vw;
-    top: 13vh;
-    width: 65%;
-    height: 90vh;
     flex-direction: column;
-    padding: 5vh;
-    align-items: center;
-    padding-bottom: 20vh;
+    right: 5vw;
+    top: 14vh;
+    width: 90vw;
+    height: 90vh;
+    padding: 0;
+    box-shadow: none;
+    visibility: visible;
+    overflow-y: auto;
 }
-#pdf-viewers:focus {
+/* #pdf-container:focus {
     outline: #0098d6;
     outline-width: 10px;
-}
+    color: #0098d6;
+} */
 /* #pdf-viewers::-webkit-scrollbar {
     display: none; /* For Chrome, Safari, and Opera */
  /* } */

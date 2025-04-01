@@ -52,6 +52,32 @@ function openTV() {
         "AddChannels": []
     };
 
+    //AFLEX channels data
+    if (aflexTvChannelsData){
+        for (var j=0; j<aflexTvChannelsData.length; j++){
+            var channel1 = aflexTvChannelsData[j]['channel-streaming-url'].substring(6);
+                channelNo_arr[j] = aflexTvChannelsData[j]['channel-id'];
+                tv_channel_list[j] = aflexTvChannelsData[j]['channel-id'];
+                channelName_arr[j] = aflexTvChannelsData[j]['channel-name'];
+                channelIP_arr[j] = aflexTvChannelsData[j]['channel-streaming-url'].substring(6);;
+
+                // Creating channel object
+                const chan = {
+                    "BasicChannelDetails": {
+                        "ChannelNo": Number(channelNo_arr[j]),
+                        "ChannelName": channelName_arr[j],
+                        "ChannelType": "IP"
+                    },
+                    "ChannelTuningDetails": {
+                        "URL": "multicast://" + channelIP_arr[j]+"/0/0/0"
+                    }
+                };
+                // Pushing channel object to JAPIT channel object           
+                JAPITObjForWIXPSvc.CommandDetails.AddChannels.push(chan);
+        }
+        //console.log("TV Channels Aflex: " + JSON.stringify(JAPITObjForWIXPSvc));
+    }
+
     // Extracting excel data and converting it to json format
     const filePath = 'tvchannels.xlsx';
     fetch(filePath)

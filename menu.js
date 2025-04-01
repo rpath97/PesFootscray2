@@ -87,7 +87,7 @@ function backTemp() {
         const rightColumn = document.getElementById("radio_title");
         const gifTitle = document.getElementById("gif-title");
         const rightColumnLogo = document.getElementById("radio-logo-right");
-        rightColumn.innerText = 'Press Radio Channel to Play';
+        rightColumn.innerText = 'Select radio station to play';
         gif.style.display = 'none';
         gifTitle.style.display = 'none';
         rightColumnLogo.style.display = 'none';
@@ -145,3 +145,18 @@ function tempLeftButton() {
         videoElement.currentTime = Math.max(videoElement.currentTime - 1, 0);
     }
 }
+
+//OPENING SUB MENU
+function handleSubmenuClick(openedView) {
+
+    //setting previous and current page
+    previous_page = current_page;
+    current_page = openedView;
+
+    document.getElementById(previous_page).style.display = 'none';
+    document.getElementById(current_page).style.display = 'flex';
+
+    //document.getElementById("tv_button").focus();
+
+}
+
