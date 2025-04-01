@@ -165,7 +165,7 @@ window.openPdf = function (url) {
     document.getElementById(current_page).style.display = 'none';
     previous_page = current_page;
     current_page = "pdf-viewers";
-    current_page.innerHTML = '';
+    document.getElementById(current_page).innerHTML = '';
     const sidebar = document.querySelector('.sidebar');
     if (sidebar) {
         sidebar.style.display = 'none';
