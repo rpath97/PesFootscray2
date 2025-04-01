@@ -167,14 +167,14 @@ function loadMainMenu(data) {
 
                                 var videoApi = subModule.moduleAction.moduleUrl;
                                 if (videoApi) { // Check if moduleUrl exists
-                                    apiGetCall(videoApi, 'submenu', function (response) {
+                                    apiGetCall('https://api.codetabs.com/v1/proxy/?quest='+videoApi, 'submenu', function (response) {
                                         if (response) console.log('API Response:', response);
                                     });
                                 }
                             } else if (subModule.moduleAction.url) {
                                 button.addEventListener('click', function () {
                                     console.log("Opening PDF ", subModule.moduleAction.url)
-                                    openPdf(subModule.moduleAction.url);
+                                    openPdf('https://api.codetabs.com/v1/proxy/?quest='+ subModule.moduleAction.url);
                                 });
                             }
 
@@ -319,7 +319,7 @@ function loadMainMenu(data) {
                             } else if (subModule.moduleAction && subModule.moduleAction.url) {
                                 button.addEventListener('click', function () {
                                     console.log("Opening PDF ", subModule.moduleAction.url)
-                                    openPdf(subModule.moduleAction.url);
+                                    openPdf('https://api.codetabs.com/v1/proxy/?quest='+subModule.moduleAction.url);
                                 });
                             }
 
