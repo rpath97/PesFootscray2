@@ -81,7 +81,7 @@ function handleReachClick() {
     document.getElementById("pdf-viewers").style.display = 'flex';
     //pdfViewer('https://api.printnode.com/static/test/pdf/multipage.pdf');
     PDFJS.workerSrc = "pdf.worker.js";
-    PDFJS.getDocument('https://api.printnode.com/static/test/pdf/multipage.pdf').then(function(pdf) {
+    PDFJS.getDocument('https://staging1.stellar.care/public/uploads/staticmodules/1660101276-31066498.pdf').then(function(pdf) {
         var numPages = pdf.numPages;  // Get the total number of pages
         for (var pageNum = 1; pageNum <= numPages; pageNum++) {
             renderPage(pdf, pageNum);
