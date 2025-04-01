@@ -706,7 +706,7 @@ function keyHandler(keyCode) {
 				}
 				document.getElementById(current_page).style.display = 'none';
 				document.getElementById(previous_page).style.display = 'flex';
-				previous_page.firstElementChild.focus();
+				document.getElementById(previous_page).firstElementChild.focus();
 				current_page = previous_page;
 				previous_page = "default_view";
 				break;
