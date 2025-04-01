@@ -1008,10 +1008,11 @@ div.Input_Output {
     right: 5vw;
     top: 13vh;
     width: 90vw;
+    height: 90vh;
     padding: 0;
     box-shadow: none;
     visibility: visible;
-    overflow-y: auto;
+    overflow-y: scroll;
 }
 #pdf-container:focus {
     outline: #0098d6;

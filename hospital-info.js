@@ -70,6 +70,10 @@ function handleReachClick() {
     document.getElementById(current_page).style.display = 'none';
     previous_page = current_page;
     current_page = "pdf-viewers";
+    const sidebar = document.querySelector('.sidebar');
+    if (sidebar) {
+        sidebar.style.display = 'none';
+    }
     //const pdf_canvas = document.getElementById('pdf-canvas');
     //const proxyUrl = "https://cors-anywhere.herokuapp.com/";
     //renderPDF3('https://api.printnode.com/static/test/pdf/multipage.pdf', current_page);
@@ -78,27 +82,25 @@ function handleReachClick() {
     //pdfViewer('https://api.printnode.com/static/test/pdf/multipage.pdf');
     PDFJS.workerSrc = "pdf.worker.js";
     PDFJS.getDocument('https://api.printnode.com/static/test/pdf/multipage.pdf').then(function(pdf) {
-        var numPages = pdf.numPages;  // Get total number of pages
+        var numPages = pdf.numPages;  // Get the total number of pages
         for (var pageNum = 1; pageNum <= numPages; pageNum++) {
             renderPage(pdf, pageNum);
         }
-        document.getElementById('pdf-container').focus();
     }).catch(function(error) {
         console.error("Error loading PDF:", error);
     });
 }
 function renderPage(pdf, pageNum) {
     pdf.getPage(pageNum).then(function(page) {
-        var scale = 1.5;
+        var scale = 5;  // Adjust the zoom level of the page
         var viewport = page.getViewport(scale);
 
-        var canvas = document.createElement('canvas');  // Create new canvas for each page
-        document.getElementById('pdf-container').appendChild(canvas);  // Append canvas to container
+        var canvas = document.createElement('canvas');  // Create a new canvas for each page
+        document.getElementById('pdf-container').appendChild(canvas);  // Append the canvas to the container
 
         var ctx = canvas.getContext('2d');
         canvas.width = viewport.width;
         canvas.height = viewport.height;
-        canvas.style.marginBottom = '10px';
 
         var renderContext = {
             canvasContext: ctx,
