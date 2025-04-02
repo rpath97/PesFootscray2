@@ -653,6 +653,8 @@ function keyHandler(keyCode) {
 					changeCDBstate('Activate');
 					break;
 				} else if (current_page == 'tv_view') {
+					const tv_buffer = document.getElementById("loadingGif");
+					tv_buffer.style.display = 'none';
 					if (channel_list_view_on == true) {
 						tvChannelsList('Deactivate');
 						break;
