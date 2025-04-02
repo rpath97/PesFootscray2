@@ -54,6 +54,7 @@ function WIXPResponseHandler(WIXPResponseJSON) {
 				if (parsedWIXPJSON.CommandDetails.ChannelTuningDetails.ChannelNumber) {
 					if (parsedWIXPJSON.CommandDetails.ChannelSelectionStatus == 'Failure') {
 						if (channel_failed_count > 10) {
+							const tv_buffer = document.getElementById("loadingGif");
 							setTimeout(() => tv_buffer.style.display = 'none', 2000);
 							//document.getElementById("loadingGif").style.display = 'none';
 							channel_failed_count = 0;
