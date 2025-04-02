@@ -79,7 +79,7 @@ function openTV() {
         delete JAPITObjForWIXPSvc;
 
         // Set default channel and activate TV app
-        current_tv_channel = channelNo_arr[Math.floor(jsonData.length / 2)];
+        current_tv_channel = channelNo_arr[Math.floor(aflexTvChannelsData.length / 2)];
         channelSelection(current_tv_channel);
     } else {
         // Extracting excel data and converting it to json format
