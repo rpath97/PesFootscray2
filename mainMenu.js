@@ -129,32 +129,14 @@ function loadMainMenu(data) {
 
                 var hospInfoView = document.getElementById('hospitalinfo_menu');
                 // hospInfoView.setAttribute('tabindex', '0');
-                // Find the first button child (including nested buttons)
-                function findFirstButton(element) {
-                    // Check if current element is a button
-                    if (element.tagName === 'BUTTON') {
-                    return element;
-                    }
-                    
-                    // Search through children
-                    for (var i = 0; i < element.children.length; i++) {
-                        const found = findFirstButton(element.children[i]);
-                        if (found) return found;
-                    }
-                    
-                    return null;
-                }
 
                 var firstButton = findFirstButton(hospInfoView);
-
                 if (!firstButton) {
                     console.warn('No button elements found in container');
                     return;
                 }
-
                 // Opera v32 workaround - ensure button is focusable
                 firstButton.setAttribute('tabindex', '0');
-
                 // Handle focus event
                 hospInfoView.addEventListener('focus', function(e) {
                     // Prevent infinite focus loop
@@ -331,6 +313,8 @@ function loadMainMenu(data) {
                 var subMenuBox = document.createElement('div');
                 subMenuBox.className = 'submenu-view';
                 subMenuBox.id = currentData.title.split(' ').join('');
+                
+
                 button.addEventListener("focus", function () {
                     //handleSubmenuClick(subMenuBox.id);
                     previous_page = current_page;
@@ -411,10 +395,50 @@ function loadMainMenu(data) {
                         })(subModulesData[j]);
                     }
                 }
+                subMenuBox.setAttribute('tabindex', '0');
+                
+                var firstButton = findFirstButton(subMenuBox);
+                if (!firstButton) {
+                    console.warn('No button elements found in container');
+                } else {
+                    // Opera v32 workaround - ensure button is focusable
+                    firstButton.setAttribute('tabindex', '0');
+                    // Handle focus event
+                    subMenuBox.addEventListener('focus', function(e) {
+                        // Prevent infinite focus loop
+                        console.log('Focsing on scrollable')
+                        if (e.target === subMenuBox && document.activeElement !== firstButton) {
+                        // Opera v32 needs a small delay for focus to work properly
+                        setTimeout(() => {
+                            firstButton.focus();
+                        }, 10);
+                        }
+                    }, true); // Use capture phase for better Opera compatibility
+                }
             }
 
 
 
         })(data[i]); // Pass current iteration data to closure
     }
+}
+
+
+
+
+//FUNCTION TO FIND FIRST BUTTON IN ELEMENTS
+// Find the first button child (including nested buttons)
+function findFirstButton(element) {
+    // Check if current element is a button
+    if (element.tagName === 'BUTTON') {
+    return element;
+    }
+    
+    // Search through children
+    for (var i = 0; i < element.children.length; i++) {
+        const found = findFirstButton(element.children[i]);
+        if (found) return found;
+    }
+    
+    return null;
 }
