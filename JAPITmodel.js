@@ -15,6 +15,7 @@ var tv_info = {
 	tv_serial: "",
 	last_update: ""
 };
+var channel_failed_count = 0;
 
 
 function Exercise01ModelInit() {
@@ -34,7 +35,7 @@ function WIXPResponseHandler(WIXPResponseJSON) {
 		PrintLogsWIXPFromTV(parsedWIXPJSON);
 
 		//PROFESSIONAL SETTINGS RESPONSE
-		if(parsedWIXPJSON.Fun == "ProfessionalSettingsControl") {
+		if (parsedWIXPJSON.Fun == "ProfessionalSettingsControl") {
 			const roomid = parsedWIXPJSON.CommandDetails.IdentificationSettings.RoomID;
 			const tv_ip_new = parsedWIXPJSON.CommandDetails.NetworkStatus.IPAddress;
 			const serial_no = parsedWIXPJSON.CommandDetails.SerialNumber;
@@ -44,36 +45,44 @@ function WIXPResponseHandler(WIXPResponseJSON) {
 			tv_info.tv_ip = tv_ip_new;
 			tv_info.tv_serial = serial_no;
 			tv_info.last_update = today.toLocaleTimeString();
-			
+
 		}
 
 		// CHANNELS RESPONSE
-		if (parsedWIXPJSON.Fun == "ChannelSelection"){ //When TV responds with an error
-			if (tv_channel_on == 1 && dashboard_on && current_page == 'tv_view') {                        
-				if (parsedWIXPJSON.CommandDetails.ChannelTuningDetails.ChannelNumber){             
-					if (parsedWIXPJSON.CommandDetails.ChannelSelectionStatus == 'Failure'){
+		if (parsedWIXPJSON.Fun == "ChannelSelection") { //When TV responds with an error
+			if (tv_channel_on == 1 && dashboard_on && current_page == 'tv_view') {
+				if (parsedWIXPJSON.CommandDetails.ChannelTuningDetails.ChannelNumber) {
+					if (parsedWIXPJSON.CommandDetails.ChannelSelectionStatus == 'Failure') {
+						if (channel_failed_count > 10) {
+							setTimeout(() => tv_buffer.style.display = 'none', 2000);
+							//document.getElementById("loadingGif").style.display = 'none';
+							channel_failed_count = 0;
+							tvChannelsApp('Activate');
+							return;
+						}
 						setTimeout(loadChannel, 500);
-						
+
 						//channelSelection(default_chan_no);
-					} else if (parsedWIXPJSON.CommandDetails.ChannelSelectionStatus == 'Started'){
+					} else if (parsedWIXPJSON.CommandDetails.ChannelSelectionStatus == 'Started') {
 						const tv_buffer = document.getElementById("loadingGif");
-						setTimeout(()=>tv_buffer.style.display = 'none', 2000);
+						setTimeout(() => tv_buffer.style.display = 'none', 2000);
 						//document.getElementById("loadingGif").style.display = 'none';
+						channel_failed_count = 0;
 						tvChannelsApp('Activate');
-					}	
+					}
 				}
-			
+
 			} else if (tv_channel_on == 1 && current_page == 'tv_view') {
 				current_tv_channel = parsedWIXPJSON.CommandDetails.ChannelTuningDetails.ChannelNumber;
-				document.getElementById("logmsgcallback").value += '\n' + 'Dasohboard value  ' + dashboard_on  + '\n';
-				document.getElementById("logmsgcallback").scrollTop=document.getElementById("logmsgcallback").scrollHeight;
-			}		
-		} 
+				document.getElementById("logmsgcallback").value += '\n' + 'Dasohboard value  ' + dashboard_on + '\n';
+				document.getElementById("logmsgcallback").scrollTop = document.getElementById("logmsgcallback").scrollHeight;
+			}
+		}
 
 
 	} catch (e) {
 		//Error - can print to logs view
-		document.getElementById("logmsgcallback").value += '\n' + "JAPITmode.js line 53" +e + '\n';
+		document.getElementById("logmsgcallback").value += '\n' + "JAPITmode.js line 53" + e + '\n';
 		document.getElementById("logmsgcallback").scrollTop = document.getElementById("logmsgcallback").scrollHeight;
 		errorCount++;
 		//This is turn the tv screen off and reset the errorCount. Mainly to over the Googlecast error.
@@ -124,6 +133,7 @@ function loadChannel() {
 	// document.getElementById("topbar").style.display = "none";
 	// document.body.style.backgroundColor = '#000000';
 	//document.getElementById("loadingGif").style.display = 'flex';
+	channel_failed_count++;
 	channelSelection(current_tv_channel);
 }
 
@@ -291,9 +301,9 @@ function setArrowButtonsVirtual() {
 				{ "vkkey": "HBBTV_VK_GUIDE" },
 				//{ "vkkey" : "HBBTV_VK_UP" }, // not existing
 				// { "vkkey" : "HBBTV_VK_INFO" },
-				{ "vkkey" : "HBBTV_VK_LEFT" }, // not existing
+				{ "vkkey": "HBBTV_VK_LEFT" }, // not existing
 				// { "vkkey" : "HBBTV_VK_ACCEPT" }, // not existing
-				{ "vkkey" : "HBBTV_VK_RIGHT" }, // not existing
+				{ "vkkey": "HBBTV_VK_RIGHT" }, // not existing
 				{ "vkkey": "HBBTV_VK_ADJUST" }, //SETTINGS BUTTON
 				//{ "vkkey" : "HBBTV_VK_DOWN" }, // not existing
 				{ "vkkey": "HBBTV_VK_MENU" }, // Home Button
@@ -358,9 +368,9 @@ function setVideoKeys() {
 				{ "vkkey": "HBBTV_VK_GUIDE" },
 				//{ "vkkey" : "HBBTV_VK_UP" }, // not existing
 				// { "vkkey" : "HBBTV_VK_INFO" },
-				{ "vkkey" : "HBBTV_VK_LEFT" }, // not existing
-				{ "vkkey" : "HBBTV_VK_ACCEPT" }, // not existing
-				{ "vkkey" : "HBBTV_VK_RIGHT" }, // not existing
+				{ "vkkey": "HBBTV_VK_LEFT" }, // not existing
+				{ "vkkey": "HBBTV_VK_ACCEPT" }, // not existing
+				{ "vkkey": "HBBTV_VK_RIGHT" }, // not existing
 				{ "vkkey": "HBBTV_VK_ADJUST" }, //SETTINGS BUTTON
 				//{ "vkkey" : "HBBTV_VK_DOWN" }, // not existing
 				{ "vkkey": "HBBTV_VK_MENU" }, // Home Button
@@ -403,13 +413,13 @@ function setPDFViewKeys() {
 				//{ "vkkey" : "HBBTV_VK_HOME" }, // not existing
 				// { "vkkey" : "HBBTV_VK_PLAY_PAUSE" }, // previously was VK_OSRC
 				{ "vkkey": "HBBTV_VK_GUIDE" },
-				{ "vkkey" : "HBBTV_VK_UP" }, // not existing
+				{ "vkkey": "HBBTV_VK_UP" }, // not existing
 				// { "vkkey" : "HBBTV_VK_INFO" },
-				{ "vkkey" : "HBBTV_VK_LEFT" }, // not existing
-				{ "vkkey" : "HBBTV_VK_ACCEPT" }, // not existing
-				{ "vkkey" : "HBBTV_VK_RIGHT" }, // not existing
+				{ "vkkey": "HBBTV_VK_LEFT" }, // not existing
+				{ "vkkey": "HBBTV_VK_ACCEPT" }, // not existing
+				{ "vkkey": "HBBTV_VK_RIGHT" }, // not existing
 				{ "vkkey": "HBBTV_VK_ADJUST" }, //SETTINGS BUTTON
-				{ "vkkey" : "HBBTV_VK_DOWN" }, // not existing
+				{ "vkkey": "HBBTV_VK_DOWN" }, // not existing
 				{ "vkkey": "HBBTV_VK_MENU" }, // Home Button
 				{ "vkkey": "HBBTV_VK_BACK" }, // not existing
 				{ "vkkey": "HBBTV_VK_RED" },
@@ -451,7 +461,7 @@ function setMoviesKeys() {
 				// { "vkkey" : "HBBTV_VK_PLAY_PAUSE" }, // previously was VK_OSRC
 				{ "vkkey": "HBBTV_VK_GUIDE" },
 				//{ "vkkey" : "HBBTV_VK_UP" }, // not existing
-				{ "vkkey" : "HBBTV_VK_INFO" },
+				{ "vkkey": "HBBTV_VK_INFO" },
 				//{ "vkkey" : "HBBTV_VK_LEFT" }, // not existing
 				//{ "vkkey" : "HBBTV_VK_ACCEPT" }, // not existing
 				//{ "vkkey" : "HBBTV_VK_RIGHT" }, // not existing
@@ -478,7 +488,7 @@ function setMoviesKeys() {
 
 function changeCDBstate(state) {
 	//updating ui status
-	if (state == 'Activate'){
+	if (state == 'Activate') {
 		dashboard_on = true;
 	}
 	var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
@@ -501,19 +511,19 @@ function keyDownHandler(e) {
 	keyHandler(e.keyCode);
 	// document.getElementById("logmsgcallback").value += '\n' + 'Remote Key Press: '+e.keyCode + '\n';
 	// document.getElementById("logmsgcallback").scrollTop=document.getElementById("logmsgcallback").scrollHeight;
-	if (current_page == 'video-frame'){
+	if (current_page == 'video-frame') {
 		if (keyPressTimer) return;
-        keyPressTimer = setInterval(() => {
-            console.log("Long press detected:");
-            startSeeking();
-        }, LONG_PRESS_DELAY);
+		keyPressTimer = setInterval(() => {
+			console.log("Long press detected:");
+			startSeeking();
+		}, LONG_PRESS_DELAY);
 	}
 }
 
 function startSeeking() {
 	console.log("Seeking")
 	document.getElementById("logmsgcallback").value += '\n' + 'Long Press deteched' + '\n';
-	document.getElementById("logmsgcallback").scrollTop=document.getElementById("logmsgcallback").scrollHeight;
+	document.getElementById("logmsgcallback").scrollTop = document.getElementById("logmsgcallback").scrollHeight;
 }
 
 function OnKeyReceivedHandler(event) {
@@ -597,7 +607,7 @@ function keyHandler(keyCode) {
 					current_page = "hospitalinfo_menu";
 					previous_page = "default_view";
 					openInternetWithPdf('Deactivate');
-				} else if (current_page == 'pdf-viewers'){
+				} else if (current_page == 'pdf-viewers') {
 					setRcControlSelective();
 					const sidebar = document.querySelector('.sidebar');
 					if (sidebar) {
@@ -642,7 +652,7 @@ function keyHandler(keyCode) {
 					changeCDBstate('Activate');
 					break;
 				} else if (current_page == 'tv_view') {
-					if (channel_list_view_on == true){
+					if (channel_list_view_on == true) {
 						tvChannelsList('Deactivate');
 						break;
 					}
@@ -676,7 +686,7 @@ function keyHandler(keyCode) {
 					gifTitle.style.display = 'none';
 					rightColumnLogo.style.display = 'none';
 
-				} else if (current_page == 'phillips_cast') { 
+				} else if (current_page == 'phillips_cast') {
 					SelectCast('Deactivate');
 					current_page = "entertainment_menu";
 					previous_page = "default_view";
@@ -697,7 +707,7 @@ function keyHandler(keyCode) {
 					previous_page = "default_view";
 					openInternetWithPdf('Deactivate');
 					break;
-				} else if (current_page == 'pdf-viewers'){
+				} else if (current_page == 'pdf-viewers') {
 					//setRcControlSelective();
 					const sidebar = document.querySelector('.sidebar');
 					if (sidebar) {
@@ -710,35 +720,35 @@ function keyHandler(keyCode) {
 				current_page = previous_page;
 				previous_page = "default_view";
 				break;
-			case VK_LEFT: 
-				if (current_page == 'tv_view'){
+			case VK_LEFT:
+				if (current_page == 'tv_view') {
 					tvChannelsList('Activate');
 				} else if (current_page == 'video-frame') {
 					const videoElement = document.getElementById('video-frame');
 					videoElement.currentTime = Math.max(videoElement.currentTime - 5, 0);
 					break;
-				} else if (current_page == 'pdf-viewers'){
-        			document.getElementById("pdf-viewers").focus();
-        			break; 
+				} else if (current_page == 'pdf-viewers') {
+					document.getElementById("pdf-viewers").focus();
+					break;
 				}
 				break;
 			case VK_RIGHT:
-				if (current_page == 'tv_view'){
+				if (current_page == 'tv_view') {
 					tvChannelsList('Activate');
 				} else if (current_page == 'video-frame') {
 					const videoElement = document.getElementById('video-frame');
 					videoElement.currentTime = Math.min(videoElement.currentTime + 5, videoElement.duration);
 					break;
-				} else if (current_page == 'pdf-viewers'){
+				} else if (current_page == 'pdf-viewers') {
 					document.getElementById("pdf-viewers").focus();
-        			break; 
+					break;
 				}
-				
+
 				break;
 			case VK_ACCEPT:
-				if (current_page == 'video-frame'){
+				if (current_page == 'video-frame') {
 					const videoElement = document.getElementById('video-frame');
-					if (videoPlaying){
+					if (videoPlaying) {
 						videoElement.pause();
 						videoPlaying = !videoPlaying;
 					} else if (!videoPlaying) {
@@ -749,7 +759,7 @@ function keyHandler(keyCode) {
 			// case VK_UP:
 			// 	if (current_page == 'pdf-viewers'){
 			// 		const pdfContainer = document.getElementById("pdf-viewers");
-        	// 		pdfContainer.scrollTop -= 50;
+			// 		pdfContainer.scrollTop -= 50;
 			// 		break;
 			// 	}
 			// 	break;
@@ -759,7 +769,7 @@ function keyHandler(keyCode) {
 			// 		pdfContainer.scrollTop += 50;
 			// 		break;
 			// 	}
-				
+
 			// 	break;
 			default:
 				alert("Nothing to handle \n");
