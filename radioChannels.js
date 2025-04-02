@@ -72,7 +72,7 @@ function openRadio() {
                     const sheet = workbook.Sheets[sheetName];
                     const jsonData = XLSX.utils.sheet_to_json(sheet);
                     // looping through the different channel data and creating japit objects
-                    for (let i = 0; i < jsonData.length; i++) {
+                    for (var i = 0; i < jsonData.length; i++) {
                         channelNo_arr[i] = jsonData[i].Chan_No;
                         radio_channel_num_list[i] = jsonData[i].Chan_No;
                         channelName_arr[i] = jsonData[i].Chan_name;
@@ -228,7 +228,7 @@ function openRadio() {
                     const sheet = workbook.Sheets[sheetName];
                     const jsonData = XLSX.utils.sheet_to_json(sheet);
                     // looping through the different channel data and creating japit objects
-                    for (let i = 0; i < jsonData.length; i++) {
+                    for (var i = 0; i < jsonData.length; i++) {
                         channelNo_arr[i] = jsonData[i].Chan_No;
                         radio_channel_num_list[i] = jsonData[i].Chan_No;
                         channelName_arr[i] = jsonData[i].Chan_name;

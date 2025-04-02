@@ -13,8 +13,12 @@ function init() {
 		if (response) {
 			console.log('API Response:', response);
 			// Process the response here (e.g., parse JSON)
-			rawAflexData = JSON.parse(response);
-			//loadSubMenu(data);
+			if (response === 200 || response === 201){
+				document.querySelector('.menu-item').style.display = 'none';
+				rawAflexData = JSON.parse(response);
+				loadSubMenu(rawAflexData);
+			}
+			
 		} else {
 			console.log('API request failed');
 		}

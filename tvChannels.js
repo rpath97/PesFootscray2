@@ -14,14 +14,14 @@ function openTV() {
     current_page = 'tv_view';
     document.getElementById("loadingGif").style.display = 'flex';
     setArrowButtonsVirtual(); //disabling arrow keys
-    
+
     // SETTING RADIO CHANNEL STATUS
-    if (radio_channel_on != 0){
-		radio_channel_on = 2;
+    if (radio_channel_on != 0) {
+        radio_channel_on = 2;
         removeRadioChannels(radio_channel_num_list);
-	}
+    }
     //Ensuring multiple clicks of the button consecutively doesn't keep on removing and adding channels
-    if (tv_channel_on == 0){
+    if (tv_channel_on == 0) {
         tv_channel_on = 1;
     } else {
         channelSelection(current_tv_channel);
@@ -53,32 +53,30 @@ function openTV() {
     };
 
     //AFLEX channels data
-    if (aflexTvChannelsData){
-        for (var j=0; j<aflexTvChannelsData.length; j++){
-            var channel1 = aflexTvChannelsData[j]['channel-streaming-url'].substring(6);
-                channelNo_arr[j] = aflexTvChannelsData[j]['channel-id'];
-                tv_channel_list[j] = aflexTvChannelsData[j]['channel-id'];
-                channelName_arr[j] = aflexTvChannelsData[j]['channel-name'];
-                channelIP_arr[j] = aflexTvChannelsData[j]['channel-streaming-url'].substring(6);;
+    if (aflexTvChannelsData.length != 0) {
+        for (var j = 0; j < aflexTvChannelsData.length; j++) {
+            channelNo_arr[j] = aflexTvChannelsData[j]['channel-id'];
+            tv_channel_list[j] = aflexTvChannelsData[j]['channel-id'];
+            channelName_arr[j] = aflexTvChannelsData[j]['channel-name'];
+            channelIP_arr[j] = aflexTvChannelsData[j]['channel-streaming-url'].substring(6);;
 
-                // Creating channel object
-                const chan = {
-                    "BasicChannelDetails": {
-                        "ChannelNo": Number(channelNo_arr[j]),
-                        "ChannelName": channelName_arr[j],
-                        "ChannelType": "IP"
-                    },
-                    "ChannelTuningDetails": {
-                        "URL": "multicast://" + channelIP_arr[j]+"/0/0/0"
-                    }
-                };
-                // Pushing channel object to JAPIT channel object           
-                JAPITObjForWIXPSvc.CommandDetails.AddChannels.push(chan);
+            // Creating channel object
+            const chan = {
+                "BasicChannelDetails": {
+                    "ChannelNo": Number(channelNo_arr[j]),
+                    "ChannelName": channelName_arr[j],
+                    "ChannelType": "IP"
+                },
+                "ChannelTuningDetails": {
+                    "URL": "multicast://" + channelIP_arr[j] + "/0/0/0"
+                }
+            };
+            // Pushing channel object to JAPIT channel object           
+            JAPITObjForWIXPSvc.CommandDetails.AddChannels.push(chan);
         }
         //console.log("TV Channels Aflex: " + JSON.stringify(JAPITObjForWIXPSvc));
-    }
-
-    // Extracting excel data and converting it to json format
+    } else {
+        // Extracting excel data and converting it to json format
     const filePath = 'tvchannels.xlsx';
     fetch(filePath)
         .then(response => response.arrayBuffer())
@@ -90,7 +88,7 @@ function openTV() {
             const jsonData = XLSX.utils.sheet_to_json(sheet);
 
             // looping through the different channel data and creating JAPIT objects
-            for (let i = 0; i < jsonData.length; i++) {
+            for (var i = 0; i < jsonData.length; i++) {
                 channelNo_arr[i] = jsonData[i].Chan_No;
                 tv_channel_list[i] = jsonData[i].Chan_No;
                 channelName_arr[i] = jsonData[i].Chan_name;
@@ -104,7 +102,7 @@ function openTV() {
                         "ChannelType": "IP"
                     },
                     "ChannelTuningDetails": {
-                        "URL": "multicast://" + channelIP_arr[i]+"/0/0/0"
+                        "URL": "multicast://" + channelIP_arr[i] + "/0/0/0"
                     }
                 };
                 // Pushing channel object to JAPIT channel object           
@@ -117,7 +115,7 @@ function openTV() {
             delete JAPITObjForWIXPSvc;
 
             // Set default channel and activate TV app
-            current_tv_channel = channelNo_arr[Math.floor(jsonData.length/2)];
+            current_tv_channel = channelNo_arr[Math.floor(jsonData.length / 2)];
             channelSelection(current_tv_channel);
             //tvChannelsApp('Activate');
             // OPENING HTML TV CHANNELS VIEW
@@ -128,7 +126,10 @@ function openTV() {
         })
         .catch(error => {
             document.getElementById("logmsgcallback").value += '\n' + 'file could not be read' + '\n';
-            document.getElementById("logmsgcallback").scrollTop=document.getElementById("logmsgcallback").scrollHeight;
+            document.getElementById("logmsgcallback").scrollTop = document.getElementById("logmsgcallback").scrollHeight;
         });
+    }
+
+    
 }
 
