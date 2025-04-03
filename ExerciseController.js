@@ -17,10 +17,15 @@ function init() {
 				document.querySelector('.menu-item').style.display = 'none';
 				rawAflexData = JSON.parse(response);
 				loadSubMenu(rawAflexData);
+			} else {
+				
+				setTimeout(()=>document.getElementById('buffer-animation-container').style.display = 'none', 3000);
 			}
 			
 		} else {
 			console.log('API request failed');
+			document.querySelector('.menu-item').style.display = 'flex';
+			document.getElementById('buffer-animation-container').style.display = 'none';
 		}
 	});
 	
