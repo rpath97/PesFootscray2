@@ -81,12 +81,13 @@ function loadMainMenu(data) {
                 var radioChannelsObjects = radioModuleMatches[0].subModules;
                 
                 if (radioChannelsObjects) { // Check if moduleUrl exists
-                    var radioChannelsApiUrl = radioChannelsObjects[0].moduleAction.moduleUrl;
+                    var radioChannelsApiUrl = radioChannelsObjects[1].moduleAction.moduleUrl;
                     console.log("Radio api call", radioChannelsApiUrl);
                     apiGetCall(corsProxy+radioChannelsApiUrl, 'submenu', function (response) {
                         if (response){
-
-                        } //console.log('API Response:', response);
+                            //radioChannelsAflexdata = JSON.parse(response).subModules;
+                            console.log('Radio Channels API Response:', radioChannelsAflexdata);
+                        } 
                     });
                     // for (var k=0; k<radioChannelsObjects.length; k++){
                     //     var radioChannelsApiUrl = radioChannelsObjects[k].moduleAction.moduleUrl;

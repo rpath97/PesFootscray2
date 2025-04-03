@@ -58,7 +58,7 @@ function openTV() {
             channelNo_arr[j] = aflexTvChannelsData[j]['channel-id'];
             tv_channel_list[j] = aflexTvChannelsData[j]['channel-id'];
             channelName_arr[j] = aflexTvChannelsData[j]['channel-name'];
-            channelIP_arr[j] = aflexTvChannelsData[j]['channel-streaming-url'].substring(6);;
+            channelIP_arr[j] = aflexTvChannelsData[j]['channel-streaming-url'].substring(6);
 
             // Creating channel object
             const chan = {
