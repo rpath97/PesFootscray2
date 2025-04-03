@@ -5,11 +5,11 @@ var aflexApiUrl = 'http://10.5.5.244/moduleData.php';
 
 function apiGetCall(url, menuType, callback) {
     
-    if (menuType == 'mainMenu'){
-        console.log(aflexDataParsed);
-        setTimeout(loadMainMenu(aflexDataParsed), 1000);
-        //loadMainMenu(aflexDataParsed);
-    }
+    // if (menuType == 'mainMenu'){
+    //     console.log(aflexDataParsed);
+    //     setTimeout(loadMainMenu(aflexDataParsed), 1000);
+    //     //loadMainMenu(aflexDataParsed);
+    // }
 
 
     const xhr = new XMLHttpRequest();
