@@ -14,7 +14,7 @@ body {
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     background: #000000;  /* Black background */
     color: #ffffff;
-    min-height: 100vh;
+    height: 100vh;
     overflow: hidden;
 }
 
@@ -77,25 +77,25 @@ body {
 /* Non-header section - flex row */
 .non-header {
     display: flex;
-    flex: 1;
     background: #c9c6c6;  /* Light gray background */
-    height: 92.5vh;
+    height: 100%;
  
 }
 
 /* Sidebar section */
 .sidebar {
-    width: 430px;
-     background:#fafafaf0; /*#e1e1e1c4   */
+    width: 30vw;
+    background:#fafafaf0; /*#e1e1e1c4   */
     padding: 20px;
-    height: 92.5vh;
+    height: 85.5vh;
     
 }
 
 
 .sidebar-menu {
     background: #fafafaf0;
-    height: 90%; /* Adjust height to match the image */
+    width: 100%;
+    height: 95%; /* Adjust height to match the image */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -113,7 +113,7 @@ body {
     width: 100%;
     height: 19vh; /* Set a fixed height */
     background: #ffffff;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: flex-start;
     font-size: 30px;
@@ -150,12 +150,13 @@ body {
 
 /* Main content area */
 .non-sidebar {
-    flex: 1;
     /*padding: 10px;   reduced from 80px to 10px */
     display: flex;
-    justify-content: left;
+    width: 100%;
+    height: 100%;
     /* align-items: center; */
     background: #e4e5ee;
+    overflow-y: hidden;
 }
 
 /* Default view with Footscray Hospital logo */
@@ -232,15 +233,6 @@ body {
 
 .menu-item.active span {
     color: white;
-}
-
-
-.card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-    gap: 2rem;
-    padding: 1rem;
-    padding-top: 300px;
 }
 
 /* SUB MENU BUTTONS */
@@ -357,13 +349,17 @@ body {
 .submenu-view {
     background-color: #e4e5ee;
     padding: 30px;
-    height: 100%;
+    height: 85.5vh;
     width: 100%;
     /* display: grid;
     grid-template-columns: 1fr;  */
     display: none;
     flex-direction: row;
     flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    align-content: flex-start;
+    overflow-y: auto;
 }
 
 /* Entertainment card styles */
@@ -480,12 +476,6 @@ body {
 }
 
 
-.submenu-card-x span {
-    font-size: 24px;
-    font-weight: 500;
-    /* color: #333; */
-}
-
 .submenu-card-x:hover,
 .submenu-card-x:focus {
     transform: translateY(-5px);
@@ -513,9 +503,8 @@ body {
 }
 
 .submenu-card-x span {
-    font-size: 24px;
-    font-weight: 500;
-    color: var(--mycare-color);
+    font-size: 33px;
+    font-weight: 600;
 }
 
 
@@ -647,49 +636,6 @@ div.Input_Output {
 }
 
 
-/* #entertainmentButton {
-    display: none;
-} */
-
-/* TV Loading Styles */
-.tv-loading {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.9);
-    z-index: 999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.loading-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-}
-
-.tv-logo {
-    width: 200px;
-    height: auto;
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
-}
-
-
-.radio-button-container {
-    display: flex;
-    justify-content: center;
-}
 
 .radio_chan_btn {
     display: flex;
@@ -708,6 +654,7 @@ div.Input_Output {
     border: 1px solid #e0e0e0;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin: 0 auto; /* Center button in grid cell */
+    margin-bottom: 10px;
 }
 
 .radio_chan_btn img {
@@ -740,87 +687,6 @@ div.Input_Output {
 
 
 
-
-/* Radio Channels Grid Layout */
-.radiochannels-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    padding: 40px;
-    max-width: 1600px;
-    margin: 0 auto;
-}
-
-.radiochannels-card {
-    width: 450px;
-    height: 320px;
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 25px;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    border: none;
-    padding: 30px;
-    margin: 0 auto;
-}
-
-.radiochannels-card:hover,
-.radiochannels-card:focus {
-    transform: scale(1.05);
-    box-shadow: 0 12px 20px rgba(0,0,0,0.12);
-    background: linear-gradient(135deg, #00b0f0, #0098d6);
-}
-
-.radiochannels-card img {
-    width: 140px;
-    height: 140px;
-    object-fit: contain;
-    transition: transform 0.3s ease;
-}
-
-.radiochannels-card span {
-    font-size: 32px;
-    font-weight: 500;
-    color: #2c3e50;
-    text-align: center;
-}
-
-.radiochannels-card:hover span,
-.radiochannels-card:focus span {
-    color: white;
-}
-
-.radiochannels-card.active {
-    background: linear-gradient(135deg, #00b0f0, #0098d6);
-    color: white;
-    box-shadow: 0 6px 12px rgba(0,176,240,0.2);
-}
-
-.radiochannels-card.active span {
-    color: white;
-}
-
-/* Special styling for Radio Channel Cards */
-.radiochannels-card[data-type="Double J"] img,
-.radiochannels-card[data-type="ABC Jazz"] img,
-.radiochannels-card[data-type="ABC KIDS Listen"] img,
-.radiochannels-card[data-type="triple j"] img,
-.radiochannels-card[data-type="triple j Unearthed"] img,
-.radiochannels-card[data-type="ABC Classic"] img,
-.radiochannels-card[data-type="ABC Country"] img,
-.radiochannels-card[data-type="ABC Melbourne"] img,
-.radiochannels-card[data-type="ABC RN"] img,
-.radiochannels-card[data-type="ABC NewsRadio"] img {
-    width: 140px;
-    height: 140px;
-    margin-top: 15px;
-}
-
 /* View transitions */
 .default-view, .radiochannels-view {
     transition: opacity 0.3s ease-in-out;
@@ -834,21 +700,6 @@ div.Input_Output {
     margin-left: 20%;
     width: 80%;
     padding: 40px;
-}
-
-
-
-
-
-/* Radio Info Grid Layout style */
-.radio-info-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 80px;
-    gap: 120px;  /* Increased from 80px to 120px */
-    padding: 40px;
-    justify-content: center;
-    align-items: center;
 }
 
 
@@ -1000,7 +851,7 @@ div.Input_Output {
     width: 100%;
    
 }
-#pdf-viewers, #pdf-container {
+#pdf-viewers{
     display: none;
     z-index: 1100;
     position: fixed;
@@ -1008,17 +859,15 @@ div.Input_Output {
     right: 5vw;
     top: 14vh;
     width: 90vw;
-    height: 90vh;
+    height: 85.5vh;
     padding: 0;
     box-shadow: none;
     visibility: visible;
     overflow-y: auto;
 }
-/* #pdf-container:focus {
-    outline: #0098d6;
-    outline-width: 10px;
-    color: #0098d6;
-} */
+#pdf-viewers:focus {
+    outline: none;
+}
 /* #pdf-viewers::-webkit-scrollbar {
     display: none; /* For Chrome, Safari, and Opera */
  /* } */
@@ -1067,7 +916,7 @@ div.Input_Output {
 .radio-view {
     background-color: #f5f5f5;  /* Change this from #f5f9ff to match */
     width: 100vw;
-    height: 100vh;
+    height: 85.5vh;
     transition: all 1s ease;
     flex-direction: row;
     overflow-x: hidden;
@@ -1080,6 +929,8 @@ div.Input_Output {
     height: 100%;
     overflow-y: auto;
     flex-direction: row;
+    align-content: flex-start;
+    justify-items: flex-start;
     flex-wrap: wrap;
     padding: 30px;
     transition: all 1s ease-in-out;
@@ -1093,7 +944,6 @@ div.Input_Output {
     width: 30vw;
     height: 100%;
     flex-direction: column;
-    gap: 10px;
     justify-content: flex-start;
     align-items: center;
     transition: all 1s ease-in-out;
@@ -1569,3 +1419,16 @@ div.Input_Output {
     color: #00BAA3;  
 }
 
+#buffer-animation-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1300;
+    background: rgba(255, 255, 255, 0.7);
+    transition: all 1s ease;
+}

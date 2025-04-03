@@ -31,14 +31,14 @@
   **/
 
   SpatnavAPI.prototype.createNavEvents = function(option, element, direction) {
-    let data_ = {
+    var data_ = {
       relatedTarget: element,
       dir: direction
     };
 
     switch (option) {
     case 'beforefocus':
-      let navbeforefocus_event = document.createEvent('CustomEvent');
+      var navbeforefocus_event = document.createEvent('CustomEvent');
       if (typeof spatnavPolyfillOptions == 'object' && spatnavPolyfillOptions.standardName) {
         navbeforefocus_event.initCustomEvent('navbeforefocus', true, true, data_);
       } else {
@@ -48,7 +48,7 @@
       break;
 
     case 'beforescroll':
-      let navbeforescroll_event = document.createEvent('CustomEvent');
+      var navbeforescroll_event = document.createEvent('CustomEvent');
       if (typeof spatnavPolyfillOptions == 'object' && spatnavPolyfillOptions.standardName) {
         navbeforescroll_event.initCustomEvent('navbeforescroll', true, true, data_);
       } else {
@@ -58,7 +58,7 @@
       break;
 
     case 'notarget':
-      let navnotarget_event = document.createEvent('CustomEvent');
+      var navnotarget_event = document.createEvent('CustomEvent');
       if (typeof spatnavPolyfillOptions == 'object' && spatnavPolyfillOptions.standardName) {
         navnotarget_event.initCustomEvent('navnotarget', true, true, data_);
       } else {

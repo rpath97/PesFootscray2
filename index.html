@@ -26,7 +26,11 @@
     <script type="text/javascript" src="my-care.js"></script>
     <script type="text/javascript" src="videoPlayer.js"></script>
     <script type="text/javascript" src="apiCalls.js"></script>
-    <script type="text/javascript" src="mainMenu.js"></script>
+    <script type="text/javascript" src="wordMatch.js"></script>
+
+    <!-- LOTTIE ANIMATION PLAYER -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.5.10/lottie.min.js"></script>
+    
     <!-- Add this in the head section -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/1.10.100/pdf.min.js"></script>
@@ -36,6 +40,7 @@
     <script type="text/javascript" src="pdf.worker.js"></script>
 
     <script type="text/javascript" src="hospital-info.js" defer></script>
+    <script type="text/javascript" src="apiMenuCreation.js"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/1.0.907/pdf.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.2.8/es6-promise.auto.min.js"></script> -->
     <!-- DASH VIDEO PLAYER -->
@@ -73,7 +78,7 @@
 </head>
 
 <body onload="init(); getProfessionalSettings(); focusImageChange();">
-    <div class="container-fluid  p-0 mw-100 mh-100">
+    <div class="container-fluid  p-0 mw-100 mh-100" style="width: 100vh; width: 100vw; overflow: hidden;">
         <!-- Header -->
         <div class="header">
             <div class="branding">
@@ -158,7 +163,7 @@
                     </div>
                     <!-- Casting under Television -->
                     <!-- <div class="mt-4"> -->
-                    <div class="sub-menu-buttons">
+                    <div class="sub-menu-buttons" id="casting_btn">
                         <button class="submenu-card" onclick="handleCastingClick()" button-focus="casting">
                             <img src="logos/entertainment/casting.png" alt="Casting">
                             <span>Casting</span>
@@ -264,7 +269,7 @@
                     </div>
                 </div>
                 <!-- Hospital Info View -->
-                <div class="submenu-view" id="hospitalinfo_menu" style="display: none;">
+                <div class="submenu-view" id="hospitalinfo_menu" style="display: none;" tabindex="0">
                     <!-- First Row -->
                     <div class="sub-menu-buttons">
                         <button class="submenu-card4" id="welcome-button"
@@ -345,6 +350,10 @@
     <div id="loadingGif">
         <img id="tv-buffer" src="logos/tvLoadingGif.gif" width="30%" height="30%" alt="GIF">
     </div>
+    <!-- LOTTIE ANITMATION CONTAINER -->
+    <div id="buffer-animation-container">
+        <img src="animations/buffer.gif" width="10%" height="15%" style="object-fit: cover; padding-top: 10px;"/>
+    </div>
 
 
     </div>
@@ -365,7 +374,6 @@
             class="pdfImageContainer" alt="img2" />
     </div> -->
 
-    <canvas id="pdf-render" style="display: none; width: 100%;"></canvas> -->
     <div id="pdf-viewers" tabindex="0"></div>
 
     <!-- JAPIT WIXP Plugin -->

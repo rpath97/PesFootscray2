@@ -58,6 +58,9 @@ function videoPlayerHls(videoUrl) {
     //setting virtual keys
     setVideoKeys();
 
+    document.getElementById('buffer-animation-container').style.display = 'flex';
+    setTimeout(()=>document.getElementById('buffer-animation-container').style.display = 'none', 2000);
+
     //OPENING VIDEO FRAME
     //setting previous and current page
     previous_page = current_page;

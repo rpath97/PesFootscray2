@@ -1,6 +1,6 @@
 // Track active section
-let currentSection = 'default';
-const directoryPath = 'logos/channel_logos/'; 
+var currentSection = 'default';
+const directoryPath = 'logos/channel_logos/';
 
 
 // radio button action function
@@ -9,14 +9,14 @@ function radio_ui(event) {
     const rightColumn = document.getElementById("radio_title");
     const rightColumnLogo = document.getElementById("radio-logo-right");
     const gifTitle = document.getElementById("gif-title");
-    
+
     // leftColumn.style.width = '70vw'; // Change the left column to 2/3 of the container
     rightColumn.innerText = 'Now Playing'; // Make the right column visible (1/3 of the container)
     gifTitle.style.display = 'flex';
     gif.style.display = 'flex';
     rightColumnLogo.style.display = 'flex';
     // rightColumn.style.display = 'flex';
-    
+
     const clickedButton = event.currentTarget;  // Get the clicked element
     const buttonId = clickedButton.id;   // Access the ID property
     const channel_no = channel_list.find(item => item.BasicChannelDetails.ChannelName === buttonId);
@@ -28,8 +28,8 @@ function radio_ui(event) {
     const img_src = directoryPath + logoname;
     rightColumnLogo.src = img_src.toLocaleLowerCase();
     const img_url = rightColumnLogo.src;
-    
-    checkImageExists(img_url, function(exists) {
+
+    checkImageExists(img_url, function (exists) {
         if (exists) {
             console.log('Image exists.');
         } else {
@@ -38,7 +38,44 @@ function radio_ui(event) {
         }
     });
 
-    document.getElementById(clickedButton.id).focus(); 
+    document.getElementById(clickedButton.id).focus();
+}
+// radio button action function
+function radio_ui2(channName) {
+    const gif = document.querySelector("#gif");
+    const rightColumn = document.getElementById("radio_title");
+    const rightColumnLogo = document.getElementById("radio-logo-right");
+    const gifTitle = document.getElementById("gif-title");
+
+    // leftColumn.style.width = '70vw'; // Change the left column to 2/3 of the container
+    rightColumn.innerText = 'Now Playing'; // Make the right column visible (1/3 of the container)
+    gifTitle.style.display = 'flex';
+    gif.style.display = 'flex';
+    rightColumnLogo.style.display = 'flex';
+    // rightColumn.style.display = 'flex';
+
+    //const clickedButton = event.currentTarget;  // Get the clicked element
+    const buttonId = channName;   // Access the ID property
+    const channel_no = channel_list.find(item => item.BasicChannelDetails.ChannelName === buttonId);
+    channelSelection(channel_no.BasicChannelDetails.ChannelNo);
+    radio_channel_playing = channel_no.BasicChannelDetails.ChannelNo; //it plays as defined in the channel_list
+    gifTitle.innerHTML = `<div>${buttonId}</div>`;
+    // channelSelection(buttonId);
+    const logoname = buttonId + '.png';
+    const img_src = directoryPath + logoname;
+    rightColumnLogo.src = img_src.toLocaleLowerCase();
+    const img_url = rightColumnLogo.src;
+
+    checkImageExists(img_url, function (exists) {
+        if (exists) {
+            console.log('Image exists.');
+        } else {
+            rightColumnLogo.src = 'logos/entertainment/radio.png';
+            console.log('Image does not exist.');
+        }
+    });
+
+    document.getElementById(channName).focus();
 }
 
 // MENU FOCUS ACTION FUNCTION
@@ -51,12 +88,12 @@ function focusImageChange() {
         const focusedSrc = button.getAttribute("data-focused-src"); // Get the focused image from the data attribute
 
         // Change image source when the button is focused
-        button.addEventListener("focus", function() {
+        button.addEventListener("focus", function () {
             imageElement.src = focusedSrc; // Change the image on focus
         });
 
         // Reset image source when the button loses focus
-        button.addEventListener("blur", function() {
+        button.addEventListener("blur", function () {
             imageElement.src = defaultSrc; // Restore the original image on blur
         });
     });
@@ -65,7 +102,7 @@ function focusImageChange() {
 
 //TEMPORARY BUTTON
 function backTemp() {
-    if (current_page == 'clinical_casting'){
+    if (current_page == 'clinical_casting') {
         setRcControlSelective();
         current_page = "clinicalservices_menu";
         previous_page = "default_view";
@@ -81,7 +118,7 @@ function backTemp() {
     } else if (current_page == 'radio_view') {
         channelStopPlaying(radio_channel_playing);
         document.querySelector('.sidebar').style.display = 'block';
-        
+
         // ADJUSTING DISPLAY ELEMENTS
         const gif = document.querySelector("#gif");
         const rightColumn = document.getElementById("radio_title");
@@ -120,9 +157,9 @@ function backTemp() {
 }
 // temporary enter button
 function tempEnter() {
-    if (current_page == 'video-frame'){
+    if (current_page == 'video-frame') {
         const videoElement = document.getElementById('video-frame');
-        if (videoPlaying){
+        if (videoPlaying) {
             videoElement.pause();
             videoPlaying = !videoPlaying;
         } else if (!videoPlaying) {
@@ -159,4 +196,7 @@ function handleSubmenuClick(openedView) {
     //document.getElementById("tv_button").focus();
 
 }
+
+
+
 

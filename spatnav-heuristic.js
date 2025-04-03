@@ -15,20 +15,20 @@ function focusNavigationHeuristics() {
   const textInputTypes = ['password', 'text', 'search', 'tel', 'url'];
 
   // Load SpatNav API lib
-  let SpatNavAPI = SpatnavAPI();
+  var SpatNavAPI = SpatnavAPI();
 
   // Indicates for the position type starting point
-  let startingPosition = null;
+  var startingPosition = null;
 
   /*
    * keydown EventListener :
    * If arrow key pressed, get the next focusing element and send it to focusing controller
    */
   document.addEventListener('keydown', function(e) {
-    let focusNavigableArrowKey = {'left': true, 'up': true, 'right': true, 'down': true};
+    var focusNavigableArrowKey = {'left': true, 'up': true, 'right': true, 'down': true};
     const eventTarget = document.activeElement;
 
-    let dir = ARROW_KEY_CODE[e.keyCode];
+    var dir = ARROW_KEY_CODE[e.keyCode];
     // Edge case (text input, area) : Don't move focus, just navigate cursor in text area
     if ((eventTarget.nodeName === 'INPUT') || eventTarget.nodeName === 'TEXTAREA')
       focusNavigableArrowKey = handlingEditableElement(e);
@@ -59,7 +59,7 @@ function focusNavigationHeuristics() {
     // 2 Optional step, not handled
 
     // 3
-    let eventTarget = startingPoint;
+    var eventTarget = startingPoint;
 
     // 3-2 : the mouse clicked position will be come the starting point
     if (startingPosition) {
@@ -81,7 +81,7 @@ function focusNavigationHeuristics() {
         eventTarget = eventTarget.contentDocument.body;
 
       const candidates = findCandidates(eventTarget);
-      let bestCandidate;
+      var bestCandidate;
 
       if (Array.isArray(candidates) && candidates.length > 0) {
         bestCandidate = selectBestCandidateFromEdge(eventTarget, candidates, dir);
@@ -94,8 +94,8 @@ function focusNavigationHeuristics() {
 
     // 6
     // Let container be the nearest ancestor of eventTarget
-    let container = getSpatnavContainer(eventTarget);
-    let parentContainer = getSpatnavContainer(container);
+    var container = getSpatnavContainer(eventTarget);
+    var parentContainer = getSpatnavContainer(container);
 
     // The container is IFRAME
     if (!parentContainer) {
@@ -108,11 +108,11 @@ function focusNavigationHeuristics() {
 
     while (parentContainer) {
       // 7
-      let candidates = filteredCandidates(eventTarget, findCandidates(container), dir, container);
+      var candidates = filteredCandidates(eventTarget, findCandidates(container), dir, container);
 
       if (Array.isArray(candidates) && candidates.length > 0) {
         // 9
-        let bestCandidate = selectBestCandidate(eventTarget, candidates, dir, container);
+        var bestCandidate = selectBestCandidate(eventTarget, candidates, dir, container);
         if (bestCandidate) {
           // 10 & 11
           focusingController(bestCandidate, dir);
@@ -225,8 +225,8 @@ function focusNavigationHeuristics() {
   */
   function spatNavSearch (dir, candidates, container) {
     // Let container be the nearest ancestor of eventTarget that is a spatnav container.
-    let container_, candidates_;
-    let bestCandidate = null;
+    var container_, candidates_;
+    var bestCandidate = null;
 
     console.log('spatnavsearch');
 
@@ -271,9 +271,9 @@ function focusNavigationHeuristics() {
   * @returns {sequence<Node>} filtered candidates
   */
   function filteredCandidates(currentElm, candidates, dir, container) {
-    let originalContainer = getSpatnavContainer(currentElm);
-    let filteredcandidates = [];
-    let eventTargetRect;
+    var originalContainer = getSpatnavContainer(currentElm);
+    var filteredcandidates = [];
+    var eventTargetRect;
 
     // to do
     // Offscreen handling when originalContainer is not <HTML>
@@ -281,19 +281,19 @@ function focusNavigationHeuristics() {
         eventTargetRect = originalContainer.getBoundingClientRect();
     else eventTargetRect = currentElm.getBoundingClientRect();
 
-    // If D(dir) is null, let candidates be the same as visibles
+    // If D(dir) is null, var candidates be the same as visibles
     if (dir === undefined)
       filteredcandidates = candidates;
 
     /*
-     * Else, let candidates be the subset of the elements in visibles
+     * Else, var candidates be the subset of the elements in visibles
      * whose principal box’s geometric center is within the closed half plane
      * whose boundary goes through the geometric center of starting point and is perpendicular to D.
      */
     else
-      for (let i = 0; i < candidates.length; i++) {
-        let candidateContainer = getSpatnavContainer(candidates[i]);
-        let candidateRect = candidates[i].getBoundingClientRect();
+      for (var i = 0; i < candidates.length; i++) {
+        var candidateContainer = getSpatnavContainer(candidates[i]);
+        var candidateRect = candidates[i].getBoundingClientRect();
         if (container.contains(candidateContainer) && isOutside(candidateRect, eventTargetRect, dir))
           filteredcandidates.push(candidates[i]);
       }
@@ -314,12 +314,12 @@ function focusNavigationHeuristics() {
   * @returns {Node} the best candidate
   */
   function selectBestCandidate(currentElm, candidates, dir, container) {
-    let bestCandidate;
-    let elementsSameDistance = [];
-    let minDistance = Number.POSITIVE_INFINITY;
+    var bestCandidate;
+    var elementsSameDistance = [];
+    var minDistance = Number.POSITIVE_INFINITY;
 
-    for (let i = 0; i < candidates.length; i++) {
-      let tempDistance = getDistance(currentElm.getBoundingClientRect(), candidates[i].getBoundingClientRect(), dir);
+    for (var i = 0; i < candidates.length; i++) {
+      var tempDistance = getDistance(currentElm.getBoundingClientRect(), candidates[i].getBoundingClientRect(), dir);
       if (tempDistance < minDistance) {
         minDistance = tempDistance;
         bestCandidate = candidates[i];
@@ -339,13 +339,13 @@ function focusNavigationHeuristics() {
   * @returns {Node} the best candidate
   */
   function selectBestCandidateFromEdge(currentElm, candidates, dir) {
-    let eventTargetRect = currentElm.getBoundingClientRect();
-    let minDistanceElement = undefined;
-    let minDistance = Number.POSITIVE_INFINITY;
+    var eventTargetRect = currentElm.getBoundingClientRect();
+    var minDistanceElement = undefined;
+    var minDistance = Number.POSITIVE_INFINITY;
 
     if(Array.isArray(candidates)) {
-      for (let i = 0; i < candidates.length; i++) {
-        let tempMinDistance = getInnerDistance(eventTargetRect, candidates[i].getBoundingClientRect(), dir);
+      for (var i = 0; i < candidates.length; i++) {
+        var tempMinDistance = getInnerDistance(eventTargetRect, candidates[i].getBoundingClientRect(), dir);
 
         if (tempMinDistance < minDistance) {
           minDistance = tempMinDistance;
@@ -372,7 +372,7 @@ function focusNavigationHeuristics() {
   function getSpatnavContainer(element) {
     if (!element.parentElement) return element; // if element==HTML
 
-    let container = element.parentElement;
+    var container = element.parentElement;
 
     while(!isContainer(container)) {
       container = container.parentElement;
@@ -391,7 +391,7 @@ function focusNavigationHeuristics() {
   * @returns {sequence<Node>} - candidates
   */
   function findCandidates(container, visibleOnly = true) {
-    let focusables = focusableAreas(container);
+    var focusables = focusableAreas(container);
 
     if (!visibleOnly)
       return focusables;
@@ -406,10 +406,10 @@ function focusNavigationHeuristics() {
   * @returns {sequence<Node>} - visible focusable areas
   */
   function findVisibles(focusables) {
-    let visibles = [];
+    var visibles = [];
 
-    for (let i = 0; i < focusables.length; i++) {
-      let thisElement = focusables[i];
+    for (var i = 0; i < focusables.length; i++) {
+      var thisElement = focusables[i];
       if (isVisible(thisElement)){
         visibles.push(thisElement);
       }
@@ -425,8 +425,8 @@ function focusNavigationHeuristics() {
   * @returns {sequence<Node>} focusable areas
   */
   function focusableAreas(container) {
-    let focusables = [];
-    let children = [];
+    var focusables = [];
+    var children = [];
 
     if (container.childElementCount > 0) {
       if (!container.parentElement)
@@ -435,13 +435,13 @@ function focusNavigationHeuristics() {
       // Find focusable areas among container
       children = container.children;
 
-      for (let i = 0; i < children.length; i++) {
-        let thisElement = children[i];
+      for (var i = 0; i < children.length; i++) {
+        var thisElement = children[i];
         if (isFocusable(thisElement)){
           focusables.push(thisElement);
         }
         else {
-          let recursiveFocusables = focusableAreas(thisElement);
+          var recursiveFocusables = focusableAreas(thisElement);
 
           if(Array.isArray(recursiveFocusables) && recursiveFocusables.length){
             focusables = focusables.concat(recursiveFocusables);
@@ -459,7 +459,7 @@ function focusNavigationHeuristics() {
   * @returns {<Node>} Starting point
   */
   function findStartingPoint() {
-    let startingPoint = document.activeElement;
+    var startingPoint = document.activeElement;
     if (!startingPoint ||
       (startingPoint == document.body && !document.querySelector(':focus')) /* body isn't actually focused*/
     ) {
@@ -497,8 +497,8 @@ function focusNavigationHeuristics() {
    * reference: https://drafts.csswg.org/css-overflow-3/#scroll-container
    */
   function isScrollContainer(element) {
-    let overflowX = window.getComputedStyle(element).getPropertyValue('overflow-x');
-    let overflowY = window.getComputedStyle(element).getPropertyValue('overflow-y');
+    var overflowX = window.getComputedStyle(element).getPropertyValue('overflow-x');
+    var overflowY = window.getComputedStyle(element).getPropertyValue('overflow-y');
     return (overflowX !== 'visible' && overflowX !== 'clip') && (overflowY !== 'visible' && overflowY !== 'clip');
   }
 
@@ -517,8 +517,8 @@ function focusNavigationHeuristics() {
     // parameter: dir, element
     else if (arguments.length == 2 && typeof arguments[0] === 'object'
             && typeof arguments[1] === 'string') {
-      let element = arguments[0];
-      let dir = arguments[1];
+      var element = arguments[0];
+      var dir = arguments[1];
 
       if (isOverflow(element, dir)) {
         // style property
@@ -675,8 +675,8 @@ function focusNavigationHeuristics() {
    * Check whether this element is entirely or partially visible within the viewport.
    */
   function hitTest(element) {
-    let offsetX = parseInt(window.getComputedStyle(element, null).getPropertyValue('width')) / 10;
-    let offsetY = parseInt(window.getComputedStyle(element, null).getPropertyValue('height')) / 10;
+    var offsetX = parseInt(window.getComputedStyle(element, null).getPropertyValue('width')) / 10;
+    var offsetY = parseInt(window.getComputedStyle(element, null).getPropertyValue('height')) / 10;
 
     offsetX = isNaN(offsetX)? 0:offsetX;
     offsetY = isNaN(offsetY)? 0:offsetY;
@@ -747,8 +747,8 @@ function focusNavigationHeuristics() {
    * reference: https://wicg.github.io/spatial-navigation/#select-the-best-candidate
    */
   function getInnerDistance(rect1, rect2, dir) {
-    let points = {fromPoint: 0, toPoint: 0};
-    let P1, P2;
+    var points = {fromPoint: 0, toPoint: 0};
+    var P1, P2;
 
     switch (dir) {
       case 'right':
@@ -783,11 +783,11 @@ function focusNavigationHeuristics() {
     const kOrthogonalWeightForLeftRight = 30;
     const kOrthogonalWeightForUpDown = 2;
 
-    let orthogonal_bias = 0;
+    var orthogonal_bias = 0;
 
     // Get exit point, entry point
     const points = getEntryAndExitPoints(dir, rect1, rect2);
-    let entryPoint, exitPoint;
+    var entryPoint, exitPoint;
     ({entryPoint, exitPoint} = points);
 
     // Find the points P1 inside the border box of starting point and P2 inside the border box of candidate
@@ -797,7 +797,7 @@ function focusNavigationHeuristics() {
 
     // A = The euclidian distance between P1 and P2.
     const A = Math.sqrt(Math.pow(P1, 2) + Math.pow(P2, 2));
-    let B, C, D;
+    var B, C, D;
 
     // B: The absolute distance in the dir direction between P1 and P2, or 0 if dir is null.
     // C: The absolute distance in the direction which is orthogonal to dir between P1 and P2, or 0 if dir is null.
@@ -840,7 +840,7 @@ function focusNavigationHeuristics() {
    * Default value dir = 'down' for findStartingPoint() function
    */
   function getEntryAndExitPoints(dir, rect1, rect2) {
-    let points = {entryPoint:[0,0], exitPoint:[0,0]};
+    var points = {entryPoint:[0,0], exitPoint:[0,0]};
 
     // Set direction
     switch (dir) {
@@ -914,7 +914,7 @@ function focusNavigationHeuristics() {
    * rectangle object = {width: , height: }
    */
   function getIntersectionRect(rect1, rect2) {
-    let intersection_rect;
+    var intersection_rect;
     const new_location = [Math.max(rect1.left, rect2.left), Math.max(rect1.top, rect2.top)];
     const new_max_point = [Math.min(rect1.right, rect2.right), Math.min(rect1.bottom, rect2.bottom)];
 
@@ -936,7 +936,7 @@ function focusNavigationHeuristics() {
     const eventTarget = document.activeElement;
     const startPosition = eventTarget.selectionStart;
     const endPosition = eventTarget.selectionEnd;
-    let focusNavigableArrowKey = {'left': false, 'up': false, 'right': false, 'down': false};
+    var focusNavigableArrowKey = {'left': false, 'up': false, 'right': false, 'down': false};
 
     if (includes(spinnableInputTypes, eventTarget.getAttribute("type"))) {
       switch (e.keyCode) {
@@ -989,7 +989,7 @@ function focusNavigationHeuristics() {
    * Whether NodeList includes the element or not
    */
   function includes(nodelist, element) {
-    for (let i = 0; i < nodelist.length; i++) {
+    for (var i = 0; i < nodelist.length; i++) {
       if (nodelist[i] === element) return true;
     }
     return false;

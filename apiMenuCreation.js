@@ -1,5 +1,6 @@
 function loadMainMenu(data) {
-    console.log("hello");
+    document.querySelector('.menu-item').style.display = 'none';
+
     const mainMenuButtons = [];
     for (var i = 0; i < data.length; i++) {
         (function (currentData) { // Closure to capture current iteration data
@@ -65,8 +66,12 @@ function loadMainMenu(data) {
                 console.log("TV api call", tvChannelsApiUrl);
                 // TV CHANNELS API CALL
                 if (tvChannelsApiUrl) { // Check if moduleUrl exists
-                    apiGetCall(tvChannelsApiUrl, 'submenu', function (response) {
-                        if (response) console.log('API Response:', response);
+                    apiGetCall(corsProxy+tvChannelsApiUrl, 'submenu', function (response) {
+                        if (response){
+                            console.log('API Response:', JSON.parse(response));
+                            document.getElementById('buffer-animation-container').style.display = 'none';
+                            aflexTvChannelsData = JSON.parse(response);
+                        } 
                     });
                 }
                 // RADIO CHANNELS API CALL
@@ -76,10 +81,13 @@ function loadMainMenu(data) {
                 var radioChannelsObjects = radioModuleMatches[0].subModules;
                 
                 if (radioChannelsObjects) { // Check if moduleUrl exists
-                    var radioChannelsApiUrl = radioChannelsObjects[0].moduleAction.moduleUrl;
+                    var radioChannelsApiUrl = radioChannelsObjects[1].moduleAction.moduleUrl;
                     console.log("Radio api call", radioChannelsApiUrl);
-                    apiGetCall(radioChannelsApiUrl, 'submenu', function (response) {
-                        if (response) console.log('API Response:', response);
+                    apiGetCall(corsProxy+radioChannelsApiUrl, 'submenu', function (response) {
+                        if (response){
+                            radioChannelsAflexdata = JSON.parse(response).subModules;
+                            console.log('Radio Channels API Response:', radioChannelsAflexdata);
+                        } 
                     });
                     // for (var k=0; k<radioChannelsObjects.length; k++){
                     //     var radioChannelsApiUrl = radioChannelsObjects[k].moduleAction.moduleUrl;
@@ -120,101 +128,134 @@ function loadMainMenu(data) {
 
                 
 
-            } else if (title.toLowerCase().includes('hospital')) {
-                hospitalInfoButton.style.display = 'flex';
-                var img = hospitalInfoButton.getElementsByTagName("img")[0];
-                var span = hospitalInfoButton.getElementsByTagName("span")[0];
+             } //else if (title.toLowerCase().includes('hospital')) {
+            //     hospitalInfoButton.style.display = 'flex';
+            //     var img = hospitalInfoButton.getElementsByTagName("img")[0];
+            //     var span = hospitalInfoButton.getElementsByTagName("span")[0];
 
-                if (currentData.icon.imageUrl) {
-                    img.src = currentData.icon.imageUrl;
-                }
+            //     var hospInfoView = document.getElementById('hospitalinfo_menu');
+            //     // hospInfoView.setAttribute('tabindex', '0');
 
-                if (colourScheme) {
-                    (function (hover, defaultColour, iconData) {
-                        hospitalInfoButton.addEventListener("focus", function () {
-                            var span = this.querySelector("span");
-                            var img = this.querySelector("img");
-                            if (span) span.style.color = hover;
-                            if (img && iconData.focusedImageUrl) img.src = iconData.focusedImageUrl;
-                        });
+            //     var firstButton = findFirstButton(hospInfoView);
+            //     if (!firstButton) {
+            //         console.warn('No button elements found in container');
+            //         return;
+            //     }
+            //     // Opera v32 workaround - ensure button is focusable
+            //     firstButton.setAttribute('tabindex', '0');
+            //     // Handle focus event
+            //     hospInfoView.addEventListener('focus', function(e) {
+            //         // Prevent infinite focus loop
+            //         console.log('Focsing on scrollable')
+            //         if (e.target === hospInfoView && document.activeElement !== firstButton) {
+            //         // Opera v32 needs a small delay for focus to work properly
+            //         setTimeout(() => {
+            //             firstButton.focus();
+            //         }, 10);
+            //         }
+            //     }, true); // Use capture phase for better Opera compatibility
 
-                        hospitalInfoButton.addEventListener("blur", function () {
-                            var span = this.querySelector("span");
-                            var img = this.querySelector("img");
-                            if (span) span.style.color = defaultColour;
-                            if (img && iconData.imageUrl) img.src = iconData.imageUrl;
-                        });
-                    })(hoverColour, colourScheme, currentData.icon);
-                }
+            //     if (currentData.icon.imageUrl) {
+            //         img.src = currentData.icon.imageUrl;
+            //     }
 
-                // SUB MODULES
-                var subModulesData = currentData.subModules;
-                if (subModulesData) { // Check if subModules exists
-                    for (var j = 0; j < subModulesData.length; j++) {
-                        (function (subModule) {
-                            var hospMenu = document.getElementById('hospitalinfo_menu');
-                            var subMenuButtons = document.createElement('div');
-                            subMenuButtons.className = 'sub-menu-buttons';
+            //     if (colourScheme) {
+            //         (function (hover, defaultColour, iconData) {
+            //             hospitalInfoButton.addEventListener("focus", function () {
+            //                 var span = this.querySelector("span");
+            //                 var img = this.querySelector("img");
+            //                 if (span) span.style.color = hover;
+            //                 if (img && iconData.focusedImageUrl) img.src = iconData.focusedImageUrl;
+            //             });
 
-                            var button = document.createElement('button');
-                            button.className = 'submenu-card-x';
-                            button.id = subModule.id;
-                            button.setAttribute('button-focus', subModule.title.split(' ').join(''));
+            //             hospitalInfoButton.addEventListener("blur", function () {
+            //                 var span = this.querySelector("span");
+            //                 var img = this.querySelector("img");
+            //                 if (span) span.style.color = defaultColour;
+            //                 if (img && iconData.imageUrl) img.src = iconData.imageUrl;
+            //             });
+            //         })(hoverColour, colourScheme, currentData.icon);
+            //     }
 
-                            // Module Action - with proper undefined checks
-                            if (subModule.moduleAction &&
-                                subModule.moduleAction.packageName &&
-                                typeof subModule.moduleAction.packageName.includes === 'function' &&
-                                subModule.moduleAction.packageName.includes('video')) {
+            //     // SUB MODULES
+            //     var subModulesData = currentData.subModules;
+            //     if (subModulesData) { // Check if subModules exists
+            //         for (var j = 0; j < subModulesData.length; j++) {
+            //             (function (subModule) {
+            //                 var hospMenu = document.getElementById('hospitalinfo_menu');
+            //                 var subMenuButtons = document.createElement('div');
+            //                 subMenuButtons.className = 'sub-menu-buttons';
 
-                                var videoApi = subModule.moduleAction.moduleUrl;
-                                if (videoApi) { // Check if moduleUrl exists
-                                    apiGetCall(videoApi, 'submenu', function (response) {
-                                        if (response) console.log('API Response:', response);
-                                    });
-                                }
-                            }
+            //                 var button = document.createElement('button');
+            //                 button.className = 'submenu-card-x';
+            //                 button.id = subModule.id;
+            //                 button.setAttribute('button-focus', subModule.title.split(' ').join(''));
 
-                            // Rest of your submodule creation code...
-                            var img = document.createElement('img');
-                            img.src = subModule.icon.imageUrl || ''; // Optional chaining with fallback
-                            img.alt = subModule.title || ''; // Fallback for alt text
+            //                 // Module Action - with proper undefined checks
+            //                 if (subModule.moduleAction.packageName &&
+            //                     subModule.moduleAction.packageName.includes('video')) {
 
-                            var span = document.createElement('span');
-                            span.textContent = subModule.title || ''; // Fallback for text content
-                            if (currentData.colorScheme.selectionColor) { // Check if color exists
-                                span.style.color = currentData.colorScheme.selectionColor;
-                            }
+            //                     var videoApi = subModule.moduleAction.moduleUrl;
+            //                     if (videoApi) { // Check if moduleUrl exists
+            //                         apiGetCall(corsProxy+videoApi, 'submenu', function (response) {
+            //                             if (response){
+            //                                 var videoData = JSON.parse(response);
+            //                                 console.log(videoData);
+            //                                 var videoUrl = videoData.subModules[0].moduleAction.url;
+            //                                 button.addEventListener('click', function () {
+            //                                     videoPlayerHls(videoUrl);
+            //                                 });
+            //                             }
+            //                         });
+            //                     }
+            //                 } else if (subModule.moduleAction.url) {
+            //                     button.addEventListener('click', function () {
+            //                         console.log("Opening PDF ", subModule.moduleAction.url)
+            //                         openPdf(corsProxy+ subModule.moduleAction.url);
+            //                     });
+            //                 }
+
+            //                 // Rest of your submodule creation code...
+            //                 var img = document.createElement('img');
+            //                 img.src = subModule.icon.imageUrl || ''; // Optional chaining with fallback
+            //                 img.alt = subModule.title || ''; // Fallback for alt text
+
+            //                 var span = document.createElement('span');
+            //                 span.textContent = subModule.title || ''; // Fallback for text content
+            //                 if (currentData.colorScheme.selectionColor) { // Check if color exists
+            //                     span.style.color = currentData.colorScheme.selectionColor;
+            //                 }
 
 
-                            button.addEventListener('focus', function () {
-                                if (subModule.icon.focusedImageUrl) { // Check if focusedImageUrl exists
-                                    img.src = subModule.icon.focusedImageUrl;
-                                    img.style.transform = "scale(1.1)";
-                                    span.style.color = currentData.colorScheme.baseColor;
-                                    button.style.background = currentData.colorScheme.selectionColor;
-                                }
-                            });
+            //                 button.addEventListener('focus', function () {
+            //                     if (subModule.icon.focusedImageUrl) { // Check if focusedImageUrl exists
+            //                         img.src = subModule.icon.focusedImageUrl;
+            //                         img.style.transform = "scale(1.1)";
+            //                         span.style.color = currentData.colorScheme.baseColor;
+            //                         button.style.background = currentData.colorScheme.selectionColor;
+            //                     }
+            //                 });
 
-                            button.addEventListener('blur', function () {
-                                if (subModule.icon.imageUrl) { // Check if imageUrl exists
-                                    img.src = subModule.icon.imageUrl;
-                                    img.style.transform = "scale(1)";
-                                    span.style.color = currentData.colorScheme.selectionColor;
-                                    button.style.background = currentData.colorScheme.baseColor;
-                                }
-                            });
+            //                 button.addEventListener('blur', function () {
+            //                     if (subModule.icon.imageUrl) { // Check if imageUrl exists
+            //                         img.src = subModule.icon.imageUrl;
+            //                         img.style.transform = "scale(1)";
+            //                         span.style.color = currentData.colorScheme.selectionColor;
+            //                         button.style.background = currentData.colorScheme.baseColor;
+            //                     }
+            //                 });
 
 
-                            button.appendChild(img);
-                            button.appendChild(span);
-                            subMenuButtons.appendChild(button);
-                            hospMenu.appendChild(subMenuButtons);
-                        })(subModulesData[j]);
-                    }
-                }
+            //                 button.appendChild(img);
+            //                 button.appendChild(span);
+            //                 subMenuButtons.appendChild(button);
+            //                 hospMenu.appendChild(subMenuButtons);
+            //             })(subModulesData[j]);
+            //         }
+            //     }
 
-            } else {
+            // } 
+            else {
 
                 //MAIN MENU
                 var colorScheme = currentData.colorScheme;
@@ -279,6 +320,8 @@ function loadMainMenu(data) {
                 var subMenuBox = document.createElement('div');
                 subMenuBox.className = 'submenu-view';
                 subMenuBox.id = currentData.title.split(' ').join('');
+                
+
                 button.addEventListener("focus", function () {
                     //handleSubmenuClick(subMenuBox.id);
                     previous_page = current_page;
@@ -303,18 +346,30 @@ function loadMainMenu(data) {
                             button.setAttribute('button-focus', subModule.title.split(' ').join(''));
 
                             // Module Action - with proper undefined checks
-                            if (subModule.moduleAction &&
-                                subModule.moduleAction.packageName &&
-                                typeof subModule.moduleAction.packageName.includes === 'function' &&
+                            // Module Action - with proper undefined checks
+                            if (subModule.moduleAction && subModule.moduleAction.packageName &&
                                 subModule.moduleAction.packageName.includes('video')) {
 
                                 var videoApi = subModule.moduleAction.moduleUrl;
                                 if (videoApi) { // Check if moduleUrl exists
-                                    apiGetCall(videoApi, 'submenu', function (response) {
-                                        if (response) console.log('API Response:', response);
+                                    apiGetCall(corsProxy+videoApi, 'submenu', function (response) {
+                                         if (response){
+                                            var videoData = JSON.parse(response);
+                                            console.log(videoData);
+                                            var videoUrl = videoData.subModules[0].moduleAction.url;
+                                            button.addEventListener('click', function () {
+                                                videoPlayerHls(videoUrl);
+                                            });
+                                        }
                                     });
                                 }
+                            } else if (subModule.moduleAction && subModule.moduleAction.url) {
+                                button.addEventListener('click', function () {
+                                    console.log("Opening PDF ", subModule.moduleAction.url)
+                                    openPdf(corsProxy+subModule.moduleAction.url);
+                                });
                             }
+
 
                             // Rest of your submodule creation code...
                             var img = document.createElement('img');
@@ -354,10 +409,50 @@ function loadMainMenu(data) {
                         })(subModulesData[j]);
                     }
                 }
+                subMenuBox.setAttribute('tabindex', '0');
+                
+                var firstButton = findFirstButton(subMenuBox);
+                if (!firstButton) {
+                    console.warn('No button elements found in container');
+                } else {
+                    // Opera v32 workaround - ensure button is focusable
+                    firstButton.setAttribute('tabindex', '0');
+                    // Handle focus event
+                    subMenuBox.addEventListener('focus', function(e) {
+                        // Prevent infinite focus loop
+                        console.log('Focsing on scrollable')
+                        if (e.target === subMenuBox && document.activeElement !== firstButton) {
+                        // Opera v32 needs a small delay for focus to work properly
+                        setTimeout(() => {
+                            firstButton.focus();
+                        }, 10);
+                        }
+                    }, true); // Use capture phase for better Opera compatibility
+                }
             }
 
 
 
         })(data[i]); // Pass current iteration data to closure
     }
+}
+
+
+
+
+//FUNCTION TO FIND FIRST BUTTON IN ELEMENTS
+// Find the first button child (including nested buttons)
+function findFirstButton(element) {
+    // Check if current element is a button
+    if (element.tagName === 'BUTTON') {
+    return element;
+    }
+    
+    // Search through children
+    for (var i = 0; i < element.children.length; i++) {
+        const found = findFirstButton(element.children[i]);
+        if (found) return found;
+    }
+    
+    return null;
 }
