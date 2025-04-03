@@ -40,6 +40,43 @@ function radio_ui(event) {
 
     document.getElementById(clickedButton.id).focus();
 }
+// radio button action function
+function radio_ui2(channName) {
+    const gif = document.querySelector("#gif");
+    const rightColumn = document.getElementById("radio_title");
+    const rightColumnLogo = document.getElementById("radio-logo-right");
+    const gifTitle = document.getElementById("gif-title");
+
+    // leftColumn.style.width = '70vw'; // Change the left column to 2/3 of the container
+    rightColumn.innerText = 'Now Playing'; // Make the right column visible (1/3 of the container)
+    gifTitle.style.display = 'flex';
+    gif.style.display = 'flex';
+    rightColumnLogo.style.display = 'flex';
+    // rightColumn.style.display = 'flex';
+
+    //const clickedButton = event.currentTarget;  // Get the clicked element
+    const buttonId = channName;   // Access the ID property
+    const channel_no = channel_list.find(item => item.BasicChannelDetails.ChannelName === buttonId);
+    channelSelection(channel_no.BasicChannelDetails.ChannelNo);
+    radio_channel_playing = channel_no.BasicChannelDetails.ChannelNo; //it plays as defined in the channel_list
+    gifTitle.innerHTML = `<div>${buttonId}</div>`;
+    // channelSelection(buttonId);
+    const logoname = buttonId + '.png';
+    const img_src = directoryPath + logoname;
+    rightColumnLogo.src = img_src.toLocaleLowerCase();
+    const img_url = rightColumnLogo.src;
+
+    checkImageExists(img_url, function (exists) {
+        if (exists) {
+            console.log('Image exists.');
+        } else {
+            rightColumnLogo.src = 'logos/entertainment/radio.png';
+            console.log('Image does not exist.');
+        }
+    });
+
+    document.getElementById(channName).focus();
+}
 
 // MENU FOCUS ACTION FUNCTION
 function focusImageChange() {

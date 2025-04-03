@@ -931,6 +931,8 @@ div.Input_Output {
     height: 100%;
     overflow-y: auto;
     flex-direction: row;
+    align-content: flex-start;
+    justify-items: flex-start;
     flex-wrap: wrap;
     padding: 30px;
     transition: all 1s ease-in-out;

@@ -80,7 +80,7 @@ function openRadio() {
                     }
                 };
 
-                console.log("Channel: " + chan);
+                //console.log("Channel: " + chan);
 
                 // Pushing channel object to JAPIT channel object           
                 JAPITObjForWIXPSvc.CommandDetails.AddChannels.push(chan);
@@ -115,7 +115,6 @@ function openRadio() {
                     var btnElement = document.createElement('button');
                     btnElement.className = 'radio_chan_btn';
                     btnElement.id = button.BasicChannelDetails.ChannelName;
-                    console.log("Channel Name: " + button.BasicChannelDetails.ChannelName);
                     btnElement.style.width = '20vw';
             
                     // Create image element
@@ -140,7 +139,7 @@ function openRadio() {
             
                     // Add click handler
                     btnElement.addEventListener('click', function() {
-                        radio_ui();
+                        radio_ui2(button.BasicChannelDetails.ChannelName);
                     });
             
                     // Add to grid
