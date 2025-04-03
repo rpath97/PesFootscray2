@@ -1,5 +1,7 @@
 //open pdf function
 window.openPdf = function (url) {
+    document.getElementById('buffer-animation-container').style.display = 'flex';
+
     document.getElementById(current_page).style.display = 'none';
     previous_page = current_page;
     current_page = "pdf-viewers";
@@ -22,6 +24,8 @@ window.openPdf = function (url) {
         console.error("Error loading PDF:", error);
     });
     document.getElementById('pdf-viewers').focus();
+    setTimeout(()=>document.getElementById('buffer-animation-container').style.display = 'none', 2000);
+   
 }
 
 function renderPage(pdf, pageNum) {

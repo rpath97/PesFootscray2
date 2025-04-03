@@ -851,7 +851,7 @@ div.Input_Output {
     width: 100%;
    
 }
-#pdf-viewers, #pdf-container {
+#pdf-viewers{
     display: none;
     z-index: 1100;
     position: fixed;
@@ -865,11 +865,9 @@ div.Input_Output {
     visibility: visible;
     overflow-y: auto;
 }
-/* #pdf-container:focus {
-    outline: #0098d6;
-    outline-width: 10px;
-    color: #0098d6;
-} */
+#pdf-viewers:focus {
+    outline: none;
+}
 /* #pdf-viewers::-webkit-scrollbar {
     display: none; /* For Chrome, Safari, and Opera */
  /* } */
