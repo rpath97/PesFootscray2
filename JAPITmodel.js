@@ -553,6 +553,9 @@ function keyHandler(keyCode) {
 					UtilityRefreshPage();
 					break;
 				} else if (current_page == 'tv_view') {
+					const tv_buffer = document.getElementById("loadingGif");
+					tv_buffer.style.display = 'none';
+					
 					current_page = "entertainment_menu";
 					previous_page = "default_view";
 					setRcControlSelective();
