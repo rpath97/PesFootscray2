@@ -85,7 +85,7 @@ function loadMainMenu(data) {
                     console.log("Radio api call", radioChannelsApiUrl);
                     apiGetCall(corsProxy+radioChannelsApiUrl, 'submenu', function (response) {
                         if (response){
-                            //radioChannelsAflexdata = JSON.parse(response).subModules;
+                            radioChannelsAflexdata = JSON.parse(response).subModules;
                             console.log('Radio Channels API Response:', radioChannelsAflexdata);
                         } 
                     });
