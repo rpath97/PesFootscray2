@@ -1,7 +1,7 @@
 var rawAflexData = '';
 var corsProxy = 'https://api.codetabs.com/v1/proxy/?quest=';
 var corsProxy2 = 'https://corsproxy.github.io/';
-var aflexApiUrl = 'http://10.5.5.244/moduleData.php';
+var aflexApiUrl = 'https://prov01.stellar.care/aflex5/';
 
 function apiGetCall(url, menuType, callback) {
     

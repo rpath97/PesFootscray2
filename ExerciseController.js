@@ -9,18 +9,18 @@ function init() {
 	UtilityInit();
 
 	//rawAflexData = apiGetCall("http://10.5.5.244/moduleData.php", 'mainMenu');
-	apiGetCall(aflexApiUrl, 'mainMenu', function(response) {
+	apiGetCall(corsProxy+aflexApiUrl, 'mainMenu', function(response) {
 		if (response) {
 			console.log('API Response:', response);
 			// Process the response here (e.g., parse JSON)
-			if (response === 200 || response === 201){
+			//if (response === 200 || response === 201){
 				document.querySelector('.menu-item').style.display = 'none';
 				rawAflexData = JSON.parse(response);
-				loadSubMenu(rawAflexData);
-			} else {
+				loadMainMenu(rawAflexData);
+			//} else {
 				
 				setTimeout(()=>document.getElementById('buffer-animation-container').style.display = 'none', 3000);
-			}
+			//}
 			
 		} else {
 			console.log('API request failed');
