@@ -2,7 +2,7 @@ function loadMainMenu(data) {
     document.querySelector('.menu-item').style.display = 'none';
 
     const mainMenuButtons = [];
-    for (var i = 0; i < data.length; i++) {
+    for (var i = 0; i < data.length; i++) { 
         (function (currentData) { // Closure to capture current iteration data
             var title = currentData.title;
             mainMenuButtons.push(title);
@@ -11,11 +11,17 @@ function loadMainMenu(data) {
             const entertainmentButton = document.getElementById('entertainmentButton');
             const clinicalServiceButton = document.querySelector('.menu-item.japit-button[data-type="clinical-services"]');
             const hospitalInfoButton = document.querySelector('.menu-item.japit-button[data-type="hospitalinfo"]');
+            
+            // Add references to other main menu buttons
+            const servicesButton = document.querySelector('.menu-item.japit-button[data-type="services"]');
+            const tvRentalButton = document.querySelector('.menu-item.japit-button[data-type="tv-rental"]');
 
             const colourScheme = currentData.colorScheme.selectionColor;
             const hoverColour = currentData.colorScheme.baseColor;
 
             if (title.toLowerCase().includes('entertainment')) {
+                entertainmentButton.style.order = currentData.ordering;
+
                 entertainmentButton.style.display = 'flex';
                 var img = entertainmentButton.getElementsByTagName("img")[0];
                 var span = entertainmentButton.getElementsByTagName("span")[0];
@@ -41,7 +47,7 @@ function loadMainMenu(data) {
                         });
                     })(hoverColour, colourScheme, currentData.icon);
 
-                    // Submenu cards
+                    // Submenu cards 
                     var cards = document.querySelectorAll(".submenu-card");
                     for (var j = 0; j < cards.length; j++) {
                         (function (card, hover, defaultColour) {
@@ -75,60 +81,63 @@ function loadMainMenu(data) {
                     });
                 }
                 // RADIO CHANNELS API CALL
-                var radioModuleMatches = subModulesData.filter(function(item) {
-                    return item.title === "Radio";
-                });
-                var radioChannelsObjects = radioModuleMatches[0].subModules;
+                // var radioModuleMatches = subModulesData.filter(function(item) {
+                //     return item.title === "Radio";
+                // });
+                // var radioChannelsObjects = radioModuleMatches[0].subModules;
                 
-                if (radioChannelsObjects) { // Check if moduleUrl exists
-                    var radioChannelsApiUrl = radioChannelsObjects[1].moduleAction.moduleUrl;
-                    console.log("Radio api call", radioChannelsApiUrl);
-                    apiGetCall(corsProxy+radioChannelsApiUrl, 'submenu', function (response) {
-                        if (response){
-                            radioChannelsAflexdata = JSON.parse(response).subModules;
-                            console.log('Radio Channels API Response:', radioChannelsAflexdata);
-                        } 
-                    });
-                    // for (var k=0; k<radioChannelsObjects.length; k++){
-                    //     var radioChannelsApiUrl = radioChannelsObjects[k].moduleAction.moduleUrl;
-                    //     console.log(radioChannelsApiUrl);
-                    // }
-                    // apiGetCall(radioChannelsApiUrl, 'submenu', function (response) {
-                    //     if (response) console.log('API Response:', response);
-                    // });
-                }
-                
-
-            } else if (title.toLowerCase().includes('clinical')) {
-                clinicalServiceButton.style.display = 'flex';
-                var img = clinicalServiceButton.getElementsByTagName("img")[0];
-                var span = clinicalServiceButton.getElementsByTagName("span")[0];
-
-                if (currentData.icon.imageUrl) {
-                    img.src = currentData.icon.imageUrl;
-                }
-
-                if (colourScheme) {
-                    (function (hover, defaultColour, iconData) {
-                        clinicalServiceButton.addEventListener("focus", function () {
-                            var span = this.querySelector("span");
-                            var img = this.querySelector("img");
-                            if (span) span.style.color = hover;
-                            if (img && iconData.focusedImageUrl) img.src = iconData.focusedImageUrl;
-                        });
-
-                        clinicalServiceButton.addEventListener("blur", function () {
-                            var span = this.querySelector("span");
-                            var img = this.querySelector("img");
-                            if (span) span.style.color = defaultColour;
-                            if (img && iconData.imageUrl) img.src = iconData.imageUrl;
-                        });
-                    })(hoverColour, colourScheme, currentData.icon);
-                }
-
+                // if (radioChannelsObjects) { // Check if moduleUrl exists
+                //     var radioChannelsApiUrl = radioChannelsObjects[1].moduleAction.moduleUrl;
+                //     console.log("Radio api call", radioChannelsApiUrl);
+                //     apiGetCall(corsProxy+radioChannelsApiUrl, 'submenu', function (response) {
+                //         if (response){
+                //             radioChannelsAflexdata = JSON.parse(response).subModules;
+                //             console.log('Radio Channels API Response:', radioChannelsAflexdata);
+                //         } 
+                //     });
+                //     for (var k=0; k<radioChannelsObjects.length; k++){
+                //         var radioChannelsApiUrl = radioChannelsObjects[k].moduleAction.moduleUrl;
+                //         console.log(radioChannelsApiUrl);
+                //     }
+                //     apiGetCall(radioChannelsApiUrl, 'submenu', function (response) {
+                //         if (response) console.log('API Response:', response);
+                //     });
+                // }
                 
 
-             } //else if (title.toLowerCase().includes('hospital')) {
+            } 
+            // else if (title.toLowerCase().includes('clinical')) {
+            //     clinicalServiceButton.style.order = currentData.ordering;
+                
+            //     clinicalServiceButton.style.display = 'flex';
+            //     var img = clinicalServiceButton.getElementsByTagName("img")[0];
+            //     var span = clinicalServiceButton.getElementsByTagName("span")[0];
+
+            //     if (currentData.icon.imageUrl) {
+            //         img.src = currentData.icon.imageUrl;
+            //     }
+
+            //     if (colourScheme) {
+            //         (function (hover, defaultColour, iconData) {
+            //             clinicalServiceButton.addEventListener("focus", function () {
+            //                 var span = this.querySelector("span");
+            //                 var img = this.querySelector("img");
+            //                 if (span) span.style.color = hover;
+            //                 if (img && iconData.focusedImageUrl) img.src = iconData.focusedImageUrl;
+            //             });
+
+            //             clinicalServiceButton.addEventListener("blur", function () {
+            //                 var span = this.querySelector("span");
+            //                 var img = this.querySelector("img");
+            //                 if (span) span.style.color = defaultColour;
+            //                 if (img && iconData.imageUrl) img.src = iconData.imageUrl;
+            //             });
+            //         })(hoverColour, colourScheme, currentData.icon);
+            //     }
+
+                
+
+            //  } //else if (title.toLowerCase().includes('hospital')) {
             //     hospitalInfoButton.style.display = 'flex';
             //     var img = hospitalInfoButton.getElementsByTagName("img")[0];
             //     var span = hospitalInfoButton.getElementsByTagName("span")[0];
@@ -146,7 +155,7 @@ function loadMainMenu(data) {
             //     // Handle focus event
             //     hospInfoView.addEventListener('focus', function(e) {
             //         // Prevent infinite focus loop
-            //         console.log('Focsing on scrollable')
+            //         console.log('Focusing on scrollable')
             //         if (e.target === hospInfoView && document.activeElement !== firstButton) {
             //         // Opera v32 needs a small delay for focus to work properly
             //         setTimeout(() => {
@@ -260,7 +269,7 @@ function loadMainMenu(data) {
                 //MAIN MENU
                 var colorScheme = currentData.colorScheme;
                 var button = document.createElement('button');
-                button.className = 'menu-item japit-button';
+                button.className = 'menu-item japit-button _dynamic';
                 button.style.display = 'flex';
                 // button.id = currentData.title.split(' ').join('');
 
@@ -338,37 +347,52 @@ function loadMainMenu(data) {
                     for (var j = 0; j < subModulesData.length; j++) {
                         (function (subModule) {
                             var subMenuButtons = document.createElement('div');
-                            subMenuButtons.className = 'sub-menu-buttons';
+                            subMenuButtons.className = 'sub-menu-buttons _dynamic2';
 
                             var button = document.createElement('button');
                             button.className = 'submenu-card-x';
                             button.id = subModule.id;
                             button.setAttribute('button-focus', subModule.title.split(' ').join(''));
-
+                            
+                            button.addEventListener('click', () => {
+                                console.log('CLicked button for', subModule)
+                            });
+                            
                             // Module Action - with proper undefined checks
-                            // Module Action - with proper undefined checks
-                            if (subModule.moduleAction && subModule.moduleAction.packageName &&
-                                subModule.moduleAction.packageName.includes('video')) {
-
-                                var videoApi = subModule.moduleAction.moduleUrl;
-                                if (videoApi) { // Check if moduleUrl exists
-                                    apiGetCall(corsProxy+videoApi, 'submenu', function (response) {
-                                         if (response){
-                                            var videoData = JSON.parse(response);
-                                            console.log(videoData);
-                                            var videoUrl = videoData.subModules[0].moduleAction.url;
-                                            button.addEventListener('click', function () {
-                                                videoPlayerHls(videoUrl);
-                                            });
-                                        }
-                                    });
-                                }
-                            } else if (subModule.moduleAction && subModule.moduleAction.url) {
-                                button.addEventListener('click', function () {
-                                    console.log("Opening PDF ", subModule.moduleAction.url)
-                                    openPdf(corsProxy+subModule.moduleAction.url);
+                            if (subModule.moduleAction && subModule.moduleAction.packageName === 'com.stellar.television') {
+                                button.addEventListener('click', () => {
+                                    openTV();
                                 });
                             }
+                            else if (subModule.moduleAction && subModule.moduleAction.packageName === 'com.stellar.movies') {
+                                button.addEventListener('click', () => {
+                                    console.log ('open movies');
+                                    openMovies();
+                                });
+
+                            // else if (subModule.moduleAction && subModule.moduleAction.packageName &&
+                            //     subModule.moduleAction.packageName.includes('video')) {
+
+                                // var videoApi = subModule.moduleAction.moduleUrl;
+                                // if (videoApi) { // Check if moduleUrl exists
+                                //     apiGetCall(corsProxy+videoApi, 'submenu', function (response) {
+                                //          if (response){
+                                //             var videoData = JSON.parse(response);
+                                //             console.log(videoData);
+                                //             var videoUrl = videoData.subModules[0].moduleAction.url;
+                                //             button.addEventListener('click', function () {
+                                //                 videoPlayerHls(videoUrl);
+                                //             });
+                                //         }
+                                //     });
+                                // }
+                           // }
+                            //  else if (subModule.moduleAction && subModule.moduleAction.url) {
+                            //     button.addEventListener('click', function () {
+                            //         console.log("Opening PDF ", subModule.moduleAction.url)
+                            //         openPdf(corsProxy+subModule.moduleAction.url);
+                            //     });
+                             }
 
 
                             // Rest of your submodule creation code...
@@ -406,7 +430,8 @@ function loadMainMenu(data) {
                             button.appendChild(span);
                             subMenuButtons.appendChild(button);
                             subMenuBox.appendChild(subMenuButtons);
-                        })(subModulesData[j]);
+                        }
+                    )(subModulesData[j]);
                     }
                 }
                 subMenuBox.setAttribute('tabindex', '0');
@@ -420,7 +445,7 @@ function loadMainMenu(data) {
                     // Handle focus event
                     subMenuBox.addEventListener('focus', function(e) {
                         // Prevent infinite focus loop
-                        console.log('Focsing on scrollable')
+                        console.log('Focusing on scrollable')
                         if (e.target === subMenuBox && document.activeElement !== firstButton) {
                         // Opera v32 needs a small delay for focus to work properly
                         setTimeout(() => {

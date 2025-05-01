@@ -103,7 +103,7 @@ function sendWIxPCommand(command) {
 		JAPITWIXPPlugin.WebIxpSend(WIXPJSONStringForm);
 	}
 	catch (e) {
-		console.error("Error in sendWIxPCommand:", e);
+		//console.error("Error in sendWIxPCommand:", e);
 	}
 }
 
@@ -509,7 +509,7 @@ function changeCDBstate(state) {
 var keyPressTimer;
 const LONG_PRESS_DELAY = 500; // Time in milliseconds to detect long press
 function keyDownHandler(e) {
-	keyHandler(e.keyCode);
+	//keyHandler(e.keyCode);
 	// document.getElementById("logmsgcallback").value += '\n' + 'Remote Key Press: '+e.keyCode + '\n';
 	// document.getElementById("logmsgcallback").scrollTop=document.getElementById("logmsgcallback").scrollHeight;
 	if (current_page == 'video-frame') {

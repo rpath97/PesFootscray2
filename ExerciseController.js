@@ -11,7 +11,7 @@ function init() {
 	//rawAflexData = apiGetCall("http://10.5.5.244/moduleData.php", 'mainMenu');
 	apiGetCall(corsProxy+aflexApiUrl, 'mainMenu', function(response) {
 		if (response) {
-			console.log('API Response:', response);
+			console.log('API Response:', JSON.parse(response));
 			// Process the response here (e.g., parse JSON)
 			//if (response === 200 || response === 201){
 				document.querySelector('.menu-item').style.display = 'none';
@@ -40,7 +40,7 @@ function init() {
 			hour: '2-digit', 
 			minute: '2-digit',
 			hour12: false, // Use 24-hour format
-			timeZone: 'Australia/Victoria'
+			timeZone: 'Australia/Melbourne'
 		};
 		
 		// Format the date for Victoria timezone

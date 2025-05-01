@@ -82,7 +82,8 @@ function radio_ui2(channName) {
 function focusImageChange() {
     const buttons = document.querySelectorAll(".sub-menu-buttons");
 
-    buttons.forEach(button => {
+    for (var i = 0 ; i < buttons.length; i++) {
+        var button = buttons[i];
         const imageElement = button.querySelector("img");
         const defaultSrc = button.getAttribute("data-default-src"); // Get the default image from the data attribute
         const focusedSrc = button.getAttribute("data-focused-src"); // Get the focused image from the data attribute
@@ -96,7 +97,7 @@ function focusImageChange() {
         button.addEventListener("blur", function () {
             imageElement.src = defaultSrc; // Restore the original image on blur
         });
-    });
+    }
 }
 
 

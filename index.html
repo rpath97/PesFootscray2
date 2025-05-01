@@ -156,10 +156,10 @@
                 <div class="submenu-view" id="entertainment_menu" style="display: none;">
                     <!-- First Row -->
                     <div class="sub-menu-buttons">
-                        <button class="submenu-card" onclick="openTV()" button-focus="television">
+                        <!-- <button class="submenu-card" onclick="openTV()" button-focus="television">
                             <img src="logos/entertainment/television.png" alt="TV">
                             <span>Television</span>
-                        </button>
+                        </button> -->
                     </div>
                     <!-- Casting under Television -->
                     <!-- <div class="mt-4"> -->
@@ -391,6 +391,30 @@
         <!-- <source id="video-src-iframe" src="" type="video/mp4"> -->
         Your browser does not support the video tag.
     </video>
+
+    <script>
+    const items = [
+    { title: 'tv', action: 'openTv' },
+    { title: 'radio', action: 'openRadio' },
+];
+
+const mainEl = document.querySelector('main');
+
+for (const item of items) {
+    const button = document.createElement('button');
+    button.innerText = item.title;
+
+    if (item.action === 'openRadio') {
+        button.addEventListener('click', () => alert('opening radio'));
+    } else if (item.action === 'openTv') {
+        button.addEventListener('click', () => alert('opening tv'));
+    // } else if (item.action === 'openMovies'){
+    //     button.addEventListener('click', () => alert ('opening movies'));
+    }
+
+   // mainEl.appendChild(button);
+}
+</script>
 
 
 

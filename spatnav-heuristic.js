@@ -390,13 +390,28 @@ function focusNavigationHeuristics() {
   * @param {Node} visible or all [ TODO: Can UA set the option? See Step 3 in "find candidates"]
   * @returns {sequence<Node>} - candidates
   */
-  function findCandidates(container, visibleOnly = true) {
-    var focusables = focusableAreas(container);
 
+
+  // function findCandidates(container, visibleOnly = true) {
+  //   var focusables = focusableAreas(container);
+
+  //   if (!visibleOnly)
+  //     return focusables;
+  //   return findVisibles(focusables);
+  // }
+  function findCandidates(container, visibleOnly) {
+    if (typeof visibleOnly === 'undefined') {
+      visibleOnly = true;
+    }
+  
+    var focusables = focusableAreas(container);
+  
     if (!visibleOnly)
       return focusables;
+  
     return findVisibles(focusables);
   }
+  
 
   /*
   * Find visible elements among focusable elements
@@ -474,7 +489,8 @@ function focusNavigationHeuristics() {
    * (Assume that User Agent defined distance is '40px')
    * Reference: https://wicg.github.io/spatial-navigation/#directionally-scroll-an-element
    */
-  function moveScroll(element, dir, offset = 0) {
+  function moveScroll(element, dir, offset) {
+    offset  = (typeof offset === 'undefined') ? 0: offset;
     if (element) {
       switch (dir) {
       case 'left': element.scrollLeft -= (40 + offset); break;
@@ -655,7 +671,7 @@ function focusNavigationHeuristics() {
     if (rect.left < containerRect.left) return false;
     if (rect.right > containerRect.right) return false;
     if (rect.top < containerRect.top) return false;
-    if (rect.bottom > containerRect.botto) return false;
+    if (rect.bottom > containerRect.bottom) return false;
 
     console.log('entirely in the view');
     return true;
@@ -787,8 +803,10 @@ function focusNavigationHeuristics() {
 
     // Get exit point, entry point
     const points = getEntryAndExitPoints(dir, rect1, rect2);
-    var entryPoint, exitPoint;
-    ({entryPoint, exitPoint} = points);
+    // var entryPoint, exitPoint;
+    // ({entryPoint, exitPoint} = points);
+    var entryPoint = pointers.entryPoint;
+    var exitPoint = pointers.exitPoint;
 
     // Find the points P1 inside the border box of starting point and P2 inside the border box of candidate
     // that minimize the distance between these two points
