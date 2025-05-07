@@ -1,3 +1,4 @@
+//this is the latest version of the aflex data
 var rawAflexData = '';
 var corsProxy = 'https://api.codetabs.com/v1/proxy/?quest=';
 var corsProxy2 = 'https://corsproxy.github.io/';
