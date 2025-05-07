@@ -7,10 +7,12 @@
 * https://wicg.github.io/spatial-navigation
 */
 
+var lastFocusedMenu;
+var shouldFocusMenuItem = false;
 function focusNavigationHeuristics() {
   // condition: focus delegation model = false
 
-  const ARROW_KEY_CODE = {37: 'left', 38: 'up', 39: 'right', 40: 'down'};
+  const ARROW_KEY_CODE = { 37: 'left', 38: 'up', 39: 'right', 40: 'down' };
   const spinnableInputTypes = ['email', 'date', 'month', 'number', 'time', 'week'];
   const textInputTypes = ['password', 'text', 'search', 'tel', 'url'];
 
@@ -24,8 +26,8 @@ function focusNavigationHeuristics() {
    * keydown EventListener :
    * If arrow key pressed, get the next focusing element and send it to focusing controller
    */
-  document.addEventListener('keydown', function(e) {
-    var focusNavigableArrowKey = {'left': true, 'up': true, 'right': true, 'down': true};
+  document.addEventListener('keydown', function (e) {
+    var focusNavigableArrowKey = { 'left': true, 'up': true, 'right': true, 'down': true };
     const eventTarget = document.activeElement;
 
     var dir = ARROW_KEY_CODE[e.keyCode];
@@ -46,8 +48,8 @@ function focusNavigationHeuristics() {
    * mouseclick EventListener :
    * If the mouse click a point in the page, the point will be the starting point.
    */
-  document.addEventListener('click', function(e) {
-    startingPosition = {xPosition: e.clientX, yPosition: e.clientY};
+  document.addEventListener('click', function (e) {
+    startingPosition = { xPosition: e.clientX, yPosition: e.clientY };
   });
 
   function navigate(dir) {
@@ -76,7 +78,7 @@ function focusNavigationHeuristics() {
     // 5
     // If startingPoint is either a scroll container or the document,
     // find the best candidate within startingPoint
-    if((isContainer(eventTarget) || eventTarget.nodeName === 'BODY') && !(eventTarget.nodeName === 'INPUT')){
+    if ((isContainer(eventTarget) || eventTarget.nodeName === 'BODY') && !(eventTarget.nodeName === 'INPUT')) {
       if (eventTarget.nodeName === 'IFRAME')
         eventTarget = eventTarget.contentDocument.body;
 
@@ -101,7 +103,7 @@ function focusNavigationHeuristics() {
     if (!parentContainer) {
       parentContainer = window;
 
-      if ( window.location !== window.parent.location ) {
+      if (window.location !== window.parent.location) {
         parentContainer = window.parent;
       }
     }
@@ -133,7 +135,7 @@ function focusNavigationHeuristics() {
           if (container === document || container === document.documentElement) {
             container = window;
 
-            if ( window.location !== window.parent.location ) {
+            if (window.location !== window.parent.location) {
               // The page is in an iframe
               container = window.parent;
             }
@@ -167,14 +169,26 @@ function focusNavigationHeuristics() {
     if (bestCandidate) {
       // Scrolling container or document when the next focusing element isn't entirely visible
       if (isScrollContainer(container) && !isEntirelyVisible(bestCandidate))
-          bestCandidate.scrollIntoView();
+        bestCandidate.scrollIntoView();
 
       // When bestCandidate is a focusable element and not a container : move focus
       /*
        * [event] navbeforefocus : Fired before spatial or sequential navigation changes the focus.
        */
       SpatNavAPI.createNavEvents('beforefocus', bestCandidate, dir);
-      bestCandidate.focus();
+
+      if (bestCandidate.classList.contains("menu-item")) {
+        if (shouldFocusMenuItem && lastFocusedMenu != null) {
+          lastFocusedMenu.focus();
+        } else {
+          lastFocusedMenu = bestCandidate;
+          bestCandidate.focus();
+        }
+        shouldFocusMenuItem = false;
+      } else {
+        shouldFocusMenuItem = true;
+        bestCandidate.focus();
+      }
     }
 
     // When bestCandidate is not found within the scrollport of a container: Nothing
@@ -223,7 +237,7 @@ function focusNavigationHeuristics() {
   * @param {Node} container
   * @returns {Node} the best candidate
   */
-  function spatNavSearch (dir, candidates, container) {
+  function spatNavSearch(dir, candidates, container) {
     // Let container be the nearest ancestor of eventTarget that is a spatnav container.
     var container_, candidates_;
     var bestCandidate = null;
@@ -237,11 +251,11 @@ function focusNavigationHeuristics() {
       container_ = getSpatnavContainer(this);
 
     // If the candidates is unknown, find candidates
-    if(Array.isArray(candidates) && candidates.length > 0) {
+    if (Array.isArray(candidates) && candidates.length > 0) {
       candidates_ = candidates;
     }
     else {
-      if((isContainer(this) || this.nodeName === 'BODY') && !(this.nodeName === 'INPUT'))
+      if ((isContainer(this) || this.nodeName === 'BODY') && !(this.nodeName === 'INPUT'))
         candidates_ = findCandidates(this);
       else
         candidates_ = findCandidates(container_);
@@ -249,7 +263,7 @@ function focusNavigationHeuristics() {
 
     // Find the best candidate
     if (Array.isArray(candidates_) && candidates_.length > 0) {
-      if((isContainer(this) || this.nodeName === 'BODY') && !(this.nodeName === 'INPUT'))
+      if ((isContainer(this) || this.nodeName === 'BODY') && !(this.nodeName === 'INPUT'))
         bestCandidate = selectBestCandidateFromEdge(this, candidates_, dir);
       else
         bestCandidate = selectBestCandidate(this, candidates_, dir, container_);
@@ -278,7 +292,7 @@ function focusNavigationHeuristics() {
     // to do
     // Offscreen handling when originalContainer is not <HTML>
     if (!isVisible(currentElm) && originalContainer.parentElement && container !== originalContainer)
-        eventTargetRect = originalContainer.getBoundingClientRect();
+      eventTargetRect = originalContainer.getBoundingClientRect();
     else eventTargetRect = currentElm.getBoundingClientRect();
 
     // If D(dir) is null, var candidates be the same as visibles
@@ -343,7 +357,7 @@ function focusNavigationHeuristics() {
     var minDistanceElement = undefined;
     var minDistance = Number.POSITIVE_INFINITY;
 
-    if(Array.isArray(candidates)) {
+    if (Array.isArray(candidates)) {
       for (var i = 0; i < candidates.length; i++) {
         var tempMinDistance = getInnerDistance(eventTargetRect, candidates[i].getBoundingClientRect(), dir);
 
@@ -374,7 +388,7 @@ function focusNavigationHeuristics() {
 
     var container = element.parentElement;
 
-    while(!isContainer(container)) {
+    while (!isContainer(container)) {
       container = container.parentElement;
       if (!container) return element; // if element==HTML
     }
@@ -403,15 +417,15 @@ function focusNavigationHeuristics() {
     if (typeof visibleOnly === 'undefined') {
       visibleOnly = true;
     }
-  
+
     var focusables = focusableAreas(container);
-  
+
     if (!visibleOnly)
       return focusables;
-  
+
     return findVisibles(focusables);
   }
-  
+
 
   /*
   * Find visible elements among focusable elements
@@ -425,7 +439,7 @@ function focusNavigationHeuristics() {
 
     for (var i = 0; i < focusables.length; i++) {
       var thisElement = focusables[i];
-      if (isVisible(thisElement)){
+      if (isVisible(thisElement)) {
         visibles.push(thisElement);
       }
     }
@@ -452,13 +466,13 @@ function focusNavigationHeuristics() {
 
       for (var i = 0; i < children.length; i++) {
         var thisElement = children[i];
-        if (isFocusable(thisElement)){
+        if (isFocusable(thisElement)) {
           focusables.push(thisElement);
         }
         else {
           var recursiveFocusables = focusableAreas(thisElement);
 
-          if(Array.isArray(recursiveFocusables) && recursiveFocusables.length){
+          if (Array.isArray(recursiveFocusables) && recursiveFocusables.length) {
             focusables = focusables.concat(recursiveFocusables);
           }
         }
@@ -490,13 +504,13 @@ function focusNavigationHeuristics() {
    * Reference: https://wicg.github.io/spatial-navigation/#directionally-scroll-an-element
    */
   function moveScroll(element, dir, offset) {
-    offset  = (typeof offset === 'undefined') ? 0: offset;
+    offset = (typeof offset === 'undefined') ? 0 : offset;
     if (element) {
       switch (dir) {
-      case 'left': element.scrollLeft -= (40 + offset); break;
-      case 'right': element.scrollLeft += (40 + offset); break;
-      case 'up': element.scrollTop -= (40 + offset); break;
-      case 'down': element.scrollTop += (40 + offset); break;
+        case 'left': element.scrollLeft -= (40 + offset); break;
+        case 'right': element.scrollLeft += (40 + offset); break;
+        case 'up': element.scrollTop -= (40 + offset); break;
+        case 'down': element.scrollTop += (40 + offset); break;
       }
     }
   }
@@ -504,9 +518,9 @@ function focusNavigationHeuristics() {
   /* Whether this element is container or not */
   function isContainer(element) {
     return (!element.parentElement) ||
-           (element.nodeName === 'IFRAME') ||
-           (isScrollContainer(element)) ||
-           (SpatNavAPI.isCSSSpatNavContain(element));
+      (element.nodeName === 'IFRAME') ||
+      (isScrollContainer(element)) ||
+      (SpatNavAPI.isCSSSpatNavContain(element));
   }
 
   /* Whether this element is container or not
@@ -522,42 +536,42 @@ function focusNavigationHeuristics() {
   function isScrollable() { // element, dir
     // parameter: element
     if ((arguments.length == 1 && typeof arguments[0] === 'object') ||
-        (arguments.length == 2 && typeof arguments[0] === 'object' && arguments[1] == null)) {
+      (arguments.length == 2 && typeof arguments[0] === 'object' && arguments[1] == null)) {
       const element = arguments[0];
 
-        if (element.nodeName === 'HTML' || element.nodeName === 'BODY') return true;
-        else if (isScrollContainer(element) && isOverflow(element)) return true;
-        else return false;
+      if (element.nodeName === 'HTML' || element.nodeName === 'BODY') return true;
+      else if (isScrollContainer(element) && isOverflow(element)) return true;
+      else return false;
     }
 
     // parameter: dir, element
     else if (arguments.length == 2 && typeof arguments[0] === 'object'
-            && typeof arguments[1] === 'string') {
-        const element = arguments[0];
-        var dir = arguments[1];
+      && typeof arguments[1] === 'string') {
+      const element = arguments[0];
+      var dir = arguments[1];
 
-        if (isOverflow(element, dir)) {
-            // style property
-            const overflowX = window.getComputedStyle(element, null).getPropertyValue('overflow-x');
-            const overflowY = window.getComputedStyle(element, null).getPropertyValue('overflow-y');
+      if (isOverflow(element, dir)) {
+        // style property
+        const overflowX = window.getComputedStyle(element, null).getPropertyValue('overflow-x');
+        const overflowY = window.getComputedStyle(element, null).getPropertyValue('overflow-y');
 
-            switch (dir) {
-            case 'left':
-              /* falls through */
-            case 'right':
-              return (overflowX !== 'visible' && overflowX !== 'clip');
-            case 'up':
-              /* falls through */
-            case 'down':
-              return (overflowY !== 'visible' && overflowY !== 'clip');
-            }
+        switch (dir) {
+          case 'left':
+          /* falls through */
+          case 'right':
+            return (overflowX !== 'visible' && overflowX !== 'clip');
+          case 'up':
+          /* falls through */
+          case 'down':
+            return (overflowY !== 'visible' && overflowY !== 'clip');
         }
-        return false;
+      }
+      return false;
     }
 
     else {
-        console.log('Need parameters for isScrollable()');
-        return false;
+      console.log('Need parameters for isScrollable()');
+      return false;
     }
   }
 
@@ -566,38 +580,38 @@ function focusNavigationHeuristics() {
     // parameter: element
     if (arguments.length == 1 && typeof arguments[0] === 'object') {
       const element = arguments[0];
-        if (element.scrollWidth > element.clientWidth || element.scrollHeight > element.clientHeight) {
-            return true;
-        }
-        else {
-            return false;
-        }
+      if (element.scrollWidth > element.clientWidth || element.scrollHeight > element.clientHeight) {
+        return true;
+      }
+      else {
+        return false;
+      }
     }
     // parameter: element, dir
     else if (arguments.length == 2 && typeof arguments[0] === 'object'
-            && typeof arguments[1] === 'string'){
+      && typeof arguments[1] === 'string') {
       const element = arguments[0];
       const dir = arguments[1];
 
-        switch (dir) {
-            case 'left':
-              /* falls through */
-            case 'right':
-              if (element.scrollWidth > element.clientWidth)
-                return true;
-              break;
-            case 'up':
-              /* falls through */
-            case 'down':
-              if (element.scrollHeight > element.clientHeight)
-                return true;
-              break;
-        }
-        return false;
+      switch (dir) {
+        case 'left':
+        /* falls through */
+        case 'right':
+          if (element.scrollWidth > element.clientWidth)
+            return true;
+          break;
+        case 'up':
+        /* falls through */
+        case 'down':
+          if (element.scrollHeight > element.clientHeight)
+            return true;
+          break;
+      }
+      return false;
     }
     else {
-        console.log('Need parameters for isOverflow()');
-        return false;
+      console.log('Need parameters for isOverflow()');
+      return false;
     }
   }
 
@@ -608,7 +622,7 @@ function focusNavigationHeuristics() {
     const scrollTop = window.scrollY;
     const scrollLeft = window.scrollX;
 
-    const checkTargetValue = {left: scrollLeft, right: scrollRight, up: scrollTop, down: scrollBottom};
+    const checkTargetValue = { left: scrollLeft, right: scrollRight, up: scrollTop, down: scrollBottom };
     return (checkTargetValue[dir] == 0);
   }
 
@@ -622,10 +636,10 @@ function focusNavigationHeuristics() {
       const width = element.scrollWidth - element.clientWidth;
 
       switch (dir) {
-      case 'left': return (winScrollX === 0);
-      case 'right': return (Math.abs(winScrollX - width) <= 1);
-      case 'up': return (winScrollY === 0);
-      case 'down': return (Math.abs(winScrollY - height) <= 1);
+        case 'left': return (winScrollX === 0);
+        case 'right': return (Math.abs(winScrollX - width) <= 1);
+        case 'up': return (winScrollY === 0);
+        case 'down': return (Math.abs(winScrollY - height) <= 1);
       }
     }
     return false;
@@ -640,10 +654,10 @@ function focusNavigationHeuristics() {
    * check4. Whether the element is scrollable container or not. (regardless of scrollable axis)
    */
   function isFocusable(element) {
-    return (!element.parentElement)||
-          (element.nodeName === 'IFRAME')||
-          (element.tabIndex >= 0 && !element.disabled)||
-          (isScrollable(element) && isOverflow(element));
+    return (!element.parentElement) ||
+      (element.nodeName === 'IFRAME') ||
+      (element.tabIndex >= 0 && !element.disabled) ||
+      (isScrollable(element) && isOverflow(element));
   }
 
   /*
@@ -694,12 +708,12 @@ function focusNavigationHeuristics() {
     var offsetX = parseInt(window.getComputedStyle(element, null).getPropertyValue('width')) / 10;
     var offsetY = parseInt(window.getComputedStyle(element, null).getPropertyValue('height')) / 10;
 
-    offsetX = isNaN(offsetX)? 0:offsetX;
-    offsetY = isNaN(offsetY)? 0:offsetY;
+    offsetX = isNaN(offsetX) ? 0 : offsetX;
+    offsetY = isNaN(offsetY) ? 0 : offsetY;
 
     const elementRect = element.getBoundingClientRect();
 
-    const middleElem = document.elementFromPoint((elementRect.left + elementRect.right)/2, (elementRect.top + elementRect.bottom) / 2);
+    const middleElem = document.elementFromPoint((elementRect.left + elementRect.right) / 2, (elementRect.top + elementRect.bottom) / 2);
     const leftTopElem = document.elementFromPoint(elementRect.left + offsetX, elementRect.top + offsetY);
     const leftBottomElem = document.elementFromPoint(elementRect.left + offsetX, elementRect.bottom - offsetY);
     const rightTopElem = document.elementFromPoint(elementRect.right - offsetX, elementRect.top + offsetY);
@@ -745,13 +759,13 @@ function focusNavigationHeuristics() {
   /* rect1 is completely aligned or partially aligned for the direction */
   function isAligned(rect1, rect2, dir) {
     switch (dir) {
-      case 'left' :
-        /* falls through */
-      case 'right' :
+      case 'left':
+      /* falls through */
+      case 'right':
         return rect1.bottom > rect2.top && rect1.top < rect2.bottom;
-      case 'up' :
-        /* falls through */
-      case 'down' :
+      case 'up':
+      /* falls through */
+      case 'down':
         return rect1.right > rect2.left && rect1.left < rect2.right;
       default:
         return false;
@@ -763,26 +777,26 @@ function focusNavigationHeuristics() {
    * reference: https://wicg.github.io/spatial-navigation/#select-the-best-candidate
    */
   function getInnerDistance(rect1, rect2, dir) {
-    var points = {fromPoint: 0, toPoint: 0};
+    var points = { fromPoint: 0, toPoint: 0 };
     var P1, P2;
 
     switch (dir) {
       case 'right':
-      points.fromPoint = rect1.left;
-      points.toPoint = rect2.left;
-      break;
+        points.fromPoint = rect1.left;
+        points.toPoint = rect2.left;
+        break;
 
-      case 'down' :
+      case 'down':
         points.fromPoint = rect1.top;
         points.toPoint = rect2.top;
         break;
 
-      case 'left' :
+      case 'left':
         points.fromPoint = rect1.right;
         points.toPoint = rect2.right;
         break;
 
-      case 'up' :
+      case 'up':
         points.fromPoint = rect1.bottom;
         points.toPoint = rect2.bottom;
         break;
@@ -819,22 +833,22 @@ function focusNavigationHeuristics() {
     // C: The absolute distance in the direction which is orthogonal to dir between P1 and P2, or 0 if dir is null.
     switch (dir) {
       case 'left':
-        /* falls through */
-      case 'right' :
+      /* falls through */
+      case 'right':
         B = P1;
         // If not aligned => add bias
         if (!isAligned(rect1, rect2, dir))
-        orthogonal_bias = (rect1.height / 2);
+          orthogonal_bias = (rect1.height / 2);
         C = (P2 + orthogonal_bias) * kOrthogonalWeightForLeftRight;
         break;
 
-      case 'up' :
-        /* falls through */
-      case 'down' :
+      case 'up':
+      /* falls through */
+      case 'down':
         B = P2;
         // If not aligned => add bias
         if (!isAligned(rect1, rect2, dir))
-        orthogonal_bias = (rect1.width / 2);
+          orthogonal_bias = (rect1.width / 2);
         C = (P1 + orthogonal_bias) * kOrthogonalWeightForUpDown;
         break;
 
@@ -846,7 +860,7 @@ function focusNavigationHeuristics() {
 
     // D: The square root of the area of intersection between the border boxes of candidate and starting point
     const intersection_rect = getIntersectionRect(rect1, rect2);
-    D = (intersection_rect)? intersection_rect.width * intersection_rect.height : 0;
+    D = (intersection_rect) ? intersection_rect.width * intersection_rect.height : 0;
 
     return (A + B + C - D);
   }
@@ -856,7 +870,7 @@ function focusNavigationHeuristics() {
    * Default value dir = 'down' for findStartingPoint() function
    */
   function getEntryAndExitPoints(dir, rect1, rect2) {
-    var points = {entryPoint:[0,0], exitPoint:[0,0]};
+    var points = { entryPoint: [0, 0], exitPoint: [0, 0] };
 
     // Set direction
     switch (dir) {
@@ -885,7 +899,7 @@ function focusNavigationHeuristics() {
     // Set orthogonal direction
     switch (dir) {
       case 'left':
-        /* falls through */
+      /* falls through */
       case 'right':
         if (isBelow(rect1, rect2)) {
           points.exitPoint[1] = rect1.top;
@@ -904,7 +918,7 @@ function focusNavigationHeuristics() {
         break;
 
       case 'up':
-        /* falls through */
+      /* falls through */
       case 'down':
         if (isRightSide(rect1, rect2)) {
           points.exitPoint[0] = rect1.left;
@@ -936,7 +950,7 @@ function focusNavigationHeuristics() {
 
     if (!(new_location[0] >= new_max_point[0] || new_location[1] >= new_max_point[1])) {
       // intersecting-cases
-      intersection_rect = {width: 0, height: 0};
+      intersection_rect = { width: 0, height: 0 };
       intersection_rect.width = Math.abs(new_location[0] - new_max_point[0]);
       intersection_rect.height = Math.abs(new_location[1] - new_max_point[1]);
     }
@@ -952,7 +966,7 @@ function focusNavigationHeuristics() {
     const eventTarget = document.activeElement;
     const startPosition = eventTarget.selectionStart;
     const endPosition = eventTarget.selectionEnd;
-    var focusNavigableArrowKey = {'left': false, 'up': false, 'right': false, 'down': false};
+    var focusNavigableArrowKey = { 'left': false, 'up': false, 'right': false, 'down': false };
 
     if (includes(spinnableInputTypes, eventTarget.getAttribute("type"))) {
       switch (e.keyCode) {

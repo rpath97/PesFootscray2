@@ -1,17 +1,19 @@
+
+const mainMenuButtons = [];
+const mainMenuData = [];
 function loadMainMenu(data) {
     document.querySelector('.menu-item').style.display = 'none';
 
-    const mainMenuButtons = [];
-    for (var i = 0; i < data.length; i++) { 
+    for (var i = 0; i < data.length; i++) {
         (function (currentData) { // Closure to capture current iteration data
             var title = currentData.title;
-            mainMenuButtons.push(title);
+            //mainMenuButtons.push(title);
             console.log("Title ", title);
 
             const entertainmentButton = document.getElementById('entertainmentButton');
             const clinicalServiceButton = document.querySelector('.menu-item.japit-button[data-type="clinical-services"]');
             const hospitalInfoButton = document.querySelector('.menu-item.japit-button[data-type="hospitalinfo"]');
-            
+
             // Add references to other main menu buttons
             const servicesButton = document.querySelector('.menu-item.japit-button[data-type="services"]');
             const tvRentalButton = document.querySelector('.menu-item.japit-button[data-type="tv-rental"]');
@@ -65,19 +67,19 @@ function loadMainMenu(data) {
                 }
                 // GETTING CHANNELS
                 var subModulesData = currentData.subModules;
-                var tvModuleMatches = subModulesData.filter(function(item) {
+                var tvModuleMatches = subModulesData.filter(function (item) {
                     return item.title === "Freeview TV";
                 });
                 var tvChannelsApiUrl = tvModuleMatches[0].moduleAction.moduleUrl;
                 console.log("TV api call", tvChannelsApiUrl);
                 // TV CHANNELS API CALL
                 if (tvChannelsApiUrl) { // Check if moduleUrl exists
-                    apiGetCall(corsProxy+tvChannelsApiUrl, 'submenu', function (response) {
-                        if (response){
+                    apiGetCall(corsProxy + tvChannelsApiUrl, 'submenu', function (response) {
+                        if (response) {
                             console.log('API Response:', JSON.parse(response));
                             document.getElementById('buffer-animation-container').style.display = 'none';
                             aflexTvChannelsData = JSON.parse(response);
-                        } 
+                        }
                     });
                 }
                 // RADIO CHANNELS API CALL
@@ -85,7 +87,7 @@ function loadMainMenu(data) {
                 //     return item.title === "Radio";
                 // });
                 // var radioChannelsObjects = radioModuleMatches[0].subModules;
-                
+
                 // if (radioChannelsObjects) { // Check if moduleUrl exists
                 //     var radioChannelsApiUrl = radioChannelsObjects[1].moduleAction.moduleUrl;
                 //     console.log("Radio api call", radioChannelsApiUrl);
@@ -103,12 +105,12 @@ function loadMainMenu(data) {
                 //         if (response) console.log('API Response:', response);
                 //     });
                 // }
-                
 
-            } 
+
+            }
             // else if (title.toLowerCase().includes('clinical')) {
             //     clinicalServiceButton.style.order = currentData.ordering;
-                
+
             //     clinicalServiceButton.style.display = 'flex';
             //     var img = clinicalServiceButton.getElementsByTagName("img")[0];
             //     var span = clinicalServiceButton.getElementsByTagName("span")[0];
@@ -135,7 +137,7 @@ function loadMainMenu(data) {
             //         })(hoverColour, colourScheme, currentData.icon);
             //     }
 
-                
+
 
             //  } //else if (title.toLowerCase().includes('hospital')) {
             //     hospitalInfoButton.style.display = 'flex';
@@ -289,38 +291,20 @@ function loadMainMenu(data) {
                 button.appendChild(img);
                 button.appendChild(span);
 
+                mainMenuButtons.push(button);
+                mainMenuData.push(currentData);
 
-                (function (btn, scheme, itemData) {
+
+                (function (btn, itemData) {
                     btn.addEventListener('focus', function () {
-                        if (!this.classList.contains('active')) {
-                            this.style.background = 'linear-gradient(135deg, ' + scheme.selectionColor + ', ' + scheme.selectionColor + ')';
-                            this.style.transform = 'scale(1.02)';
-                            this.style.boxShadow = '0 4px 8px rgba(3, 95, 3, 0.2)';
-
-                            var btnImg = this.querySelector('img');
-                            btnImg.src = itemData.icon.focusedImageUrl;
-                            btnImg.style.transform = 'scale(1.1)';
-
-                            var btnSpan = this.querySelector('span');
-                            btnSpan.style.color = scheme.baseColor;
-                        }
+                        findAndApplyBlurSchemeToOtherMenuButtons(this);
+                        setActiveSchemeToMenuButton(btn, itemData);
                     });
 
                     btn.addEventListener('blur', function () {
-                        if (!this.classList.contains('active')) {
-                            this.style.background = '';
-                            this.style.transform = '';
-                            this.style.boxShadow = '';
-
-                            var btnImg = this.querySelector('img');
-                            btnImg.src = itemData.icon.imageUrl;
-                            btnImg.style.transform = '';
-
-                            var btnSpan = this.querySelector('span');
-                            btnSpan.style.color = scheme.selectionColor;
-                        }
+                        setBlurSchemeToMenuButton(btn, itemData);
                     });
-                })(button, colorScheme, currentData);
+                })(button, currentData);
 
                 document.querySelector('.sidebar-menu').appendChild(button);
 
@@ -329,7 +313,7 @@ function loadMainMenu(data) {
                 var subMenuBox = document.createElement('div');
                 subMenuBox.className = 'submenu-view';
                 subMenuBox.id = currentData.title.split(' ').join('');
-                
+
 
                 button.addEventListener("focus", function () {
                     //handleSubmenuClick(subMenuBox.id);
@@ -345,33 +329,33 @@ function loadMainMenu(data) {
                 var subModulesData = data[i].subModules;
                 if (subModulesData) { // Check if subModules exists
                     for (var j = 0; j < subModulesData.length; j++) {
-                        (function (subModule) {
+                        (function (subModule, btn, itemData) {
                             var subMenuButtons = document.createElement('div');
                             subMenuButtons.className = 'sub-menu-buttons _dynamic2';
 
-                            var button = document.createElement('button');
-                            button.className = 'submenu-card-x';
-                            button.id = subModule.id;
-                            button.setAttribute('button-focus', subModule.title.split(' ').join(''));
-                            
-                            button.addEventListener('click', () => {
+                            var submenuButton = document.createElement('button');
+                            submenuButton.className = 'submenu-card-x';
+                            submenuButton.id = subModule.id;
+                            submenuButton.setAttribute('button-focus', subModule.title.split(' ').join(''));
+
+                            submenuButton.addEventListener('click', () => {
                                 console.log('CLicked button for', subModule)
                             });
-                            
+
                             // Module Action - with proper undefined checks
                             if (subModule.moduleAction && subModule.moduleAction.packageName === 'com.stellar.television') {
-                                button.addEventListener('click', () => {
+                                submenuButton.addEventListener('click', () => {
                                     openTV();
                                 });
                             }
                             else if (subModule.moduleAction && subModule.moduleAction.packageName === 'com.stellar.movies') {
-                                button.addEventListener('click', () => {
-                                    console.log ('open movies');
+                                submenuButton.addEventListener('click', () => {
+                                    console.log('open movies');
                                     openMovies();
                                 });
 
-                            // else if (subModule.moduleAction && subModule.moduleAction.packageName &&
-                            //     subModule.moduleAction.packageName.includes('video')) {
+                                // else if (subModule.moduleAction && subModule.moduleAction.packageName &&
+                                //     subModule.moduleAction.packageName.includes('video')) {
 
                                 // var videoApi = subModule.moduleAction.moduleUrl;
                                 // if (videoApi) { // Check if moduleUrl exists
@@ -386,13 +370,13 @@ function loadMainMenu(data) {
                                 //         }
                                 //     });
                                 // }
-                           // }
-                            //  else if (subModule.moduleAction && subModule.moduleAction.url) {
-                            //     button.addEventListener('click', function () {
-                            //         console.log("Opening PDF ", subModule.moduleAction.url)
-                            //         openPdf(corsProxy+subModule.moduleAction.url);
-                            //     });
-                             }
+                                // }
+                                //  else if (subModule.moduleAction && subModule.moduleAction.url) {
+                                //     button.addEventListener('click', function () {
+                                //         console.log("Opening PDF ", subModule.moduleAction.url)
+                                //         openPdf(corsProxy+subModule.moduleAction.url);
+                                //     });
+                            }
 
 
                             // Rest of your submodule creation code...
@@ -407,35 +391,38 @@ function loadMainMenu(data) {
                             }
 
 
-                            button.addEventListener('focus', function () {
+                            submenuButton.addEventListener('focus', function () {
+                                console.log("sub-menu button focus");
                                 if (subModule.icon.focusedImageUrl) { // Check if focusedImageUrl exists
                                     img.src = subModule.icon.focusedImageUrl;
                                     img.style.transform = "scale(1.1)";
                                     span.style.color = currentData.colorScheme.baseColor;
-                                    button.style.background = currentData.colorScheme.selectionColor;
+                                    submenuButton.style.background = currentData.colorScheme.selectionColor;
                                 }
+                                setActiveSchemeToMenuButton(btn, itemData);
                             });
 
-                            button.addEventListener('blur', function () {
+                            submenuButton.addEventListener('blur', function () {
+                                console.log("sub-menu button blur");
                                 if (subModule.icon.imageUrl) { // Check if imageUrl exists
                                     img.src = subModule.icon.imageUrl;
                                     img.style.transform = "scale(1)";
                                     span.style.color = currentData.colorScheme.selectionColor;
-                                    button.style.background = currentData.colorScheme.baseColor;
+                                    submenuButton.style.background = currentData.colorScheme.baseColor;
                                 }
                             });
 
 
-                            button.appendChild(img);
-                            button.appendChild(span);
-                            subMenuButtons.appendChild(button);
+                            submenuButton.appendChild(img);
+                            submenuButton.appendChild(span);
+                            subMenuButtons.appendChild(submenuButton);
                             subMenuBox.appendChild(subMenuButtons);
                         }
-                    )(subModulesData[j]);
+                        )(subModulesData[j], button, currentData);
                     }
                 }
                 subMenuBox.setAttribute('tabindex', '0');
-                
+
                 var firstButton = findFirstButton(subMenuBox);
                 if (!firstButton) {
                     console.warn('No button elements found in container');
@@ -443,14 +430,14 @@ function loadMainMenu(data) {
                     // Opera v32 workaround - ensure button is focusable
                     firstButton.setAttribute('tabindex', '0');
                     // Handle focus event
-                    subMenuBox.addEventListener('focus', function(e) {
+                    subMenuBox.addEventListener('focus', function (e) {
                         // Prevent infinite focus loop
                         console.log('Focusing on scrollable')
                         if (e.target === subMenuBox && document.activeElement !== firstButton) {
-                        // Opera v32 needs a small delay for focus to work properly
-                        setTimeout(() => {
-                            firstButton.focus();
-                        }, 10);
+                            // Opera v32 needs a small delay for focus to work properly
+                            setTimeout(() => {
+                                firstButton.focus();
+                            }, 10);
                         }
                     }, true); // Use capture phase for better Opera compatibility
                 }
@@ -470,14 +457,56 @@ function loadMainMenu(data) {
 function findFirstButton(element) {
     // Check if current element is a button
     if (element.tagName === 'BUTTON') {
-    return element;
+        return element;
     }
-    
+
     // Search through children
     for (var i = 0; i < element.children.length; i++) {
         const found = findFirstButton(element.children[i]);
         if (found) return found;
     }
-    
+
     return null;
+}
+
+// FUNCTION TO SET ACTIVE COLOR SCHEME TO A BUTTON ELEMENT
+function setActiveSchemeToMenuButton(btn, itemData) {
+    if (!btn.classList.contains('active')) {
+        btn.style.background = 'linear-gradient(135deg, ' + itemData.colorScheme.selectionColor + ', ' + itemData.colorScheme.selectionColor + ')';
+        btn.style.transform = 'scale(1.02)';
+        btn.style.boxShadow = '0 4px 8px rgba(3, 95, 3, 0.2)';
+
+        var btnImg = btn.querySelector('img');
+        btnImg.src = itemData.icon.focusedImageUrl;
+        btnImg.style.transform = 'scale(1.1)';
+
+        var btnSpan = btn.querySelector('span');
+        btnSpan.style.color = itemData.colorScheme.baseColor;
+    }
+}
+
+
+// FUNCTION TO SET BLUR COLOR SCHEME TO A BUTTON ELEMENT
+function setBlurSchemeToMenuButton(btn, itemData) {
+    if (!btn.classList.contains('active')) {
+        btn.style.background = '';
+        btn.style.transform = '';
+        btn.style.boxShadow = '';
+
+        var btnImg = btn.querySelector('img');
+        btnImg.src = itemData.icon.imageUrl;
+        btnImg.style.transform = '';
+
+        var btnSpan = btn.querySelector('span');
+        btnSpan.style.color = itemData.colorScheme.selectionColor;
+    }
+}
+
+
+// FUNCTION TO SET BLUR COLOR SCHEME TO ALL BUTTONS ELEMENT EXCEPT THE FOCUSED ONE.
+function findAndApplyBlurSchemeToOtherMenuButtons(btn) {
+    for (var i = 0; i < mainMenuButtons.length; i++) {
+        if (mainMenuButtons[i] != btn) setBlurSchemeToMenuButton(mainMenuButtons[i], mainMenuData[i]);
+
+    }
 }
