@@ -103,7 +103,7 @@ function sendWIxPCommand(command) {
 		JAPITWIXPPlugin.WebIxpSend(WIXPJSONStringForm);
 	}
 	catch (e) {
-		//console.error("Error in sendWIxPCommand:", e);
+	//	console.error("Error in sendWIxPCommand:", e);
 	}
 }
 
@@ -128,12 +128,6 @@ function switchToMainTuner() {
 }
 //FUNCTION TO OPEN TV CHANNEL AFTER DELAY
 function loadChannel() {
-	// document.getElementById("nav").style.display = "none";
-	// document.getElementById("patientMenu").style.display = "none";
-	// document.getElementById("gallery").style.display = "none";
-	// document.getElementById("topbar").style.display = "none";
-	// document.body.style.backgroundColor = '#000000';
-	//document.getElementById("loadingGif").style.display = 'flex';
 	channel_failed_count++;
 	channelSelection(current_tv_channel);
 }
@@ -509,7 +503,7 @@ function changeCDBstate(state) {
 var keyPressTimer;
 const LONG_PRESS_DELAY = 500; // Time in milliseconds to detect long press
 function keyDownHandler(e) {
-	//keyHandler(e.keyCode);
+	keyHandler(e.keyCode);
 	// document.getElementById("logmsgcallback").value += '\n' + 'Remote Key Press: '+e.keyCode + '\n';
 	// document.getElementById("logmsgcallback").scrollTop=document.getElementById("logmsgcallback").scrollHeight;
 	if (current_page == 'video-frame') {
@@ -541,6 +535,7 @@ function OnKeyReceivedHandler(event) {
 
 
 function keyHandler(keyCode) {
+	const tv_buffer = document.getElementById("loadingGif");
 	try {
 		switch (keyCode) {
 			case VK_MENU:
@@ -553,7 +548,7 @@ function keyHandler(keyCode) {
 					UtilityRefreshPage();
 					break;
 				} else if (current_page == 'tv_view') {
-					const tv_buffer = document.getElementById("loadingGif");
+					// const tv_buffer = document.getElementById("loadingGif");
 					tv_buffer.style.display = 'none';
 					
 					current_page = "entertainment_menu";
@@ -656,7 +651,7 @@ function keyHandler(keyCode) {
 					changeCDBstate('Activate');
 					break;
 				} else if (current_page == 'tv_view') {
-					const tv_buffer = document.getElementById("loadingGif");
+					// function keyHandler(keyCode)
 					tv_buffer.style.display = 'none';
 					if (channel_list_view_on == true) {
 						tvChannelsList('Deactivate');
@@ -683,7 +678,7 @@ function keyHandler(keyCode) {
 					document.querySelector('.sidebar').style.display = 'block';
 
 					// ADJUSTING DISPLAY ELEMENTS
-					const gif = document.querySelector("#gif");
+					// const gif = document.querySelector("#gif");
 					const rightColumn = document.getElementById("radio_title");
 					const gifTitle = document.getElementById("gif-title");
 					const rightColumnLogo = document.getElementById("radio-logo-right");
@@ -762,21 +757,7 @@ function keyHandler(keyCode) {
 						videoPlaying = !videoPlaying;
 					}
 				}
-			// case VK_UP:
-			// 	if (current_page == 'pdf-viewers'){
-			// 		const pdfContainer = document.getElementById("pdf-viewers");
-			// 		pdfContainer.scrollTop -= 50;
-			// 		break;
-			// 	}
-			// 	break;
-			// case VK_DOWN: 
-			// 	if (current_page == 'pdf-viewers'){
-			// 		const pdfContainer = document.getElementById("pdf-viewers");
-			// 		pdfContainer.scrollTop += 50;
-			// 		break;
-			// 	}
-
-			// 	break;
+			
 			default:
 				alert("Nothing to handle \n");
 				break;
@@ -790,6 +771,7 @@ function keyHandler(keyCode) {
 
 	//Exit Keyhandler
 }
+
 
 
 
