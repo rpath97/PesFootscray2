@@ -108,7 +108,7 @@ function focusNavigationHeuristics() {
 
     while (parentContainer) {
       // 7
-      var candidates = filteredCandidates(eventTarget, findCandidates(container), dir, container);
+      const candidates = filteredCandidates(eventTarget, findCandidates(container), dir, container);
 
       if (Array.isArray(candidates) && candidates.length > 0) {
         // 9
@@ -287,7 +287,7 @@ function focusNavigationHeuristics() {
 
     /*
      * Else, var candidates be the subset of the elements in visibles
-     * whose principal box’s geometric center is within the closed half plane
+     * whose principal box's geometric center is within the closed half plane
      * whose boundary goes through the geometric center of starting point and is perpendicular to D.
      */
     else
@@ -525,39 +525,39 @@ function focusNavigationHeuristics() {
         (arguments.length == 2 && typeof arguments[0] === 'object' && arguments[1] == null)) {
       const element = arguments[0];
 
-      if (element.nodeName === 'HTML' || element.nodeName === 'BODY') return true;
-      else if (isScrollContainer(element) && isOverflow(element)) return true;
-      else return false;
+        if (element.nodeName === 'HTML' || element.nodeName === 'BODY') return true;
+        else if (isScrollContainer(element) && isOverflow(element)) return true;
+        else return false;
     }
 
     // parameter: dir, element
     else if (arguments.length == 2 && typeof arguments[0] === 'object'
             && typeof arguments[1] === 'string') {
-      var element = arguments[0];
-      var dir = arguments[1];
+        const element = arguments[0];
+        var dir = arguments[1];
 
-      if (isOverflow(element, dir)) {
-        // style property
-        const overflowX = window.getComputedStyle(element, null).getPropertyValue('overflow-x');
-        const overflowY = window.getComputedStyle(element, null).getPropertyValue('overflow-y');
+        if (isOverflow(element, dir)) {
+            // style property
+            const overflowX = window.getComputedStyle(element, null).getPropertyValue('overflow-x');
+            const overflowY = window.getComputedStyle(element, null).getPropertyValue('overflow-y');
 
-        switch (dir) {
-        case 'left':
-          /* falls through */
-        case 'right':
-          return (overflowX !== 'visible' && overflowX !== 'clip');
-        case 'up':
-          /* falls through */
-        case 'down':
-          return (overflowY !== 'visible' && overflowY !== 'clip');
+            switch (dir) {
+            case 'left':
+              /* falls through */
+            case 'right':
+              return (overflowX !== 'visible' && overflowX !== 'clip');
+            case 'up':
+              /* falls through */
+            case 'down':
+              return (overflowY !== 'visible' && overflowY !== 'clip');
+            }
         }
-      }
-      return false;
+        return false;
     }
 
     else {
-      console.log('Need parameters for isScrollable()');
-      return false;
+        console.log('Need parameters for isScrollable()');
+        return false;
     }
   }
 
@@ -566,12 +566,12 @@ function focusNavigationHeuristics() {
     // parameter: element
     if (arguments.length == 1 && typeof arguments[0] === 'object') {
       const element = arguments[0];
-      if (element.scrollWidth > element.clientWidth || element.scrollHeight > element.clientHeight) {
-        return true;
-      }
-      else {
-        return false;
-      }
+        if (element.scrollWidth > element.clientWidth || element.scrollHeight > element.clientHeight) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
     // parameter: element, dir
     else if (arguments.length == 2 && typeof arguments[0] === 'object'
@@ -579,25 +579,25 @@ function focusNavigationHeuristics() {
       const element = arguments[0];
       const dir = arguments[1];
 
-      switch (dir) {
-        case 'left':
-          /* falls through */
-        case 'right':
-          if (element.scrollWidth > element.clientWidth)
-            return true;
-          break;
-        case 'up':
-          /* falls through */
-        case 'down':
-          if (element.scrollHeight > element.clientHeight)
-            return true;
-          break;
-      }
-      return false;
+        switch (dir) {
+            case 'left':
+              /* falls through */
+            case 'right':
+              if (element.scrollWidth > element.clientWidth)
+                return true;
+              break;
+            case 'up':
+              /* falls through */
+            case 'down':
+              if (element.scrollHeight > element.clientHeight)
+                return true;
+              break;
+        }
+        return false;
     }
     else {
-      console.log('Need parameters for isOverflow()');
-      return false;
+        console.log('Need parameters for isOverflow()');
+        return false;
     }
   }
 
@@ -803,10 +803,8 @@ function focusNavigationHeuristics() {
 
     // Get exit point, entry point
     const points = getEntryAndExitPoints(dir, rect1, rect2);
-    // var entryPoint, exitPoint;
-    // ({entryPoint, exitPoint} = points);
-    var entryPoint = pointers.entryPoint;
-    var exitPoint = pointers.exitPoint;
+    var entryPoint = points.entryPoint;
+    var exitPoint = points.exitPoint;
 
     // Find the points P1 inside the border box of starting point and P2 inside the border box of candidate
     // that minimize the distance between these two points
