@@ -1,5 +1,3 @@
-
-
 //side menu bar appearing
 function handleClinicalServicesClick() {
     
@@ -20,6 +18,18 @@ function openClicnicalCasting() {
     current_page = "clinical_casting";
 
     setBackHomeVirtual(); //sets all buttons except back and home to virtual keys
+    switchToHDMI1();
+}
+
+function openClinicalSharingHDMI() {
+    // Set navigation state
+    previous_page = current_page;
+    current_page = "clinical_casting";
+
+    // Set virtual keys so only back and home work
+    setBackHomeVirtual();
+
+    // Switch TV to HDMI1 input
     switchToHDMI1();
 }
 
