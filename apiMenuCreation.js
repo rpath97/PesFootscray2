@@ -25,7 +25,6 @@ function loadMainMenu(data) {
                 entertainmentButton.style.display = 'flex';
                 var img = entertainmentButton.getElementsByTagName("img")[0];
                 var span = entertainmentButton.getElementsByTagName("span")[0];
-
                 if (currentData.icon.imageUrl) {
                     img.src = currentData.icon.imageUrl;
                 }
@@ -155,13 +154,20 @@ function loadMainMenu(data) {
                 var subMenuBox = document.createElement('div');
                 subMenuBox.className = 'submenu-view';
                 subMenuBox.id = currentData.title.split(' ').join('');
-
-                button.addEventListener("focus", function () {
+                
+                // Add onclick focus functionality for left-side menu buttons
+                button.addEventListener('click', function () {
+                    // Show the submenu (if not already)
                     previous_page = current_page;
                     current_page = subMenuBox.id;
-
                     document.getElementById(previous_page).style.display = 'none';
                     document.getElementById(current_page).style.display = 'flex';
+
+                    // Focus the first button in the submenu
+                    var firstButton = findFirstButton(subMenuBox);
+                    if (firstButton) {
+                        setTimeout(() => firstButton.focus(), 10); // Timeout ensures DOM is updated
+                    }
                 });
 
                 const nonSideBar = document.querySelector('.non-sidebar');
@@ -182,26 +188,14 @@ function loadMainMenu(data) {
                                 console.log('Clicked button for', subModule);
                             });
 
-                            //openTV from URL
-                            // if (subModule.moduleAction && subModule.moduleAction.packageName === 'com.stellar.television') {
-                            //     button.addEventListener('click', () => {
-                            //         openTV();
-                            //     });
-                            // }
+                            
 
                             //television from URL
                             if (subModule.moduleAction && subModule.moduleAction.packageName === 'com.stellar.television') {
                                 button.addEventListener('click', () => {
                                     console.log('Opening TV');
                                     openTV();
-                                    // apiGetCall(corsProxy + 'https://prov01.stellar.care/aflex5/footscray.php', 'television', function(response) {
-                                    //     if (response) {
-                                    //         console.log('TV API Response:', response);
-                                    //         const data = JSON.parse(response);
-                                    //         // After getting the TV data, open the TV interface
-                                    //         openTV(data);
-                                    //     }
-                                    // });
+                                    
                                 });
                             }
 
@@ -210,14 +204,7 @@ function loadMainMenu(data) {
                                 button.addEventListener('click', () => {
                                     console.log('Opening movies');
                                     openMovies('Activate');
-                                    // apiGetCall(corsProxy + 'https://prov01.stellar.care/aflex5/footscray.php', 'movies', function(response) {
-                                    //     if (response) {
-                                    //         console.log('Movies API Response:', response);
-                                    //         const data = JSON.parse(response);
-                                    //         // After getting the movies data, open the movies interface
-                                    //         openMovies(data);
-                                    //     }
-                                    // });
+                                    
                                 });
                             }
 
@@ -226,12 +213,7 @@ function loadMainMenu(data) {
                                 button.addEventListener('click', () => {
                                     console.log('Opening clinical sharing');
                                     openClinicalSharing('Activate');
-                                    // apiGetCall(corsProxy + 'https://prov01.stellar.care/aflex5/footscray.php', 'clinicalsharing', function(response) {
-                                    //     if (response) {
-                                    //         console.log('Clinical Sharing API Response:', response);
-                                    //         const data = JSON.parse(response);
-                                    //     }
-                                    // });
+                                    
                                 });
                             }
 
@@ -240,13 +222,27 @@ function loadMainMenu(data) {
                                 button.addEventListener('click', () => {
                                     console.log('Opening casting');
                                     openCasting('Activate')
-                                    // apiGetCall(corsProxy + 'https://prov01.stellar.care/aflex5/footscray.php', 'casting', function(response) {
-                                    //     if (response) {
-                                    //         console.log('Casting API Response:', response);
-                                    //         const data = JSON.parse(response);
-                                            
-                                    //     }
-                                    // });
+                                   
+                                });
+                            }
+
+                            //radio from URL
+                            else if (subModule.moduleAction && subModule.moduleAction.packageName === 'com.stellar.radio') {
+                                button.addEventListener('click', () => {
+                                    // Hide the default Radio button image (if present)
+                                    var defaultRadioImg = document.querySelector('img[src*="radio_512_00baa3.png"]');
+                                    if (defaultRadioImg) {
+                                        defaultRadioImg.style.display = 'none';
+                                    }
+                                    // Show the radio view container
+                                    var radioView = document.getElementById('radio_view');
+                                    if (radioView) {
+                                        radioView.style.display = 'flex';
+                                    }
+                                    // Call handleRadioClick to populate radio channels
+                                    if (typeof handleRadioClick === 'function') {
+                                        handleRadioClick();
+                                    }
                                 });
                             }
 
@@ -304,13 +300,7 @@ function loadMainMenu(data) {
         })(data[i]);
     }
 
-    // Remove blue focus outline from submenu-card-x buttons
-    // if (!document.getElementById('remove-blue-outline-style')) {
-    //     const style = document.createElement('style');
-    //     style.id = 'remove-blue-outline-style';
-    //     style.innerHTML = `.submenu-card-x:focus { outline: none; box-shadow: none; }`;
-    //     document.head.appendChild(style);
-    // }
+   
 }
 
 //FUNCTION TO FIND FIRST BUTTON IN ELEMENTS
@@ -322,7 +312,7 @@ function findFirstButton(element) {
     
     for (var i = 0; i < element.children.length; i++) {
         const found = findFirstButton(element.children[i]);
-        if (found) return found;
+        if (found) return found
     }
     
     return null;

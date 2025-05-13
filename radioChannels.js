@@ -449,3 +449,37 @@ function checkImageExists(imageUrl, callback) {
     img.src = imageUrl;
 }
 
+function removeOnlyRadioChannels() {
+    // Step 1: Send a request to get all channels
+    var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
+    JAPITObjForWIXPSvc.Cookie = 85;
+    JAPITObjForWIXPSvc.CmdType = "Request";
+    JAPITObjForWIXPSvc.Fun = "ChannelList";
+    JAPITObjForWIXPSvc.CommandDetails = {
+        "ContentLevel": "BasicChannelDetails"
+    };
+
+    // Handle the response from the TV
+    JAPITWIXPPlugin.WebIXPOnReceive = function(response) {
+        const parsed = JSON.parse(response);
+        
+        if (parsed.Fun === "ChannelList" && parsed.CommandDetails && parsed.CommandDetails.ChannelList) {
+            // Step 2: Filter only radio channels (you may need to adjust logic based on real structure)
+            const radioChannels = parsed.CommandDetails.ChannelList.filter(channel =>
+                channel.ServiceType && channel.ServiceType.toLowerCase() === 'radio'
+            ).map(channel => channel.ChannelNumber);
+
+            // Step 3: Remove radio channels
+            if (radioChannels.length > 0) {
+                removeRadioChannels(radioChannels);
+                console.log("Removed radio channels:", radioChannels);
+            } else {
+                console.log("No radio channels found to remove.");
+            }
+        }
+    };
+
+    sendWIxPCommand(JAPITObjForWIXPSvc);
+    delete JAPITObjForWIXPSvc;
+}
+

@@ -21,15 +21,11 @@ function openClicnicalCasting() {
     switchToHDMI1();
 }
 
-function openClinicalSharingHDMI() {
-    // Set navigation state
+function openClinicalSharing() {
+    // Set previous and current page
     previous_page = current_page;
     current_page = "clinical_casting";
-
-    // Set virtual keys so only back and home work
-    setBackHomeVirtual();
-
-    // Switch TV to HDMI1 input
-    switchToHDMI1();
+    setBackHomeVirtual(); // Only back and home keys work
+    switchToHDMI1(); // Switch to HDMI1 input
 }
 
