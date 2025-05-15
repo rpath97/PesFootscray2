@@ -274,6 +274,22 @@ function loadMainMenu(data) {
                                 }
                             });
 
+                            button.addEventListener('keydown', function(e) {
+                                if (e.key === 'ArrowLeft' || e.keyCode === 37) {
+                                    // Find the corresponding sidebar button by matching text or a data attribute
+                                    var sidebarButtons = document.querySelectorAll('.menu-item.japit-button_sidemenu');
+                                    for (var k = 0; k < sidebarButtons.length; k++) {
+                                        var sidebarBtn = sidebarButtons[k];
+                                        var sidebarText = sidebarBtn.textContent.trim().toLowerCase();
+                                        var submenuText = (subModule.title || '').trim().toLowerCase();
+                                        if (sidebarText === submenuText) {
+                                            sidebarBtn.focus();
+                                            break;
+                                        }
+                                    }
+                                }
+                            });
+
                             button.appendChild(img);
                             button.appendChild(span);
                             subMenuButtons.appendChild(button);
