@@ -1,3 +1,5 @@
+<!-- Author Dinidi Pathirana -->
+
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -156,18 +158,18 @@
                 <div class="submenu-view" id="entertainment_menu" style="display: none;">
                     <!-- First Row -->
                     <div class="sub-menu-buttons">
-                        <!-- <button class="submenu-card" onclick="openTV()" button-focus="television">
+                        <button class="submenu-card" onclick="openTV()" button-focus="television">
                             <img src="logos/entertainment/television.png" alt="TV">
                             <span>Television</span>
-                        </button> -->
+                        </button>
                     </div>
                     <!-- Casting under Television -->
                     <!-- <div class="mt-4"> -->
                     <div class="sub-menu-buttons" id="casting_btn">
-                        <!-- <button class="submenu-card" onclick="handleCastingClick()" button-focus="casting">
+                        <button class="submenu-card" onclick="handleCastingClick()" button-focus="casting">
                             <img src="logos/entertainment/casting.png" alt="Casting">
                             <span>Casting</span>
-                        </button> -->
+                        </button>
                     </div>
                     <!-- </div>
                         </div> -->
@@ -182,12 +184,12 @@
                     <!-- </div> -->
 
                     <!-- <div class="col-md-3"> -->
-                    <!--
-                    <button class="submenu-card" onclick="handleRadioClick()" button-focus="radio">
-                        <img src="logos/entertainment/radio.png" alt="Radio">
-                        <span>Radio</span>
-                    </button>
-                    -->
+                    <div class="sub-menu-buttons">
+                        <button class="submenu-card" onclick="handleRadioClick()" button-focus="radio">
+                            <img src="logos/entertainment/radio.png" alt="Radio">
+                            <span>Radio</span>
+                        </button>
+                    </div>
                     <!-- </div> -->
 
                 </div>
@@ -241,12 +243,12 @@
                     <!-- First Row -->
                     <div class="sub-menu-buttons">
                         <button class="submenu-card3" id="clinical-sharing-button"
-                        button-focus="clinical-sharing"
-                        onclick="openClinicalSharing()">
-                        <img src="logos/clinicalservices/clinicalsharing.png" alt="Clinical Sharing">
-                        <span>Clinical Sharing</span>
-                    </button>
-                </div>
+                            button-focus="clinical-sharing"
+                            onclick="openClinicalSharing()">
+                            <img src="logos/clinicalservices/clinicalsharing.png" alt="Clinical Sharing">
+                            <span>Clinical Sharing</span>
+                        </button>
+                    </div>
 
                     <!-- Clinical Section -->
                     <div class="sub-menu-buttons">
@@ -359,7 +361,20 @@
     </div>
     <!-- Toast container for notifications -->
     <div class="toast-container position-fixed bottom-0 end-0 p-3"></div>
-    
+    <!-- CHANNEL VIEWER -->
+    <!-- <div id="tvChannelDiv" style="width: 100%; height: 100%; position: absolute; top: 0;right: 0; z-index: -1;"> 
+        <object id="vidObject" style="position:absolute;" type="video/broadcast" width="100%" height="100%"/>
+     </div> -->
+    <!-- CHANNEL VIEWER -->
+    <!-- PDF VIEWER OPTIONs -->
+    <!-- <div id="pdf-viewers"> -->
+        <!-- PDF VIEWER OPTION 2 -->
+<!-- 
+        <img src="https://images.squarespace-cdn.com/content/v1/580d687ac534a57edb75c0ea/1594182141925-DV8LR3RFTOLFKWWKF2I0/2.jpg?format=2500w"
+            class="pdfImageContainer" alt="img1" />
+        <img src="https://images.squarespace-cdn.com/content/v1/580d687ac534a57edb75c0ea/1594182141925-DV8LR3RFTOLFKWWKF2I0/2.jpg?format=2500w"
+            class="pdfImageContainer" alt="img2" />
+    </div> -->
 
     <div id="pdf-viewers" tabindex="0"></div>
 
@@ -368,35 +383,16 @@
         onload="pluginLoaded()">
     </object>
 
+    <!-- Video Frame -->
+    <!-- <div class="video-grid" id="video-frame">
+        <iframe id="video-src-iframe" src="" width="100%" height="100%" frameborder="0" allowfullscreen>
+        </iframe>
+     </div> -->
     <!-- Second type video frame -->
     <video id="video-frame" controls autoplay>
         <!-- <source id="video-src-iframe" src="" type="video/mp4"> -->
         Your browser does not support the video tag.
     </video>
-
-    <script>
-    const items = [
-    { title: 'tv', action: 'openTv' },
-    { title: 'radio', action: 'openRadio' },
-];
-
-const mainEl = document.querySelector('main');
-
-for (const item of items) {
-    const button = document.createElement('button');
-    button.innerText = item.title;
-
-    if (item.action === 'openRadio') {
-        button.addEventListener('click', () => alert('opening radio'));
-    } else if (item.action === 'openTv') {
-        button.addEventListener('click', () => alert('opening tv'));
-    // } else if (item.action === 'openMovies'){
-    //     button.addEventListener('click', () => alert ('opening movies'));
-    }
-
-   // mainEl.appendChild(button);
-}
-</script>
 
 
 

@@ -154,6 +154,16 @@ function loadMainMenu(data) {
                 var subMenuBox = document.createElement('div');
                 subMenuBox.className = 'submenu-view';
                 subMenuBox.id = currentData.title.split(' ').join('');
+
+
+                 // Add scrollable focus functionality for left-side menu buttons
+                button.addEventListener('focus', function () {
+                    // Show the submenu (if not already)
+                    previous_page = current_page;
+                    current_page = subMenuBox.id;
+                    document.getElementById(previous_page).style.display = 'none';
+                    document.getElementById(current_page).style.display = 'flex';
+                });
                 
                 // Add onclick focus functionality for left-side menu buttons
                 button.addEventListener('click', function () {
@@ -199,6 +209,8 @@ function loadMainMenu(data) {
                                 });
                             }
 
+                            
+
                             //movies from URL
                             else if (subModule.moduleAction && subModule.moduleAction.packageName === 'com.stellar.movies') {
                                 button.addEventListener('click', () => {
@@ -212,8 +224,7 @@ function loadMainMenu(data) {
                             else if (subModule.moduleAction && subModule.moduleAction.packageName === 'com.stellar.clinicalsharing') {
                                 button.addEventListener('click', () => {
                                     console.log('Opening clinical sharing');
-                                    openClinicalSharing('Activate');
-                                    
+                                    openClinicalSharing();
                                 });
                             }
 
@@ -338,20 +349,64 @@ function openCasting(param) {
     SelectCast(param);
 }
 
-function openClinicalSharing(param) {
-    //nsole.log('openClinicalSharing called with param:', param);
-    var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
-    JAPITObjForWIXPSvc.Cookie = 119;
-    JAPITObjForWIXPSvc.CmdType = "Change";
-    JAPITObjForWIXPSvc.Fun = "ApplicationControl";
-    JAPITObjForWIXPSvc.CommandDetails = {
-        "ApplicationDetails": {
-            "ApplicationAndroidPackageName": "com.stellar.clinicalsharing"
-        },
-        "ApplicationState": param
-    };
-    sendWIxPCommand(JAPITObjForWIXPSvc);
-    delete JAPITObjForWIXPSvc;
+function openClinicalSharing() {
+    console.log('openClinicalSharing() called');
+    previous_page = current_page;
+    current_page = "clinical_sharing";
+    setBackHomeVirtual();
+    switchToHDMI1();
+}
+
+// Add debug logs to setBackHomeVirtual and switchToHDMI1 if not present
+if (typeof setBackHomeVirtual === 'function') {
+    const originalSetBackHomeVirtual = setBackHomeVirtual;
+    setBackHomeVirtual = function() {
+        console.log('setBackHomeVirtual() called');
+        return originalSetBackHomeVirtual.apply(this, arguments);
+    }
+}
+
+if (typeof switchToHDMI1 === 'function') {
+    const originalSwitchToHDMI1 = switchToHDMI1;
+    switchToHDMI1 = function() {
+        console.log('switchToHDMI1() called');
+        return originalSwitchToHDMI1.apply(this, arguments);
+    }
+}
+
+// Helper function to restore button functionality
+function restoreButtonFunctionality() {
+    // Restore functionality to all buttons
+    const disabledButtons = document.querySelectorAll('button[data-original-tabindex]');
+    disabledButtons.forEach(button => {
+        // Restore original tabIndex
+        const originalTabIndex = button.getAttribute('data-original-tabindex');
+        if (originalTabIndex) {
+            button.tabIndex = originalTabIndex;
+            button.removeAttribute('data-original-tabindex');
+        }
+        // Restore original onclick if it existed
+        const originalOnclick = button.getAttribute('data-original-onclick');
+        if (originalOnclick) {
+            button.onclick = new Function(originalOnclick);
+            button.removeAttribute('data-original-onclick');
+        }
+    });
+    // Restore back button functionality
+    const backButton = document.querySelector('.back-button');
+    if (backButton && backButton.hasAttribute('data-original-onclick')) {
+        const originalOnclick = backButton.getAttribute('data-original-onclick');
+        backButton.onclick = originalOnclick ? new Function(originalOnclick) : null;
+        backButton.removeAttribute('data-original-onclick');
+    }
+    // Restore home button functionality
+    const homeButton = document.querySelector('.home-button');
+    if (homeButton && homeButton.hasAttribute('data-original-onclick')) {
+        const originalOnclick = homeButton.getAttribute('data-original-onclick');
+        homeButton.onclick = originalOnclick ? new Function(originalOnclick) : null;
+        homeButton.removeAttribute('data-original-onclick');
+    }
+    console.log('Restored all button functionality');
 }
 
 
