@@ -66,34 +66,33 @@ function openRadio() {
             var radioView = document.querySelector('#radio-left-column');
             if (!radioView) {
                 console.warn('No #radio-left-column container found');
-                return;
             }
             radioView.innerHTML = '';
             radioChannels.forEach(function (channel) {
-                var btnElement = document.createElement('button');
-                btnElement.className = 'radio_chan_btn';
+                    var btnElement = document.createElement('button');
+                    btnElement.className = 'radio_chan_btn';
                 btnElement.id = channel.title;
-                btnElement.style.width = '20vw';
-
-                // Create image element
+                    btnElement.style.width = '20vw';
+            
+                    // Create image element
                 var image = document.createElement('img');
                 image.src = channel.icon && channel.icon.imageUrl ? channel.icon.imageUrl : '';
-                btnElement.appendChild(image);
-
-                // Create text element
+                    btnElement.appendChild(image);
+            
+                    // Create text element
                 var textSpan = document.createElement('span');
                 textSpan.className = 'buttonText';
-                textSpan.style.fontSize = '30px';
-                textSpan.style.fontWeight = 'bold';
+                    textSpan.style.fontSize = '30px';
+                    textSpan.style.fontWeight = 'bold';
                 textSpan.textContent = channel.title;
-                btnElement.appendChild(textSpan);
-
-                // Add click handler
+                    btnElement.appendChild(textSpan);
+            
+                    // Add click handler
                 btnElement.addEventListener('click', function () {
                     radio_ui2(channel.title);
-                });
-
-                radioView.appendChild(btnElement);
+                    });
+            
+                    radioView.appendChild(btnElement);
             });
             if (radioChannels.length > 0) {
                 document.getElementById(radioChannels[0].title).focus();
