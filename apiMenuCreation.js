@@ -154,7 +154,7 @@ function loadMainMenu(data) {
                 var subMenuBox = document.createElement('div');
                 subMenuBox.className = 'submenu-view';
                 subMenuBox.id = currentData.title.split(' ').join('');
-
+                
 
                  // Add scrollable focus functionality for left-side menu buttons
                 button.addEventListener('focus', function () {
@@ -223,8 +223,19 @@ function loadMainMenu(data) {
                             //clinical sharing from URL
                             else if (subModule.moduleAction && subModule.moduleAction.packageName === 'com.stellar.clinicalsharing') {
                                 button.addEventListener('click', () => {
-                                    console.log('Opening clinical sharing');
-                                    openClinicalSharing();
+                                    console.log('Clinical sharing card clicked');
+                                    // Hide the previous page
+                                    if (typeof previous_page !== 'undefined' && document.getElementById(previous_page)) {
+                                        document.getElementById(previous_page).style.display = 'none';
+                                    }
+                                    // Set navigation state
+                                    previous_page = current_page;
+                                    current_page = 'clinical_sharing';
+                                    // Show the clinical sharing view if it exists
+                                    if (document.getElementById('clinical_sharing')) {
+                                        document.getElementById('clinical_sharing').style.display = 'flex';
+                                    }
+                                    switchToHDMI1();
                                 });
                             }
 
@@ -407,6 +418,15 @@ function restoreButtonFunctionality() {
         homeButton.removeAttribute('data-original-onclick');
     }
     console.log('Restored all button functionality');
+}
+
+// Example for a dynamically created HDMI button:
+var hdmiButton = document.getElementById('hdmiButton');
+if (hdmiButton) {
+    hdmiButton.addEventListener('click', function() {
+        console.log('HDMI button clicked, calling JAPIT function...');
+        switchToHDMI1();
+    });
 }
 
 

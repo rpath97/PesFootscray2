@@ -41,41 +41,70 @@ function radio_ui(event) {
     document.getElementById(clickedButton.id).focus();
 }
 // radio button action function
-function radio_ui2(channName) {
+function radio_ui2(channelTitle) {
+    var radioChannel = (window.radioChannelsAflexdata || []).find(
+        ch => ch.title && ch.title.trim().toLowerCase() === channelTitle.trim().toLowerCase()
+    );
+    if (!radioChannel) {
+        console.error('Radio channel not found:', channelTitle);
+        return;
+    }
+    var streamUrl = radioChannel.moduleAction && radioChannel.moduleAction.url;
+    if (!streamUrl) {
+        console.error('No stream URL for channel:', channelTitle);
+        return;
+    }
+    // Send JAPIT command to TV to play the RTP stream
+    playRadioOnTV(streamUrl, channelTitle);
+    // Show the GIF and update UI as before
+    showRadioPlayingGif(channelTitle, radioChannel);
+}
+
+// Send JAPIT command to TV to play the RTP stream
+function playRadioOnTV(streamUrl, channelTitle) {
+    // Example JAPIT command for radio (adapt as needed for your TV)
+    // This assumes you have a sendWIxPCommand function available
+    if (typeof sendWIxPCommand === 'function') {
+        var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
+        JAPITObjForWIXPSvc.Cookie = 16;
+        JAPITObjForWIXPSvc.CmdType = "Change";
+        JAPITObjForWIXPSvc.Fun = "ChannelList";
+        JAPITObjForWIXPSvc.CommandDetails = {
+            "AddChannels": [
+                {
+                    "BasicChannelDetails": {
+                        "ChannelNo": 1,
+                        "ChannelName": channelTitle,
+                        "ChannelType": "IP"
+                    },
+                    "ChannelTuningDetails": {
+                        "URL": "multicast://" + streamUrl.replace('rtp://', '') + "/0/0/0"
+                    }
+                }
+            ]
+        };
+        sendWIxPCommand(JAPITObjForWIXPSvc);
+    } else {
+        console.warn('sendWIxPCommand not available, cannot play radio on TV.');
+    }
+}
+
+// Show the GIF and update UI for playing radio
+function showRadioPlayingGif(channelTitle, radioChannel) {
     const gif = document.querySelector("#gif");
     const rightColumn = document.getElementById("radio_title");
     const rightColumnLogo = document.getElementById("radio-logo-right");
     const gifTitle = document.getElementById("gif-title");
 
-    // leftColumn.style.width = '70vw'; // Change the left column to 2/3 of the container
-    rightColumn.innerText = 'Now Playing'; // Make the right column visible (1/3 of the container)
+    rightColumn.innerText = 'Now Playing';
     gifTitle.style.display = 'flex';
     gif.style.display = 'flex';
     rightColumnLogo.style.display = 'flex';
-    // rightColumn.style.display = 'flex';
-
-    //const clickedButton = event.currentTarget;  // Get the clicked element
-    const buttonId = channName;   // Access the ID property
-    const channel_no = channel_list.find(item => item.BasicChannelDetails.ChannelName === buttonId);
-    channelSelection(channel_no.BasicChannelDetails.ChannelNo);
-    radio_channel_playing = channel_no.BasicChannelDetails.ChannelNo; //it plays as defined in the channel_list
-    gifTitle.innerHTML = `<div>${buttonId}</div>`;
-    // channelSelection(buttonId);
-    const logoname = buttonId + '.png';
-    const img_src = directoryPath + logoname;
-    rightColumnLogo.src = img_src.toLocaleLowerCase();
-    const img_url = rightColumnLogo.src;
-
-    checkImageExists(img_url, function (exists) {
-        if (exists) {
-            console.log('Image exists.');
-        } else {
-            rightColumnLogo.src = 'logos/entertainment/radio.png';
-            console.log('Image does not exist.');
-        }
-    });
-
-    document.getElementById(channName).focus();
+    gifTitle.innerHTML = `<div>${channelTitle}</div>`;
+    // Optionally update the logo as well
+    if (radioChannel && radioChannel.icon && radioChannel.icon.imageUrl) {
+        rightColumnLogo.src = radioChannel.icon.imageUrl;
+    }
 }
 
 // MENU FOCUS ACTION FUNCTION

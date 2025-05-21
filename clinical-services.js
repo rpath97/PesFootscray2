@@ -23,6 +23,7 @@ function openClicnicalCasting() {
 
 function openClinicalSharing() {
     // Set previous and current page
+    console.log('openClinicalSharing() called');
     previous_page = current_page;
     current_page = "clinical_casting";
     setBackHomeVirtual(); // Only back and home keys work

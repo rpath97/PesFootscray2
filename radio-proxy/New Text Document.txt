@@ -1,0 +1,26 @@
+const express = require('express');
+const fetch = require('node-fetch');
+const app = express();
+const PORT = 3001;
+
+// Allow CORS for your frontend
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
+
+// Proxy endpoint
+app.get('/api/radio-channels', async (req, res) => {
+  try {
+    const apiUrl = 'https://prov01.stellar.care/aflex5/playlists/33_5_9.php';
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    res.json(data);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch radio channels' });
+  }
+});
+
+app.listen(PORT, () => {
+  console.log(`Proxy server running at http://localhost:${PORT}`);
+});

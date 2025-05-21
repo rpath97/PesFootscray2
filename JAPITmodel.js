@@ -133,15 +133,16 @@ function loadChannel() {
 }
 
 function switchToHDMI1() {  //clinical services to HDMI STR
+	console.log('switchToHDMI1() called');
 	var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
-
 	JAPITObjForWIXPSvc.Cookie = 1055;
 	JAPITObjForWIXPSvc.CmdType = "Change";
 	JAPITObjForWIXPSvc.Fun = "Source";
 	JAPITObjForWIXPSvc.CommandDetails = {
 		"TuneToSource": "HDMI1"
 	};
-	changeCDBstate('Deactivate');  //deactivate the dashboard to open HDMI STR
+	console.log('Sending HDMI1 JAPIT command:', JAPITObjForWIXPSvc);
+	changeCDBstate('Deactivate');
 	sendWIxPCommand(JAPITObjForWIXPSvc);
 }
 
@@ -297,7 +298,6 @@ function setArrowButtonsVirtual() {
 				//{ "vkkey" : "HBBTV_VK_UP" }, // not existing
 				// { "vkkey" : "HBBTV_VK_INFO" },
 				{ "vkkey": "HBBTV_VK_LEFT" }, // not existing
-				// { "vkkey" : "HBBTV_VK_ACCEPT" }, // not existing
 				{ "vkkey": "HBBTV_VK_RIGHT" }, // not existing
 				{ "vkkey": "HBBTV_VK_ADJUST" }, //SETTINGS BUTTON
 				//{ "vkkey" : "HBBTV_VK_DOWN" }, // not existing
@@ -568,7 +568,6 @@ function keyHandler(keyCode) {
 					openMovies('Deactivate');
 					setRcControlSelective();
 					changeCDBstate('Activate');
-					UtilityRefreshPage();
 					break;
 				} else if (current_page == 'radio_view') {
 					channelStopPlaying(radio_channel_playing);
