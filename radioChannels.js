@@ -13,25 +13,32 @@ var radio_channel_num_list = [];
 
 var radioChannelsAflexdata = [];
 
-
+// Function to remove radio channels from TV channels list
+function removeRadioChannelsFromTV() {
+    console.log("Removing radio channels from TV app");
+    
+    // If we have a list of radio channel numbers, use it
+    if (radio_channel_num_list && radio_channel_num_list.length > 0) {
+        console.log("Removing specific radio channels:", radio_channel_num_list);
+        removeRadioChannels(radio_channel_num_list);
+    } else {
+        // Otherwise, look for channels in the 200+ range (typical for radio)
+        const genericRadioChannels = [];
+        for (let i = 200; i < 300; i++) {
+            genericRadioChannels.push(i);
+        }
+        console.log("Removing generic radio channel range:", genericRadioChannels);
+        removeRadioChannels(genericRadioChannels);
+    }
+}
 
 function openRadio() {
     const directoryPath = 'logos/channel_logos/'; // 
     const targetFilename = 'sbs popasia.png'; // Replace with the filename you're looking for
 
-    //setting current page
-    // const currentPage = document.querySelector('.current-page');
-    // currentPage.textContent = 'Radio';
+    // First, make sure radio channels are removed from TV app
+    removeRadioChannelsFromTV();
 
-    //debugger;
-    // window.onload = function() {
-    //     const radioList = document.getElementsByClassName("radio_list");
-    //     if (radioList.length > 0) { // Check if elements exist
-    //       radioList[0].style.visibility = "visible"; // Access the first element
-    //     } else {
-    //       console.error("Element with class 'radio_list' not found");
-    //     }
-    //   };
     //Ensuring multiple clicks of the button consecutively doesn't keep on removing and adding channels
     if (radio_channel_on == 0) {
         radio_channel_on = 1;
@@ -192,62 +199,7 @@ function openRadio() {
                 //Ensuring that the default chanenl number is one from the list added
                 default_chan_no = channelNo_arr[Math.floor(jsonData.length / 2)];
 
-                //Creating Hiding home dashbaord view and show radio view
-                //document.querySelector(".entertainment-view").style.display = "none";
-                //document.getElementById("patientMenu").style.display = "none";
-                //document.getElementById("gallery").style.display = "none";
-                //document.getElementById("left-column").style.display = "flex";
-
-                // const leftColumn = document.getElementById("left-column");
-
-                //const gifTitle = document.getElementById("gif-title");
-                // channel_list.forEach(button => {
-                //     const btnElement = document.createElement('button');
-                //     btnElement.className = 'radio_chan_btn japit-button';
-                //     btnElement.id = button.BasicChannelDetails.ChannelName;
-                //     // btnElement.setAttribute('data-channel-number', button.BasicChannelDetails.ChannelNo);
-                //     // btnElement.setAttribute('data-japit-control', 'true');
-                //     // btnElement.setAttribute('data-japit-focusable', 'true');
-
-                //     // Create image element
-                //     const image = document.createElement("img");
-                //     const logoMap = {
-                //         'ABC Classic': 'ABC_Classic.png',
-                //         'ABC Country': 'ABC_Country.png',
-                //         'ABC KIDS Listen': 'ABC_KIDS_Listen.png',
-                //         'ABC Jazz': 'ABC_Jazz.png',
-                //         'ABC Melbourne': 'ABC_Melbourne.png',
-                //         'ABC NewsRadio': 'ABC_News.png',
-                //         'ABC RN': 'ABC_RN.png',
-                //         'Double J': 'Double_J.png',
-                //         'triple j': 'triple_j.png',
-                //         'triple j Unearthed': 'triple_j_Unearthed.png'
-                //     };
-
-                //     const logoName = logoMap[button.BasicChannelDetails.ChannelName] || 'radio.png';
-                //     image.src = `logos/channel_logos/${logoName}`;
-                //     image.onerror = () => image.src = 'logos/radio.png';
-                //     btnElement.appendChild(image);
-
-                //     // Create text element
-                //     const textSpan = document.createElement("span");
-                //     textSpan.className = "buttonText";
-                //     textSpan.textContent = button.BasicChannelDetails.ChannelName;
-                //     btnElement.appendChild(textSpan);
-
-                //     // Add click handler
-                //     btnElement.addEventListener('click', radio_ui);
-
-                //     // Add to grid
-                //     radioView.appendChild(btnElement);
-                // });
-
                 document.getElementById(channel_list[0].BasicChannelDetails.ChannelName).focus();
-                //mute("Off");
-                // document.querySelector(".radio-view").style.display = "flex";
-                // previous_page = current_page;
-                // current_page = "radio_view";
-                //console.log("Channel List: " + channel_list);
             })
             .catch(error => { //if the file coudl not be read
 
@@ -262,8 +214,17 @@ function openRadio() {
     }
 
     mute("Off"); //turns audio on channels off when coming back to the dashbaord
-    // Removing all previous channels, so that no radio channels will pop up
+}
 
+// Make sure to remove radio channels when switching back to TV
+function handleRadioToTVSwitch() {
+    // First remove any existing radio channels from TV
+    removeRadioChannelsFromTV();
+    
+    // Then perform normal TV channel setup
+    if (typeof openTV === 'function') {
+        openTV();
+    }
 }
 
 // function to check if channel logo exists in library
@@ -280,6 +241,7 @@ function checkImageExists(imageUrl, callback) {
     img.src = imageUrl;
 }
 
+// Improved function to remove radio channels from TV
 function removeOnlyRadioChannels() {
     // Step 1: Send a request to get all channels
     var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
@@ -295,9 +257,10 @@ function removeOnlyRadioChannels() {
         const parsed = JSON.parse(response);
         
         if (parsed.Fun === "ChannelList" && parsed.CommandDetails && parsed.CommandDetails.ChannelList) {
-            // Step 2: Filter only radio channels (you may need to adjust logic based on real structure)
+            // Step 2: Filter only radio channels (channels in the 200+ range or with radio in name)
             const radioChannels = parsed.CommandDetails.ChannelList.filter(channel =>
-                channel.ServiceType && channel.ServiceType.toLowerCase() === 'radio'
+                (channel.ChannelNumber >= 200 && channel.ChannelNumber < 300) || 
+                (channel.ChannelName && channel.ChannelName.toLowerCase().includes('radio'))
             ).map(channel => channel.ChannelNumber);
 
             // Step 3: Remove radio channels

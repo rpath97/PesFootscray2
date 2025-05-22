@@ -1,5 +1,3 @@
-
-
 function handleMoviesClick() {
     console.log('Opening Movies...');
     //setting previous and current page
@@ -32,6 +30,10 @@ function handleRadioClick() {
         //radioView.style.marginLeft = '15%'; // Align with sidebar
     }
 
+    // First make sure to remove any radio channels from the TV app
+    if (typeof removeRadioChannelsFromTV === 'function') {
+        removeRadioChannelsFromTV();
+    }
 
     // Initialize radio channels
     openRadio();

@@ -756,9 +756,11 @@ function keyHandler(keyCode) {
 						videoPlaying = !videoPlaying;
 					}
 				}
+				break;
 			
 			default:
-				alert("Nothing to handle \n");
+				// Remove the alert that shows "Nothing to handle"
+				// No operation - silently ignore unhandled keys
 				break;
 		}
 	}

@@ -1,3 +1,16 @@
+// Define key constants for remote controls and keyboard
+const VK_BACK = 461;    // BACK button on Philips remote
+const VK_MENU = 36;     // MENU button on Philips remote
+const VK_LEFT = 37;     // LEFT arrow key
+const VK_UP = 38;       // UP arrow key
+const VK_RIGHT = 39;    // RIGHT arrow key
+const VK_DOWN = 40;     // DOWN arrow key
+const VK_ACCEPT = 13;   // ENTER/OK button on remote or keyboard
+const VK_1 = 49;        // Number 1 key
+const VK_2 = 50;        // Number 2 key
+const VK_3 = 51;        // Number 3 key
+const VK_4 = 52;        // Number 4 key
+
 function loadMainMenu(data) {
     document.querySelector('.menu-item').style.display = 'none';
 
@@ -428,5 +441,376 @@ if (hdmiButton) {
         switchToHDMI1();
     });
 }
+
+// Function to reset the TV to dashboard mode
+function resetToDashboardMode() {
+    // First change to HDMI1 to show our HTML dashboard
+    switchToHDMI1();
+    
+    // Then activate the Control Dashboard to capture remote control inputs
+    changeCDBstate('Activate');
+    
+    console.log('Reset TV to dashboard mode: HDMI1 input with CDB active');
+}
+
+// Global back navigation for main modules
+function handleBackNavigation() {
+    // Map detailed views to their submenu-view IDs
+    const submenuMap = {
+        'tv_view': 'Television',         // Television
+        'radio_view': 'Radio',           // Radio
+        'movies': 'Movies',              // Movies
+        'casting': 'Casting',            // Casting
+        'clinical_sharing': 'ClinicalSharing' // Clinical Sharing
+    };
+
+    // List of submenu IDs
+    const submenuIds = [
+        'Television',   // Television (id 80)
+        'Radio',        // Radio (id 64)
+        'Movies',       // Movies (id 70)
+        'Casting',      // Casting (id 98)
+        'ClinicalSharing' // Clinical Sharing (id 100)
+    ];
+
+    // Map submenu IDs to their corresponding sidebar button selectors
+    const sidebarButtonMap = {
+        'Television': 'button.menu-item.japit-button_sidemenu span:contains("Television")',
+        'Radio': 'button.menu-item.japit-button_sidemenu span:contains("Radio")',
+        'Movies': 'button.menu-item.japit-button_sidemenu span:contains("Movies")',
+        'Casting': 'button.menu-item.japit-button_sidemenu span:contains("Casting")',
+        'ClinicalSharing': 'button.menu-item.japit-button_sidemenu span:contains("Clinical Sharing")'
+    };
+
+    // Special cases that require additional cleanup
+    if (current_page === 'tv_view') {
+        const tvBuffer = document.getElementById('tv_buffer');
+        if (tvBuffer) {
+            tvBuffer.style.display = 'none';
+        }
+        
+        if (channel_list_view_on) {
+            if (typeof tvChannelsList === 'function') {
+                tvChannelsList('Deactivate');
+            }
+            // Reset to dashboard mode after exiting TV channels list
+            resetToDashboardMode();
+            return;
+        }
+        
+        if (typeof channelStopPlaying === 'function') {
+            channelStopPlaying(current_tv_channel);
+        }
+        
+        // Always reset to dashboard mode after exiting TV view
+        resetToDashboardMode();
+    } 
+    else if (current_page === 'radio_view') {
+        if (typeof channelStopPlaying === 'function' && radio_channel_playing) {
+            channelStopPlaying(radio_channel_playing);
+        }
+        
+        const sidebar = document.querySelector('.sidebar');
+        if (sidebar) {
+            sidebar.style.display = 'block';
+        }
+        
+        // Adjusting display elements
+        const gif = document.querySelector("#gif");
+        const rightColumn = document.getElementById("radio_title");
+        const gifTitle = document.getElementById("gif-title");
+        const rightColumnLogo = document.getElementById("radio-logo-right");
+        
+        if (rightColumn) rightColumn.innerText = 'Press Radio Channel to Play';
+        if (gif) gif.style.display = 'none';
+        if (gifTitle) gifTitle.style.display = 'none';
+        if (rightColumnLogo) rightColumnLogo.style.display = 'none';
+        
+        // Reset to dashboard mode after exiting radio view
+        resetToDashboardMode();
+    }
+    else if (current_page === 'movies') {
+        if (typeof openMovies === 'function') {
+            openMovies('Deactivate');
+        }
+        
+        // Reset to dashboard mode after exiting movies
+        resetToDashboardMode();
+    }
+    else if (current_page === 'casting') {
+        if (typeof SelectCast === 'function') {
+            SelectCast('Deactivate');
+        }
+        
+        // Reset to dashboard mode after exiting casting
+        resetToDashboardMode();
+    }
+    else if (current_page === 'clinical_sharing') {
+        // Reset to dashboard mode after exiting clinical sharing
+        resetToDashboardMode();
+    }
+    else if (current_page === 'video-frame') {
+        if (typeof setRcControlSelective === 'function') {
+            setRcControlSelective();
+        }
+        
+        const videoElement = document.getElementById('video-frame');
+        if (videoElement) {
+            videoElement.src = '';
+            videoElement.currentTime = 0;
+            videoElement.pause();
+        }
+        
+        document.removeEventListener("keyup", handleKeyUp);
+        
+        // Reset to dashboard mode after exiting video player
+        resetToDashboardMode();
+    }
+
+    // Function to find and focus the corresponding sidebar button
+    function focusSidebarButton(submenuId) {
+        // Find all sidebar buttons
+        const sidebarButtons = document.querySelectorAll('.menu-item.japit-button_sidemenu');
+        
+        // First ensure all buttons have their images
+        ensureSidebarButtonImages();
+        
+        // Check each button to find the matching one
+        for (let i = 0; i < sidebarButtons.length; i++) {
+            const button = sidebarButtons[i];
+            const buttonText = button.textContent.trim();
+            
+            // Check if this button matches our submenu
+            if ((submenuId === 'Television' && buttonText.includes('Television')) ||
+                (submenuId === 'Radio' && buttonText.includes('Radio')) ||
+                (submenuId === 'Movies' && buttonText.includes('Movies')) ||
+                (submenuId === 'Casting' && buttonText.includes('Casting')) ||
+                (submenuId === 'ClinicalSharing' && buttonText.includes('Clinical Sharing'))) {
+                
+                // Make sure this button has its image before focusing
+                ensureButtonImage(button);
+                
+                // Focus this button
+                button.focus();
+                
+                // Add event listener for navigation to ensure submenu views are properly hidden
+                button.addEventListener('blur', function() {
+                    hideAllSubmenuViews();
+                    // Check images again after blur
+                    setTimeout(ensureSidebarButtonImages, 100);
+                }, { once: true });
+                
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // If in a detailed view, go back to submenu view
+    if (submenuMap[current_page]) {
+        const currentPageElement = document.getElementById(current_page);
+        if (currentPageElement) {
+            currentPageElement.style.display = 'none';
+        }
+        
+        const submenuElement = document.getElementById(submenuMap[current_page]);
+        if (submenuElement) {
+            submenuElement.style.display = 'flex';
+            current_page = submenuMap[current_page];
+            
+            // Try to focus a submenu card if it exists
+            const card = submenuElement.querySelector('.submenu-card-x');
+            if (card) {
+                card.focus();
+            }
+        }
+        
+        // Set dashboard state to active when returning to submenu view
+        changeCDBstate('Activate');
+        
+        return;
+    }
+
+    // If in a submenu view, go back to dashboard and highlight the corresponding sidebar button
+    if (submenuIds.includes(current_page)) {
+        const currentPageElement = document.getElementById(current_page);
+        if (currentPageElement) {
+            currentPageElement.style.display = 'none';
+        }
+        
+        const defaultView = document.getElementById('default_view');
+        if (defaultView) {
+            defaultView.style.display = 'flex';
+            
+            // Focus the corresponding sidebar button
+            focusSidebarButton(current_page);
+            
+            current_page = 'default_view';
+        }
+        
+        // Ensure dashboard mode is active when returning to main view
+        changeCDBstate('Activate');
+        
+        return;
+    }
+
+    // Default fallback - try to go from current page to previous page
+    const currentPageElement = document.getElementById(current_page);
+    if (currentPageElement) {
+        currentPageElement.style.display = 'none';
+    }
+    
+    if (previous_page && previous_page !== "") {
+        const previousPageElement = document.getElementById(previous_page);
+        if (previousPageElement) {
+            previousPageElement.style.display = 'flex';
+            
+            // If returning to default view, focus the appropriate sidebar button
+            if (previous_page === 'default_view') {
+                // Try to determine which sidebar button to focus based on current_page
+                if (!focusSidebarButton(current_page)) {
+                    // If we couldn't determine the button, focus the first element
+                    const firstElement = previousPageElement.firstElementChild;
+                    if (firstElement) {
+                        firstElement.focus();
+                    }
+                }
+            } else {
+                // Otherwise focus the first element in the previous page
+                const firstElement = previousPageElement.firstElementChild;
+                if (firstElement) {
+                    firstElement.focus();
+                }
+            }
+            
+            current_page = previous_page;
+            previous_page = "default_view";
+        }
+    } else {
+        // If no previous page, go to default view
+        const defaultView = document.getElementById('default_view');
+        if (defaultView) {
+            defaultView.style.display = 'flex';
+            current_page = 'default_view';
+        }
+    }
+    
+    // Always ensure CDB is active after navigation
+    changeCDBstate('Activate');
+}
+
+// Add event listeners for back button (Backspace, VK_BACK or Esc key)
+document.addEventListener('keydown', function(e) {
+    // Handle Backspace key (keyboard)
+    if (e.key === 'Backspace' || e.keyCode === 8) {
+        e.preventDefault(); // Prevent browser back navigation
+        handleBackNavigation();
+    }
+    // Handle Esc key (keyboard)
+    else if (e.key === 'Escape' || e.keyCode === 27) {
+        e.preventDefault();
+        handleBackNavigation();
+    }
+    // Handle VK_BACK (Philips remote)
+    else if (e.keyCode === VK_BACK) {
+        e.preventDefault();
+        handleBackNavigation();
+    }
+});
+
+// Function to hide all submenu views
+function hideAllSubmenuViews() {
+    // Get all submenu views
+    const submenuViews = document.querySelectorAll('.submenu-view');
+    
+    // Hide all of them
+    submenuViews.forEach(view => {
+        if (view && view.id !== current_page) {
+            view.style.display = 'none';
+        }
+    });
+}
+
+// Function to ensure all sidebar buttons have their images
+function ensureSidebarButtonImages() {
+    const sidebarButtons = document.querySelectorAll('.menu-item.japit-button_sidemenu');
+    
+    sidebarButtons.forEach(button => {
+        ensureButtonImage(button);
+    });
+}
+
+// Function to ensure a specific button has its image
+function ensureButtonImage(button) {
+    const img = button.querySelector('img');
+    const span = button.querySelector('span');
+    
+    if (!img || img.style.display === 'none') {
+        // If image is missing or hidden, create/restore it
+        let newImg;
+        if (!img) {
+            newImg = document.createElement('img');
+            // Insert the image before the span
+            button.insertBefore(newImg, span);
+        } else {
+            newImg = img;
+            newImg.style.display = ''; // Reset display if it was hidden
+        }
+        
+        // Set appropriate image source based on button text
+        const buttonText = span.textContent.trim().toLowerCase();
+        if (buttonText.includes('television')) {
+            newImg.src = 'logos/sidemenu/television.png';
+            newImg.alt = 'Television';
+        } else if (buttonText.includes('radio')) {
+            newImg.src = 'logos/sidemenu/radio.png';
+            newImg.alt = 'Radio';
+        } else if (buttonText.includes('movies')) {
+            newImg.src = 'logos/sidemenu/movies.png';
+            newImg.alt = 'Movies';
+        } else if (buttonText.includes('casting')) {
+            newImg.src = 'logos/sidemenu/casting.png';
+            newImg.alt = 'Casting';
+        } else if (buttonText.includes('clinical sharing')) {
+            newImg.src = 'logos/sidemenu/clinicalsharing.png';
+            newImg.alt = 'Clinical Sharing';
+        }
+    }
+}
+
+// Add to the existing setupSidebarButtonNavigation function
+function setupSidebarButtonNavigation() {
+    const sidebarButtons = document.querySelectorAll('.menu-item.japit-button_sidemenu');
+    
+    // Ensure all buttons have images initially
+    ensureSidebarButtonImages();
+    
+    sidebarButtons.forEach(button => {
+        button.addEventListener('focus', function() {
+            // Hide all submenu views when a new sidebar button is focused
+            hideAllSubmenuViews();
+            
+            // Ensure this button has its image
+            ensureButtonImage(button);
+        });
+        
+        // Add hover handlers to ensure images remain
+        button.addEventListener('mouseenter', function() {
+            ensureButtonImage(button);
+        });
+        
+        button.addEventListener('mouseleave', function() {
+            ensureButtonImage(button);
+        });
+    });
+}
+
+// Call to initialize and ensure images
+document.addEventListener('DOMContentLoaded', function() {
+    setupSidebarButtonNavigation();
+    
+    // Add an extra check after a short delay to catch any issues
+    setTimeout(ensureSidebarButtonImages, 500);
+});
 
 

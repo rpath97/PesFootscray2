@@ -17,9 +17,20 @@ function openTV() {
 
     // SETTING RADIO CHANNEL STATUS
     if (radio_channel_on != 0) {
-        radio_channel_on = 2;
-        removeRadioChannels(radio_channel_num_list);
+        // We're coming from radio mode, make sure to clean up
+        radio_channel_on = 0;
+        
+        // Remove any radio channels from the TV channel list
+        if (typeof removeRadioChannelsFromTV === 'function') {
+            removeRadioChannelsFromTV();
+        } else {
+            // Fallback - use the existing function if available
+            if (radio_channel_num_list && radio_channel_num_list.length > 0) {
+                removeRadioChannels(radio_channel_num_list);
+            }
+        }
     }
+    
     //Ensuring multiple clicks of the button consecutively doesn't keep on removing and adding channels
     if (tv_channel_on == 0) {
         tv_channel_on = 1;
@@ -135,7 +146,5 @@ function openTV() {
                 document.getElementById("logmsgcallback").scrollTop = document.getElementById("logmsgcallback").scrollHeight;
             });
     }
-
-
 }
 
