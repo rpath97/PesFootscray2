@@ -53,10 +53,30 @@ function powerState(state) {
 
 // Selecting the Cast Button calls the function
 function SelectCast(state) {
+	console.log('SelectCast called with state:', state);
+	
 	if (state === 'Activate') {
+		// Set casting state
 		castState = 1;
 		mute("Off");
+		
+		// For two-step back navigation, store the current state
+		if (typeof current_page !== 'undefined') {
+			previous_page = current_page;
+		}
+		
+		// Update the current page for navigation
+		current_page = 'casting';
+		
+		// Hide any currently visible view
+		if (document.getElementById(previous_page)) {
+			document.getElementById(previous_page).style.display = 'none';
+		}
+	} else if (state === 'Deactivate') {
+		// Reset casting state
+		castState = 0;
 	}
+	
 	var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
 
 	JAPITObjForWIXPSvc.Cookie = 10;

@@ -1,11 +1,22 @@
 function handleMoviesClick() {
     console.log('Opening Movies...');
+    
     //setting previous and current page
+    previous_page = current_page;
     current_page = 'movies';
+    
+    // Store the activeSubmenuId if not already set by apiMenuCreation.js
+    if (typeof activeSubmenuId === 'undefined' || !activeSubmenuId) {
+        activeSubmenuId = 'entertainment_menu';
+    }
+    
+    // Hide current view
+    if (document.getElementById(previous_page)) {
+        document.getElementById(previous_page).style.display = 'none';
+    }
+    
     openMovies('Activate');
     setMoviesKeys();
-    
-
 }
 
 function handleRadioClick() {
@@ -77,13 +88,57 @@ function handleEntertainmentClick() {
 function handleCastingClick() {
     console.log('Opening Casting...');
     
-    // Hide entertainment view
-   // document.querySelector('.entertainment-view').style.display = 'none';
-   current_page = 'phillips_cast';
+    // Set navigation state
+    previous_page = current_page;
+    current_page = 'casting'; // Use 'casting' instead of 'phillips_cast' for consistency
+    
+    // Store the activeSubmenuId if not already set by apiMenuCreation.js
+    if (typeof activeSubmenuId === 'undefined' || !activeSubmenuId) {
+        activeSubmenuId = 'entertainment_menu';
+    }
+    
+    // Hide current view
+    if (document.getElementById(previous_page)) {
+        document.getElementById(previous_page).style.display = 'none';
+    }
+    
+    // Use the new naming for consistency or keep the legacy function
     SelectCast('Activate');
     changeCDBstate('Deactivate');
+}
 
+/**
+ * This function enters the Movies module from API menu
+ * @param {string} action - 'Activate' or 'Deactivate'
+ */
+function openMovies(action) {
+    console.log('openMovies called with action:', action);
     
-    // // Create loading screen
-  
+    if (action === 'Activate') {
+        // Set movie controls
+        setRcControlNone();
+        
+        // Display movies view
+        document.getElementById('movies').style.display = 'flex';
+        
+        // Deactivate dashboard
+        changeCDBstate('Deactivate');
+    } else if (action === 'Deactivate') {
+        // Hide movies view
+        document.getElementById('movies').style.display = 'none';
+        
+        // Reset controls
+        setRcControlSelective();
+    }
+}
+
+/**
+ * This function enters the Casting module from API menu
+ * @param {string} action - 'Activate' or 'Deactivate'
+ */
+function openCasting(action) {
+    console.log('openCasting called with action:', action);
+    
+    // Redirect to the legacy function to maintain compatibility
+    SelectCast(action);
 } 

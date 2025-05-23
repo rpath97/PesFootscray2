@@ -539,12 +539,11 @@ function keyHandler(keyCode) {
 	try {
 		switch (keyCode) {
 			case VK_MENU:
-				//coming after clinical cast
-				if (current_page == 'clinical_casting') {
-					setRcControlSelective();
-					current_page = "clinicalservices_menu";
-					previous_page = "default_view";
-					changeCDBstate('Activate');
+				// Coming after clinical sharing (HDMI1)
+				if (current_page == 'clinical_sharing') {
+					console.log('Home button pressed while in HDMI view');
+					// Exit clinical sharing and return to clinical services menu
+					exitClinicalSharing();
 					UtilityRefreshPage();
 					break;
 				} else if (current_page == 'tv_view') {
@@ -568,6 +567,7 @@ function keyHandler(keyCode) {
 					openMovies('Deactivate');
 					setRcControlSelective();
 					changeCDBstate('Activate');
+					UtilityRefreshPage();
 					break;
 				} else if (current_page == 'radio_view') {
 					channelStopPlaying(radio_channel_playing);
@@ -642,12 +642,12 @@ function keyHandler(keyCode) {
 				}
 				break;
 			case VK_BACK: //BACK BUTTNO FUNCTIONALITIES //
-				//coming after clinical cast
-				if (current_page == 'clinical_casting') {
-					setRcControlSelective();
-					current_page = "clinicalservices_menu";
-					previous_page = "default_view";
-					changeCDBstate('Activate');
+				// Coming after clinical sharing (HDMI1)
+				if (current_page == 'clinical_sharing') {
+					console.log('Back button pressed while in HDMI view');
+					// Let the handleBackNavigation function handle the back navigation
+					// This will use the activeSubmenuId to navigate to the appropriate submenu
+					handleBackNavigation();
 					break;
 				} else if (current_page == 'tv_view') {
 					// function keyHandler(keyCode)
@@ -665,19 +665,17 @@ function keyHandler(keyCode) {
 					// dashboard_on = true;
 					changeCDBstate('Activate');
 					break;
-				} else if (current_page == 'movies') {
-					current_page = "entertainment_menu";
-					previous_page = "default_view";
-					openMovies('Deactivate');
-					setRcControlSelective();
-					changeCDBstate('Activate');
+				} else if (current_page == 'movies' || current_page == 'casting') {
+					// Let the handleBackNavigation function handle the back navigation
+					// This will use the activeSubmenuId to navigate to the appropriate submenu
+					handleBackNavigation();
 					break;
 				} else if (current_page == 'radio_view') {
 					channelStopPlaying(radio_channel_playing);
 					document.querySelector('.sidebar').style.display = 'block';
 
 					// ADJUSTING DISPLAY ELEMENTS
-					// const gif = document.querySelector("#gif");
+					const gif = document.querySelector("#gif");
 					const rightColumn = document.getElementById("radio_title");
 					const gifTitle = document.getElementById("gif-title");
 					const rightColumnLogo = document.getElementById("radio-logo-right");

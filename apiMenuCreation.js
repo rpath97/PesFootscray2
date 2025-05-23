@@ -11,6 +11,42 @@ const VK_2 = 50;        // Number 2 key
 const VK_3 = 51;        // Number 3 key
 const VK_4 = 52;        // Number 4 key
 
+/** Which submenu ID (e.g. 70, 98, 100) launched the current full-screen view? */
+let activeSubmenuId = null;
+
+/** Forward BACK & MENU to our HBBTV browser even while another source is frontmost */
+function enableBackKeyForwarding() {
+  const wixp = new CreateJAPITObjectForWIXPSvc();
+  wixp.Cookie  = 9001;
+  wixp.CmdType = "Change";
+  wixp.Fun     = "UserInputControl";
+  wixp.CommandDetails = {
+    VirtualKeyForwardDetails: {
+      VirtualKeyForwardMode   : "SelectiveVirtualKeyForward",
+      VirtualKeyToBeForwarded : ["HBBTV_VK_BACK", "HBBTV_VK_MENU"]
+    }
+  };
+  sendWIxPCommand(wixp);
+  delete wixp;
+}
+
+/** Bring our dashboard browser back to the foreground */
+function foregroundDashboard() {
+  const appCtrl = new CreateJAPITObjectForWIXPSvc();
+  appCtrl.Cookie  = 9002;
+  appCtrl.CmdType = "Change";
+  appCtrl.Fun     = "ApplicationControl";
+  appCtrl.CommandDetails = {
+    ApplicationDetails : {
+      ApplicationName : "LocalCustomDashboard",
+      ApplicationType : "NonNative"
+    },
+    ApplicationState  : "Activate"
+  };
+  sendWIxPCommand(appCtrl);
+  delete appCtrl;
+}
+
 function loadMainMenu(data) {
     document.querySelector('.menu-item').style.display = 'none';
 
@@ -228,6 +264,7 @@ function loadMainMenu(data) {
                             else if (subModule.moduleAction && subModule.moduleAction.packageName === 'com.stellar.movies') {
                                 button.addEventListener('click', () => {
                                     console.log('Opening movies');
+                                    activeSubmenuId = subModule.id;      // 70
                                     openMovies('Activate');
                                     
                                 });
@@ -237,6 +274,8 @@ function loadMainMenu(data) {
                             else if (subModule.moduleAction && subModule.moduleAction.packageName === 'com.stellar.clinicalsharing') {
                                 button.addEventListener('click', () => {
                                     console.log('Clinical sharing card clicked');
+                                    activeSubmenuId = subModule.id;      // 100
+                                    enableBackKeyForwarding();           // Forward BACK/MENU keys
                                     // Hide the previous page
                                     if (typeof previous_page !== 'undefined' && document.getElementById(previous_page)) {
                                         document.getElementById(previous_page).style.display = 'none';
@@ -256,7 +295,8 @@ function loadMainMenu(data) {
                             else if (subModule.moduleAction && subModule.moduleAction.packageName === 'com.stellar.casting') {
                                 button.addEventListener('click', () => {
                                     console.log('Opening casting');
-                                    openCasting('Activate')
+                                    activeSubmenuId = subModule.id;      // 98
+                                    openCasting('Activate');
                                    
                                 });
                             }
@@ -482,6 +522,43 @@ function handleBackNavigation() {
         'ClinicalSharing': 'button.menu-item.japit-button_sidemenu span:contains("Clinical Sharing")'
     };
 
+    // Detail views that need two-step back logic
+    if (current_page === 'movies' ||
+        current_page === 'casting' ||
+        current_page === 'clinical_sharing') {
+
+        /* FIRST BACK ───────────────┐
+           Bring dashboard forward   │*/
+        foregroundDashboard();            // tell TV to foreground browser
+
+        // Hide full-screen view (HDMI-1 or Android Activity)
+        if (current_page === 'clinical_sharing') {
+            const hdmiLayer = document.getElementById('clinical_sharing');
+            if (hdmiLayer) hdmiLayer.style.display = 'none';
+            switchToHDMI1();              // put HTML layer over HDMI again
+        } else if (current_page === 'movies') {
+            openMovies('Deactivate');
+        } else if (current_page === 'casting') {
+            SelectCast('Deactivate');
+        }
+
+        /* Show the originating submenu (we kept its id) */
+        const submenuSelector = `[id="${activeSubmenuId}"]`;
+        const submenuCard = document.querySelector(submenuSelector);
+        if (submenuCard) {
+            const submenuView = submenuCard.closest('.submenu-view');
+            if (submenuView) {
+                submenuView.style.display = 'flex';
+                submenuCard.focus();
+                current_page = submenuView.id;  // e.g. "Movies" / "Casting"
+                previous_page = 'default_view';
+            }
+        }
+
+        changeCDBstate('Activate');   // grab RC focus
+        return;                       // handled!
+    }
+
     // Special cases that require additional cleanup
     if (current_page === 'tv_view') {
         const tvBuffer = document.getElementById('tv_buffer');
@@ -527,26 +604,6 @@ function handleBackNavigation() {
         if (rightColumnLogo) rightColumnLogo.style.display = 'none';
         
         // Reset to dashboard mode after exiting radio view
-        resetToDashboardMode();
-    }
-    else if (current_page === 'movies') {
-        if (typeof openMovies === 'function') {
-            openMovies('Deactivate');
-        }
-        
-        // Reset to dashboard mode after exiting movies
-        resetToDashboardMode();
-    }
-    else if (current_page === 'casting') {
-        if (typeof SelectCast === 'function') {
-            SelectCast('Deactivate');
-        }
-        
-        // Reset to dashboard mode after exiting casting
-        resetToDashboardMode();
-    }
-    else if (current_page === 'clinical_sharing') {
-        // Reset to dashboard mode after exiting clinical sharing
         resetToDashboardMode();
     }
     else if (current_page === 'video-frame') {
