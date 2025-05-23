@@ -463,7 +463,7 @@ function setMoviesKeys() {
 				{ "vkkey": "HBBTV_VK_ADJUST" }, //SETTINGS BUTTON
 				//{ "vkkey" : "HBBTV_VK_DOWN" }, // not existing
 				{ "vkkey": "HBBTV_VK_MENU" }, // Home Button
-				//{ "vkkey": "HBBTV_VK_BACK" }, // not existing
+				{ "vkkey": "HBBTV_VK_BACK" }, // Add back key forwarding for consistent navigation
 				{ "vkkey": "HBBTV_VK_RED" },
 				{ "vkkey": "HBBTV_VK_GREEN" },
 				{ "vkkey": "HBBTV_VK_YOUTUBE" },
@@ -567,7 +567,7 @@ function keyHandler(keyCode) {
 					openMovies('Deactivate');
 					setRcControlSelective();
 					changeCDBstate('Activate');
-					UtilityRefreshPage();
+					UtilityRefreshPage(); 
 					break;
 				} else if (current_page == 'radio_view') {
 					channelStopPlaying(radio_channel_playing);
@@ -584,7 +584,7 @@ function keyHandler(keyCode) {
 					rightColumnLogo.style.display = 'none';
 
 					UtilityRefreshPage();
-				} else if (current_page == 'phillips_cast') {
+				} else if (current_page == 'casting') {
 					SelectCast('Deactivate');
 					current_page = "entertainment_menu";
 					previous_page = "default_view";
@@ -684,7 +684,7 @@ function keyHandler(keyCode) {
 					gifTitle.style.display = 'none';
 					rightColumnLogo.style.display = 'none';
 
-				} else if (current_page == 'phillips_cast') {
+				} else if (current_page == 'casting') {
 					SelectCast('Deactivate');
 					current_page = "entertainment_menu";
 					previous_page = "default_view";

@@ -263,41 +263,59 @@ function loadMainMenu(data) {
                             //movies from URL
                             else if (subModule.moduleAction && subModule.moduleAction.packageName === 'com.stellar.movies') {
                                 button.addEventListener('click', () => {
-                                    console.log('Opening movies');
-                                    activeSubmenuId = subModule.id;      // 70
-                                    openMovies('Activate');
-                                    
+                                    /* remember which card launched the full-screen view */
+                                    activeSubmenuId = subModule.id;        // → "70"
+
+                                    previous_page = current_page;
+                                    current_page  = 'movies';
+
+                                    /* 1. keep BACK & MENU flowing to the dashboard */
+                                    enableBackKeyForwarding();
+
+                                    /* 2. forward any extra keys you want (includes BACK & MENU) */
+                                    setMoviesKeys();
+
+                                    /* 3. now launch the Android Movies app and hide the dashboard */
+                                    openMovies('Activate');                // calls changeCDBstate('Deactivate')
                                 });
                             }
 
                             //clinical sharing from URL
                             else if (subModule.moduleAction && subModule.moduleAction.packageName === 'com.stellar.clinicalsharing') {
                                 button.addEventListener('click', () => {
-                                    console.log('Clinical sharing card clicked');
-                                    activeSubmenuId = subModule.id;      // 100
-                                    enableBackKeyForwarding();           // Forward BACK/MENU keys
-                                    // Hide the previous page
-                                    if (typeof previous_page !== 'undefined' && document.getElementById(previous_page)) {
+                                    /* remember which card launched the full-screen view */
+                                    activeSubmenuId = subModule.id;        // → "100"
+
+                                    previous_page = current_page;
+                                    current_page  = 'clinical_sharing';
+
+                                    /* 1. keep BACK & MENU flowing to the dashboard */
+                                    enableBackKeyForwarding();
+
+                                    /* 2. hide the current view */
+                                    if (document.getElementById(previous_page)) {
                                         document.getElementById(previous_page).style.display = 'none';
                                     }
-                                    // Set navigation state
-                                    previous_page = current_page;
-                                    current_page = 'clinical_sharing';
-                                    // Show the clinical sharing view if it exists
-                                    if (document.getElementById('clinical_sharing')) {
-                                        document.getElementById('clinical_sharing').style.display = 'flex';
-                                    }
-                                    switchToHDMI1();
+
+                                    /* 3. now switch to HDMI1 and hide the dashboard */
+                                    switchToHDMI1();                      // calls changeCDBstate('Deactivate')
                                 });
                             }
 
                             //casting from URL
                             else if (subModule.moduleAction && subModule.moduleAction.packageName === 'com.stellar.casting') {
                                 button.addEventListener('click', () => {
-                                    console.log('Opening casting');
-                                    activeSubmenuId = subModule.id;      // 98
-                                    openCasting('Activate');
-                                   
+                                    /* remember which card launched the full-screen view */
+                                    activeSubmenuId = subModule.id;        // → "98"
+
+                                    previous_page = current_page;
+                                    current_page  = 'casting';
+
+                                    /* 1. keep BACK & MENU flowing to the dashboard */
+                                    enableBackKeyForwarding();
+
+                                    /* 2. now launch the Android Casting app and hide the dashboard */
+                                    SelectCast('Activate');                // calls changeCDBstate('Deactivate')
                                 });
                             }
 
