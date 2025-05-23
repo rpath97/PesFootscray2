@@ -148,3 +148,22 @@ function openTV() {
     }
 }
 
+// Function to remove radio channels from TV channels list
+function removeRadioChannelsFromTV() {
+    console.log("Removing radio channels from TV app");
+    
+    // If we have a list of radio channel numbers, use it
+    if (radio_channel_num_list && radio_channel_num_list.length > 0) {
+        console.log("Removing specific radio channels:", radio_channel_num_list);
+        removeRadioChannels(radio_channel_num_list);
+    } else {
+        // Otherwise, look for channels in the 200+ range (typical for radio)
+        const genericRadioChannels = [];
+        for (let i = 200; i < 300; i++) {
+            genericRadioChannels.push(i);
+        }
+        console.log("Removing generic radio channel range:", genericRadioChannels);
+        removeRadioChannels(genericRadioChannels);
+    }
+}
+
