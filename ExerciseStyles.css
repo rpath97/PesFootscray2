@@ -1434,3 +1434,9 @@ div.Input_Output {
     background: rgba(255, 255, 255, 0.7);
     transition: all 1s ease;
 }
+button:focus,
+button:hover {
+    outline: none !important;      /* browser-supplied outline          */
+    box-shadow: none !important;   /* JS-added glow from loadMainMenu() */
+    border-color: transparent;     /* in case a border was used         */
+}
