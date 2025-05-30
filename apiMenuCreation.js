@@ -609,7 +609,11 @@ function handleBackNavigation() {
         if (sidebar) {
             sidebar.style.display = 'block';
         }
-        
+        // Restore the radio sidebar icon if it was hidden
+        const radioSidebarImg = document.querySelector('.sidebar img[alt="Radio"]');
+        if (radioSidebarImg) {
+            radioSidebarImg.style.display = '';
+        }
         // Adjusting display elements
         const gif = document.querySelector("#gif");
         const rightColumn = document.getElementById("radio_title");

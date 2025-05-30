@@ -6,7 +6,6 @@
 
 var default_chan_no = 200;
 var channel_list = [];
-var radio_channel_on = 0;
 var radio_channel_list = [];
 var radio_channel_playing = 0;
 var radio_channel_num_list = [];
@@ -15,205 +14,17 @@ var radioChannelsAflexdata = [];
 
 // Function to remove radio channels from TV channels list
 function removeRadioChannelsFromTV() {
-    console.log("Removing radio channels from TV app");
+    // Get the list of radio channel numbers to remove
+    var radioChannelNumbers = radio_channel_num_list;
     
-    // If we have a list of radio channel numbers, use it
-    if (radio_channel_num_list && radio_channel_num_list.length > 0) {
-        console.log("Removing specific radio channels:", radio_channel_num_list);
-        removeRadioChannels(radio_channel_num_list);
-    } else {
-        // Otherwise, look for channels in the 200+ range (typical for radio)
-        const genericRadioChannels = [];
-        for (let i = 200; i < 300; i++) {
-            genericRadioChannels.push(i);
-        }
-        console.log("Removing generic radio channel range:", genericRadioChannels);
-        removeRadioChannels(genericRadioChannels);
-    }
-}
-
-function openRadio() {
-    const directoryPath = 'logos/channel_logos/'; // 
-    const targetFilename = 'sbs popasia.png'; // Replace with the filename you're looking for
-
-    // First, make sure radio channels are removed from TV app
-    removeRadioChannelsFromTV();
-
-    //Ensuring multiple clicks of the button consecutively doesn't keep on removing and adding channels
-    if (radio_channel_on == 0) {
-        radio_channel_on = 1;
-        //console.log("Previous page ", current_page)
-        previous_page = current_page;
-        current_page = "radio_view";
-        document.getElementById(previous_page).style.display = "none";
-        document.getElementById(current_page).style.display = "flex";
-
-        //removeChannels();
+    if (radioChannelNumbers.length > 0) {
+        console.log('Removing radio channels:', radioChannelNumbers);
+        removeRadioChannels(radioChannelNumbers);
+        
+        // Clear the radio channel list
+        radio_channel_num_list = [];
         channel_list = [];
-        // Arrays that will hold the values form the json data extracted from excel
-        var channelNo_arr = [];
-        var channelName_arr = [];
-        var channelIP_arr = [];
-
-        // Creating Channels JAPIT Object
-        var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
-        JAPITObjForWIXPSvc.Cookie = 16;
-        JAPITObjForWIXPSvc.CmdType = "Change";
-        JAPITObjForWIXPSvc.Fun = "ChannelList";
-        JAPITObjForWIXPSvc.CommandDetails = {
-            "AddChannels": []
-        };
-
-        // Fetch radio channels from backend using the local proxy
-        var radioChannelsUrl = 'http://localhost:3001/api/radio-channels';
-        fetch(radioChannelsUrl)
-          .then(response => response.json())
-          .then(data => {
-            var radioChannels = data.subModules || [];
-            var radioView = document.querySelector('#radio-left-column');
-            if (!radioView) {
-                console.warn('No #radio-left-column container found');
-            }
-            radioView.innerHTML = '';
-            radioChannels.forEach(function (channel) {
-                    var btnElement = document.createElement('button');
-                    btnElement.className = 'radio_chan_btn';
-                btnElement.id = channel.title;
-                    btnElement.style.width = '20vw';
-            
-                    // Create image element
-                var image = document.createElement('img');
-                image.src = channel.icon && channel.icon.imageUrl ? channel.icon.imageUrl : '';
-                    btnElement.appendChild(image);
-            
-                    // Create text element
-                var textSpan = document.createElement('span');
-                textSpan.className = 'buttonText';
-                    textSpan.style.fontSize = '30px';
-                    textSpan.style.fontWeight = 'bold';
-                textSpan.textContent = channel.title;
-                    btnElement.appendChild(textSpan);
-            
-                    // Add click handler
-                btnElement.addEventListener('click', function () {
-                    radio_ui2(channel.title);
-                    });
-            
-                    radioView.appendChild(btnElement);
-            });
-            if (radioChannels.length > 0) {
-                document.getElementById(radioChannels[0].title).focus();
-            }
-          })
-          .catch(error => {
-            console.error('Failed to fetch radio channels:', error);
-          });
-        mute("Off");
     }
-    else if (radio_channel_on == 1) {
-        //Creating Hiding home dashbaord view and show radio view
-        radio_channel_on = 2;
-        previous_page = current_page;
-        current_page = "radio_view";
-        document.getElementById(previous_page).style.display = "none";
-        document.getElementById(current_page).style.display = "flex";
-        // previous_page = current_page;
-        // current_page = "radio_view";
-
-        // console.log("Making appear vew ", previous_page)
-        // document.getElementById(previous_page).style.display = "none";
-        // document.getElementById(current_page).style.display = "flex";
-        document.getElementById(channel_list[0].BasicChannelDetails.ChannelName).focus();
-        mute("Off");
-
-
-    } else if (radio_channel_on = 2) {
-        radio_channel_on = 1;
-        previous_page = current_page;
-        current_page = "radio_view";
-        document.getElementById(previous_page).style.display = "none";
-        document.getElementById(current_page).style.display = "flex";
-        //removeChannels();
-        channel_list = [];
-        // Arrays that will hold the values form the json data extracted from excel
-        var channelNo_arr = [];
-        var channelName_arr = [];
-        var channelIP_arr = [];
-
-        // Creating Channels JAPIT Object
-        var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
-        JAPITObjForWIXPSvc.Cookie = 16;
-        JAPITObjForWIXPSvc.CmdType = "Change";
-        JAPITObjForWIXPSvc.Fun = "ChannelList";
-        JAPITObjForWIXPSvc.CommandDetails = {
-            "AddChannels": []
-        };
-        // Extracting excel data and converting it to json formta
-        var filePath = 'radiochannels.xlsx';
-        fetch(filePath)
-            .then(response => response.arrayBuffer()) //is a chain of promises using the .then() method in JavaScript. It is commonly used in combination with the Fetch API to handle the response from a network request.
-            .then(buffer => {
-                const data = new Uint8Array(buffer); //This method is used on the response object to read the response body as an ArrayBuffer. An ArrayBuffer is a binary data buffer, often used for handling binary data such as images or, in this case, the binary data of an Excel file.
-                //console.log("data: " + data);
-                // Use SheetJS to parse the Excel data
-                // debugger
-                const workbook = XLSX.read(data, { type: 'array' });
-                const sheetName = workbook.SheetNames[0];
-                const sheet = workbook.Sheets[sheetName];
-                const jsonData = XLSX.utils.sheet_to_json(sheet);
-                // looping through the different channel data and creating japit objects
-                for (var i = 0; i < jsonData.length; i++) {
-                    channelNo_arr[i] = jsonData[i].Chan_No;
-                    radio_channel_num_list[i] = jsonData[i].Chan_No;
-                    channelName_arr[i] = jsonData[i].Chan_name;
-                    channelIP_arr[i] = jsonData[i].Chan_IP;
-
-                    // Creating channel objecy
-                    const chan = {
-                        "BasicChannelDetails": {
-                            "ChannelNo": Number(channelNo_arr[i]),
-                            "ChannelName": channelName_arr[i],
-                            "ChannelType": "IP"
-                        },
-                        "ChannelTuningDetails": {
-                            "URL": "multicast://" + channelIP_arr[i] + "/0/0/0"
-                        }
-                    };
-
-                    console.log("Channel: " + chan);
-
-                    // Pushing channel object to JAPIT channel object           
-                    JAPITObjForWIXPSvc.CommandDetails.AddChannels.push(chan);
-                    if (radio_channel_on == 1) {
-                        channel_list.push(chan);
-                    }
-
-                }
-                //Sending final list of channels to the tv
-                //console.log("Radio Channel: " + JSON.stringify(JAPITObjForWIXPSvc));
-                sendWIxPCommand(JAPITObjForWIXPSvc);
-                delete JAPITObjForWIXPSvc;
-                // console.log("Channel List: " + channel_list);
-
-
-                //Ensuring that the default chanenl number is one from the list added
-                default_chan_no = channelNo_arr[Math.floor(jsonData.length / 2)];
-
-                document.getElementById(channel_list[0].BasicChannelDetails.ChannelName).focus();
-            })
-            .catch(error => { //if the file coudl not be read
-
-                document.getElementById("logmsgcallback").value += '\n' + 'file could not be read' + '\n';
-                document.getElementById("logmsgcallback").scrollTop = document.getElementById("logmsgcallback").scrollHeight;
-            });
-    }
-
-    //Toggling TV channel status
-    if (tv_channel_on == 1) {
-        tv_channel_on = 0;
-    }
-
-    mute("Off"); //turns audio on channels off when coming back to the dashbaord
 }
 
 // Make sure to remove radio channels when switching back to TV
@@ -241,39 +52,18 @@ function checkImageExists(imageUrl, callback) {
     img.src = imageUrl;
 }
 
-// Improved function to remove radio channels from TV
+// Function to remove only radio channels (channels 101-200 range typically used for radio)
 function removeOnlyRadioChannels() {
-    // Step 1: Send a request to get all channels
-    var JAPITObjForWIXPSvc = new CreateJAPITObjectForWIXPSvc();
-    JAPITObjForWIXPSvc.Cookie = 85;
-    JAPITObjForWIXPSvc.CmdType = "Request";
-    JAPITObjForWIXPSvc.Fun = "ChannelList";
-    JAPITObjForWIXPSvc.CommandDetails = {
-        "ContentLevel": "BasicChannelDetails"
-    };
-
-    // Handle the response from the TV
-    JAPITWIXPPlugin.WebIXPOnReceive = function(response) {
-        const parsed = JSON.parse(response);
-        
-        if (parsed.Fun === "ChannelList" && parsed.CommandDetails && parsed.CommandDetails.ChannelList) {
-            // Step 2: Filter only radio channels (channels in the 200+ range or with radio in name)
-            const radioChannels = parsed.CommandDetails.ChannelList.filter(channel =>
-                (channel.ChannelNumber >= 200 && channel.ChannelNumber < 300) || 
-                (channel.ChannelName && channel.ChannelName.toLowerCase().includes('radio'))
-            ).map(channel => channel.ChannelNumber);
-
-            // Step 3: Remove radio channels
-            if (radioChannels.length > 0) {
-                removeRadioChannels(radioChannels);
-                console.log("Removed radio channels:", radioChannels);
-            } else {
-                console.log("No radio channels found to remove.");
-            }
-        }
-    };
-
-    sendWIxPCommand(JAPITObjForWIXPSvc);
-    delete JAPITObjForWIXPSvc;
+    var radioChannelRange = [];
+    
+    // Assuming radio channels are in the 101-200 range
+    for (var i = 101; i <= 200; i++) {
+        radioChannelRange.push(i);
+    }
+    
+    if (radioChannelRange.length > 0) {
+        console.log('Removing radio channel range:', radioChannelRange);
+        removeRadioChannels(radioChannelRange);
+    }
 }
 

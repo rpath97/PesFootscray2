@@ -549,17 +549,14 @@ function keyHandler(keyCode) {
 				} else if (current_page == 'tv_view') {
 					// const tv_buffer = document.getElementById("loadingGif");
 					tv_buffer.style.display = 'none';
-					
-					current_page = "entertainment_menu";
-					previous_page = "default_view";
+					// Restore previous dashboard navigation behavior
+					document.getElementById('tv_view').style.display = 'none';
+					document.getElementById('default_view').style.display = 'flex';
+					previous_page = 'tv_view';
+					current_page = 'default_view';
 					setRcControlSelective();
-					//setRcControlNone();
-					// switchToHDMI1();
 					channelStopPlaying(current_tv_channel);
-					// dashboard_on = true;
 					changeCDBstate('Activate');
-					UtilityRefreshPage();
-
 					break;
 				} else if (current_page == 'movies') {
 					current_page = "entertainment_menu";

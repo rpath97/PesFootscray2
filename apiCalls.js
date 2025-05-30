@@ -4,6 +4,9 @@ var corsProxy = 'https://api.codetabs.com/v1/proxy/?quest=';
 var corsProxy2 = 'https://corsproxy.github.io/';
 var aflexApiUrl = 'https://prov01.stellar.care/aflex5/footscray.php';
 
+// Radio state variables
+var radio_channel_on = 0;
+
 function apiGetCall(url, menuType, callback) {
 
     // if (menuType == 'mainMenu'){
@@ -23,19 +26,22 @@ function apiGetCall(url, menuType, callback) {
 
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            // Successful response
-            //console.log('Response:', xhr.responseText);
-            callback(xhr.responseText);
-        } else if (xhr.readyState === 4 && xhr.status !== 200) {
-            // Error handling
-            console.log('Error:', xhr.status);
-            callback(xhr.status);
+            // Request was successful
+            const responseData = xhr.responseText;
+            rawAflexData = responseData;
+            if (callback) {
+                callback(responseData);
+            }
+        } else if (xhr.readyState === 4) {
+            // Request failed
+            console.error('Request failed with status:', xhr.status);
+            if (callback) {
+                callback(null);
+            }
         }
     };
 
-    // Send the GET request
     xhr.send();
-
 }
 
 
@@ -55,14 +61,28 @@ var aflexTvChannelsData = [];
 //console.log(aflexTvChannelsData);
 
 function openRadio() {
+    
+    if (typeof removeRadioChannelsFromTV === 'function') {
+        removeRadioChannelsFromTV();
+    }
+    
+    // Set radio state
+    radio_channel_on = 1;
+    
     previous_page = current_page;
     current_page = "radio_view";
     document.getElementById(previous_page).style.display = "none";
     document.getElementById(current_page).style.display = "flex";
 
-    // Fetch radio channels from backend
-    var radioChannelsUrl = 'http://10.5.5.234:3001/api/radio-channels';
+   
+    var radioChannelsUrl = corsProxy + 'https://prov01.stellar.care/aflex5/playlists/33_5_9.php';
+    
     apiGetCall(radioChannelsUrl, 'radioChannels', function (response) {
+        if (!response) {
+            console.error('Failed to fetch radio channels');
+            return;
+        }
+        
         try {
             var data = JSON.parse(response);
             var radioChannels = data.subModules || [];
@@ -106,5 +126,11 @@ function openRadio() {
             console.error('Failed to parse radio channels response:', e);
         }
     });
+    
+    // Toggle TV channel status
+    if (typeof tv_channel_on !== 'undefined' && tv_channel_on == 1) {
+        tv_channel_on = 0;
+    }
+    
     mute("Off");
 }
