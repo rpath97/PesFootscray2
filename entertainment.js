@@ -109,31 +109,31 @@ function handleCastingClick() {
  * This function enters the Movies module from API menu
  * @param {string} action - 'Activate' or 'Deactivate'
  */
-function openMovies(action) {
-    console.log('openMovies called with action:', action);
-    
-    if (action === 'Activate') {
-        // Display movies view
-        document.getElementById('movies').style.display = 'flex';
-        
-        // Deactivate dashboard
-        changeCDBstate('Deactivate');
-    } else if (action === 'Deactivate') {
-        // Hide movies view
-        document.getElementById('movies').style.display = 'none';
-        
-        // Reset controls
-        setRcControlSelective();
-    }
-}
+// function openMovies(action) {
+//     console.log('openMovies called with action:', action);
+//     
+//     if (action === 'Activate') {
+//         // Display movies view
+//         document.getElementById('movies').style.display = 'flex';
+//         
+//         // Deactivate dashboard
+//         changeCDBstate('Deactivate');
+//     } else if (action === 'Deactivate') {
+//         // Hide movies view
+//         document.getElementById('movies').style.display = 'none';
+//         
+//         // Reset controls
+//         setRcControlSelective();
+//     }
+// }
 
 /**
  * This function enters the Casting module from API menu
  * @param {string} action - 'Activate' or 'Deactivate'
  */
-function openCasting(action) {
-    console.log('openCasting called with action:', action);
-    
-    // Redirect to the legacy function to maintain compatibility
-    SelectCast(action);
-} 
+// function openCasting(action) {
+//     console.log('openCasting called with action:', action);
+//     
+//     // Redirect to the legacy function to maintain compatibility
+//     SelectCast(action);
+// } 

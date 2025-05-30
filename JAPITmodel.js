@@ -539,84 +539,26 @@ function keyHandler(keyCode) {
 	try {
 		switch (keyCode) {
 			case VK_MENU:
-				// Coming after clinical sharing (HDMI1)
-				if (current_page == 'clinical_sharing') {
-					console.log('Home button pressed while in HDMI view');
-					// Exit clinical sharing and return to clinical services menu
-					exitClinicalSharing();
-					UtilityRefreshPage();
-					break;
-				} else if (current_page == 'tv_view') {
-					// const tv_buffer = document.getElementById("loadingGif");
-					tv_buffer.style.display = 'none';
-					// Restore previous dashboard navigation behavior
-					document.getElementById('tv_view').style.display = 'none';
-					document.getElementById('default_view').style.display = 'flex';
-					previous_page = 'tv_view';
-					current_page = 'default_view';
-					setRcControlSelective();
-					channelStopPlaying(current_tv_channel);
-					changeCDBstate('Activate');
-					break;
-				} else if (current_page == 'movies') {
-					current_page = "entertainment_menu";
-					previous_page = "default_view";
-					openMovies('Deactivate');
-					setRcControlSelective();
-					changeCDBstate('Activate');
-					UtilityRefreshPage(); 
-					break;
-				} else if (current_page == 'radio_view') {
-					channelStopPlaying(radio_channel_playing);
-					document.querySelector('.sidebar').style.display = 'block';
-
-					// ADJUSTING DISPLAY ELEMENTS
-					const gif = document.querySelector("#gif");
-					const rightColumn = document.getElementById("radio_title");
-					const gifTitle = document.getElementById("gif-title");
-					const rightColumnLogo = document.getElementById("radio-logo-right");
-					rightColumn.innerText = 'Press Radio Channel to Play';
-					gif.style.display = 'none';
-					gifTitle.style.display = 'none';
-					rightColumnLogo.style.display = 'none';
-
-					UtilityRefreshPage();
-				} else if (current_page == 'casting') {
-					SelectCast('Deactivate');
-					current_page = "entertainment_menu";
-					previous_page = "default_view";
-					UtilityRefreshPage();
-					break;
-				} else if (current_page == 'video-frame') {
-					setRcControlSelective(); //setting virtual keys back to standard
-					// const videoSrcFrame = document.getElementById('video-src-iframe');
-					const videoElement = document.getElementById('video-frame');
-					if (videoElement) {
-						videoElement.src = '';  //d the welcome video and activated the dashbo
-						videoElement.currentTime = 0;
-						videoElement.pause();
-						// videoElement.removeEventListener("ended", backTemp());
-					}
-					document.removeEventListener("keyup", handleKeyUp);
-				} else if (current_page == 'visiting_hours') {
-					current_page = "hospitalinfo_menu";
-					previous_page = "default_view";
-					openInternetWithPdf('Deactivate');
-				} else if (current_page == 'pdf-viewers') {
-					setRcControlSelective();
-					const sidebar = document.querySelector('.sidebar');
-					if (sidebar) {
-						sidebar.style.display = 'block';
-					}
+				// Always foreground the dashboard app
+				if (typeof foregroundDashboard === 'function') {
+					foregroundDashboard();
 				}
-				//activate the dashboard going back from where i am to dashboard
-				document.getElementById(current_page).style.display = 'none';
+				// Hide all views except the dashboard
+				var allViews = document.querySelectorAll('.submenu-view, .radio-view, #tv_view, #movies, #casting, #clinical_sharing');
+				allViews.forEach(function(view) {
+					view.style.display = 'none';
+				});
+				document.getElementById('default_view').style.display = 'flex';
+				// Update state
+				previous_page = current_page;
 				current_page = 'default_view';
-				document.getElementById(current_page).style.display = 'flex';
-
-
+				// Restore sidebar, focus, etc.
+				setRcControlSelective();
 				changeCDBstate('Activate');
-
+				// Re-enable key forwarding for Home/Menu
+				if (typeof enableBackKeyForwarding === 'function') {
+					enableBackKeyForwarding();
+				}
 				break;
 			case VK_1: //Refreshes the dashboard
 				UtilityRefreshPage();

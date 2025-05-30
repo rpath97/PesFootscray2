@@ -13,24 +13,14 @@ var radio_channel_num_list = [];
 var radioChannelsAflexdata = [];
 
 // Function to remove radio channels from TV channels list
-function removeRadioChannelsFromTV() {
-    // Get the list of radio channel numbers to remove
-    var radioChannelNumbers = radio_channel_num_list;
-    
-    if (radioChannelNumbers.length > 0) {
-        console.log('Removing radio channels:', radioChannelNumbers);
-        removeRadioChannels(radioChannelNumbers);
-        
-        // Clear the radio channel list
-        radio_channel_num_list = [];
-        channel_list = [];
-    }
-}
+// function removeRadioChannelsFromTV() {
+//     // This function is a duplicate and commented out in favor of the version in tvChannels.js
+// }
 
 // Make sure to remove radio channels when switching back to TV
 function handleRadioToTVSwitch() {
     // First remove any existing radio channels from TV
-    removeRadioChannelsFromTV();
+    // removeRadioChannelsFromTV();
     
     // Then perform normal TV channel setup
     if (typeof openTV === 'function') {
@@ -53,17 +43,17 @@ function checkImageExists(imageUrl, callback) {
 }
 
 // Function to remove only radio channels (channels 101-200 range typically used for radio)
-function removeOnlyRadioChannels() {
-    var radioChannelRange = [];
-    
-    // Assuming radio channels are in the 101-200 range
-    for (var i = 101; i <= 200; i++) {
-        radioChannelRange.push(i);
-    }
-    
-    if (radioChannelRange.length > 0) {
-        console.log('Removing radio channel range:', radioChannelRange);
-        removeRadioChannels(radioChannelRange);
-    }
-}
+// function removeOnlyRadioChannels() {
+//     var radioChannelRange = [];
+//     
+//     // Assuming radio channels are in the 101-200 range
+//     for (var i = 101; i <= 200; i++) {
+//         radioChannelRange.push(i);
+//     }
+//     
+//     if (radioChannelRange.length > 0) {
+//         console.log('Removing radio channel range:', radioChannelRange);
+//         removeRadioChannels(radioChannelRange);
+//     }
+// }
 

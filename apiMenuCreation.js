@@ -597,7 +597,7 @@ function handleBackNavigation() {
             channelStopPlaying(current_tv_channel);
         }
         
-        // Always reset to dashboard mode after exiting TV view
+        
         resetToDashboardMode();
     } 
     else if (current_page === 'radio_view') {
@@ -609,12 +609,16 @@ function handleBackNavigation() {
         if (sidebar) {
             sidebar.style.display = 'block';
         }
-        // Restore the radio sidebar icon if it was hidden
+        
         const radioSidebarImg = document.querySelector('.sidebar img[alt="Radio"]');
         if (radioSidebarImg) {
-            radioSidebarImg.style.display = '';
+            radioSidebarImg.style.display = 'inline'; 
         }
-        // Adjusting display elements
+       
+        if (typeof ensureSidebarButtonImages === 'function') {
+            ensureSidebarButtonImages();
+        }
+        
         const gif = document.querySelector("#gif");
         const rightColumn = document.getElementById("radio_title");
         const gifTitle = document.getElementById("gif-title");
@@ -646,7 +650,7 @@ function handleBackNavigation() {
         resetToDashboardMode();
     }
 
-    // Function to find and focus the corresponding sidebar button
+    
     function focusSidebarButton(submenuId) {
         // Find all sidebar buttons
         const sidebarButtons = document.querySelectorAll('.menu-item.japit-button_sidemenu');

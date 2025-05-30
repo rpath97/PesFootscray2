@@ -100,8 +100,8 @@ function exitClinicalSharing() {
 }
 
 // Legacy function for backward compatibility
-function openClinicalSharing() {
-    console.log('openClinicalSharing() called - redirecting to enterClinicalSharing()');
-    enterClinicalSharing();
-}
+// function openClinicalSharing() {
+//     console.log('openClinicalSharing() called - redirecting to enterClinicalSharing()');
+//     enterClinicalSharing();
+// }
 

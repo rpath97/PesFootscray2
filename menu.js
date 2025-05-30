@@ -131,60 +131,61 @@ function focusImageChange() {
 
 
 //TEMPORARY BUTTON
-function backTemp() {
-    if (current_page == 'clinical_casting') {
-        setRcControlSelective();
-        current_page = "clinicalservices_menu";
-        previous_page = "default_view";
-        changeCDBstate('Activate');
-        return;
-    } else if (current_page == 'tv_view') {
-        current_page = "entertainment_menu";
-        previous_page = "default_view";
-        console.log("Coming back from tv ", current_page)
-        // switchToHDMI1();
-        // changeCDBstate('Activate');
-        return;
-    } else if (current_page == 'radio_view') {
-        channelStopPlaying(radio_channel_playing);
-        document.querySelector('.sidebar').style.display = 'block';
+// function backTemp() {
+//     if (current_page == 'clinical_casting') {
+//         setRcControlSelective();
+//         current_page = "clinicalservices_menu";
+//         previous_page = "default_view";
+//         changeCDBstate('Activate');
+//         return;
+//     } else if (current_page == 'tv_view') {
+//         current_page = "entertainment_menu";
+//         previous_page = "default_view";
+//         console.log("Coming back from tv ", current_page)
+//         // switchToHDMI1();
+//         // changeCDBstate('Activate');
+//         return;
+//     } else if (current_page == 'radio_view') {
+//         channelStopPlaying(radio_channel_playing);
+//         document.querySelector('.sidebar').style.display = 'block';
+//
+//         // ADJUSTING DISPLAY ELEMENTS
+//         const gif = document.querySelector("#gif");
+//         const rightColumn = document.getElementById("radio_title");
+//         const gifTitle = document.getElementById("gif-title");
+//         const rightColumnLogo = document.getElementById("radio-logo-right");
+//         rightColumn.innerText = 'Select radio station to play';
+//         gif.style.display = 'none';
+//         gifTitle.style.display = 'none';
+//         rightColumnLogo.style.display = 'none';
+//
+//     }
+//         const videoSrcFrame = document.getElementById('video-src-iframe');
+//         const videoElement = document.getElementById('video-frame');
+//         if (videoElement) {
+//             videoElement.src = '';  //d the welcome video and activated the dashbo
+//             videoElement.currentTime = 0;
+//             videoElement.pause();
+//             console.log("Video stopped");
+//             // videoElement.removeEventListener("ended", backTemp());
+//         }
+//
+//     } else if (current_page.toLocaleLowerCase().includes('pdf')) {
+//         // current_page = "pdf-viewer-3";
+//         // previous_page = "hospitalinfo_menu";
+//         //openInternetWithPdf('Deactivate');
+//         //document.getElementById('pdf-viewer-3').style.display = 'none';
+//         const sidebar = document.querySelector('.sidebar');
+//         if (sidebar) {
+//             sidebar.style.display = 'block';
+//         }
+//     }
+//     document.getElementById(current_page).style.display = 'none';
+//     document.getElementById(previous_page).style.display = 'flex';
+//     current_page = previous_page;
+//     previous_page = "default_view";
+// }
 
-        // ADJUSTING DISPLAY ELEMENTS
-        const gif = document.querySelector("#gif");
-        const rightColumn = document.getElementById("radio_title");
-        const gifTitle = document.getElementById("gif-title");
-        const rightColumnLogo = document.getElementById("radio-logo-right");
-        rightColumn.innerText = 'Select radio station to play';
-        gif.style.display = 'none';
-        gifTitle.style.display = 'none';
-        rightColumnLogo.style.display = 'none';
-
-    } else if (current_page == 'video-frame') {
-        const videoSrcFrame = document.getElementById('video-src-iframe');
-        const videoElement = document.getElementById('video-frame');
-        if (videoElement) {
-            videoElement.src = '';  //d the welcome video and activated the dashbo
-            videoElement.currentTime = 0;
-            videoElement.pause();
-            console.log("Video stopped");
-            // videoElement.removeEventListener("ended", backTemp());
-        }
-
-    } else if (current_page.toLocaleLowerCase().includes('pdf')) {
-        // current_page = "pdf-viewer-3";
-        // previous_page = "hospitalinfo_menu";
-        //openInternetWithPdf('Deactivate');
-        //document.getElementById('pdf-viewer-3').style.display = 'none';
-        const sidebar = document.querySelector('.sidebar');
-        if (sidebar) {
-            sidebar.style.display = 'block';
-        }
-    }
-    document.getElementById(current_page).style.display = 'none';
-    document.getElementById(previous_page).style.display = 'flex';
-    current_page = previous_page;
-    previous_page = "default_view";
-}
 // temporary enter button
 function tempEnter() {
     if (current_page == 'video-frame') {
