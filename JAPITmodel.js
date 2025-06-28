@@ -539,23 +539,49 @@ function keyHandler(keyCode) {
 	try {
 		switch (keyCode) {
 			case VK_MENU:
-				// Always foreground the dashboard app
+				document.querySelector('#testElementForVkMenu').style.display = 'flex';
+				// window.location.reload(); 
+				return;
+
+				// 1. Deactivate/exit any external app or source
+				if (current_page === 'tv_view') {
+					if (typeof channelStopPlaying === 'function') {
+						channelStopPlaying(current_tv_channel);
+					}
+					// Optionally deactivate TV app if needed
+				} else if (current_page === 'casting') {
+					if (typeof SelectCast === 'function') {
+						SelectCast('Deactivate');
+					}
+				} else if (current_page === 'clinical_sharing') {
+					if (typeof switchToHDMI1 === 'function') {
+						switchToHDMI1();
+					}
+					// Optionally deactivate clinical sharing app if needed
+				} else if (current_page === 'radio_view') {
+					if (typeof channelStopPlaying === 'function' && typeof radio_channel_playing !== 'undefined') {
+						channelStopPlaying(radio_channel_playing);
+					}
+				}
+
+				// 2. Foreground the dashboard
 				if (typeof foregroundDashboard === 'function') {
 					foregroundDashboard();
 				}
-				// Hide all views except the dashboard
+
+				// 3. Hide all views except the dashboard
 				var allViews = document.querySelectorAll('.submenu-view, .radio-view, #tv_view, #movies, #casting, #clinical_sharing');
 				allViews.forEach(function(view) {
 					view.style.display = 'none';
 				});
 				document.getElementById('default_view').style.display = 'flex';
-				// Update state
+				document.querySelector('.sidebar').style.display = 'flex';
+
+				// 4. Update state and restore sidebar/focus
 				previous_page = current_page;
 				current_page = 'default_view';
-				// Restore sidebar, focus, etc.
 				setRcControlSelective();
 				changeCDBstate('Activate');
-				// Re-enable key forwarding for Home/Menu
 				if (typeof enableBackKeyForwarding === 'function') {
 					enableBackKeyForwarding();
 				}

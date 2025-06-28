@@ -75,7 +75,7 @@ function openRadio() {
     document.getElementById(current_page).style.display = "flex";
 
    
-    var radioChannelsUrl = corsProxy + 'https://prov01.stellar.care/aflex5/playlists/33_5_9.php';
+    var radioChannelsUrl = corsProxy + 'https://prov01.stellar.care/aflex5/playlists/33_5_7.php';
     
     apiGetCall(radioChannelsUrl, 'radioChannels', function (response) {
         if (!response) {
