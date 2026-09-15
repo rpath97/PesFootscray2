@@ -1,0 +1,10 @@
+# Render Blueprint: publish only the browser portfolio demo.
+# Reference: https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: pesfootscray-portfolio
+    runtime: static
+    repo: https://github.com/rpath97/PesFootscray2
+    branch: main
+    buildCommand: node --check portfolio-demo/demo.js
+    staticPublishPath: ./portfolio-demo
