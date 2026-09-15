@@ -1,6 +1,6 @@
 # PES Footscray — Patient Entertainment System
 
-**Live demo:** Render deployment pending. The public URL will be added after deployment is verified.
+**[Open the public interactive demo](https://pesfootscray-portfolio.onrender.com)**
 
 A hospital bedside entertainment interface by **Ryan Pathirana**, with a browser-adapted portfolio demo that visitors can explore without an account or specialised TV hardware.
 
@@ -37,13 +37,15 @@ Then open http://localhost:8080.
 
 ## Validation
 
+- Render deployment reported `live` on 15 September 2026; its build-time JavaScript syntax check passed.
+
 - JavaScript syntax checked with `node --check portfolio-demo/demo.js`.
 - All referenced local assets verified; no external page dependencies or hospital API calls in the demo adapter.
 - Browser rendering and automated end-to-end tests have not been completed in the publishing environment.
 
 ## Portfolio access
 
-This repository remains private. Once the Render deployment is verified, share its public URL with recruiters; access to the source code requires separately granted repository access.
+The [Render demo](https://pesfootscray-portfolio.onrender.com) is public and requires no account. This repository remains private; access to the source code requires separately granted repository access.
 
 
 ## Deploy on Render
