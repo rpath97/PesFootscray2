@@ -1,6 +1,6 @@
 # PES Footscray — Patient Entertainment System
 
-**[Open the public interactive demo](https://pesfootscray-ryan-demo.pdadp999.chatgpt.site)**
+**Live demo:** Render deployment pending. The public URL will be added after deployment is verified.
 
 A hospital bedside entertainment interface by **Ryan Pathirana**, with a browser-adapted portfolio demo that visitors can explore without an account or specialised TV hardware.
 
@@ -43,5 +43,24 @@ Then open http://localhost:8080.
 
 ## Portfolio access
 
-The live demo is public. This repository remains private; recruiters need the demo link or separately granted repository access to view the code.
+This repository remains private. Once the Render deployment is verified, share its public URL with recruiters; access to the source code requires separately granted repository access.
 
+
+## Deploy on Render
+
+The root `render.yaml` configures a static site that publishes only `portfolio-demo/`.
+
+Create a Blueprint from this repository in the Render account connected to GitHub. For manual static-site setup, use:
+
+| Setting | Value |
+| --- | --- |
+| Repository | `rpath97/PesFootscray2` |
+| Branch | `main` |
+| Name | `pesfootscray-portfolio` |
+| Root directory | Leave blank |
+| Build command | `node --check portfolio-demo/demo.js` |
+| Publish directory | `portfolio-demo` |
+
+No application secrets or database are required for this browser demo. Use the actual URL returned by Render after a successful deployment; the service name alone does not guarantee a particular hostname.
+
+Configuration reference: [Render Blueprint documentation](https://render.com/docs/blueprint-spec).
