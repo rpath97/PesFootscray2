@@ -1,0 +1,1442 @@
+/* Define constants */
+:root {
+    --entertaintment-color: #05CBF9;
+    --hosp-info-color: #00BAA3;
+    --mycare-color: #AD3054;
+    --clinical-color: #ff8c00;
+    --font-size-large: 18px;
+  }
+
+/* Reset default styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #000000;  /* Black background */
+    color: #ffffff;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Main container - flex column */
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    background: #000000;  /* Black background */
+    
+}
+
+/* Header section */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 155px;
+    background: #131b42;  /* Blue background */
+
+}
+
+/* Western Health logo container */
+.branding {
+    width: 200px;
+    height: 100px;
+    /* background: #0066cc;   */
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    margin-top: 20px;
+}
+
+.branding img {
+    width: 150px;
+    height: 75px;
+    object-fit: contain;
+    margin: 1vw;
+}
+
+/* Time display container */
+.time {
+    width: 600px;
+    height: 60px;
+    /* background: #949998;   */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 36px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-left: auto;  /* Push time to the right */
+    
+}
+
+
+/* Non-header section - flex row */
+.non-header {
+    display: flex;
+    background: #c9c6c6;  /* Light gray background */
+    height: 100%;
+ 
+}
+
+/* Sidebar section */
+.sidebar {
+    width: 30vw;
+    background:#fafafaf0; /*#e1e1e1c4   */
+    padding: 20px;
+    height: 85.5vh;
+    
+}
+
+
+.sidebar-menu {
+    background: #fafafaf0;
+    width: 100%;
+    height: 95%; /* Adjust height to match the image */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Distribute buttons evenly */
+    margin-top: 10px; /* Adjust to align with image */
+    padding: 0;
+}
+
+/* .menu-item:first-child {
+    margin-top: 120px; /* Adjust this value 
+} */
+
+/* Menu buttons */
+.menu-item {
+    width: 100%;
+    height: 19vh; /* Set a fixed height */
+    background: #ffffff;
+    display: none;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 9px;
+    /* padding: 20px 30px; */
+    flex-direction: row;
+    flex-grow: 1;
+    /* margin-bottom: calc(20px - 0.5vh); */
+    gap: 30px;
+}
+/* Ensure last button has no bottom margin */
+.menu-item:last-child {
+    margin-bottom: 0;
+}
+
+
+/* Update menu item icons */
+.menu-item img {
+    width: 80px; /* Adjust image size if necessary */
+    height: 80px;
+    flex-shrink: 0; /* Prevents image from shrinking */
+    /* padding-right: 10px; */
+    margin-right: 5px;
+    margin-left: 17px;
+  
+}
+
+
+.menu-item:hover {
+    /* background: #00B0F0; */
+    color: #ffffff;
+}
+
+/* Main content area */
+.non-sidebar {
+    /*padding: 10px;   reduced from 80px to 10px */
+    display: flex;
+    width: 100%;
+    height: 100%;
+    /* align-items: center; */
+    background: #e4e5ee;
+    overflow-y: hidden;
+}
+
+/* Default view with Footscray Hospital logo */
+.default-view {
+    width: 100%;  /* Ensure it spans the available space */
+    height: 100%;  /* Adjust height to fit well */
+    background: #e4e5ee;  
+    display: flex;
+    justify-content: cover;
+    align-items: cover;
+    padding: 0px; /* from 20 */
+}
+
+
+/* Make sure the image properly fits within the highlighted area */
+.default-view img {
+    width: 75vw;  /* Reduce width slightly for better spacing */
+   /*  height: auto;  Maintain aspect ratio */
+    max-height: 81vh;  /* Limit max height to avoid overflow */
+    object-fit: cover;  /* Ensure it fills the space nicely */
+    border-radius: 12px; /* Smoother rounded corners */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15),  
+                0 5px 15px rgba(0, 0, 0, 0.12);
+    transition: box-shadow 0.3s ease;
+    margin-left: 15px;
+    margin-top: 20px;
+}
+
+
+/* Optional: Add slightly stronger shadow on hover */
+.default-view img:hover {
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2),   /* Stronger outer shadow */
+                0 8px 20px rgba(0, 0, 0, 0.15);    /* Stronger inner shadow */
+}
+
+
+/* Utility class for active view */
+.active {
+    display: flex !important;
+}
+
+/* Remove border from last item */
+/* .menu-item:last-child {
+    border-bottom: none;
+} */
+
+
+
+/* Hover and focus states */
+.menu-item:hover:not(.active),
+.menu-item:focus:not(.active) {
+    /* background: linear-gradient(135deg, #00b0f0, #0098d6); */
+    color: white;
+    transform: scale(1.02);
+    /* box-shadow: 0 4px 8px rgba(0, 176, 240, 0.2); */
+}
+
+.menu-item:hover:not(.active) img,
+.menu-item:focus:not(.active) img {
+    transform: scale(1.1);
+    filter: brightness(0) invert(1);  /* Make icon white on hover/focus */
+}
+
+.menu-item:hover:not(.active) span,
+.menu-item:focus:not(.active) span {
+    color: white;  /* Make text white on hover/focus */
+}
+
+
+
+.menu-item.active img {
+    filter: brightness(0) invert(1);
+}
+
+.menu-item.active span {
+    color: white;
+}
+
+/* SUB MENU BUTTONS */
+.sub-menu-buttons {
+    display: flex;
+    width: 21vw;
+    height: 20vh;
+    justify-content: center;
+    align-items: center;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 50px;
+    margin-top: 0.5vh;
+} 
+/* ENTERTAINTMENT CARD */
+/* Update the image source on hover/focus for  button */
+.submenu-card[button-focus="television"]:focus img {
+    content: normal;  /* Switch to hover image */
+    transform: scale(1.1);
+}
+.submenu-card[button-focus="casting"]:focus img {
+    content: normal;  /* Switch to hover image */
+    transform: scale(1.1);
+}
+.submenu-card[button-focus="movies"]:focus img {
+    content: normal;  /* Switch to hover image */
+    transform: scale(1.1);
+}
+.submenu-card[button-focus="radio"]:focus img {
+    content: normal;  /* Switch to hover image */
+    transform: scale(1.1);
+}
+
+.submenu-card {
+    width: 21vw;
+    height: 20vh;
+    background: white;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    padding: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* For all sub menu buttons */
+.submenu-card span,.submenu-card2 span,.submenu-card3 span,.submenu-card4 span {
+    font-size: 33px;
+    font-weight: 600;
+    /* color: #333; */
+}
+
+.submenu-card:hover,
+.submenu-card:focus {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0, 176, 240, 0.3);
+    background: linear-gradient(135deg, #00b0f0, #0098d6);
+    outline: none;
+  
+}
+
+.submenu-card:hover span,
+.submenu-card:focus span {
+    color: white;
+}
+
+.submenu-card:hover img,
+.submenu-card:focus img {
+    transform: scale(1.05);
+}
+
+.submenu-card img {
+    width: 5vw;
+    height: auto;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.submenu-card span {
+    /* font-size: 24px;
+    font-weight: 500; */
+    color: #05CBF9;
+}
+
+/* Hover effects */
+.submenu-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.submenu-card:hover img {
+    transform: scale(1.1);
+}
+
+.submenu-card:hover,
+.submenu-card:focus {
+    /* Use the same hover/focus style as other entertainment cards */
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0, 176, 240, 0.3);
+    background: linear-gradient(135deg, #00b0f0, #0098d6);
+}
+
+
+/* View transitions */
+.default-view, .submenu-view {
+    transition: opacity 0.3s ease-in-out;
+}
+
+
+
+/* Entertainment view background */
+.submenu-view {
+    background-color: #e4e5ee;
+    padding: 30px;
+    height: 85.5vh;
+    width: 100%;
+    /* display: grid;
+    grid-template-columns: 1fr;  */
+    display: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    align-content: flex-start;
+    overflow-y: auto;
+}
+
+/* Entertainment card styles */
+/* .submenu-card {
+    width: 25vw;
+    background: #ffffff;
+    border: none;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    padding: 20px;
+} */
+
+/* Responsive grid for medium screens (3 cards per row) */
+
+
+/* MYCARE CARD */
+/* Update the image source on hover/focus for button */
+.submenu-card2[button-focus="management-and-discharge-button"]:focus img {
+    content: normal;  /* Switch to hover image */
+    transform: scale(1.1);
+}
+.submenu-card2[button-focus="blacktown-surveys"]:focus img {
+    content: normal;  /* Switch to hover image */
+    transform: scale(1.1);
+}
+.submenu-card2[button-focus="carers-surveys"]:focus img {
+    content: normal;  /* Switch to hover image */
+    transform: scale(1.1);
+}
+.submenu-card2[button-focus="patient-survey"]:focus img {
+    content: normal;  /* Switch to hover image */
+    transform: scale(1.1);
+}
+
+.submenu-card2 {
+    width: 21vw;
+    height: 20vh;
+    background: white;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    padding: 20px;
+    box-shadow: 0 8px 16px rgba(194, 41, 3, 0.1);
+}
+
+
+.submenu-card2 span {
+    /* font-size: 24px;
+    font-weight: 500; */
+    /* color: #333; */
+}
+
+.submenu-card2:hover,
+.submenu-card2:focus {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(235, 36, 1, 0.3);
+    background: linear-gradient(135deg,  var(--mycare-color), var(--mycare-color));
+    outline: none;
+  
+}
+
+.submenu-card2:hover span,
+.submenu-card2:focus span {
+    color: white;
+}
+
+.submenu-card2:hover img,
+.submenu-card2:focus img {
+    transform: scale(1.05);
+}
+
+.submenu-card2 img {
+    width: 5vw;
+    height: auto;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.submenu-card2 span {
+    /* font-size: 24px;
+    font-weight: 500; */
+    color: var(--mycare-color);
+}
+
+/* Hover effects */
+.submenu-card2:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.submenu-card2:hover img {
+    transform: scale(1.1);
+}
+
+/* GENERIC SUB MENU BUTTON CSS */
+.submenu-card-x {
+    width: 21vw;
+    height: 20vh;
+    background: white;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    padding: 20px;
+    box-shadow: 0 8px 16px rgba(194, 41, 3, 0.1);
+}
+
+
+.submenu-card-x:hover,
+.submenu-card-x:focus {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+    /* background: linear-gradient(135deg,  var(--mycare-color), var(--mycare-color)); */
+    outline: none;
+  
+}
+
+.submenu-card-x:hover span,
+.submenu-card-x:focus span {
+    color: white;
+}
+
+.submenu-card-x:hover img,
+.submenu-card-x:focus img {
+    transform: scale(1.05);
+}
+
+.submenu-card-x img {
+    width: 5vw;
+    height: auto;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.submenu-card-x span {
+    font-size: 33px;
+    font-weight: 600;
+}
+
+
+.submenu-card-x:hover img {
+    transform: scale(1.1);
+}
+
+/* Spacing adjustments */
+.row.g-4 {
+    --bs-gutter-y: 2rem;
+}
+
+.mt-4 {
+    margin-top: 2rem !important;
+}
+
+/* Specific row gap for streaming services */
+/* .entertainment-grid .col:nth-child(n+4) {
+    margin-top: 60px;
+}
+.row.g-4 {
+    gap: 15px !important;
+} */
+
+
+/* Back Button */
+.back-button {
+    position: fixed;
+    bottom: 20px;
+    left: 20%;
+    padding: 10px 20px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    z-index: 100;
+}
+
+.back-button:hover {
+    background: #f0f0f0;
+    transform: translateY(-2px);
+}
+
+/* Focus styles for back button navigation */
+.japit-button:focus {
+    box-shadow: 0 0 15px rgba(0, 176, 240, 0.3);
+    transform: translateY(-2px);
+    transition: all 0.2s ease;
+    border-radius: 15px;
+}
+
+/* Ensure focus is visible when using remote */
+.japit-button:focus-visible {
+    box-shadow: 0 0 15px rgba(0, 176, 240, 0.3);
+    border-radius: 15px;
+}
+
+div.JAPITFromTV {
+    position: fixed;
+    left: 1040px;
+    right: 20px;  
+    top: 0px;
+    height: 1080px;
+    background: none;
+    display: none;
+    z-index: 1200;
+    padding: 0;
+    box-shadow: none;
+    visibility: visible;
+}
+
+div.JAPITToTV_Misc {
+    position: fixed;
+    left: 600px; 
+    right: 500px;
+    top: 0px;
+    height: 1080px;
+    background: none;
+    display: none;
+    z-index: 1200;
+    padding: 0;
+    box-shadow: none;
+    visibility: visible;
+
+}
+
+div.Output {
+    position: absolute; 
+    left: 200px; 
+    top: 0px;
+    width: 540px;
+    height: 1080px;
+    font-size: 8px;
+    background: none;
+    border: none;
+    display: none; /* Hide the output div */
+}
+
+div.Input_Output {
+    top: 0px;
+    left: 200px;
+    width: 540px;
+    height: 1080px;
+    background: none;
+    margin: 0;
+    padding: 0;
+    color: white;
+    font: 20px;
+    display: none; /* Hide the input/output div */
+}
+
+/* Turn on and off the visbility of the buttons */
+#ButtonToggleLogs {
+    visibility: visible;
+}
+.debugButtons {
+    position: absolute;
+    bottom: 0.92%;
+    visibility: hidden;
+}
+
+/* Style the log headers */
+.IOContentsColor {
+    margin: 0 0 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+
+
+.radio_chan_btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 200px; /* Fixed width */
+    height: 200px; /* Fixed height */
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 18px;
+    color: #333;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 0 auto; /* Center button in grid cell */
+    margin-bottom: 10px;
+}
+
+.radio_chan_btn img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+.radio_chan_btn .buttonText {
+    font-size: 18px;
+    color: var(--entertaintment-color);
+    text-align: center;
+}
+
+
+.radio_chan_btn:focus,
+.radio_chan_btn.active {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    background: white;
+    outline: none;
+}
+
+.radio_chan_btn.active .buttonText {
+    color: #ffffff;
+}
+
+
+
+
+
+/* View transitions */
+.default-view, .radiochannels-view {
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Radio Channels view background */
+.radiochannels-view {
+    background-color: #f5f9ff;
+    height: calc(100vh - 60px);
+    overflow: hidden;
+    margin-left: 20%;
+    width: 80%;
+    padding: 40px;
+}
+
+
+#video-frame {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+}
+#video-src-iframe {
+    display: none;
+    
+}
+
+
+
+/* Radio Styles */
+#radioicon {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    transition: all 0.3s ease;
+}
+
+/* Remove the fixed positioning styles that were causing overlay issues */
+#radioicon {
+    display: block;
+    background-color: white;
+    border-radius: 10px;
+    transition: background-color 0.5s ease;
+}
+
+.radio_list {
+    width: 1920px;
+    height: 1080px;
+    display: flex;
+    transition: all 0.5s ease;
+}
+
+.radio_chan_btn {
+    margin: 10px;
+    font-size: 16px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+
+#radio-logo-right {
+    width: 100px;
+    margin-bottom: 50px;
+}
+
+/* Note: Removed duplicate #radioicon definition since it was identical to the first one */
+
+/* Add casting loading screen styles */
+/* .casting-loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+} */
+
+.casting-loading .loading-content {
+    text-align: center;
+}
+
+.casting-loading .casting-logo {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 20px;
+}
+
+/* Casting button specific styles */
+/*  */
+
+/* Specific hover/focus state for my care button */
+.menu-item[data-type="my-care"]:hover:not(.active),
+.menu-item[data-type="my-care"]:focus:not(.active) {
+    background: linear-gradient(135deg, #AD3054, #AD3054);  /* Red gradient */
+    color: white;
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(214, 7, 7, 0.2);  /* Red shadow */
+}
+
+.menu-item[data-type="my-care"] span {
+    color: #AD3054;  
+}
+
+
+/* Update the image source on hover/focus for my care button */
+.menu-item[data-type="my-care"]:hover:not(.active) img,
+.menu-item[data-type="my-care"]:focus:not(.active) img {
+    content: normal;  /* Switch to hover image */
+    transform: scale(1.1);
+}
+
+.menu-item[data-type="my-care"]:hover:not(.active) span,
+.menu-item[data-type="my-care"]:focus:not(.active) span {
+    color: white;  /* Keep text white */
+}
+
+
+
+/* Add new entertainment button hover/focus styles */
+.menu-item[data-type="entertainment"]:hover:not(.active),
+.menu-item[data-type="entertainment"]:focus:not(.active) {
+    background: linear-gradient(135deg, #05CBF9, #05CBF9);  /* Blue gradient */
+    color: white;
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 176, 240, 0.2);  /* Blue shadow */
+}
+.menu-item[data-type="entertainment"] span {
+    color: #0098d6;  /* Specific blue color for entertainment text */
+    /* margin-left: 10px; */
+}
+
+/* Add gap between logo and text for entertainment button */
+/* .menu-item[data-type="entertainment"] {
+    gap: 30px;  
+} */
+
+
+/* Update the image source on hover/focus for entertainment button */
+/* .menu-item[data-type="entertainment"]:hover:not(.active) img, */
+.menu-item[data-type="entertainment"]:focus:not(.active) img {
+    content: normal;  /* Switch to hover image */
+    transform: scale(1.1);
+}
+
+.menu-item[data-type="entertainment"]:hover:not(.active) span,
+.menu-item[data-type="entertainment"]:focus:not(.active) span {
+    color: white;  /* Keep text white */
+}
+
+/* PDF VIEWERS */
+#pdf-viewer-3, #pdf-viewer-2, #pdf-canvas {
+    display: none;
+    width: 100%;
+   
+}
+#pdf-viewers{
+    display: none;
+    z-index: 1100;
+    position: fixed;
+    flex-direction: column;
+    right: 5vw;
+    top: 14vh;
+    width: 90vw;
+    height: 85.5vh;
+    padding: 0;
+    box-shadow: none;
+    visibility: visible;
+    overflow-y: auto;
+}
+#pdf-viewers:focus {
+    outline: none;
+}
+/* #pdf-viewers::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
+ /* } */
+/* IMAGE PDF CONTAINER */
+.pdfImageContainer {
+    display: none;
+
+}
+
+/* TV CHANNEL VIEWER */
+#tvChannelDiv {
+    display: none;
+}
+
+#loadingGif{
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1200;
+    width: 100%;
+    height: 100%;
+    background-color: #0e0d0c;
+    align-items: center;
+    justify-content: center;
+} 
+
+
+/* Update JAPIT button focus styles */
+.japit-button:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.japit-button:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Add specific spacing after entertainment button */
+/* .menu-item[data-type="entertainment"] {
+    margin-bottom: 0;  /* Remove extra space after entertainment button */
+/*} */
+
+/* RADIO VIEW */
+.radio-view {
+    background-color: #f5f5f5;  /* Change this from #f5f9ff to match */
+    width: 100vw;
+    height: 85.5vh;
+    transition: all 1s ease;
+    flex-direction: row;
+    overflow-x: hidden;
+    margin-top: -0.5%;
+    transition: all 1s ease-in-out;
+}
+#radio-left-column {
+    display: flex;
+    width: 70vw;
+    height: 100%;
+    overflow-y: auto;
+    flex-direction: row;
+    align-content: flex-start;
+    justify-items: flex-start;
+    flex-wrap: wrap;
+    padding: 30px;
+    transition: all 1s ease-in-out;
+}
+#radio-left-column::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
+  }
+#radio-right-column {
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.15);
+    width: 30vw;
+    height: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    transition: all 1s ease-in-out;
+}
+#radio-right-column img {
+    max-width: 100%;
+    max-height: 100%;
+    transition: all 1s ease-in-out;
+}
+#radio_title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+	font-size: 60px;
+	font-family: Arial, sans-serif;
+	font-weight: bold;
+    padding: 10px;
+    margin-top: 10vh;
+	opacity: 0.8;
+    width: 80%;
+    transition: all 1s ease-in; 
+}
+#radio-logo-right {
+    display: none;
+	width: 130px;
+	margin-bottom: 20px;
+    transition: all 1s ease;
+}
+
+.radio_chan_btn:focus {
+    background-color: var(--entertaintment-color);
+    transform: scale(1.07);
+    outline: none;
+}
+
+/* Keep icon and text color dark on hover/focus */
+.radio_chan_btn:focus:focus .buttonText {
+    color: #ffffff;
+}
+
+.marquee {
+    width: 20vw;
+    white-space: nowrap;
+    overflow: hidden;
+    box-sizing: border-box;
+    margin-bottom: 50px;
+	font-size: 32px; /* Increase the font size */
+    font-weight: bold; 
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    transition: all 1s ease-in-out;
+}
+
+/* .marquee div { */
+    /* display: inline-block; */
+    /* padding-left: 100%; */
+    /* animation: marquee 10s linear infinite; */
+/* } */
+
+/* @keyframes marquee {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-100%, 0); }
+} */
+/* RADIO VIEW */
+
+/* Update hover images for entertainment cards */
+/* .submenu-card:hover:not(.active) img,
+.submenu-card:focus:not(.active) img {
+    content: normal;
+    transform: scale(1.1);
+} */
+
+/* My Care view styles */
+.my-care-view {
+    background-color: #e4e5ee;
+    padding: 40px;
+    height: 100%;
+}
+
+/* My Care card styles */
+.mycare-card {
+    width: 300px;
+    min-height: 180px;
+    background: #ffffff;
+    border: none;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    padding: 60px;
+    margin: 0 auto;
+}
+
+
+.mycare-card img {
+    width: 110px;
+    height: 110px;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.mycare-card span {
+    font-size: 30px;
+    font-weight: 700;
+    color: #AD3054;  /* My Care theme color */
+}
+
+/* Update hover/focus effects */
+.mycare-card:hover,
+.mycare-card:focus {
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    background: linear-gradient(135deg, #d60707, #d60707);  /* Red gradient */
+}
+
+.mycare-card:hover span,
+.mycare-card:focus span {
+    color: white;  /* Keep text white on hover/focus */
+}
+
+.mycare-card:hover img,
+.mycare-card:focus img {
+    transform: scale(1.1);
+    filter: brightness(0) invert(1);  /* Keep image white on hover/focus */
+}
+
+/* Spacing adjustments */
+.my-care-view .row.g-4 {
+    --bs-gutter-x: 30px !important;
+    --bs-gutter-y: 30px !important;
+}
+
+.my-care-view .col-md-3 {
+    padding: 8px 85px;  /* gap between buttons */
+    margin-bottom: 30px;
+}
+
+
+
+/*------------------------------ Clinical Services Grid Layout ----------------------------*/
+
+
+/* Specific hover/focus state for Clinical Services button */
+.menu-item[data-type="clinical-services"]:hover:not(.active),
+.menu-item[data-type="clinical-services"]:focus:not(.active) {
+    background: linear-gradient(135deg, #ff8c00, #ff8c00); /* Orange gradient */
+    color: white;
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(255, 140, 0, 0.2); /* Orange shadow */
+}
+
+.menu-item[data-type="clinical-services"] span {
+    color: #ff8c00;
+}
+
+/* Update the image source on hover/focus for Clinical Services button */
+.menu-item[data-type="clinical-services"]:hover:not(.active) img,
+.menu-item[data-type="clinical-services"]:focus:not(.active) img {
+    content: normal; /* Switch to hover image */
+    transform: scale(1.1);
+}
+
+.menu-item[data-type="clinical-services"]:hover:not(.active) span,
+.menu-item[data-type="clinical-services"]:focus:not(.active) span {
+    color: white; /* Keep text white */
+}
+
+.submenu-card3[button-focus="clinical-sharing"]:focus img {
+    content: normal;  /* Switch to hover image */
+    transform: scale(1.1);
+}
+.submenu-card3[button-focus="time"]:focus img {
+    content: normal;  /* Switch to hover image */
+    transform: scale(1.1);
+}
+.submenu-card3[button-focus="information"]:focus img {
+    content: normal;  /* Switch to hover image */
+    transform: scale(1.1);
+}
+/* CLINICAL SERVICES CARD */
+.submenu-card3 {
+    width: 21vw;
+    height: 20vh;
+    background: white;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    padding: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.submenu-card3 span {
+    /* font-size: 28px;
+    font-weight: 500; */
+    color: var(--clinical-color);
+}
+
+/* Hover/focus effects */
+.submenu-card3:hover,
+.submenu-card3:focus {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(255, 140, 0, 0.3);
+    background: linear-gradient(135deg, var(--clinical-color), var(--clinical-color));
+    outline: none;
+}
+
+.submenu-card3:hover span,
+.submenu-card3:focus span {
+    color: white;
+}
+
+.submenu-card3:hover img,
+.submenu-card3:focus img {
+    transform: scale(1.05);
+}
+
+.submenu-card3 img {
+    width: 5vw;
+    height: auto;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+/* Clinical Services View Styles */
+.clinical-services-view {
+    background-color: #e4e5ee;
+    padding: 40px;
+    height: 100%;
+}
+
+/* Clinical Services card styles */
+.clinical-services-card {
+    width: 300px;
+    min-height: 180px;
+    background: #ffffff;
+    border: none;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    padding: 60px;
+    margin: 0 auto;
+}
+
+.clinical-services-card img {
+    width: 110px;
+    height: 110px;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.clinical-services-card span {
+    font-size: 30px;
+    font-weight: 700;
+    color: #ff8c00; /* Clinical Services theme color */
+}
+
+/* Hover/focus effects */
+.clinical-services-card:hover,
+.clinical-services-card:focus {
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    background: linear-gradient(135deg, #ff8c00, #ff8c00);
+}
+
+.clinical-services-card:hover span,
+.clinical-services-card:focus span {
+    color: white;
+}
+
+.clinical-services-card:hover img,
+.clinical-services-card:focus img {
+    transform: scale(1.1);
+    filter: brightness(0) invert(1);
+}
+
+/* Spacing adjustments */
+.clinical-services-view .row.g-4 {
+    --bs-gutter-x: 30px !important;
+    --bs-gutter-y: 30px !important;
+}
+
+.clinical-services-view .col-md-3 {
+    padding: 8px 85px;
+    margin-bottom: 30px;
+}
+
+
+
+
+/* HOSPITAL INFO CARD */
+
+/* Update the image source on hover/focus for button */
+.submenu-card4[button-focus="welcome"]:focus img {
+    content: normal;  /* Switch to hover image */
+    transform: scale(1.1);
+}
+.submenu-card4[button-focus="visiting"]:focus img {
+    content: normal;  /* Switch to hover image */
+    transform: scale(1.1);
+}
+.submenu-card4[button-focus="rights"]:focus img {
+    content: normal;  /* Switch to hover image */
+    transform: scale(1.1);
+}
+.submenu-card4[button-focus="reach"]:focus img {
+    content: normal;  /* Switch to hover image */
+    transform: scale(1.1);
+}
+
+.submenu-card4 {
+    width: 21vw;
+    height: 20vh;
+    background: white;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    padding: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.submenu-card4:hover,
+.submenu-card4:focus {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(37, 197, 6, 0.3);
+    background: linear-gradient(135deg, var(--hosp-info-color), var(--hosp-info-color));
+    outline: none;
+}
+
+.submenu-card4:hover span,
+.submenu-card4:focus span {
+    color: white;
+}
+
+.submenu-card4:hover img,
+.submenu-card4:focus img {
+    transform: scale(1.05);
+}
+
+.submenu-card4 img {
+    width: 5vw;
+    height: auto;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.submenu-card4 span {
+    /* font-size: 24px;
+    font-weight: 500; */
+    color: var( --hosp-info-color);
+}
+
+/* Hover effects */
+.submenu-card4:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.submenu-card4:hover img {
+    transform: scale(1.1);
+}
+
+
+/* Spacing adjustments */
+.row.g-4 {
+    --bs-gutter-y: 2rem;
+}
+
+.mt-4 {
+    margin-top: 2rem !important;
+}
+
+/* Hospital Info view styles  */
+.hospital-info-view {
+    background-color: #e4e5ee;
+    padding: 40px;
+    height: 100%;
+}
+
+/* card styles */
+.hospital-info-card {
+    width: 300px;
+    min-height: 180px;
+    background: #ffffff;
+    border: none;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    padding: 60px;
+    margin: 0 auto;
+}
+
+
+.hospital-info-card img {
+    width: 110px;
+    height: 110px;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.hospital-info-card span {
+    font-size: 30px;
+    font-weight: 700;
+    color: #00BAA3;  /*  theme color */
+}
+
+/* Update hover/focus effects */
+.hospital-info-card:hover,
+.hospital-info-card:focus {
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    background: linear-gradient(135deg, #00BAA3, #00BAA3);  /* gradient */
+}
+
+.hospital-info-card:hover span,
+.hospital-info-card:focus span {
+    color: white;  /* Keep text white on hover/focus */
+}
+
+.hospital-info-card:hover img,
+.hospital-info-card:focus img {
+    transform: scale(1.1);
+    filter: brightness(0) invert(1);  /* Keep image white on hover/focus */
+}
+
+/* Spacing adjustments */
+.hospital-info-view .row.g-4 {
+    --bs-gutter-x: 30px !important;
+    --bs-gutter-y: 30px !important;
+}
+
+.hospital-info-view .col-md-3 {
+    padding: 8px 85px;  /* gap between buttons */
+    margin-bottom: 30px;
+}
+
+/* Update the image source on hover/focus for my care button */
+.menu-item[data-type="hospitalinfo"]:hover:not(.active) img,
+.menu-item[data-type="hospitalinfo"]:focus:not(.active) img {
+    content: normal;  /* Switch to hover image */
+    transform: scale(1.1);
+}
+
+.menu-item[data-type="hospitalinfo"]:hover:not(.active) span,
+.menu-item[data-type="hospitalinfo"]:focus:not(.active) span {
+    color: white;  /* Keep text white */
+}
+/* Specific hover/focus state for my care button */
+.menu-item[data-type="hospitalinfo"]:hover:not(.active),
+.menu-item[data-type="hospitalinfo"]:focus:not(.active) {
+    background: linear-gradient(135deg, #00BAA3, #00BAA3);  /* Red gradient */
+    color: white;
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(7, 214, 179, 0.568);  /* Red shadow */
+}
+
+.menu-item[data-type="hospitalinfo"] span {
+    color: #00BAA3;  
+}
+
+#buffer-animation-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1300;
+    background: rgba(255, 255, 255, 0.7);
+    transition: all 1s ease;
+}
+button:focus,
+button:hover {
+    outline: none !important;      /* browser-supplied outline          */
+    box-shadow: none !important;   /* JS-added glow from loadMainMenu() */
+    border-color: transparent;     /* in case a border was used         */
+}
