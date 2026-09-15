@@ -1,6 +1,6 @@
 # PES Footscray — Patient Entertainment System
 
-**[Open the public interactive demo](https://pesfootscray-portfolio.onrender.com)**
+**[Open the live demo](https://pesfootscray-portfolio.onrender.com)** · No sign-in required
 
 A hospital bedside entertainment interface by **Ryan Pathirana**, with a browser-adapted portfolio demo that visitors can explore without an account or specialised TV hardware.
 
@@ -12,6 +12,27 @@ A hospital bedside entertainment interface by **Ryan Pathirana**, with a browser
 - Walk through simulated casting and HDMI connection flows.
 - Complete a sample survey and discharge checklist.
 - Use mouse, touch, Tab, arrow keys, Enter and Escape.
+
+## Suggested walkthrough
+
+1. Select **Explore the dashboard**, then **Television**. Change a sample channel and try pause/play.
+2. Open **Casting** and simulate pairing a device.
+3. Under **My Care**, complete the sample checklist or submit a sample survey.
+4. Under **Clinical Services**, connect and disconnect the simulated HDMI device.
+5. Use **Back** or **Home** to return to the menus.
+
+The animations and audio tones are local previews. Hardware connections, hospital integrations and live broadcasts are simulated.
+
+## Technology
+
+| Area | Implementation |
+| --- | --- |
+| Interface | HTML, CSS, JavaScript |
+| Navigation | Mouse, touch and keyboard controls |
+| Browser previews | Canvas animation and Web Audio |
+| Original TV integration | JAPIT / WIXP |
+| Public hosting | Render static site |
+| Demo data | Temporary, local interactions; no database |
 
 ## Original project and browser demo
 
@@ -38,7 +59,6 @@ Then open http://localhost:8080.
 ## Validation
 
 - Render deployment reported `live` on 15 September 2026; its build-time JavaScript syntax check passed.
-
 - JavaScript syntax checked with `node --check portfolio-demo/demo.js`.
 - All referenced local assets verified; no external page dependencies or hospital API calls in the demo adapter.
 - Browser rendering and automated end-to-end tests have not been completed in the publishing environment.
@@ -66,3 +86,9 @@ Create a Blueprint from this repository in the Render account connected to GitHu
 No application secrets or database are required for this browser demo. Use the actual URL returned by Render after a successful deployment; the service name alone does not guarantee a particular hostname.
 
 Configuration reference: [Render Blueprint documentation](https://render.com/docs/blueprint-spec).
+
+## More portfolio work
+
+[Noryx — live e-commerce demo](https://commerce-operations-platform.onrender.com) · [Noryx source code](https://github.com/rpath97/commerce-operations-platform)
+
+Noryx demonstrates a React/TypeScript storefront, Express API, PostgreSQL data model and role-protected operations console.
